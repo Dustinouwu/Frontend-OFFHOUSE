@@ -18,33 +18,40 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 const commonStyles = {
-  m: 1,
+  
   borderColor: '#000',
   borderWidth: 3,
-  height: '250',
+  
 };
 
 
 
 export default function MultiActionAreaCard() {
   const variable = 2;
+  const commonStyles = {
+  
+    borderColor: '#000',
+    borderWidth: 3,
+    
+  };
 
 
   const colorproduct = variable > 10 ? "#FF0000" : "#0FFF18";
   return (
-    <Container sx={{ py: 8 }} maxWidth="md">
+    <Container sx={{ py: 7 }} maxWidth="lg">
       {/* End hero unit */}
-      <Grid container spacing={6}>
+      <Grid container spacing={9}>
         {cards.map((card) => (
-          <Grid item key={card} xs={6} sm={6} md={3}>
+          <Grid item key={card} xs={12} sm={8} md={3}>
             <Card
-              sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}
+              sx={{ height: '100%', display: 'flex', flexDirection: 'column', ...commonStyles }}
             >
               <CardMedia
                 component="img"
                 sx={{
                   // 16:9
-                  pt: '0%',
+                  pt: '10%',
+                  pb: '10%',
                 }}
                 image="https://source.unsplash.com/random"
                 alt="random"
