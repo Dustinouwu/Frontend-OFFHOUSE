@@ -5,9 +5,13 @@ import Header from "../../components/Header/Header";
 const Home = () => {
     return (
         <div>
-            <Header/>
-            <Cards/>
-            
+            <Header />
+            <div >
+                <Cards />
+                
+            </div>
+
+
         </div>
     )
 }

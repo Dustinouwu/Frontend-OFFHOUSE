@@ -49,15 +49,7 @@ const CreateUser = () => {
         }
     }
 
-    /*  OBTENCION DE DATOS */
-    function handleSubmit() {
-        let data = { user, password }
-
-        if (data) {
-            ifMatch(data)
-            console.log(data)
-        }
-    }
+    
 
     return (
         <div className="main-container">

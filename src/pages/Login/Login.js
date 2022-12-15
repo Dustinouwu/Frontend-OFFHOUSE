@@ -70,7 +70,12 @@ const Login = () => {
             <div className="login-container">
                 <Title text='Login to OFFHOUSE'></Title>
 
-                ¿
+                {hasError &&
+                    <label className="label-error-login">
+                        Su contraseña o usuario son incorrectos!
+                    </label>
+                }
+
                 <Label
                     text='USERNAME'
                 />
@@ -99,7 +104,7 @@ const Login = () => {
                     handleChange={handleChange}
                     param={passwordError}
                 />
-
+                
                 {passwordError &&
                     <label className="label-error">
                         Contraseña inválida o incompleta
