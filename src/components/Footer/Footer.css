@@ -1,0 +1,41 @@
+.footer-container {
+    display: flex;
+    gap: 3rem;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    background-color: #000;
+    font-size: 15px;
+}
+
+.footer-section-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-inline: 2rem;
+
+
+}
+
+.footer-section-container:hover {
+    background-color: #ff9901;
+    border-radius: 4px;
+    transition: all 0.2s ease-out;
+}
+
+.footer-lineseparator {
+    width: 100%;
+    height: 5px;
+    background-color: #FF9901;
+}
+
+.footer-dir {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 70%;
+    background-color: #000;
+    color: #fff;
+    font-size: 15px;
+}

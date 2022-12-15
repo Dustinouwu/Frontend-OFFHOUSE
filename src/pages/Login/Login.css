@@ -1,0 +1,111 @@
+.main-container {
+    display: flex;
+    width: 100%,
+}
+
+.image-container {
+    flex-wrap: wrap;
+}
+
+img {
+    width: auto;
+    height: max-content;
+}
+
+.image-container img {
+    height: 100vh;
+    padding: 0%;
+    margin: 0%;
+}
+#usuario{
+    background-image: url(../../assets/img/User.png);
+    background-position: 10px ;
+    padding-left: 60px;
+    background-size:auto;
+    background-repeat: no-repeat;
+}
+#contraseña{
+    background-image: url(../../assets/img/Keyhole.png);
+    background-position: 10px ;
+    padding-left: 60px;
+    background-size:auto;
+    background-repeat: no-repeat;
+}
+
+.login-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.submit-button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.submit-button-container button {
+    width: 375px;
+    height: 45px;
+    background: #FF9901;
+    border: none;
+    color: white;
+    font-family: 'Inter', sans-serif;
+    font-weight: bold;
+    outline: none;
+    letter-spacing: 1px;
+    border-radius: 5px;
+    box-sizing: border-box;
+    cursor: pointer;
+    margin-top: 25px;
+}
+
+.submit-button-container button:hover {
+    opacity: 0.90;
+}
+
+.label-error {
+    color: #721c24;
+    font-size: 12px;
+    border: 1.5px solid transparent;
+    background-color: #eac4c7;
+    border-color: #f5c6cb;
+    ;
+    width: fit-content;
+    height: fit-content;
+    padding: 5px;
+    box-sizing: border-box;
+    border-radius: 5px;
+
+}
+
+.label-error-login {
+    color: #721c24;
+    font-size: 12px;
+    border: 1.5px solid transparent;
+    background-color: #eac4c7;
+    border-color: #f5c6cb;
+    ;
+    width: fit-content;
+    height: fit-content;
+    padding: 5px;
+    box-sizing: border-box;
+    border-radius: 5px;
+    margin-bottom: 40px;
+}
+
+.signup-container {
+    display: flex;
+    gap: 30px;
+    
+}
+
+.singupl {
+    color: #FF9901;
+    text-decoration: inherit;
+
+}
