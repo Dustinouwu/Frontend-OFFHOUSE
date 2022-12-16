@@ -1,0 +1,52 @@
+.subscriptionbarcontainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 3rem;
+    margin-top: 4%;
+    
+
+}
+
+
+.col-sbar {
+    display: block;
+    height: 61px;
+    width: 15px;
+    border-radius: 0px;
+    background-color: #FF9901;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+.txt-sbar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    white-space: nowrap;
+    gap: 1rem;
+ 
+}
+
+.col2-sbar {
+    display: block;
+    height: 61px;
+    width: 5px;
+    border-radius: 0px;
+    background-color: #FF9901;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.btn-sbar {
+    color: #135EEF;
+    text-decoration: none;
+    padding: 0.1rem 2.5rem;
+    height: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
+}

@@ -1,3 +1,9 @@
+/* .footercatch{
+    position: absolute;
+    bottom: 0;
+    z-index: 100;
+} */
+
 .footer-container {
     display: flex;
     gap: 3rem;
@@ -6,6 +12,7 @@
     color: #fff;
     background-color: #000;
     font-size: 15px;
+    
 }
 
 .footer-section-container {

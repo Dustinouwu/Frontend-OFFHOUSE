@@ -30,7 +30,7 @@ export default function MultiActionAreaCard() {
   const colorproduct = variable > 10 ? "#FF0000" : "#0FFF18";
   return (
     <Container sx={{ py: 5 }} maxWidth="lg">
-      <Grid container spacing={12}>
+      <Grid container spacing={5}>
         {cards.map((card) => (
           <Grid item key={card} xs={4} sm={4} md={3} >
             <Card
@@ -53,11 +53,11 @@ export default function MultiActionAreaCard() {
                 image={Imagenes.img5}
                 alt="random"
               />
-              <CardContent sx={{ flexGrow: 2 }}>
+              <CardContent >
                 <Typography variant="h7" component="h3">
                   $ 1000
                 </Typography>
-                <Typography variant="h5" component="h5">
+                <Typography variant="h6" component="h5">
                   IPhone 10
                 </Typography>
                 <div className="rtcontainer" style={{display: 'flex'}}>

@@ -45,9 +45,6 @@ const Header = () => {
             <div className='navv-container'>
                 <Nav />
             </div>
-            {/* <div className='foo-container'>
-                <Footer />
-            </div> */}
         </div>
     )
 }

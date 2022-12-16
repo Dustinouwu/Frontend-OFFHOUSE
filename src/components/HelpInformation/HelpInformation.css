@@ -1,0 +1,31 @@
+.helpi-container {
+    background-color: #D9D9D9;
+    border-radius: 30px;
+    margin-top: 3%;
+    
+    margin-bottom: 3%;
+    width: 100%;
+    height: 600px;
+    display: flex;
+    flex-direction: column;
+   
+
+    align-items: center;
+}
+#labelhelp{
+    font-weight: bold;
+    font-family: 'Inter', sans-serif;
+    letter-spacing: 3px;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
+.helpdos {
+    margin-top: 3%;
+    padding-left: 5%;
+    padding-right: 5%;
+    font-size: 1em;
+    font-family: 'Inter', sans-serif;
+    letter-spacing: 2px;
+    
+}

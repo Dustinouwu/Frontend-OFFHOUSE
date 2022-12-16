@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import './Login.css';
+import './ResetPassword.css';
 import Title from "../../components/Title/Title";
 import Label from "../../components/Label/Label";
 import Input from "../../components/Input/Input";
@@ -68,7 +68,7 @@ const Login = () => {
             </div>
 
             <div className="login-container">
-                <Title text='Login to OFFHOUSE'></Title>
+                <Title text='RESET PASSWORD'></Title>
 
                 {hasError &&
                     <label className="label-error-login">
@@ -77,50 +77,31 @@ const Login = () => {
                 }
 
                 <Label
-                    text='USERNAME'
+                    text='EMAIL'
                 />
 
                 <Input
                     attribute={{
-                        id: 'usuario',
-                        name: 'usuario',
-                        type: 'text',
-                        placeholder: 'Ingrese su usuario'
+                        id: 'email',
+                        name: 'email',
+                        type: 'email',
+                        placeholder: 'das@example.com'
                     }}
                     handleChange={handleChange}
-
                 />
 
-                <Label
-                    text='PASSWORD'
-                />
-                <Input
-                    attribute={{
-                        id: 'contraseña',
-                        name: 'contraseña',
-                        type: 'password',
-                        placeholder: 'Ingrese su contraseña'
-                    }}
-                    handleChange={handleChange}
-                    param={passwordError}
-                />
-                
-                {passwordError &&
-                    <label className="label-error">
-                        Contraseña inválida o incompleta
-                    </label>
-                }
 
+
+    
                 <div className="submit-button-container">
                     <Link to="/home">
                         <button onClick={handleSubmit} >
-                            LOGIN
+                            CONFIRM
                         </button>
                     </Link>
 
                 </div>
 
-                <h5>Create your account</h5>
 
                 <div className="signup-container">
                     <h5>Not a member? </h5>
@@ -128,7 +109,7 @@ const Login = () => {
                 </div>
 
                 <div className="signup-container">
-                    <Link to="/resetpssw" ><h5 className="singupl">Don’t remember your password?</h5></Link>
+                    <Link to="/" ><h5 className="singupl">Do you already have an account?</h5></Link>
                 </div>
 
             </div>

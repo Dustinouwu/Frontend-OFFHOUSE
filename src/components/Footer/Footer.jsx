@@ -8,7 +8,7 @@ import CoPresentIcon from '@mui/icons-material/CoPresent';
 
 function Footer() {
   return (
-    <div>
+    <div className='footercatch'>
       <div className="footer-container">
 
         <div className="footer-section-container">
