@@ -16,6 +16,12 @@ const Login = () => {
     const [passwordError, setPasswordError] = useState(false);
     const [hasError, setHasError] = useState(false)
 
+    /*  OBTENCION DE DATOS */
+    function handleSubmit() {
+        let data = { user, password }
+        console.log(data)
+    }
+
     /* FUNCIONES */
     function handleChange(name, value) {
         if (name === 'usuario') {
@@ -34,7 +40,7 @@ const Login = () => {
     }
 
     /* VALIDACIÓN DE NÚMERO CARÁCTERES */
-    function ifMatch(param) {
+    /* function ifMatch(param) {
         if (param.user.length > 0 && param.password.length > 0) {
             if (param.user === 'dastin' && param.password === '123456') {
                 const { user, password } = param;
@@ -47,20 +53,12 @@ const Login = () => {
                 setHasError(true)
             }
         }
-    }
+    } */
 
-    /*  OBTENCION DE DATOS */
-    function handleSubmit() {
-        let data = { user, password }
-        if (data) {
-            ifMatch(data)
-            console.log(data)
-        }
-    }
+    
 
 
     return (
-        /* CONTAINER MAIN LOGIN  */
         <div className="main-container">
 
             <div className="image-container">

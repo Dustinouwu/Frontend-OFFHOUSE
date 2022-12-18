@@ -9,6 +9,7 @@ import { BiSearchAlt } from "react-icons/bi";
 import { CiChat1 } from "react-icons/ci";
 import { SlBell } from "react-icons/sl";
 import { Avatar, Stack, Badge } from '@mui/material'
+import { Outlet } from 'react-router-dom';
 
 const Header = () => {
     return (
@@ -49,6 +50,7 @@ const Header = () => {
             <div className='navv-container'>
                 <Nav />
             </div>
+            <Outlet />
         </div>
     )
 }
