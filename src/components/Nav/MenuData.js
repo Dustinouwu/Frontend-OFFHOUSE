@@ -6,7 +6,7 @@ export const MenuData = [
     },
     {
         title: 'Vender',
-        path: '/',
+        path: '/CreateProduct',
         cName: 'nav-links'
 
     },

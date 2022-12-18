@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 import { BiSearchAlt } from "react-icons/bi";
 import { CiChat1 } from "react-icons/ci";
 import { SlBell } from "react-icons/sl";
-import { Avatar } from '@mui/material'
+import { Avatar, Stack, Badge } from '@mui/material'
 
 const Header = () => {
     return (
@@ -29,7 +29,11 @@ const Header = () => {
                 </form>
 
                 <div className='other-container'>
-                    <CiChat1 size="25px" />
+
+                    <Badge badgeContent={4} color="primary" invisible={false}>
+                        <CiChat1 size="25px" />
+                    </Badge>
+
                     <SlBell size="25px" />
                     <Avatar
                         id="avatar-header"
