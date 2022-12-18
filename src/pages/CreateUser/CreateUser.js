@@ -6,7 +6,7 @@ import Label from "../../components/Label/Label";
 import Imagenes from "../../Imagenes";
 import { Link, useNavigate } from "react-router-dom";
 
-const CreateUser = () => {
+export const CreateUser = () => {
     
     /* CONSTANTES */
     const navigate = useNavigate()
@@ -129,4 +129,3 @@ const CreateUser = () => {
     )
 }
 
-export default CreateUser

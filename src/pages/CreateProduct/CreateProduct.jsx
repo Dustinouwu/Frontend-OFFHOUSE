@@ -4,7 +4,7 @@ import Header from '../../components/Header/Header'
 import Footer from '../../components/Footer/Footer'
 import Form from '../../components/Form/Form'
 
-function CreateProduct() {
+export function CreateProduct() {
   return (
     <div>
         <div className="create-product">
@@ -16,4 +16,3 @@ function CreateProduct() {
   )
 }
 
-export default CreateProduct

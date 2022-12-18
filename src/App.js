@@ -1,7 +1,8 @@
 import './App.css';
-import Login from './pages/Login/Login';
+import { Home, Login } from '../pages';
+
 import CreateUser from './pages/CreateUser/CreateUser';
-import Home from './pages/Home/Home';
+
 import Help from './pages/Help/Help';
 import ResetPassword from './pages/ResetPassword/ResetPassword';
 import CreateProduct from './pages/CreateProduct/CreateProduct';

@@ -8,55 +8,7 @@ import { Link } from "react-router-dom";
 
 
 
-const Login = () => {
-
-    /* CONSTANTES */
-    const [user, setUser] = useState('');
-    const [password, setPassword] = useState('');
-    const [passwordError, setPasswordError] = useState(false);
-    const [hasError, setHasError] = useState(false)
-
-    /* FUNCIONES */
-    function handleChange(name, value) {
-        if (name === 'usuario') {
-            setUser(value)
-            setHasError(false)
-        } else {
-            if (value.length < 6) {
-                setPasswordError(true)
-                setHasError(false)
-            } else {
-                setPasswordError(false)
-                setPassword(value)
-                setHasError(false)
-            }
-        }
-    }
-
-    /* VALIDACIÓN DE NÚMERO CARÁCTERES */
-    function ifMatch(param) {
-        if (param.user.length > 0 && param.password.length > 0) {
-            if (param.user === 'dastin' && param.password === '123456') {
-                const { user, password } = param;
-                let ac = { user, password }
-                let account = JSON.stringify(ac);
-                localStorage.setItem('account', account)
-
-            } else {
-
-                setHasError(true)
-            }
-        }
-    }
-
-    /*  OBTENCION DE DATOS */
-    function handleSubmit() {
-        let data = { user, password }
-        if (data) {
-            ifMatch(data)
-            console.log(data)
-        }
-    }
+export const ResetPassword = () => {
 
 
     return (
@@ -70,11 +22,7 @@ const Login = () => {
             <div className="login-container">
                 <Title text='RESET PASSWORD'></Title>
 
-                {hasError &&
-                    <label className="label-error-login">
-                        Su contraseña o usuario son incorrectos!
-                    </label>
-                }
+                
 
                 <Label
                     text='EMAIL'
@@ -87,7 +35,7 @@ const Login = () => {
                         type: 'email',
                         placeholder: 'das@example.com'
                     }}
-                    handleChange={handleChange}
+                    
                 />
 
 
@@ -95,7 +43,7 @@ const Login = () => {
     
                 <div className="submit-button-container">
                     <Link to="/home">
-                        <button onClick={handleSubmit} >
+                        <button  >
                             CONFIRM
                         </button>
                     </Link>
@@ -124,4 +72,4 @@ const Login = () => {
 
 }
 
-export default Login;   
+ 

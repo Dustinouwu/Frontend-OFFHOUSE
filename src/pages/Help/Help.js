@@ -2,7 +2,7 @@ import React from 'react'
 import Header from '../../components/Header/Header'
 import Footer from '../../components/Footer/Footer'
 import HelpInformation from '../../components/HelpInformation/HelpInformation'
-function Help() {
+export  function Help() {
   return (
     <div>
       
@@ -13,4 +13,3 @@ function Help() {
   )
 }
 
-export default Help

@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 
 
 
-const Login = () => {
+export const Login = () => {
 
     /* CONSTANTES */
     const [user, setUser] = useState('');
@@ -141,4 +141,4 @@ const Login = () => {
 
 }
 
-export default Login;   
+    
