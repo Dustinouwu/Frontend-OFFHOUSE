@@ -80,13 +80,19 @@ export const Login = () => {
 
                     <div className="submit-button-container">
 
-                        <button  >
+                        <button>
                             
                             LOGIN
                         </button>
 
 
                     </div>
+                    
+                    <button  >
+                            <Link to="admin/*" >ADMIN ACCOUNT</Link>
+                            
+                        </button>
+                    
 
                     <h5>Create your account</h5>
 

@@ -22,23 +22,18 @@ export const LoginAdmin = () => {
         e.preventDefault();
         try {
             const response = await axios.post(
-                'https://offhouse.herokuapp.com/api/loginCust',
+                'https://offhouse.herokuapp.com/api/login',
                 { email, password },
                 { headers: { 'accept': 'application/json' } }
             )
             const { access_token, token_type, user } = response.data.data
             login(user, `${token_type} ${access_token}`);
-            navigate('/home');
+            navigate('/homeadmin');
         } catch (error) {
             console.log(error.response.data.message, 'error');
             
         }
     }
-
-
-
-
-
 
 
     return (
@@ -81,12 +76,16 @@ export const LoginAdmin = () => {
                     <div className="submit-button-container">
 
                         <button  >
-                            
                             LOGIN
+                            
                         </button>
 
 
                     </div>
+                    <button>
+                        <Link to="/login" >USER ACCOUNT </Link>
+                       
+                    </button>
 
                     <h5>Create your account</h5>
 

@@ -5,6 +5,8 @@ import AuthProvider from '../contexts/auth/AuthProvider';
 import { CreateUser, Home, Login, ResetPassword } from '../pages';
 import { PrivateRoute } from "./PrivateRoute";
 import { PublicRoute } from "./PublicRoute";
+import {LoginAdmin} from '../pagesAdmin';
+import { HomeAdmin } from '../pagesAdmin/HomeAdmin/HomeAdmin';
 
 export const AppRouter = () => {
     return (
@@ -13,11 +15,8 @@ export const AppRouter = () => {
                 <Route path='login/*' element={
                     <PublicRoute>
                         <Routes>
-
                             <Route path='/*' element={<Login />} /> 
-
-
-
+                            <Route path='admin/*' element={<LoginAdmin />} /> 
                         </Routes>
                     </PublicRoute>
                 } />
@@ -29,8 +28,9 @@ export const AppRouter = () => {
                         <Routes>
                             <Route element={<Header />}>
                                 <Route index path='/home' element={<Home />} />
-
+                                <Route index path='/homeAdmin' element={<HomeAdmin />} />
                             </Route>
+                            
 
                         </Routes>
                     </PrivateRoute>
