@@ -1,10 +1,8 @@
 import React from 'react'
 import { Routes, Route } from 'react-router-dom';
+import Header from '../components/Header/Header';
 import AuthProvider from '../contexts/auth/AuthProvider';
 import { CreateUser, Home, Login, ResetPassword } from '../pages';
-
-
-
 import { PrivateRoute } from "./PrivateRoute";
 import { PublicRoute } from "./PublicRoute";
 
@@ -16,9 +14,9 @@ export const AppRouter = () => {
                     <PublicRoute>
                         <Routes>
 
-                            <Route path='/*' element={<Login />} />
-                            
-                            
+                            <Route path='/*' element={<Login />} /> 
+
+
 
                         </Routes>
                     </PublicRoute>
@@ -29,7 +27,11 @@ export const AppRouter = () => {
                 <Route path='/*' element={
                     <PrivateRoute>
                         <Routes>
-                        <Route index path='/home' element={<Home />} />
+                            <Route element={<Header />}>
+                                <Route index path='/home' element={<Home />} />
+
+                            </Route>
+
                         </Routes>
                     </PrivateRoute>
                 } />

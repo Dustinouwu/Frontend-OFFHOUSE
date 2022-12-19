@@ -1,17 +1,45 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import './Header.css';
 import Imagenes from "../../Imagenes";
 import Search from "../Search/Search";
 import Nav from "../Nav/Nav";
 import Footer from "../Footer/Footer";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { BiSearchAlt } from "react-icons/bi";
 import { CiChat1 } from "react-icons/ci";
 import { SlBell } from "react-icons/sl";
-import { Avatar, Stack, Badge } from '@mui/material'
+import { Avatar, Stack, Badge, IconButton } from '@mui/material'
 import { Outlet } from 'react-router-dom';
+import { AuthContext } from '../../contexts';
+import axios from 'axios';
+import { PhotoCamera } from '@mui/icons-material';
 
 const Header = () => {
+
+    const navigate = useNavigate();
+
+    const { user, logout } = useContext(AuthContext);
+    const tokenUser = localStorage.getItem('token')
+    console.log('nombreUsuario: ', user.username)
+    const config = {
+        headers: { Authorization: `${tokenUser}` }
+    };
+
+    const onLogout = async (e) => {
+        e.preventDefault();
+        try {
+            const response = await axios.post(
+                'https://offhouse.herokuapp.com/api/logout',
+                { headers: { 'accept': 'application/json' } },
+                config
+            )
+            logout()
+            navigate('/login')
+        } catch (error) {
+            console.log(error.response.data.message, 'error');
+        }
+    }
+
     return (
         <div >
 
@@ -24,7 +52,7 @@ const Header = () => {
                     <h1>OFF HOUSE</h1>
                 </div>
 
-                <form>
+                <form id='formsearch'>
                     <Search />
 
                 </form>
@@ -34,11 +62,15 @@ const Header = () => {
                     <Badge badgeContent={4} color="primary" invisible={false}>
                         <CiChat1 size="25px" />
                     </Badge>
+                    <IconButton color="primary" aria-label="upload picture" component="label" onClick={onLogout}>
+                        <input hidden accept="image/*"  />
+                        <PhotoCamera />
+                    </IconButton>
+                   
 
-                    <SlBell size="25px" />
                     <Avatar
                         id="avatar-header"
-                        alt="Remy Sharp"
+                        alt={user.username}
                         src="/static/images/avatar/1.jpg"
                         sx={{ width: 45, height: 45 }}
                         overlap="circular"

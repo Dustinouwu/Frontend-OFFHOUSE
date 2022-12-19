@@ -9,6 +9,6 @@ import { AuthContext } from '../contexts';
 export const PublicRoute = ({ children }) => 
 {
     const { logged } = useContext(AuthContext);
-
-    return (!logged) ? children : <Navigate to='/' />
+    console.warn('PublicRoute', logged);
+    return (!logged) ? children : <Navigate to='/home' />
 }

@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import './Login.css';
+import './LoginAdmin.css';
 import Title from "../../components/Title/Title";
 import Label from "../../components/Label/Label";
 import Input from "../../components/Input/Input";
@@ -10,7 +10,7 @@ import axios from "axios";
 
 
 
-export const Login = () => {
+export const LoginAdmin = () => {
 
     const { login } = useContext(AuthContext);
     const navigate = useNavigate();
