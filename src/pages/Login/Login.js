@@ -12,13 +12,16 @@ import axios from "axios";
 
 export const Login = () => {
 
-    /* Traer el AuthContext  */
+    /* TRAER LA FUNCIÓN */
     const { login } = useContext(AuthContext);
+    /* NAVEGAR ENTRE RUTAS */
     const navigate = useNavigate();
 
+    /* CONSTANTES EMAIL Y PASSWORD*/
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
+    /* PETICIÓN USUARIO POR API*/
     const onLogin = async (e) => {
         e.preventDefault();
         try {

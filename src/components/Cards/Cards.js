@@ -47,13 +47,13 @@ export default function MultiActionAreaCard() {
   /*FUNCIÓN PARA CAMBIAR EL COLOR DEPENDIENDO EL ESTADO*/
   const colorprod2 = products.map((products) => {
     return (
-      products.state_appliance === 'Nuevo' ? "#0FFF18" :   '#FF0000' && products.state_appliance === 'nuevo' ? "#0FFF18" :   '#FF0000' 
-      
+      products.state_appliance === 'Nuevo' ? "#0FFF18" : '#FF0000' && products.state_appliance === 'nuevo' ? "#0FFF18" : '#FF0000'
+
     )
-   
+
   });
 
- 
+
 
   return (
     <div>
@@ -90,7 +90,7 @@ export default function MultiActionAreaCard() {
                       {products.title}
                     </Typography>
                     <div className="rtcontainer" style={{ display: 'flex' }}>
-                      <CircleIcon style={{ color: colorprod2[index] , paddingRight: '10px', width: '20' }} />
+                      <CircleIcon style={{ color: colorprod2[index], paddingRight: '10px', width: '20' }} />
                       <Typography noWrap style={{ paddingTop: '2px' }} >
                         {products.state_appliance}
                       </Typography>

@@ -6,24 +6,24 @@ import AuthProvider from '../contexts/auth/AuthProvider';
 import { CreateUser, Home, Login, ResetPassword } from '../pages';
 import { PrivateRoute } from "./PrivateRoute";
 import { PublicRoute } from "./PublicRoute";
-import {LoginAdmin} from '../pagesAdmin';
+import { LoginAdmin } from '../pagesAdmin';
 import { HomeAdmin } from '../pagesAdmin/HomeAdmin/HomeAdmin';
 
 export const AppRouter = () => {
     return (
         <AuthProvider>
             <Routes>
+                {/* RUTAS PUBLICAS */}
                 <Route path='login/*' element={
                     <PublicRoute>
                         <Routes>
-                            <Route path='/*' element={<Login />} /> 
-                            <Route path='admin/*' element={<LoginAdmin />} /> 
+                            <Route path='/*' element={<Login />} />
+                            <Route path='admin/*' element={<LoginAdmin />} />
                         </Routes>
                     </PublicRoute>
                 } />
-
-
-
+                
+                {/* RUTAS PRIVADAS */}
                 <Route path='/*' element={
                     <PrivateRoute>
                         <Routes>
@@ -32,8 +32,6 @@ export const AppRouter = () => {
                                 <Route index path='/homeAdmin' element={<HomeAdmin />} />
                                 <Route path='/crudusers' element={<FormsUsers />}></Route>
                             </Route>
-                            
-
                         </Routes>
                     </PrivateRoute>
                 } />
