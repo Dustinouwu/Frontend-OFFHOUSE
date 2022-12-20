@@ -1,6 +1,7 @@
 import React from 'react'
 import { Routes, Route } from 'react-router-dom';
 import Header from '../components/Header/Header';
+import FormsUsers from '../components/FormsUsers/FormsUsers';
 import AuthProvider from '../contexts/auth/AuthProvider';
 import { CreateUser, Home, Login, ResetPassword } from '../pages';
 import { PrivateRoute } from "./PrivateRoute";
@@ -29,6 +30,7 @@ export const AppRouter = () => {
                             <Route element={<Header />}>
                                 <Route index path='/home' element={<Home />} />
                                 <Route index path='/homeAdmin' element={<HomeAdmin />} />
+                                <Route path='/crudusers' element={<FormsUsers />}></Route>
                             </Route>
                             
 

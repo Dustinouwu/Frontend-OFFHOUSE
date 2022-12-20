@@ -1,6 +1,6 @@
 import React from "react";
 import "./Home.css";
-import Cards from "../../components/Cards/Cards";
+import MultiActionAreaCard from "../../components/Cards/Cards";
 import Footer from "../../components/Footer/Footer";
 import SubscriptionBar from "../../components/SubscriptionBar/SubscriptionBar";
 
@@ -10,7 +10,7 @@ export const Home = () => {
 
             <div >
                 <SubscriptionBar />
-                <Cards />
+                <MultiActionAreaCard />
                 <Footer />          
             </div>
         </div>
