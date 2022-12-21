@@ -11,8 +11,9 @@ import { SlBell } from "react-icons/sl";
 import { Avatar, Stack, Badge, IconButton } from '@mui/material'
 import { Outlet } from 'react-router-dom';
 import { AuthContext } from '../../contexts';
-import axios from 'axios';
 import { PhotoCamera } from '@mui/icons-material';
+import LogoutIcon from '@mui/icons-material/Logout';
+import axios from 'axios';
 
 const Header = () => {
 
@@ -64,7 +65,7 @@ const Header = () => {
                     </Badge>
                     <IconButton color="primary" aria-label="upload picture" component="label" onClick={onLogout}>
                         <input hidden accept="image/*"  />
-                        <PhotoCamera />
+                        <LogoutIcon style={{color: 'black'}} />
                     </IconButton>
                    
 

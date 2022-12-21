@@ -7,6 +7,7 @@ import Imagenes from '../../Imagenes';
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../contexts";
 import axios from "axios";
+import { Button } from "@mui/material";
 
 
 
@@ -17,6 +18,8 @@ export const LoginAdmin = () => {
 
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+    const [error, setError] = useState('')
+    const [error2, setError2] = useState('')
 
     const onLogin = async (e) => {
         e.preventDefault();
@@ -29,9 +32,15 @@ export const LoginAdmin = () => {
             const { access_token, token_type, user } = response.data.data
             login(user, `${token_type} ${access_token}`);
             navigate('/homeadmin');
+            if (response.status === 422) {
+                setError('')
+            } else {
+                setError2('')
+            }
         } catch (error) {
+            setError(error.response.data.message)
             console.log(error.response.data.message, 'error');
-            
+
         }
     }
 
@@ -44,59 +53,54 @@ export const LoginAdmin = () => {
             </div>
 
             <div className="login-container">
-                <form className="formlogin"  onSubmit={onLogin}>
-                    <Title text='Login to OFFHOUSE'></Title>
-
+                <form className="formlogin" onSubmit={onLogin}>
+                <Title text='Login to OFFHOUSE'></Title>
+                    {error &&
+                        <label className="label-error-login">
+                            {error}                    
+                        </label>
+                    }
+                    {error2 &&
+                        <label className="label-error-login">
+                            {error2}                    
+                        </label>
+                    }
+                    <Label
+                        text='USERNAME'
+                    />
 
                     <input
                         id="email"
-                        type='mail'
+                        type='email'
                         value={email}
+                        className="inputstyle"
+                        placeholder="example@example.com"
                         onChange={e => setEmail(e.target.value)}>
-
                     </input>
                     <Label
-                        text='USERNAME'
+                        text='PASSWORD'
                     />
 
                     <input
                         id="contraseña"
                         type='password'
                         value={password}
+                        className="inputstyle"
+                        placeholder="********"
                         onChange={e => setPassword(e.target.value)}>
 
                     </input>
-                    <Label
-                        text='PASSWORD'
-                    />
-
-
-
-
                     <div className="submit-button-container">
-
                         <button  >
                             LOGIN
-                            
                         </button>
-
-
-                    </div>
-                    <button>
-                        <Link to="/login" >USER ACCOUNT </Link>
-                       
-                    </button>
-
-                    <h5>Create your account</h5>
-
-                    <div className="signup-container">
-                        <h5>Not a member? </h5>
-                        <Link to="/register" ><h5 className="singupl">Sign up</h5></Link>
                     </div>
 
-                    <div className="signup-container">
-                        <Link to="/resetpssw" ><h5 className="singupl">Don’t remember your password?</h5></Link>
-                    </div>
+                    <Button variant="contained" style={{ marginTop: '25px', backgroundColor: '#ff9900bd' }}>
+                        <Link to="/login" style={{ textDecoration: 'none', color: 'white' }} >ROL: USUARIO</Link>
+                    </Button>
+
+
                 </form>
 
             </div>

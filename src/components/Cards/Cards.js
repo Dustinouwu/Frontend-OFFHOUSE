@@ -12,7 +12,6 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { array } from 'prop-types';
 
-const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
 export default function MultiActionAreaCard() {
 
@@ -47,8 +46,7 @@ export default function MultiActionAreaCard() {
   /*FUNCIÓN PARA CAMBIAR EL COLOR DEPENDIENDO EL ESTADO*/
   const colorprod2 = products.map((products) => {
     return (
-      products.state_appliance === 'Nuevo' ? "#0FFF18" : '#FF0000' && products.state_appliance === 'nuevo' ? "#0FFF18" : '#FF0000'
-
+      products.state_appliance === 'Nuevo' ? "#0FFF18" : '#FF0000' && products.state_appliance === 'nuevo' ? "#0FFF18" : '#FF0000'  && products.state_appliance === 'reacondicionado' ? "#FFF100" : '#FF0000'
     )
 
   });
@@ -59,9 +57,9 @@ export default function MultiActionAreaCard() {
     <div>
 
       <Container sx={{ py: 5 }} maxWidth="lg">
-        <Grid container spacing={5}>
+        <Grid container spacing={2}>
           {products.map((products, index) => (
-            <Grid item key={products.id} xs={4} sm={10} md={3} >
+            <Grid item key={products.id} xs={12} sm={6} md={4} >
               <Card
                 sx={{
                   height: '100%',
@@ -78,6 +76,8 @@ export default function MultiActionAreaCard() {
                     sx={{
                       // 16:9
                       py: '5%',
+                      width: '100%',
+                      height: '200px',
                     }}
                     image={products.image}
                     alt="random"

@@ -1,13 +1,13 @@
 import React, { useContext, useState } from "react";
 import './Login.css';
+import axios from "axios";
 import Title from "../../components/Title/Title";
 import Label from "../../components/Label/Label";
 import Input from "../../components/Input/Input";
 import Imagenes from '../../Imagenes';
-import { Link, Navigate, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../contexts";
-import axios from "axios";
-
+import { Button } from "@mui/material";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 
 
 export const Login = () => {
@@ -20,6 +20,8 @@ export const Login = () => {
     /* CONSTANTES EMAIL Y PASSWORD*/
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+    const [error, setError] = useState('')
+    const [error2, setError2] = useState('')
 
     /* PETICIÓN USUARIO POR API*/
     const onLogin = async (e) => {
@@ -33,16 +35,18 @@ export const Login = () => {
             const { access_token, token_type, user } = response.data.data
             login(user, `${token_type} ${access_token}`);
             navigate('/home');
-        } catch (error) {
-            console.log(error.response.data.message, 'error');
+            if (response.status === 422) {
+                setError('')
+            } else {
+                setError2('')
+            }
             
+        } catch (error) {
+            setError(error.response.data.message)
+            console.log(error.response.data.message, 'error');
+
         }
     }
-
-
-
-
-
 
 
     return (
@@ -53,60 +57,65 @@ export const Login = () => {
             </div>
 
             <div className="login-container">
-                <form className="formlogin"  onSubmit={onLogin}>
+                <form className="formlogin" onSubmit={onLogin}>
                     <Title text='Login to OFFHOUSE'></Title>
-
+                    {error &&
+                        <label className="label-error-login">
+                            {error}                    
+                        </label>
+                    }
+                    {error2 &&
+                        <label className="label-error-login">
+                            {error2}                    
+                        </label>
+                    }
+                    <Label
+                        text='USERNAME'
+                    />
 
                     <input
                         id="email"
-                        type='mail'
+                        type='email'
                         value={email}
+                        className="inputstyle"
+                        placeholder="example@example.com"
                         onChange={e => setEmail(e.target.value)}>
-
                     </input>
                     <Label
-                        text='USERNAME'
+                        text='PASSWORD'
                     />
 
                     <input
                         id="contraseña"
                         type='password'
                         value={password}
+                        className="inputstyle"
+                        placeholder="********"
                         onChange={e => setPassword(e.target.value)}>
 
                     </input>
-                    <Label
-                        text='PASSWORD'
-                    />
-
 
 
 
                     <div className="submit-button-container">
-
-                        <button>
-                            
-                            LOGIN
-                        </button>
-
-
-                    </div>
-                    
-                    <button  >
-                            <Link to="admin/*" >ADMIN ACCOUNT</Link>
-                            
-                        </button>
-                    
-
-                    <h5>Create your account</h5>
-
-                    <div className="signup-container">
-                        <h5>Not a member? </h5>
-                        <Link to="/register" ><h5 className="singupl">Sign up</h5></Link>
+                        <button>LOGIN </button>
                     </div>
 
-                    <div className="signup-container">
-                        <Link to="/resetpssw" ><h5 className="singupl">Don’t remember your password?</h5></Link>
+                    <Button variant="contained" style={{ marginTop: '25px', backgroundColor: '#ff9900bd' }}>
+                        <Link to="admin/*" style={{ textDecoration: 'none', color: 'white' }} >ROL: ADMINISTRADOR</Link>
+                    </Button>
+
+                    <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
+                        <h5>Create your account</h5>
+
+                        <div className="signup-container">
+                            <h5>Not a member? </h5>
+                            <Link to="/register" ><h5 className="singupl">Sign up</h5></Link>
+                        </div>
+
+                        <div className="signup-container">
+                            <Link to="/resetpssw" ><h5 className="singupl">Don’t remember your password?</h5></Link>
+                        </div>
                     </div>
                 </form>
 
