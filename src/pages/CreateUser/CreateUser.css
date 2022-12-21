@@ -20,8 +20,22 @@ img {
     height: 100vh;
 }
 
-#email{
+#mail{
     background-image: url(../../assets/img/Mail.png);
+    background-position: 10px ;
+    padding-left: 60px;
+    background-size:auto;
+    background-repeat: no-repeat;
+}
+#telf{
+    background-image: url(../../assets/img/Phone.png);
+    background-position: 10px ;
+    padding-left: 60px;
+    background-size:auto;
+    background-repeat: no-repeat;
+}
+#dirre{
+    background-image: url(../../assets/img/MapPin.png);
     background-position: 10px ;
     padding-left: 60px;
     background-size:auto;
@@ -79,13 +93,12 @@ img {
 
 }
 
-.label-error-login {
+.label-error-createu {
     color: #721c24;
     font-size: 12px;
     border: 1.5px solid transparent;
     background-color: #eac4c7;
     border-color: #f5c6cb;
-    ;
     width: fit-content;
     height: fit-content;
     padding: 5px;
@@ -105,3 +118,20 @@ img {
     text-decoration: inherit;
 
 }
+.inputcreateuser {
+    padding-right: 30%;
+    width: 100%;
+    height: 44px;
+    background-color: #D9D9D9;
+    border: none;
+    border-radius: 5px;
+    box-sizing: border-box;
+    outline-color: #D9D9D9;
+    padding-left: 20px;
+    margin-bottom: 10px;
+    margin-left: 20px;
+    
+    
+    
+}
+

@@ -110,7 +110,7 @@ export const Login = () => {
 
                         <div className="signup-container">
                             <h5>Not a member? </h5>
-                            <Link to="/register" ><h5 className="singupl">Sign up</h5></Link>
+                            <Link to="createuser/*" ><h5 className="singupl">Sign up</h5></Link>
                         </div>
 
                         <div className="signup-container">
