@@ -50,14 +50,8 @@ export const ResetPassword = () => {
 
                 </div>
 
-
                 <div className="signup-container">
-                    <h5>Not a member? </h5>
-                    <Link to="/register" ><h5 className="singupl">Sign up</h5></Link>
-                </div>
-
-                <div className="signup-container">
-                    <Link to="/" ><h5 className="singupl">Do you already have an account?</h5></Link>
+                    <Link to="/*" ><h5 className="singupl">Do you already have an account?</h5></Link>
                 </div>
 
             </div>

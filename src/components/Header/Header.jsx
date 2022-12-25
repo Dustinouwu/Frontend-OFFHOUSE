@@ -59,15 +59,17 @@ const Header = () => {
                 </form>
 
                 <div className='other-container'>
+                    <Link to="/chat">
+                        <Badge badgeContent={4} color="primary" invisible={false}>
+                            <CiChat1 size="25px" />
+                        </Badge>
+                    </Link>
 
-                    <Badge badgeContent={4} color="primary" invisible={false}>
-                        <CiChat1 size="25px" />
-                    </Badge>
                     <IconButton color="primary" aria-label="upload picture" component="label" onClick={onLogout}>
-                        <input hidden accept="image/*"  />
-                        <LogoutIcon style={{color: 'black'}} />
+                        <input hidden accept="image/*" />
+                        <LogoutIcon style={{ color: 'black' }} />
                     </IconButton>
-                   
+
 
                     <Avatar
                         id="avatar-header"

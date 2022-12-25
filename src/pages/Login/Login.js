@@ -114,7 +114,7 @@ export const Login = () => {
                         </div>
 
                         <div className="signup-container">
-                            <Link to="/resetpssw" ><h5 className="singupl">Don’t remember your password?</h5></Link>
+                            <Link to="resetpssw/*" ><h5 className="singupl">Don’t remember your password?</h5></Link>
                         </div>
                     </div>
                 </form>
