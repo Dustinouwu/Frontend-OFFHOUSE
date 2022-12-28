@@ -1,4 +1,3 @@
-import React from 'react'
 import './FormsProducts.css'
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
@@ -14,21 +13,48 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import ButtonGroup from '@mui/material/ButtonGroup';
 import EditIcon from '@mui/icons-material/Edit';
 import Link from '@mui/material/Link';
-
 import AddIcon from '@mui/icons-material/Add';
-function createData(name) {
-  return { name };
-}
+import { useNavigate } from 'react-router-dom';
+import WorkspacePremiumIcon from '@mui/icons-material/WorkspacePremium';
+import axios from 'axios';
+import React, { useEffect, useState } from 'react'
 
-const rows = [
-  createData('Frozen yoghurt'),
-  createData('Ice cream sandwich'),
-  createData('Eclair'),
-  createData('Cupcake'),
-  createData('Gingerbread'),
-];
 
-function FormsProducts() {
+const FormsProducts = () => {
+
+  const navigate = useNavigate(); /* FUNCIÓN PÁRA NAVEGAR */
+  const [products, setProducts] = useState([]);  /* FUNCIÓN PARA LISTAR LOS PRODUCTOS */
+  const tokenUser = localStorage.getItem('token')  /* FUNCIÓN PARA PODER RECUPERAR EL TOKEN */
+
+  const config = {
+    headers: { Authorization: `${tokenUser}` }
+  };
+
+  /* MUESTRA DE PRODUCTO POR USUARIO  */
+  const getProductsUser = async () => {
+    try {
+      const response = await axios.post(
+        'https://offhouse.herokuapp.com/api/products/myProducts',
+        { headers: { 'accept': 'application/json' } },
+        config
+      );
+      console.log(response.data.data.products.data);
+      setProducts(response.data.data.products.data);
+    } catch (error) {
+      console.log(error.response.data.message, 'error');
+    }
+  };
+
+
+  /* FUNCIÓN PARA RENDERIZAR AL CARGAR LA PÁGINA*/
+  useEffect(() => {
+    getProductsUser();
+  }, []);
+
+
+
+
+
   return (
     <div>
       <div style={{ marginLeft: '3%', marginRight: '3%', marginTop: '3%', marginBottom: '3%', paddingLeft: '3%', paddingRight: '3%', paddingBottom: '3%', paddingTop: '3%', borderRadius: '10px', backgroundColor: '#D9D9D9' }}>
@@ -49,23 +75,26 @@ function FormsProducts() {
               </TableRow>
             </TableHead>
             <TableBody>
-              {rows.map((row) => (
+              {products.map((products, index) => (
                 <TableRow
-                  key={row.name}
+                  key={products.id}
                   sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                 >
 
                   <TableCell component="th" scope="row"  >
-                    {row.name}
+                    {products.title}
                   </TableCell>
 
                   <TableCell align="right" >
                     <ButtonGroup sx={{ gap: 0.5 }} orientation="vertical">
                       <Button variant="text" startIcon={<DeleteIcon style={{ color: 'white' }} />} style={{ color: 'white', backgroundColor: 'red' }}>
-                        Delete
+                        Eliminar
                       </Button>
                       <Button variant="text" startIcon={<EditIcon style={{ color: 'white' }} />} style={{ color: 'white', backgroundColor: 'green' }}>
-                        Edit
+                        Editar
+                      </Button>
+                      <Button variant="text" startIcon={<WorkspacePremiumIcon style={{ color: 'white' }} />} style={{ color: 'white', backgroundColor: 'blue' }}>
+                        Subscripción
                       </Button>
                     </ButtonGroup>
 

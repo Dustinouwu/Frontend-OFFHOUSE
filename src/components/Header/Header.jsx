@@ -11,7 +11,7 @@ import { SlBell } from "react-icons/sl";
 import { Avatar, Stack, Badge, IconButton } from '@mui/material'
 import { Outlet } from 'react-router-dom';
 import { AuthContext } from '../../contexts';
-import { PhotoCamera } from '@mui/icons-material';
+import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
 import LogoutIcon from '@mui/icons-material/Logout';
 import axios from 'axios';
 
@@ -21,7 +21,6 @@ const Header = () => {
 
     const { user, logout } = useContext(AuthContext);
     const tokenUser = localStorage.getItem('token')
-    console.log('nombreUsuario: ', user.username)
     const config = {
         headers: { Authorization: `${tokenUser}` }
     };
@@ -61,7 +60,7 @@ const Header = () => {
                 <div className='other-container'>
                     <Link to="/chat">
                         <Badge badgeContent={4} color="primary" invisible={false}>
-                            <CiChat1 size="25px" />
+                            <ChatBubbleOutlineIcon size="25px"  style={{ color: 'black' }}/>
                         </Badge>
                     </Link>
 

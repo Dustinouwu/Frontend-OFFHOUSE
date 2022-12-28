@@ -7,7 +7,7 @@ import FormsCategories from '../components/FormsUsers/FormsUsers';
 import FormsCom from '../components/FormsCom/FormsCom';
 import FormsReports from '../components/FormsReports/FormsReports';
 import FormsProducts from '../components/FormsProducts/FormsProducts';
-import { Home, Login, ResetPassword, CreateUser, CreateProduct, Help, Chat } from '../pages';
+import { Home, Login, ResetPassword, CreateUser, CreateProduct, Help, Chat, ProductList } from '../pages';
 import { PrivateRoute } from "./PrivateRoute";
 import { PublicRoute } from "./PublicRoute";
 import { LoginAdmin } from '../pagesAdmin';
@@ -40,7 +40,7 @@ export const AppRouter = () => {
                                 <Route path='/help' element={<Help />} />
                                 <Route path='/chat' element={<Chat />} />
                                 <Route path='/CreateProduct' element={<CreateProduct />} />
-                                <Route path='/crudproductos' element={<FormsProducts />}></Route>
+                                <Route path='/productlist' element={<ProductList />}></Route>
                                 <Route path='/crudusers' element={<FormsUsers />}></Route>
                                 <Route path='/crudcateg' element={<FormsCategories />}></Route>
                                 <Route path='/crudcoms' element={<FormsCom />}></Route>
