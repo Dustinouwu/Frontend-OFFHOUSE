@@ -1,7 +1,5 @@
 import React from 'react'
 import './CreateProduct.css'
-import Header from '../../components/Header/Header'
-import Footer from '../../components/Footer/Footer'
 import Form from '../../components/Form/Form'
 
 export function CreateProduct() {
@@ -11,7 +9,7 @@ export function CreateProduct() {
             <Form />
         
         </div>
-        <Footer />
+        
     </div>
   )
 }

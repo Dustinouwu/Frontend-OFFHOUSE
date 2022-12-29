@@ -38,17 +38,41 @@ const FormsProducts = () => {
         { headers: { 'accept': 'application/json' } },
         config
       );
-      console.log(response.data.data.products.data);
       setProducts(response.data.data.products.data);
     } catch (error) {
       console.log(error.response.data.message, 'error');
     }
   };
 
+  /* ELIMINACIÓN DE PRODUCTOS */
+  const deleteProduct = async (id) => {
+
+    if (window.confirm('¿Estás seguro de que quieres eliminar este producto?')) {
+      try {
+        const response = await axios.delete(
+          `https://offhouse.herokuapp.com/api/products/${id}`,
+          { headers: { 'accept': 'application/json', 'authorization': tokenUser } },
+          config,
+
+        );
+        await getProductsUser();
+        console.log(response.data.data.products.data);
+
+
+      } catch (error) {
+        console.log(error);
+      }
+    }
+
+
+
+  };
+
 
   /* FUNCIÓN PARA RENDERIZAR AL CARGAR LA PÁGINA*/
   useEffect(() => {
     getProductsUser();
+
   }, []);
 
 
@@ -87,10 +111,20 @@ const FormsProducts = () => {
 
                   <TableCell align="right" >
                     <ButtonGroup sx={{ gap: 0.5 }} orientation="vertical">
-                      <Button variant="text" startIcon={<DeleteIcon style={{ color: 'white' }} />} style={{ color: 'white', backgroundColor: 'red' }}>
+                      <Button
+                        variant="text"
+                        startIcon={<DeleteIcon style={{ color: 'white' }} />}
+                        style={{ color: 'white', backgroundColor: 'red' }}
+                        onClick={() => { deleteProduct(products.id) }}
+                      >
                         Eliminar
                       </Button>
-                      <Button variant="text" startIcon={<EditIcon style={{ color: 'white' }} />} style={{ color: 'white', backgroundColor: 'green' }}>
+                      <Button
+                        variant="text"
+                        startIcon={<EditIcon style={{ color: 'white' }} />}
+                        style={{ color: 'white', backgroundColor: 'green' }}
+                        onClick={() =>  navigate(`/CreateProduct/edit/${products.id}`) }
+                      >
                         Editar
                       </Button>
                       <Button variant="text" startIcon={<WorkspacePremiumIcon style={{ color: 'white' }} />} style={{ color: 'white', backgroundColor: 'blue' }}>

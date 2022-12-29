@@ -1,186 +1,232 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './Form.css'
 import Box from '@mui/material/Box';
-import FormControl from '@mui/material/FormControl';
 import TextField from '@mui/material/TextField';
-import { NumericFormat } from 'react-number-format';
-import PropTypes from 'prop-types';
-import { IMaskInput } from 'react-imask';
-import Button from '@mui/material/Button';
-import IconButton from '@mui/material/IconButton';
-import PhotoCamera from '@mui/icons-material/PhotoCamera';
+import Grid from '@mui/material/Grid';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import { MenuItem } from '@mui/material';
 
-/* VALIDACIÓN DE SOLO NÚMEROS CAPO PRECIO */
-const TextMaskCustom = React.forwardRef(function TextMaskCustom(props, ref) {
-    const { onChange, ...other } = props;
-    return (
-        <IMaskInput
-            {...other}
-            mask="(#00) 000-0000"
-            definitions={{
-                '#': /[1-9]/,
-            }}
-            inputRef={ref}
-            onAccept={(value) => onChange({ target: { name: props.name, value } })}
-            overwrite
 
-        />
-    );
-});
+const Form = ({ products }) => {
 
-TextMaskCustom.propTypes = {
-    name: PropTypes.string.isRequired,
-    onChange: PropTypes.func.isRequired,
-};
 
-const NumberFormatCustom = React.forwardRef(function NumberFormatCustom(props, ref) {
-    const { onChange, ...other } = props;
+    const navigate = useNavigate();
+    const tokenUser = localStorage.getItem('token')
+    const [error, setError] = useState(false);
+    const [form, setForm] = useState({
+        title: products?.title ?? '',
+        price: products?.price ?? '',
+        detail: products?.detail ?? '',
+        stock: products?.stock ?? '',
+        state_appliance: products?.state_appliance ?? '',
+        brand: products?.brand ?? '',
+        delivery_method: products?.delivery_method ?? '',
+        categorie_id: products?.categorie_id ?? '',
 
-    return (
-        <NumericFormat
-            {...other}
-            getInputRef={ref}
-            onValueChange={(values) => {
-                onChange({
-                    target: {
-                        name: props.name,
-                        value: values.value,
-                    },
-                });
-            }}
-
-            thousandSeparator
-            isNumericString
-            prefix="$"
-
-        />
-    );
-});
-
-NumberFormatCustom.propTypes = {
-    name: PropTypes.string.isRequired,
-    onChange: PropTypes.func.isRequired,
-};
-
-function Form() {
-
-    const [values, setValues] = React.useState({
-        textmask: '(100) 000-0000',
-        numberformat: '',
     });
 
-    const handleChange = (event) => {
-        setValues({
-            ...values,
-            [event.target.name]: event.target.value,
+    const handleForm = (e) => {
+        setForm({
+            ...form,
+            [e.target.name]: e.target.value
         });
+    }
+    const config = {
+        headers: { Authorization: `${tokenUser}` }
     };
 
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        
+
+
+        try {
+            console.log(products)
+            if (products?.id) {
+                await axios.put(
+                    `https://offhouse.herokuapp.com/api/products/${products.id}`,
+                    { ...form }, { headers: { 'accept': 'application/json', 'authorization': tokenUser } }
+                    
+                );
+            } else {
+                await axios.post(
+                    `https://offhouse.herokuapp.com/api/products`,
+                    { ...form }, { headers: { 'accept': 'application/json', 'authorization': tokenUser } }
+                );
+            }
+            navigate('/productlist')
+            } catch (error) {
+                setError(error.response.data.message)
+                console.log(error);
+            }
+        }
+
     return (
-        <div className='formproduct-container' >
-            <Box
-                component="form"
-                sx={{
-                    '& .MuiTextField-root': { m: 1, width: '50ch' },
-                }}
-                noValidate
-                autoComplete="off"
-            >
-                <div className='formproduct'>
-                    <h1 id='labelhelp'>SUBE EL PRODUCTO QUE QUIERAS VENDER</h1>
-                    <div>
-                        <TextField
-                            id="outlined-number"
-                            label="Nombre Producto"
-                            type="text"
-                            InputLabelProps={{
-                                shrink: true,
-                            }}
-                        />
-                        <TextField
-                            id="outlined-number"
-                            label="Marca"
-                            type="text"
-                            InputLabelProps={{
-                                shrink: true,
-                            }}
-                        />
-                    </div>
+            <div style={{ marginLeft: '3%', marginRight: '3%' }} >
+                <div className='formproduct' >
+                    <h1 id='labelhelp'>
+                        {products?.id ? 'Editar Producto ' : 'Crear Producto'}
+                    </h1>
+                    <form className='formproduct' onSubmit={handleSubmit} >
+                        {error &&
+                            <label className="label-error-createu">
+                                {error}
+                            </label>
+                        }
+                        <Box sx={{
+                            '& .MuiTextField-root': { ml: 4, width: '40ch' },
+                        }} >
+                            <Grid container rowSpacing={5} columnSpacing={{ xs: 1, sm: 3, md: 1 }}>
+                                <Grid item xs={6}>
+                                    <TextField
+                                        id="outlined-number"
+                                        name='title'
+                                        value={form.title}
+                                        label="Nombre Producto"
+                                        type="text"
+                                        InputLabelProps={{
+                                            shrink: true,
+                                        }}
+                                        onChange={handleForm}
+                                    />
+                                </Grid>
+                                <Grid item xs={6}>
+                                    <TextField
+                                        id="outlined-number"
+                                        name='brand'
+                                        value={form.brand}
+                                        label="Marca"
+                                        type="text"
+                                        InputLabelProps={{
+                                            shrink: true,
+                                        }}
+                                        onChange={handleForm}
+                                    />
+                                </Grid>
+                                <Grid item xs={6}>
+                                    <TextField
+                                        id="outlined-number"
+                                        name='stock'
+                                        value={form.stock}
+                                        label="Stock"
+                                        type="number"
+                                        InputLabelProps={{
+                                            shrink: true,
+                                        }}
+                                        onChange={handleForm}
+                                    />
+                                </Grid>
+                                <Grid item xs={6}>
+                                    <TextField
+                                        id="outlined-number"
+                                        label="Estado del producto"
+                                        name='state_appliance'
+                                        value={form.state_appliance}
+                                        select
+                                        InputLabelProps={{
+                                            shrink: true,
+                                        }}
+                                        onChange={handleForm}
+                                    >
+                                        <MenuItem value="Nuevo" selected>Nuevo</MenuItem>
+                                        <MenuItem value="Usado">Usado</MenuItem>
+                                        <MenuItem value="Reacondicionado">Reacondicionado</MenuItem>
+                                        <MenuItem value="Reparado">Reparado</MenuItem>
+                                    </TextField>
+                                </Grid>
+                                <Grid item xs={6}>
+                                    <TextField
+                                        id="outlined-number"
+                                        label="Precio"
+                                        name='price'
+                                        value={form.price}
+                                        type="number"
+                                        InputLabelProps={{
+                                            shrink: true,
+                                        }}
+                                        onChange={handleForm}
+                                    />
+                                </Grid>
+                                <Grid item xs={6}>
+                                    <TextField
+                                        id="outlined-number"
+                                        label="Método de entrega"
+                                        name='delivery_method'
+                                        value={form.delivery_method}
+                                        select
+                                        InputLabelProps={{
+                                            shrink: true,
+                                        }}
+                                        onChange={handleForm}
+                                    >
+                                        <MenuItem value="Envio gratis" selected>Envio gratis</MenuItem>
+                                        <MenuItem value="Acuerdo Mutuo">Acuerdo Mutuo</MenuItem>
+                                    </TextField>
 
-                    <div>
-                        <TextField
-                            id="outlined-number"
-                            label="Stock"
-                            type="number"
-                            InputLabelProps={{
-                                shrink: true,
-                            }}
-                        />
-                        <TextField
-                            id="outlined-number"
-                            label="Estado del producto"
-                            select
-                            InputLabelProps={{
-                                shrink: true,
-                            }}
-                        />
+                                </Grid>
+                                <Grid item xs={6}>
+                                    <TextField
+                                        id="outlined-number"
+                                        label="Categoria"
+                                        name='categorie_id'
+                                        value={form.categorie_id}
+                                        select
+                                        InputLabelProps={{
+                                            shrink: true,
+                                        }}
+                                        onChange={handleForm}
+                                    >
+                                        <MenuItem value="1" selected>Refrigeradores</MenuItem>
+                                        <MenuItem value="2">Cocina</MenuItem>
+                                        <MenuItem value="3">Microondas</MenuItem>
+                                        <MenuItem value="4">Iron</MenuItem>
+                                        <MenuItem value="5">Lavadora</MenuItem>
+                                        <MenuItem value="6">Televisión</MenuItem>
+                                    </TextField>
+                                </Grid>
+                                {/*  <Grid item xs={6}>
+                            <IconButton color="primary" aria-label="upload picture" component="label">
+                                <input hidden accept="image/*" type="file" />
+                                <h5>
+                                    Subir Imagen
+                                </h5>
+                                <PhotoCamera />
+                            </IconButton>
+                        </Grid> */}
+                                <Grid item xs={6}>
+                                    <TextField
+                                        id="outlined-multiline-static"
+                                        label="Descripción"
+                                        name='detail'
+                                        value={form.detail}
+                                        multiline
+                                        onChange={handleForm}
+                                        rows={6}
+                                        InputLabelProps={{
+                                            shrink: true,
+                                        }}
+                                    />
+                                </Grid>
+                                <Grid item xs={6}>
+                                </Grid>
+                            </Grid>
+                        </Box>
+                        <div className="submit-button-container" style={{ paddingBottom: '5rem' }}>
 
-                    </div>
+                            <button >
+                                CONFIRM
+                            </button>
 
-
-                    <FormControl fullWidth sx={{ mr: 2, maxWidth: 435 }}>
-                        <TextField
-
-                            label="Precio"
-
-                            value={values.numberformat}
-                            onChange={handleChange}
-                            InputProps={{
-                                inputComponent: NumberFormatCustom,
-                            }}
-                            InputLabelProps={{
-                                shrink: true,
-                            }}
-
-                        />
-                    </FormControl>
-                    <input
-                        type='file'
-                    >
-                    </input>
-                    <IconButton color="primary" aria-label="upload picture" component="label">
-                        <input hidden accept="image/*" type="file" />
-                        <PhotoCamera />
-                    </IconButton>
-
-
-                    <TextField
-                        id="outlined-multiline-static"
-                        label="Descripción"
-                        multiline
-                        rows={6}
-
-
-                        InputLabelProps={{
-                            shrink: true,
-                        }}
-                    />
-                    <div style={{ display: 'flex', justifyContent: 'center', marginTop: '5%' }}>
-                        <Button variant="contained">SUBIR PRODUCTO</Button>
-                    </div>
-
-
-
-
-
+                        </div>
+                    </form>
 
                 </div>
 
 
+            </div>
+        )
+    }
 
-            </Box>
-        </div>
-    )
-}
-
-export default Form
+    export default Form

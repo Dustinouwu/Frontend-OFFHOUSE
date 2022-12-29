@@ -10,8 +10,6 @@ import CircleIcon from '@mui/icons-material/Circle';
 import { CardActionArea } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { array } from 'prop-types';
-
 
 export default function MultiActionAreaCard() {
 
