@@ -1,9 +1,17 @@
-import { Avatar, Button } from '@mui/material'
+import { Avatar, Button, TextareaAutosize, TextField } from '@mui/material'
 import React, { useEffect, useState } from 'react'
 import RateReviewIcon from '@mui/icons-material/RateReview';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
-const Comments = () => {
+import Box from '@mui/material/Box';
+import Modal from '@mui/material/Modal';
+import Modalcomments from './Modalcomments';
+
+
+
+
+
+const Comments = ({ comment }) => {
 
     /* POR METODO GET COLOCAR LOS COMENTARIOS QUE TIENE EL PRODUCTO POR ID POR UNA API */
 
@@ -11,7 +19,6 @@ const Comments = () => {
     const [comments, setComments] = useState([])
     const { id } = useParams();
     const tokenUser = localStorage.getItem('token')
-
 
     const getComments = async () => {
         try {
@@ -29,9 +36,16 @@ const Comments = () => {
         }
     };
 
+   
+
     useEffect(() => {
         getComments()
     }, [])
+
+    
+
+
+
 
 
 
@@ -40,9 +54,7 @@ const Comments = () => {
     return (
         <div>
             <div style={{ gap: '6%' }}>
-                <Button variant="text" startIcon={<RateReviewIcon style={{ color: 'white' }} />} style={{ color: 'white', backgroundColor: 'blue' }}>
-                    Enviar Comentario
-                </Button>
+                <Modalcomments />
                 <Button variant="text" startIcon={<RateReviewIcon style={{ color: 'white' }} />} style={{ color: 'white', backgroundColor: 'red' }}>
                     Reportar
                 </Button>

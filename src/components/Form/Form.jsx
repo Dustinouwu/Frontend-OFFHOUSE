@@ -39,7 +39,7 @@ const Form = ({ products }) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        
+
 
 
         try {
@@ -48,7 +48,7 @@ const Form = ({ products }) => {
                 await axios.put(
                     `https://offhouse.herokuapp.com/api/products/${products.id}`,
                     { ...form }, { headers: { 'accept': 'application/json', 'authorization': tokenUser } }
-                    
+
                 );
             } else {
                 await axios.post(
@@ -57,136 +57,136 @@ const Form = ({ products }) => {
                 );
             }
             navigate('/productlist')
-            } catch (error) {
-                setError(error.response.data.message)
-                console.log(error);
-            }
+        } catch (error) {
+            setError(error.response.data.message)
+            console.log(error);
         }
+    }
 
     return (
-            <div style={{ marginLeft: '3%', marginRight: '3%' }} >
-                <div className='formproduct' >
-                    <h1 id='labelhelp'>
-                        {products?.id ? 'Editar Producto ' : 'Crear Producto'}
-                    </h1>
-                    <form className='formproduct' onSubmit={handleSubmit} >
-                        {error &&
-                            <label className="label-error-createu">
-                                {error}
-                            </label>
-                        }
-                        <Box sx={{
-                            '& .MuiTextField-root': { ml: 4, width: '40ch' },
-                        }} >
-                            <Grid container rowSpacing={5} columnSpacing={{ xs: 1, sm: 3, md: 1 }}>
-                                <Grid item xs={6}>
-                                    <TextField
-                                        id="outlined-number"
-                                        name='title'
-                                        value={form.title}
-                                        label="Nombre Producto"
-                                        type="text"
-                                        InputLabelProps={{
-                                            shrink: true,
-                                        }}
-                                        onChange={handleForm}
-                                    />
-                                </Grid>
-                                <Grid item xs={6}>
-                                    <TextField
-                                        id="outlined-number"
-                                        name='brand'
-                                        value={form.brand}
-                                        label="Marca"
-                                        type="text"
-                                        InputLabelProps={{
-                                            shrink: true,
-                                        }}
-                                        onChange={handleForm}
-                                    />
-                                </Grid>
-                                <Grid item xs={6}>
-                                    <TextField
-                                        id="outlined-number"
-                                        name='stock'
-                                        value={form.stock}
-                                        label="Stock"
-                                        type="number"
-                                        InputLabelProps={{
-                                            shrink: true,
-                                        }}
-                                        onChange={handleForm}
-                                    />
-                                </Grid>
-                                <Grid item xs={6}>
-                                    <TextField
-                                        id="outlined-number"
-                                        label="Estado del producto"
-                                        name='state_appliance'
-                                        value={form.state_appliance}
-                                        select
-                                        InputLabelProps={{
-                                            shrink: true,
-                                        }}
-                                        onChange={handleForm}
-                                    >
-                                        <MenuItem value="Nuevo" selected>Nuevo</MenuItem>
-                                        <MenuItem value="Usado">Usado</MenuItem>
-                                        <MenuItem value="Reacondicionado">Reacondicionado</MenuItem>
-                                        <MenuItem value="Reparado">Reparado</MenuItem>
-                                    </TextField>
-                                </Grid>
-                                <Grid item xs={6}>
-                                    <TextField
-                                        id="outlined-number"
-                                        label="Precio"
-                                        name='price'
-                                        value={form.price}
-                                        type="number"
-                                        InputLabelProps={{
-                                            shrink: true,
-                                        }}
-                                        onChange={handleForm}
-                                    />
-                                </Grid>
-                                <Grid item xs={6}>
-                                    <TextField
-                                        id="outlined-number"
-                                        label="Método de entrega"
-                                        name='delivery_method'
-                                        value={form.delivery_method}
-                                        select
-                                        InputLabelProps={{
-                                            shrink: true,
-                                        }}
-                                        onChange={handleForm}
-                                    >
-                                        <MenuItem value="Envio gratis" selected>Envio gratis</MenuItem>
-                                        <MenuItem value="Acuerdo Mutuo">Acuerdo Mutuo</MenuItem>
-                                    </TextField>
+        <div style={{ marginLeft: '3%', marginRight: '3%' }} >
+            <div className='formproduct' >
+                <h1 id='labelhelp'>
+                    {products?.id ? 'Editar Producto ' : 'Crear Producto'}
+                </h1>
+                <form className='formproduct' onSubmit={handleSubmit} >
+                    {error &&
+                        <label className="label-error-createu">
+                            {error}
+                        </label>
+                    }
+                    <Box sx={{
+                        '& .MuiTextField-root': { ml: 4, width: '40ch' },
+                    }} >
+                        <Grid container rowSpacing={5} columnSpacing={{ xs: 1, sm: 3, md: 1 }}>
+                            <Grid item xs={6}>
+                                <TextField
+                                    id="outlined-number"
+                                    name='title'
+                                    value={form.title}
+                                    label="Nombre Producto"
+                                    type="text"
+                                    InputLabelProps={{
+                                        shrink: true,
+                                    }}
+                                    onChange={handleForm}
+                                />
+                            </Grid>
+                            <Grid item xs={6}>
+                                <TextField
+                                    id="outlined-number"
+                                    name='brand'
+                                    value={form.brand}
+                                    label="Marca"
+                                    type="text"
+                                    InputLabelProps={{
+                                        shrink: true,
+                                    }}
+                                    onChange={handleForm}
+                                />
+                            </Grid>
+                            <Grid item xs={6}>
+                                <TextField
+                                    id="outlined-number"
+                                    name='stock'
+                                    value={form.stock}
+                                    label="Stock"
+                                    type="number"
+                                    InputLabelProps={{
+                                        shrink: true,
+                                    }}
+                                    onChange={handleForm}
+                                />
+                            </Grid>
+                            <Grid item xs={6}>
+                                <TextField
+                                    id="outlined-number"
+                                    label="Estado del producto"
+                                    name='state_appliance'
+                                    value={form.state_appliance}
+                                    select
+                                    InputLabelProps={{
+                                        shrink: true,
+                                    }}
+                                    onChange={handleForm}
+                                >
+                                    <MenuItem value="Nuevo" selected>Nuevo</MenuItem>
+                                    <MenuItem value="Usado">Usado</MenuItem>
+                                    <MenuItem value="Reacondicionado">Reacondicionado</MenuItem>
+                                    <MenuItem value="Reparado">Reparado</MenuItem>
+                                </TextField>
+                            </Grid>
+                            <Grid item xs={6}>
+                                <TextField
+                                    id="outlined-number"
+                                    label="Precio"
+                                    name='price'
+                                    value={form.price}
+                                    type="number"
+                                    InputLabelProps={{
+                                        shrink: true,
+                                    }}
+                                    onChange={handleForm}
+                                />
+                            </Grid>
+                            <Grid item xs={6}>
+                                <TextField
+                                    id="outlined-number"
+                                    label="Método de entrega"
+                                    name='delivery_method'
+                                    value={form.delivery_method}
+                                    select
+                                    InputLabelProps={{
+                                        shrink: true,
+                                    }}
+                                    onChange={handleForm}
+                                >
+                                    <MenuItem value="Envio gratis" selected>Envio gratis</MenuItem>
+                                    <MenuItem value="Acuerdo Mutuo">Acuerdo Mutuo</MenuItem>
+                                </TextField>
 
-                                </Grid>
-                                <Grid item xs={6}>
-                                    <TextField
-                                        id="outlined-number"
-                                        label="Categoria"
-                                        name='categorie_id'
-                                        value={form.categorie_id}
-                                        select
-                                        InputLabelProps={{
-                                            shrink: true,
-                                        }}
-                                        onChange={handleForm}
-                                    >
-                                        <MenuItem value="1" selected>Refrigeradores</MenuItem>
-                                        <MenuItem value="2">Cocina</MenuItem>
-                                        <MenuItem value="3">Microondas</MenuItem>
-                                        <MenuItem value="4">Iron</MenuItem>
-                                        <MenuItem value="5">Lavadora</MenuItem>
-                                        <MenuItem value="6">Televisión</MenuItem>
-                                    </TextField>
-                                </Grid>
-                                {/*  <Grid item xs={6}>
+                            </Grid>
+                            <Grid item xs={6}>
+                                <TextField
+                                    id="outlined-number"
+                                    label="Categoria"
+                                    name='categorie_id'
+                                    value={form.categorie_id}
+                                    select
+                                    InputLabelProps={{
+                                        shrink: true,
+                                    }}
+                                    onChange={handleForm}
+                                >
+                                    <MenuItem value="1" selected>Refrigeradores</MenuItem>
+                                    <MenuItem value="2">Cocina</MenuItem>
+                                    <MenuItem value="3">Microondas</MenuItem>
+                                    <MenuItem value="4">Iron</MenuItem>
+                                    <MenuItem value="5">Lavadora</MenuItem>
+                                    <MenuItem value="6">Televisión</MenuItem>
+                                </TextField>
+                            </Grid>
+                            {/*  <Grid item xs={6}>
                             <IconButton color="primary" aria-label="upload picture" component="label">
                                 <input hidden accept="image/*" type="file" />
                                 <h5>
@@ -195,38 +195,38 @@ const Form = ({ products }) => {
                                 <PhotoCamera />
                             </IconButton>
                         </Grid> */}
-                                <Grid item xs={6}>
-                                    <TextField
-                                        id="outlined-multiline-static"
-                                        label="Descripción"
-                                        name='detail'
-                                        value={form.detail}
-                                        multiline
-                                        onChange={handleForm}
-                                        rows={6}
-                                        InputLabelProps={{
-                                            shrink: true,
-                                        }}
-                                    />
-                                </Grid>
-                                <Grid item xs={6}>
-                                </Grid>
+                            <Grid item xs={6}>
+                                <TextField
+                                    id="outlined-multiline-static"
+                                    label="Descripción"
+                                    name='detail'
+                                    value={form.detail}
+                                    multiline
+                                    onChange={handleForm}
+                                    rows={6}
+                                    InputLabelProps={{
+                                        shrink: true,
+                                    }}
+                                />
                             </Grid>
-                        </Box>
-                        <div className="submit-button-container" style={{ paddingBottom: '5rem' }}>
+                            <Grid item xs={6}>
+                            </Grid>
+                        </Grid>
+                    </Box>
+                    <div className="submit-button-container" style={{ paddingBottom: '5rem' }}>
 
-                            <button >
-                                CONFIRM
-                            </button>
+                        <button >
+                            CONFIRM
+                        </button>
 
-                        </div>
-                    </form>
-
-                </div>
-
+                    </div>
+                </form>
 
             </div>
-        )
-    }
 
-    export default Form
+
+        </div>
+    )
+}
+
+export default Form
