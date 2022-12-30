@@ -1,7 +1,7 @@
 export const MenuData = [
     {
         title: 'Categorías',
-        path: '/register',
+        path: '/categories',
         cName: 'nav-links'
     },
     {

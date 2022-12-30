@@ -7,8 +7,9 @@ import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import CircleIcon from '@mui/icons-material/Circle';
-import { CardActionArea } from '@mui/material';
+import { Button, CardActionArea } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
+import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 import axios from 'axios';
 
 export default function MultiActionAreaCard() {
@@ -44,7 +45,7 @@ export default function MultiActionAreaCard() {
   /*FUNCIÓN PARA CAMBIAR EL COLOR DEPENDIENDO EL ESTADO*/
   const colorprod2 = products.map((products) => {
     return (
-      products.state_appliance === 'Nuevo' ? "#0FFF18" : '#FF0000' && products.state_appliance === 'nuevo' ? "#0FFF18" : '#FF0000'  && products.state_appliance === 'reacondicionado' ? "#FFF100" : '#FF0000'
+      products.state_appliance === 'Nuevo' ? "#0FFF18" : '#FF0000' && products.state_appliance === 'nuevo' ? "#0FFF18" : '#FF0000' && products.state_appliance === 'reacondicionado' ? "#FFF100" : '#FF0000'
     )
 
   });
@@ -93,9 +94,16 @@ export default function MultiActionAreaCard() {
                         {products.state_appliance}
                       </Typography>
                     </div>
-
                   </CardContent>
                 </CardActionArea>
+                <Button
+                  variant="text"
+                  startIcon={<RemoveRedEyeIcon style={{ color: 'white' }} />}
+                  style={{ color: 'white', backgroundColor: '#FF9901' }}
+                  onClick={() => navigate(`/viewproduct/${products.id}`)}
+                >
+                  Ver Producto
+                </Button>
               </Card>
             </Grid>
           ))}

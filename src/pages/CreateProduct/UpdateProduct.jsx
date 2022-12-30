@@ -12,7 +12,7 @@ export const UpdateProduct = () => {
         const getProduct = async () => {
             try {
                 const response = await axios.get(
-                    `https://offhouse.herokuapp.com/api/products/${id}`,
+                    `https://offhouse.herokuapp.com/api/products/${id}/view`,
                     { headers: { 'accept': 'application/json', 'authorization': tokenUser } }
                 )
                 const user = { ...response.data.data.product, id }
