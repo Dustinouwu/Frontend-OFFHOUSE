@@ -131,9 +131,6 @@ const FormsProducts = () => {
                         Subscripción
                       </Button>
                     </ButtonGroup>
-
-
-
                   </TableCell>
                 </TableRow>
               ))}

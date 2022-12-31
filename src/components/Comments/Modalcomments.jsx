@@ -74,7 +74,7 @@ const Modalcomments = ({ comment }) => {
     handleSubmit()
   }, [])
 
-
+  
 
 
 
@@ -99,7 +99,7 @@ const Modalcomments = ({ comment }) => {
               onChange={handleChange}
               aria-label="minimum height"
               minRows={3}
-              
+
               style={{ width: 400, height: 100, marginBottom: 10 }}
             />
             <Button variant="contained" type='submit' >Contained</Button>
@@ -108,7 +108,7 @@ const Modalcomments = ({ comment }) => {
 
         </Box>
       </Modal>
-    </div>
+    </div >
   )
 }
 

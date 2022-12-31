@@ -7,7 +7,7 @@ import FormsCategories from '../components/FormsUsers/FormsUsers';
 import FormsCom from '../components/FormsCom/FormsCom';
 import FormsReports from '../components/FormsReports/FormsReports';
 import FormsProducts from '../components/FormsProducts/FormsProducts';
-import { Home, Login, ResetPassword, CreateUser, CreateProduct, Help, Chat, ProductList, UpdateProduct, ViewProduct, Categories, CategProdView } from '../pages';
+import { Home, Login, ResetPassword, CreateUser, CreateProduct, Help, Chat, ProductList, UpdateProduct, ViewProduct, Categories, CategProdView, Profile } from '../pages';
 import { PrivateRoute } from "./PrivateRoute";
 import { PublicRoute } from "./PublicRoute";
 import { LoginAdmin } from '../pagesAdmin';
@@ -43,6 +43,7 @@ export const AppRouter = () => {
                                 <Route path='/categories' element={<Categories />} />
                                 <Route path='/categories/view/:id' element={<CategProdView />} />
                                 <Route path='/CreateProduct' element={<CreateProduct />} />
+                                <Route path='/profile' element={<Profile />} />
                                 <Route path='/CreateProduct/edit/:id' element={<UpdateProduct />} />
                                 <Route path='/productlist' element={<ProductList />}></Route>
                                 <Route path='/crudusers' element={<FormsUsers />}></Route>

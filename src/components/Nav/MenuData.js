@@ -20,8 +20,8 @@ export const MenuData = [
 
 export const MenuData2 = [
     {
-        title: 'Crear tu cuenta',
-        path: '/register',
+        title: 'Perfil',
+        path: '/profile',
         cName: 'nav-links'
     },
     {

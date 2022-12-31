@@ -8,4 +8,5 @@ export {Chat} from './Chat/Chat';
 export {ProductList} from './ProductList/ProductList';
 export {ViewProduct} from './ViewProduct/ViewProduct';
 export {Categories,CategProdView} from './Categories'
+export {Profile} from './Profile/Profile';
 
