@@ -1,0 +1,29 @@
+#titleprod{
+    font-weight: bold;
+    font-family: 'Inter', sans-serif;
+    letter-spacing: 6px;
+    font-size: 3.5rem;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
+
+#labelprod{
+    
+    font-family: 'Inter', sans-serif;
+    letter-spacing: 6px;
+    display: flex;
+    justify-content: flex-start;
+    align-content: flex-start;
+}
+
+#labelprod2{
+    font-size: 22px;
+    font-weight: normal;
+    color: rgb(88, 88, 85);
+}
+#labelprod3{
+    font-size: 28px;
+    font-weight: normal;
+    color: rgb(0, 0, 0);
+}

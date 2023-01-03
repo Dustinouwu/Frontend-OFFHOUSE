@@ -1,12 +1,11 @@
-import { Avatar, Button, TextareaAutosize, TextField } from '@mui/material'
+import { Avatar, Button } from '@mui/material'
 import React, { useEffect, useState } from 'react'
 import RateReviewIcon from '@mui/icons-material/RateReview';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
-import Box from '@mui/material/Box';
-import Modal from '@mui/material/Modal';
 import Modalcomments from './Modalcomments';
 import ModalEdit from './ModalEdit';
+import FlagIcon from '@mui/icons-material/Flag';
 
 
 
@@ -14,17 +13,13 @@ import ModalEdit from './ModalEdit';
 
 const Comments = ({ comment }) => {
 
-    /* POR METODO GET COLOCAR LOS COMENTARIOS QUE TIENE EL PRODUCTO POR ID POR UNA API */
+    const { id } = useParams(); //Trae el id de la url
+    const tokenUser = localStorage.getItem('token') //Trae el token del usuario
+    const [comments, setComments] = useState([]) //Estado para guardar los comentarios
+    const [showComments, setShowComments] = useState([]) //Estado para mostrar los comentarios
+    const [user, setUser] = useState([]) //Estado para traer 
 
-
-    const [comments, setComments] = useState([])
-    const [showComments, setShowComments] = useState([])
-    const [user, setUser] = useState([])
-    const { id } = useParams();
-    const tokenUser = localStorage.getItem('token')
-
-
-
+    // Trae los comentarios por producto
     const getComments = async () => {
         try {
             const response = await axios.get(
@@ -38,13 +33,14 @@ const Comments = ({ comment }) => {
         }
     };
 
+    // Trae los comentarios
     const getCommentsShow = async (idcoms) => {
         try {
             const response = await axios.get(
                 `https://offhouse.herokuapp.com/api/products/${id}/comments/${idcoms}`,
                 { headers: { 'accept': 'application/json', 'authorization': tokenUser } }
             )
-        
+
             setShowComments(response.data.data.comments.data, idcoms);
             console.log(response.data.data.comments.data, idcoms);
         } catch (error) {
@@ -52,6 +48,7 @@ const Comments = ({ comment }) => {
         }
     };
 
+    // Trae el usuario
     const getUser = async () => {
         try {
             const response = await axios.get(
@@ -66,7 +63,7 @@ const Comments = ({ comment }) => {
         }
     }
 
-    /* Eliminar comentario */
+    // Elimina el comentario
     const deleteComment = async (idcoms) => {
         /* Hacer que la página se recargue cada vez que elimino un producto */
 
@@ -87,13 +84,10 @@ const Comments = ({ comment }) => {
 
     }
 
-   
-
-
+    // Actualiza el comentario
     useEffect(() => {
         getComments()
         getUser()
-
     }, [])
 
 
@@ -102,9 +96,9 @@ const Comments = ({ comment }) => {
 
     return (
         <div>
-            <div style={{ gap: '6%' }}>
+            <div style={{ display: 'flex', gap: '1%' }}>
                 <Modalcomments />
-                <Button variant="text" startIcon={<RateReviewIcon style={{ color: 'white' }} />} style={{ color: 'white', backgroundColor: 'red' }}>
+                <Button variant="text" startIcon={<FlagIcon style={{ color: 'white' }} />} style={{ color: 'white', backgroundColor: 'red' }}>
                     Reportar
                 </Button>
 
@@ -115,45 +109,48 @@ const Comments = ({ comment }) => {
                     comments.map((comment, index) => (
                         <div item key={comment.id}>
                             <div className='footer-lineseparator' style={{ marginTop: '1%' }}></div>
-                            <h2>{comment.user_name}</h2>
+                            <h2 id='labelprod3'>{comment.user_name}</h2>
                             <div style={{ display: 'flex', gap: '30px', alignItems: 'center' }}>
                                 <Avatar
                                     id="avatar-header"
                                     alt={comment.user_name}
                                     src="/static/images/avatar/1.jpg"
-                                    sx={{ width: 60, height: 60 }}
+                                    sx={{ width: 50, height: 50 }}
                                     overlap="circular"
                                 />
-                                <h2>{comment.comment}</h2>
+                                <h2 id='labelprod2'>{comment.comment}</h2>
                             </div>
-                            {
-                                user === comment.user_id ?
-                                    <Button
-                                        variant="text"
-                                        startIcon={<RateReviewIcon style={{ color: 'white' }} />}
-                                        style={{ color: 'white', backgroundColor: 'red' }}
-                                        onClick={() => { deleteComment(comment.id) }}
-                                    >
-                                        ELIMINAR
-                                    </Button>
+                            <div style={{display: 'flex', gap: '1%'}}>
+                                {
+                                    user === comment.user_id ?
+                                        <Button
+                                            variant="text"
+                                            startIcon={<RateReviewIcon style={{ color: 'white' }} />}
+                                            style={{ color: 'white', backgroundColor: 'red' }}
+                                            onClick={() => { deleteComment(comment.id) }}
+                                        >
+                                            ELIMINAR
+                                        </Button>
 
-                                    : null
-                            }
+                                        : null
+                                }
 
-                            {
-                                user === comment.user_id ?
-                                    Object.keys(comment).length > 0 ?
-                                        (
-                                            <ModalEdit comment={comment} />
-                                        )
-                                        :
-                                        (
-                                            <h1>Loading...</h1>
-                                        )
-                                    
+                                {
+                                    user === comment.user_id ?
+                                        Object.keys(comment).length > 0 ?
+                                            (
+                                                <ModalEdit comment={comment} />
+                                            )
+                                            :
+                                            (
+                                                <h1>Loading...</h1>
+                                            )
 
-                                    : null
-                            }
+
+                                        : null
+                                }
+                            </div>
+
 
 
 
@@ -177,15 +174,3 @@ const Comments = ({ comment }) => {
 
 export default Comments
 
-{/* <div className='footer-lineseparator' style={{ marginTop: '1%' }}></div>
-                <h2>{comments.user_id}</h2>
-                <div style={{ display: 'flex', gap: '30px', alignItems: 'center' }}>
-                    <Avatar
-                        id="avatar-header"
-                        alt='ola'
-                        src="/static/images/avatar/1.jpg"
-                        sx={{ width: 60, height: 60 }}
-                        overlap="circular"
-                    />
-                    <h2>{comments.comment}</h2>
-                </div> */}

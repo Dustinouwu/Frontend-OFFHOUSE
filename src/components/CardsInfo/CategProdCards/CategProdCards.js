@@ -9,7 +9,7 @@ import CircleIcon from '@mui/icons-material/Circle';
 import { Button, CardActionArea } from '@mui/material';
 import { useNavigate, useParams } from 'react-router-dom';
 import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
-import Labelgiant from "../../components/atoms/Labelgiant/Labelgiant";
+import Labelgiant from "../../atoms/Labelgiant/Labelgiant";
 import axios from 'axios';
 
 

@@ -1,5 +1,5 @@
-import { Avatar, Button, TextareaAutosize, TextField } from '@mui/material'
-import React, { useEffect, useState } from 'react'
+import { Button, TextareaAutosize } from '@mui/material'
+import React, { useCallback, useEffect, useState } from 'react'
 import RateReviewIcon from '@mui/icons-material/RateReview';
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
@@ -21,8 +21,13 @@ const style = {
 };
 
 const Modalcomments = ({ comment }) => {
-  const navigate = useNavigate();
-  const [open, setOpen] = React.useState(false);
+
+  const navigate = useNavigate(); //Redireccionar
+  const { id } = useParams(); //Id del producto
+  const tokenUser = localStorage.getItem('token')   //Token del usuario
+  const [open, setOpen] = React.useState(false);  //Abrir el modal
+  const [error, setError] = useState(false);  //Error
+  //Funciones para abrir y cerrar el modal
   const handleOpen = () => {
     setOpen(true);
   };
@@ -30,13 +35,12 @@ const Modalcomments = ({ comment }) => {
     setOpen(false);
   };
 
-  const tokenUser = localStorage.getItem('token')
-  const [error, setError] = useState(false);
+  //Fomulario
   const [form, setForm] = useState({
     comment: comment?.comment ?? '',
   });
-  const { id } = useParams();
-
+  
+  //Función para cambiar el estado del formulario
   const handleChange = (e) => {
     setForm({
       ...form,
@@ -44,7 +48,8 @@ const Modalcomments = ({ comment }) => {
     });
   };
 
-  const handleSubmit = async (e) => {
+  //Función para enviar el formulario
+  const handleSubmit = useCallback(async (e) => {
     e.preventDefault();
     if (Object.values(form).includes('')) {
       setError(true);
@@ -65,24 +70,22 @@ const Modalcomments = ({ comment }) => {
 
       )
       navigate(`/viewproduct/${id}`)
+      window.location.href = `/viewproduct/${id}`;
     } catch (error) {
       console.log(error)
     }
-  };
+  },[tokenUser, form, id, navigate, comment]);
 
+  //Función para enviar el formulario
   useEffect(() => {
     handleSubmit()
-  }, [])
-
-  
-
-
+  }, [handleSubmit])
 
 
 
   return (
     <div>
-      <Button variant="text" onClick={handleOpen} startIcon={<RateReviewIcon style={{ color: 'white' }} />} style={{ color: 'white', backgroundColor: 'blue' }}>
+      <Button variant="text" onClick={handleOpen} startIcon={<RateReviewIcon style={{ color: 'white' }} />} style={{ color: 'white', backgroundColor: '#5CA637' }}>
         Enviar Comentario
       </Button>
       <Modal

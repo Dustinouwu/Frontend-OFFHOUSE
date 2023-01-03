@@ -1,5 +1,5 @@
 import React from 'react'
-import { CategoriesView } from '../../components/CategoriesView/CategoriesView'
+import { CategoriesView } from '../../components/CardsInfo/CategoriesView/CategoriesView'
 export const Categories = () => {
   return (
     <div>

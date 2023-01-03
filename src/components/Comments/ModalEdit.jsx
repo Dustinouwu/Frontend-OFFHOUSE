@@ -64,6 +64,7 @@ const ModalEdit = ({ comment }) => {
                 `https://offhouse.herokuapp.com/api/products/${id}/comments/${comment.id}`,
                 { ...form }, { headers: { 'accept': 'application/json', 'authorization': tokenUser } }
             )
+            window.location.href = `/viewproduct/${id}`;
         } catch (error) {
             console.log(error)
         }
@@ -78,7 +79,7 @@ const ModalEdit = ({ comment }) => {
             <Button
                 variant="text"
                 startIcon={<RateReviewIcon style={{ color: 'white' }} />}
-                style={{ color: 'white', backgroundColor: 'green' }}
+                style={{ color: 'white', backgroundColor: '#5CA637' }}
                 onClick={handleOpen}
             /* Cuando haga click en este botón se tiene que abrir el modal */
             >

@@ -7,7 +7,7 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { CardActionArea } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
-import Labelgiant from "../../components/atoms/Labelgiant/Labelgiant";
+import Labelgiant from "../../atoms/Labelgiant/Labelgiant";
 import axios from 'axios';
 export const CategoriesView = () => {
 

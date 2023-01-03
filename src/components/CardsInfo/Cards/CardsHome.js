@@ -13,14 +13,9 @@ import axios from 'axios';
 
 export default function MultiActionAreaCard() {
 
-  /* FUNCIÓN PÁRA NAVEGAR */
-  const navigate = useNavigate();
-
-  /* FUNCIÓN PARA LISTAR LOS PRODUCTOS */
-  const [products, setProducts] = useState([]);
-
-  /* FUNCIÓN PARA PODER RECUPERAR EL TOKEN */
+  const navigate = useNavigate(); // Para poder navegar entre las páginas
   const token = localStorage.getItem('token');
+  const [products, setProducts] = useState([]);
 
   /* FUNCION PARA PODER SACAR LOS PRODUCTOS DE LA API */
   const getProducts = async () => {
