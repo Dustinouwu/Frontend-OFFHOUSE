@@ -1,39 +1,49 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import CircleIcon from '@mui/icons-material/Circle';
-import { Button, CardActionArea } from '@mui/material';
+import { CardActionArea } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
-import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
+import Labelgiant from "../../components/atoms/Labelgiant/Labelgiant";
 import axios from 'axios';
 export const CategoriesView = () => {
 
-  const [categories, setCategories] = useState([])
-  const navigate = useNavigate();
-  const token = localStorage.getItem('token');
+  const navigate = useNavigate(); // Para navegar entre rutas
+  const token = localStorage.getItem('token'); // Obtenciíon del token del local storage
+  const [categories, setCategories] = useState([]) // Constante
 
-  const getCategories = async () => {
+  // Obtener categorías
+  const getCategories = useCallback(async () => {
     try {
       const response = await axios.get(
         'https://offhouse.herokuapp.com/api/admin/categories',
         { headers: { 'accept': 'application/json', 'authorization': token } }
       );
-      console.log(response.data.data.categories);
       setCategories(response.data.data.categories);
     } catch (error) {
       console.log(error);
     }
-  };
+  }, [token]);
+
+  // Obtener categorías al cargar el componente
   useEffect(() => {
     getCategories();
-  }, []);
+  }, [getCategories]);
+
+
+
+
+
   return (
     <div>
-      <div style={{ marginTop: '7%', }}>
+      <Labelgiant
+        text={"Categorías"}
+      />
+      <div style={{ marginTop: '2%', }}>
+
         <Container sx={{ py: 1 }} maxWidth="lg">
           <Grid container spacing={2}>
             {categories.map((categories, index) => (
@@ -49,7 +59,6 @@ export const CategoriesView = () => {
                   }}
                 >
                   <CardActionArea onClick={() => navigate(`/categories/view/${categories.id}`)}>
-                    
                     <CardMedia
                       component="img"
                       sx={{
@@ -62,18 +71,15 @@ export const CategoriesView = () => {
                       alt="random"
                     />
                     <CardContent >
-                      <Typography variant="h5" component="h3" style={{display: 'flex' , alignItems: 'center', justifyContent: 'center'}}>
+                      <Typography variant="h5" component="h3" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                         {categories.name}
                       </Typography>
-                      
                     </CardContent>
                   </CardActionArea>
-                  
                 </Card>
               </Grid>
             ))}
           </Grid>
-
         </Container>
 
       </div>
@@ -81,3 +87,22 @@ export const CategoriesView = () => {
   )
 }
 
+
+
+
+/* const getCategories = async () => {
+  try {
+    const response = await axios.get(
+      'https://offhouse.herokuapp.com/api/admin/categories',
+      { headers: { 'accept': 'application/json', 'authorization': token } }
+    );
+    console.log(response.data.data.categories);
+    setCategories(response.data.data.categories);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+useEffect(() => {
+  getCategories();
+}, [getCategories]); */

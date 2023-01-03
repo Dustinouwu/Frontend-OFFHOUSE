@@ -1,21 +1,18 @@
-import { useContext, useState } from 'react';
+import { useState } from 'react';
 import './CreateUser.css';
 import Title from "../../components/atoms/Title/Title";
 import Labeltwo from "../../components/Labeltwo/Labeltwo";
 import Imagenes from "../../Imagenes";
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from 'axios';
-import { AuthContext } from '../../contexts';
 import { Grid } from '@mui/material';
 
 export const CreateUser = ({ register }) => {
 
-    /* VALIDACIONES */
-    const USER_REGEX = /^\[A-z\][A-z0-9-_]{3,23}$/;
-    const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
+    const navigate = useNavigate(); // Para navegar entre rutas
+    const [error, setError] = useState(false);  // Para mostrar errores
 
-    /* CONSTANTES */
-    const navigate = useNavigate();
+    // Formulario
     const [form, setForm] = useState({
         username: register?.username ?? '',
         first_name: register?.first_name ?? '',
@@ -28,10 +25,7 @@ export const CreateUser = ({ register }) => {
         password_confirmation: register?.password_confirmation ?? '',
     });
 
-    const [error, setError] = useState(false);
-    const [error2, setError2] = useState('')
-
-
+    // Manejador de cambios en el formulario
     const handleChange = (e) => {
         setForm({
             ...form,
@@ -39,6 +33,7 @@ export const CreateUser = ({ register }) => {
         });
     }
 
+    // Manejador de envío del formulario
     const handleSubmit = async (e) => {
         e.preventDefault();
 
@@ -52,15 +47,15 @@ export const CreateUser = ({ register }) => {
 
             if (response.status === 422) {
                 setError('')
-            } else {
-                setError2('')
-            }
+            } 
             console.log(response);
         } catch (error) {
             setError(error.response.data.message)
             console.log(error);
         }
     }
+
+
     return (
         <div className="main-container">
 

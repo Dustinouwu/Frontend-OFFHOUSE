@@ -100,7 +100,7 @@ export const LoginAdmin = () => {
                     </div>
 
                     <Button variant="contained" style={{ marginTop: '25px', backgroundColor: '#ff9900bd' }}>
-                        <Link to="/login" style={{ textDecoration: 'none', color: 'white' }} >ROL: USUARIO</Link>
+                        <Link to="/login" style={{ textDecoration: 'none', color: 'white' }} >ROL: ADMINISTRADOR</Link>
                     </Button>
 
 

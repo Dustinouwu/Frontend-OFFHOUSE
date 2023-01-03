@@ -1,0 +1,12 @@
+.labelg-containter {
+    color: black;
+    font-size: 60px;
+    text-align: right;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Inter', sans-serif;
+    letter-spacing: 3px;
+    margin-bottom: 15px;
+    margin-top: 40px;
+}

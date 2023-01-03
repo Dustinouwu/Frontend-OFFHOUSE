@@ -103,7 +103,7 @@ export const Login = () => {
                     </div>
 
                     <Button variant="contained" style={{ marginTop: '25px', backgroundColor: '#ff9900bd' }}>
-                        <Link to="admin/*" style={{ textDecoration: 'none', color: 'white' }} >ROL: ADMINISTRADOR</Link>
+                        <Link to="admin/*" style={{ textDecoration: 'none', color: 'white' }} >ROL: CLIENTE</Link>
                     </Button>
 
                     <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
