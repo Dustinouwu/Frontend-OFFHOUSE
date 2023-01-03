@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import './CreateUser.css';
 import Title from "../../components/atoms/Title/Title";
-import Labeltwo from "../../components/Labeltwo/Labeltwo";
+import Labeltwo from "../../components/atoms/Labeltwo/Labeltwo";
 import Imagenes from "../../Imagenes";
 import { Link, useNavigate } from "react-router-dom";
 import axios from 'axios';

@@ -10,10 +10,11 @@ import { MenuItem } from '@mui/material';
 
 const Form = ({ products }) => {
 
+    const navigate = useNavigate(); // Función para navegar
+    const tokenUser = localStorage.getItem('token') // Función para traer el token del usuario
+    const [error, setError] = useState(false); // Constante para mostrar errores
 
-    const navigate = useNavigate();
-    const tokenUser = localStorage.getItem('token')
-    const [error, setError] = useState(false);
+    //Formulario
     const [form, setForm] = useState({
         title: products?.title ?? '',
         price: products?.price ?? '',
@@ -26,29 +27,28 @@ const Form = ({ products }) => {
 
     });
 
+    // Función para manejar el formulario
     const handleForm = (e) => {
         setForm({
             ...form,
             [e.target.name]: e.target.value
         });
     }
+
+   
     const config = {
         headers: { Authorization: `${tokenUser}` }
     };
 
+    // Función para manejar el submit
     const handleSubmit = async (e) => {
         e.preventDefault();
-
-
-
-
         try {
             console.log(products)
             if (products?.id) {
                 await axios.put(
                     `https://offhouse.herokuapp.com/api/products/${products.id}`,
                     { ...form }, { headers: { 'accept': 'application/json', 'authorization': tokenUser } }
-
                 );
             } else {
                 await axios.post(
@@ -67,7 +67,7 @@ const Form = ({ products }) => {
         <div style={{ marginLeft: '3%', marginRight: '3%' }} >
             <div className='formproduct' >
                 <h1 id='labelhelp'>
-                    {products?.id ? 'Editar Producto ' : 'Crear Producto'}
+                    {products?.id ? 'Editar Producto ' : 'Crear un Producto'}
                 </h1>
                 <form className='formproduct' onSubmit={handleSubmit} >
                     {error &&

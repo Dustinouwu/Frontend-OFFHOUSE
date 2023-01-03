@@ -1,30 +1,27 @@
 import React, { useContext } from 'react'
 import './Header.css';
-import Imagenes from "../../Imagenes";
-import Search from "../Search/Search";
+import Imagenes from "../../../Imagenes";
+import Search from "../../Search/Search";
 import Nav from "../Nav/Nav";
-import Footer from "../Footer/Footer";
 import { Link, useNavigate } from "react-router-dom";
-import { BiSearchAlt } from "react-icons/bi";
-import { CiChat1 } from "react-icons/ci";
-import { SlBell } from "react-icons/sl";
-import { Avatar, Stack, Badge, IconButton } from '@mui/material'
+import { Avatar, Badge, IconButton } from '@mui/material'
 import { Outlet } from 'react-router-dom';
-import { AuthContext } from '../../contexts';
+import { AuthContext } from '../../../contexts';
 import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
 import LogoutIcon from '@mui/icons-material/Logout';
 import axios from 'axios';
 
 const Header = () => {
 
-    const navigate = useNavigate();
-
-    const { user, logout } = useContext(AuthContext);
-    const tokenUser = localStorage.getItem('token')
+    const navigate = useNavigate(); // Función para navegar
+    const { user, logout } = useContext(AuthContext); // Función para traer la función para logout
+    const tokenUser = localStorage.getItem('token') // Función para traer el token del usuario
+    
     const config = {
         headers: { Authorization: `${tokenUser}` }
     };
 
+    // Función para cerrar sesión
     const onLogout = async (e) => {
         e.preventDefault();
         try {

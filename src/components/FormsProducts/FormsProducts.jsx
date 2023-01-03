@@ -1,6 +1,5 @@
 import './FormsProducts.css'
-import Header from '../Header/Header';
-import Footer from '../Footer/Footer';
+import Footer from '../Layouts/Footer/Footer';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -46,14 +45,12 @@ const FormsProducts = () => {
 
   /* ELIMINACIÓN DE PRODUCTOS */
   const deleteProduct = async (id) => {
-
     if (window.confirm('¿Estás seguro de que quieres eliminar este producto?')) {
       try {
         const response = await axios.delete(
           `https://offhouse.herokuapp.com/api/products/${id}`,
           { headers: { 'accept': 'application/json', 'authorization': tokenUser } },
           config,
-
         );
         await getProductsUser();
         console.log(response.data.data.products.data);

@@ -9,6 +9,7 @@ import CircleIcon from '@mui/icons-material/Circle';
 import { Button, CardActionArea } from '@mui/material';
 import { useNavigate, useParams } from 'react-router-dom';
 import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
+import Labelgiant from "../../components/atoms/Labelgiant/Labelgiant";
 import axios from 'axios';
 
 
@@ -16,15 +17,17 @@ import axios from 'axios';
 
 export const CategProdCards = () => {
 
-    const [categories, setCategories] = useState([])
-    const [products, setProducts] = useState([]);
-    const { id } = useParams();
-    const navigate = useNavigate();
-    const token = localStorage.getItem('token');
+    const { id } = useParams(); // Obtener el id de la categoría de la URL
+    const navigate = useNavigate(); // Para navegar entre rutas
+    const token = localStorage.getItem('token'); // Obtenciíon del token del local storage
+    const [categories, setCategories] = useState([])  // Constante para las categorías
+    const [products, setProducts] = useState([]);   // Constante para los productos
+
     const config = {
         headers: { Authorization: `${token}` }
     };
 
+    // Obtener categorías
     const getCategories = async () => {
         try {
             const response = await axios.get(
@@ -38,6 +41,7 @@ export const CategProdCards = () => {
         }
     };
 
+    // Obtener productos
     const getCatProduct = async () => {
         try {
             const response = await axios.get(
@@ -52,28 +56,30 @@ export const CategProdCards = () => {
         }
     };
 
+    // Filtrar productos por categoría
     const filterProducts = products.filter(products => products.categorie_id === categories.id);
     console.log(filterProducts);
 
+    // Renderizar categorías y productos
     useEffect(() => {
         getCategories()
         getCatProduct()
     }, [])
 
-    /*FUNCIÓN PARA CAMBIAR EL COLOR DEPENDIENDO EL ESTADO*/
+    //Función para cambiar el color del estado del producto
     const colorprod2 = products.map((products) => {
         return (
             products.state_appliance === 'Nuevo' ? "#0FFF18" : '#FF0000' && products.state_appliance === 'nuevo' ? "#0FFF18" : '#FF0000' && products.state_appliance === 'reacondicionado' ? "#FFF100" : '#FF0000'
         )
 
     });
-   
-
 
 
     return (
         <div>
-            <h1>{categories.name}</h1>
+           <Labelgiant
+           text={categories.name}
+           />
             <Container sx={{ py: 5 }} maxWidth="lg">
                 <Grid container spacing={2}>
                     {filterProducts.map((products, index) => (
@@ -123,7 +129,7 @@ export const CategProdCards = () => {
                                 >
                                     Ver Producto
                                 </Button>
-                               
+
                             </Card>
                         </Grid>
                     ))}

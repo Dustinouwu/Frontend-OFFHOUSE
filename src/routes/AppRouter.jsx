@@ -1,6 +1,6 @@
 import React from 'react'
 import { Routes, Route } from 'react-router-dom';
-import Header from '../components/Header/Header';
+import Header from '../components/Layouts/Header/Header';
 import FormsUsers from '../components/FormsUsers/FormsUsers';
 import AuthProvider from '../contexts/auth/AuthProvider';
 import FormsCategories from '../components/FormsUsers/FormsUsers';
