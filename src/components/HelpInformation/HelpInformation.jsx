@@ -1,6 +1,6 @@
 import React from 'react'
 import './HelpInformation.css'
-import Label from '../Label/Label'
+
 function HelpInformation() {
   return (
     <div style={{marginRight: '3%', marginLeft: '3%'}}>

@@ -3,32 +3,44 @@
     width: 100%,
 }
 
-.image-container {
-    flex-wrap: wrap;
-}
 
-img {
-    width: auto;
-    height: max-content;
-}
-
-.image-container img {
-    height: 100vh;
-    padding: 0%;
-    margin: 0%;
-}
-#user{
+#user {
     background-image: url(../../assets/img/User.png);
-    background-position: 10px ;
+    background-position: 10px;
     padding-left: 60px;
-    background-size:auto;
+    background-size: auto;
     background-repeat: no-repeat;
 }
-#password{
+
+#password {
     background-image: url(../../assets/img/Keyhole.png);
-    background-position: 10px ;
+    background-position: 10px;
     padding-left: 60px;
-    background-size:auto;
+    background-size: auto;
+    background-repeat: no-repeat;
+}
+
+#mail {
+    background-image: url(../../assets/img/Mail.png);
+    background-position: 10px;
+    padding-left: 60px;
+    background-size: auto;
+    background-repeat: no-repeat;
+}
+
+#telf {
+    background-image: url(../../assets/img/Phone.png);
+    background-position: 10px;
+    padding-left: 60px;
+    background-size: auto;
+    background-repeat: no-repeat;
+}
+
+#dirre {
+    background-image: url(../../assets/img/MapPin.png);
+    background-position: 10px;
+    padding-left: 60px;
+    background-size: auto;
     background-repeat: no-repeat;
 }
 
@@ -39,13 +51,15 @@ img {
     flex-direction: column;
     margin-left: auto;
     margin-right: auto;
+    padding-right: 20%;
+    
 }
 
 .submit-button-container {
     display: flex;
     justify-content: center;
     align-items: center;
-    
+
 }
 
 .submit-button-container button {
@@ -53,7 +67,7 @@ img {
     height: 45px;
     background: #FF9901;
     border: none;
-    color: white; 
+    color: white;
     font-family: 'Inter', sans-serif;
     font-weight: bold;
     outline: none;
@@ -103,7 +117,7 @@ img {
 .signup-container {
     display: flex;
     gap: 30px;
-    
+
 }
 
 .singupl {
@@ -112,7 +126,7 @@ img {
 
 }
 
-.inputstyle{
+.inputstyle {
     flex-grow: 1;
     width: 100%;
     height: 45px;
@@ -123,4 +137,47 @@ img {
     outline-color: #D9D9D9;
     padding-left: 20px;
     margin-bottom: 10px;
+}
+
+
+
+@media screen and (max-width: 900px) {
+    .login-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        margin-left: auto;
+        margin-right: auto;
+        padding-right: 15%;
+        
+
+
+    }
+
+    .logo-container {
+        display: none;
+    }
+
+
+}
+
+@media screen and (max-width: 400px) {
+    .login-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        margin-left: auto;
+        margin-right: auto;
+        padding-left: 1%;
+        padding-right: 1%;
+
+    }
+
+    .logo-container {
+        display: none;
+    }
+
+
 }

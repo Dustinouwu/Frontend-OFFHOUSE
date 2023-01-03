@@ -1,12 +1,12 @@
 import { useContext, useState } from 'react';
 import './CreateUser.css';
-import Input from "../../components/Input/Input";
-import Title from "../../components/Title/Title";
+import Title from "../../components/atoms/Title/Title";
 import Labeltwo from "../../components/Labeltwo/Labeltwo";
 import Imagenes from "../../Imagenes";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import axios from 'axios';
 import { AuthContext } from '../../contexts';
+import { Grid } from '@mui/material';
 
 export const CreateUser = ({ register }) => {
 
@@ -64,11 +64,23 @@ export const CreateUser = ({ register }) => {
     return (
         <div className="main-container">
 
-            <div className="image-container">
-                <img src={Imagenes.img1} alt='img'></img>
-            </div>
+            <Grid container component="main" sx={{ height: '100vh' }}>
+                <Grid
+                    item
+                    xs={false}
+                    sm={false}
+                    md={7}
+                    sx={{
+                        backgroundImage: 'url(https://source.unsplash.com/random)',
+                        backgroundRepeat: 'no-repeat',
+                        backgroundSize: 'cover',
+                        backgroundPosition: 'center',
 
-            <div className="register-container">
+                    }}
+                />
+            </Grid>
+
+            <div className="login-container">
 
                 <form className="formregister" onSubmit={handleSubmit}>
                     <Title text='Register to OFFHOUSE'></Title>

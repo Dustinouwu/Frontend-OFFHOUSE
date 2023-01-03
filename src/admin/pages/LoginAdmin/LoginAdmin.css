@@ -18,14 +18,14 @@ img {
     margin: 0%;
 }
 #email{
-    background-image: url(../../assets/img/User.png);
+    background-image: url(../../../assets/img/Mail.png);
     background-position: 10px ;
     padding-left: 60px;
     background-size:auto;
     background-repeat: no-repeat;
 }
 #password{
-    background-image: url(../../assets/img/Keyhole.png);
+    background-image: url(../../../assets/img/Keyhole.png);
     background-position: 10px ;
     padding-left: 60px;
     background-size:auto;

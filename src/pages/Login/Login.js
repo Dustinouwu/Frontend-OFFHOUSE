@@ -1,29 +1,23 @@
 import React, { useContext, useState } from "react";
 import './Login.css';
 import axios from "axios";
-import Title from "../../components/Title/Title";
-import Label from "../../components/Label/Label";
-import Input from "../../components/Input/Input";
+import Title from "../../components/atoms/Title/Title";
+import Label from "../../components/atoms/Label/Label";
 import Imagenes from '../../Imagenes';
 import { AuthContext } from "../../contexts";
-import { Button } from "@mui/material";
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import { Button, Grid } from "@mui/material";
+import { Link, useNavigate } from "react-router-dom";
 
 
 export const Login = () => {
 
-    /* TRAER LA FUNCIÓN */
-    const { login } = useContext(AuthContext);
-    /* NAVEGAR ENTRE RUTAS */
-    const navigate = useNavigate();
-
-    /* CONSTANTES EMAIL Y PASSWORD*/
+    const navigate = useNavigate(); /* Navegación */
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [error, setError] = useState('')
-    const [error2, setError2] = useState('')
+    const { login } = useContext(AuthContext); /* Función para poder autenticarse */
 
-    /* PETICIÓN USUARIO POR API*/
+    /* Función inicio de sesión customer*/
     const onLogin = async (e) => {
         e.preventDefault();
         try {
@@ -37,10 +31,7 @@ export const Login = () => {
             navigate('/home');
             if (response.status === 422) {
                 setError('')
-            } else {
-                setError2('')
             }
-            
         } catch (error) {
             setError(error.response.data.message)
             console.log(error.response.data.message, 'error');
@@ -52,21 +43,31 @@ export const Login = () => {
     return (
         <div className="main-container">
 
-            <div className="image-container">
-                <img src={Imagenes.img1} alt='Imagen Electrodomésticos'></img>
-            </div>
+            {/* <div className="image-container"> */}
+            {/* <img src={Imagenes.img1} alt='Imagen Electrodomésticos'></img> */}
+            <Grid container component="main" sx={{ height: '100vh' }}>
+                <Grid
+                    item
+                    xs={false}
+                    sm={false}
+                    md={7}
+                    sx={{
+                        backgroundImage: 'url(https://source.unsplash.com/random)',
+                        backgroundRepeat: 'no-repeat',
+                        backgroundSize: 'cover',
+                        backgroundPosition: 'center',
+                        
+                    }}
+                />
+            </Grid>
+            {/*  </div> */}
 
             <div className="login-container">
                 <form className="formlogin" onSubmit={onLogin}>
                     <Title text='Login to OFFHOUSE'></Title>
                     {error &&
                         <label className="label-error-login">
-                            {error}                    
-                        </label>
-                    }
-                    {error2 &&
-                        <label className="label-error-login">
-                            {error2}                    
+                            {error}
                         </label>
                     }
                     <Label
@@ -86,7 +87,7 @@ export const Login = () => {
                     />
 
                     <input
-                        id="contraseña"
+                        id="password"
                         type='password'
                         value={password}
                         className="inputstyle"

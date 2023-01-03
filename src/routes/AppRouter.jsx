@@ -6,13 +6,11 @@ import AuthProvider from '../contexts/auth/AuthProvider';
 import FormsCategories from '../components/FormsUsers/FormsUsers';
 import FormsCom from '../components/FormsCom/FormsCom';
 import FormsReports from '../components/FormsReports/FormsReports';
-import FormsProducts from '../components/FormsProducts/FormsProducts';
 import { Home, Login, ResetPassword, CreateUser, CreateProduct, Help, Chat, ProductList, UpdateProduct, ViewProduct, Categories, CategProdView, Profile } from '../pages';
 import { PrivateRoute } from "./PrivateRoute";
 import { PublicRoute } from "./PublicRoute";
-import { LoginAdmin } from '../pagesAdmin';
-import { HomeAdmin } from '../pagesAdmin/HomeAdmin/HomeAdmin';
-
+import { HomeAdmin, LoginAdmin } from '../admin/pages';
+ 
 
 export const AppRouter = () => {
     return (
