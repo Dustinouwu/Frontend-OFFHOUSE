@@ -32,7 +32,7 @@ export const CardProduct = () => {
 
     return (
 
-        <div style={{ marginLeft: '5%', marginRight: '5%', marginTop: '5%', backgroundColor: '' }} >
+        <div style={{ marginLeft: '5%', marginRight: '5%', marginTop: '2%', paddingTop:'5%', paddingLeft:'2%',paddingBottom:'5%', paddingRight:'2%', borderRadius:'35px', backgroundColor: '#D9D9D9' }} >
             <div style={{ display: 'flex', gap: '6rem', marginLeft: '5%' }}>
                 <CardMedia
                     component="img"

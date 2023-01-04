@@ -5,6 +5,7 @@ import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import Modalcomments from './Modalcomments';
 import ModalEdit from './ModalEdit';
+import ModalDelete from './ModalDelete';
 import FlagIcon from '@mui/icons-material/Flag';
 
 
@@ -95,20 +96,16 @@ const Comments = ({ comment }) => {
 
 
     return (
-        <div>
+        <div sty>
             <div style={{ display: 'flex', gap: '1%' }}>
                 <Modalcomments />
-                <Button variant="text" startIcon={<FlagIcon style={{ color: 'white' }} />} style={{ color: 'white', backgroundColor: 'red' }}>
-                    Reportar
-                </Button>
-
+                <ModalDelete />
             </div>
 
-            <div>
+            <div style={{ border: '9px solid #FF9901', padding: '0% 2% 2% ', marginTop: '2%', backgroundColor: 'white', borderRadius: '35px' }}>
                 {
                     comments.map((comment, index) => (
                         <div item key={comment.id}>
-                            <div className='footer-lineseparator' style={{ marginTop: '1%' }}></div>
                             <h2 id='labelprod3'>{comment.user_name}</h2>
                             <div style={{ display: 'flex', gap: '30px', alignItems: 'center' }}>
                                 <Avatar
@@ -120,7 +117,7 @@ const Comments = ({ comment }) => {
                                 />
                                 <h2 id='labelprod2'>{comment.comment}</h2>
                             </div>
-                            <div style={{display: 'flex', gap: '1%'}}>
+                            <div style={{ display: 'flex', gap: '1%' }}>
                                 {
                                     user === comment.user_id ?
                                         <Button
@@ -134,7 +131,6 @@ const Comments = ({ comment }) => {
 
                                         : null
                                 }
-
                                 {
                                     user === comment.user_id ?
                                         Object.keys(comment).length > 0 ?
@@ -150,17 +146,7 @@ const Comments = ({ comment }) => {
                                         : null
                                 }
                             </div>
-
-
-
-
-
-
-
-
-                            <div className='footer-lineseparator' style={{ marginTop: '1%' }}></div>
-
-
+                            <div className='footer-lineseparator' style={{ marginTop: '1%', }}></div>
                         </div>
                     ))
                 }

@@ -91,7 +91,6 @@ const Modalcomments = ({ comment }) => {
       <Modal
         open={open}
         onClose={handleClose}
-
       >
         <Box sx={{ ...style, width: 400 }}>
           <form onSubmit={handleSubmit}>
