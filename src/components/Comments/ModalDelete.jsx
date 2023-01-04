@@ -34,26 +34,28 @@ const ModalDelete = ({ report }) => {
     const { id } = useParams(); //Id del producto
     const tokenUser = localStorage.getItem('token')   //Token del usuario
     const [open, setOpen] = React.useState(false);  //Abrir el modal
+    const [openMessage, setOpenMessage] = React.useState(false);  //Abrir el modal
     const [error, setError] = useState(false);  //Error
     //Funciones para abrir y cerrar el modal
     const handleOpen = () => {
         setOpen(true);
+        
     };
     const handleClose = () => {
 
         setOpen(false);
+       
     };
     const handleClick = () => {
-        setOpen(true);
+        setOpenMessage(true);
     };
-    const handleClickMessage = () => {
-        setOpen(false);
-    };
+    
     const handleCloseMessage = (event, reason) => {
         if (reason === 'clickaway') {
             return;
         }
-        setOpen(false);
+        setOpenMessage(false);
+        
     };
     //Fomulario
     const [form, setForm] = useState({
@@ -90,6 +92,8 @@ const ModalDelete = ({ report }) => {
                 { ...form }, { headers: { 'accept': 'application/json', 'authorization': tokenUser } }
 
             )
+            handleClose();
+            handleClick();
 
 
         } catch (error) {
@@ -99,7 +103,7 @@ const ModalDelete = ({ report }) => {
 
     //Función para enviar el formulario
     useEffect(() => {
-        handleSubmit()
+        handleSubmit();
     }, [handleSubmit])
 
 
@@ -155,9 +159,9 @@ const ModalDelete = ({ report }) => {
                             style={{ width: 400, height: 100, marginBottom: 10 }}
                         />
                         <Button variant="contained" type='submit' onClick={handleClick}>Contained</Button>
-                        <Snackbar  autoHideDuration={6000} onClose={handleCloseMessage}>
+                        <Snackbar open={openMessage}  >
                             <Alert onClose={handleCloseMessage} severity="success" sx={{ width: '100%' }}>
-                                This is a success message!
+                                Su reporte ha sido enviado
                             </Alert>
                         </Snackbar>
                     </form>
