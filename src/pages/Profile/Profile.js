@@ -6,7 +6,7 @@ export const Profile = () => {
     const tokenUser = localStorage.getItem('token')
 
     const [user, setUser] = useState([])
-    const [avatar , setAvatar] = useState([])
+    const [avatar, setAvatar] = useState([])
 
     const getUser = async () => {
         try {
@@ -16,7 +16,7 @@ export const Profile = () => {
             )
             setUser(response.data.data.user);
             setAvatar(response.data.data.avatar)
-            
+
             console.log(response.data.data.avatar);
 
 
@@ -26,16 +26,23 @@ export const Profile = () => {
     }
 
     useEffect(() => {
-       
+
         getUser()
 
     }, [])
 
     return (
         <div>
-            <h1>Nombre Usuario: {user.username}</h1>
-            
-            <img src={avatar} alt="avatar" />
+            <div style={{ marginLeft: '5%', marginRight: '5%', marginTop: '2%', paddingTop: '5%', paddingLeft: '2%', paddingBottom: '5%', paddingRight: '2%', borderRadius: '35px', backgroundColor: '#D9D9D9' }} >
+                <div style={{ display: 'flex', gap: '6rem', marginLeft: '5%' }}>
+                    <img src={avatar} alt="avatar" style={{ width: '15%' }} />
+                    <h1 id='labelprod'>{user.username}</h1>
+
+                    
+                </div>
+
+            </div>
+
         </div>
     )
 }

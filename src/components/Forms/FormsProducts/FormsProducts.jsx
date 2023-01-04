@@ -1,5 +1,5 @@
 import './FormsProducts.css'
-import Footer from '../Layouts/Footer/Footer';
+import Footer from '../../Layouts/Footer/Footer';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -79,7 +79,7 @@ const FormsProducts = () => {
   return (
     <div>
       <div style={{ marginLeft: '3%', marginRight: '3%', marginTop: '3%', marginBottom: '3%', paddingLeft: '3%', paddingRight: '3%', paddingBottom: '3%', paddingTop: '3%', borderRadius: '10px', backgroundColor: '#D9D9D9' }}>
-        <h1 id='labelhelp'>SUS PRODUCTOS</h1>
+        <h1 id='labelhelp'>MIS PRODUCTOS</h1>
         <Link href="/createproduct" underline="none">
           <Button variant="contained" endIcon={<AddIcon style={{ backgroundColor: 'black', borderRadius: '10px' }} />} sx={{ mt: '1%', backgroundColor: '#000' }}>
             Subir un nuevo producto

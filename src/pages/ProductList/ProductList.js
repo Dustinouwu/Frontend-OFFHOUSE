@@ -1,6 +1,6 @@
 import React from 'react'
 import './ProductList.css'
-import FormsProducts from '../../components/FormsProducts/FormsProducts'
+import FormsProducts from '../../components/Forms/FormsProducts/FormsProducts'
 
 export const ProductList = () => {
   return (

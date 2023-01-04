@@ -43,9 +43,9 @@ const Comments = ({ comment }) => {
             )
 
             setShowComments(response.data.data.comments.data, idcoms);
-            console.log(response.data.data.comments.data, idcoms);
+            
         } catch (error) {
-            console.log(error);
+            
         }
     };
 
@@ -75,24 +75,19 @@ const Comments = ({ comment }) => {
                     `https://offhouse.herokuapp.com/api/products/${id}/comments/${idcoms}`,
                     { headers: { 'accept': 'application/json', 'authorization': tokenUser } }
                 )
-                console.log(response);
                 getComments()
             } catch (error) {
                 console.log(error);
             }
         }
-
-
     }
 
     // Actualiza el comentario
     useEffect(() => {
         getComments()
+        getCommentsShow()
         getUser()
-    }, [])
-
-
-
+    }, [getCommentsShow])
 
 
     return (

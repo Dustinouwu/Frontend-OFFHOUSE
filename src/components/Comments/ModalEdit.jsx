@@ -1,10 +1,11 @@
-import { Button, TextareaAutosize, TextField } from '@mui/material'
+import { Button, Snackbar, TextareaAutosize, TextField } from '@mui/material'
 import React, { useEffect, useState } from 'react'
 import RateReviewIcon from '@mui/icons-material/RateReview';
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
+import MuiAlert from '@mui/material/Alert';
 
 const style = {
     position: 'absolute',
@@ -20,6 +21,9 @@ const style = {
     pb: 3,
 };
 
+const Alert = React.forwardRef(function Alert(props, ref) {
+    return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
 
 const ModalEdit = ({ comment }) => {
 
@@ -30,8 +34,20 @@ const ModalEdit = ({ comment }) => {
     const handleClose = () => {
         setOpen(false);
     };
+    const handleClick = () => {
+        setOpenMessage(true);
+    };
+    
+    const handleCloseMessage = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+        setOpenMessage(false);
+        
+    };
 
     const tokenUser = localStorage.getItem('token')
+    const [openMessage, setOpenMessage] = React.useState(false);
     const [error, setError] = useState(false);
     const [form, setForm] = useState({
         comment: comment?.comment ?? '',
@@ -54,7 +70,6 @@ const ModalEdit = ({ comment }) => {
             setTimeout(() => {
                 setError(false);
             }, 3000);
-
             return;
         }
 
@@ -64,11 +79,19 @@ const ModalEdit = ({ comment }) => {
                 `https://offhouse.herokuapp.com/api/products/${id}/comments/${comment.id}`,
                 { ...form }, { headers: { 'accept': 'application/json', 'authorization': tokenUser } }
             )
-            window.location.href = `/viewproduct/${id}`;
+            /* window.location.href = `/viewproduct/${id}`; */
+            handleClose();
+            handleClick();
         } catch (error) {
             console.log(error)
         }
     };
+
+    //Función para enviar el formulario
+    useEffect(() => {
+        handleSubmit();
+    }, [handleSubmit])
+
 
 
 
@@ -102,7 +125,12 @@ const ModalEdit = ({ comment }) => {
 
                             style={{ width: 400, height: 100, marginBottom: 10 }}
                         />
-                        <Button variant="contained" type='submit' >Contained</Button>
+                        <Button variant="contained" onClick={handleClick}  type='submit' >Contained</Button>
+                        <Snackbar open={openMessage}  >
+                            <Alert onClose={handleCloseMessage} severity="success" sx={{ width: '100%' }}>
+                                Su reporte ha sido enviado
+                            </Alert>
+                        </Snackbar>
                     </form>
 
 

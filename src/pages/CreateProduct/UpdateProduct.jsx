@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react"
 import { useParams } from "react-router-dom";
-import Form from "../../components/Form/Form"
+import FormCreProduct from "../../components/Forms/FormCreProduct/FormCreProduct";
 
 export const UpdateProduct = () => {
     const { id } = useParams();
@@ -31,7 +31,7 @@ export const UpdateProduct = () => {
                 {
                     Object.keys(product).length > 0 ?
                         (
-                            <Form products={product} />
+                            <FormCreProduct products={product} />
                         )
                         :
                         (

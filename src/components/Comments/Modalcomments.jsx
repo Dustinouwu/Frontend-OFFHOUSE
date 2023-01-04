@@ -1,10 +1,11 @@
-import { Button, TextareaAutosize } from '@mui/material'
+import { Button, Snackbar, TextareaAutosize } from '@mui/material'
 import React, { useCallback, useEffect, useState } from 'react'
 import RateReviewIcon from '@mui/icons-material/RateReview';
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
+import MuiAlert from '@mui/material/Alert';
 
 const style = {
   position: 'absolute',
@@ -20,13 +21,20 @@ const style = {
   pb: 3,
 };
 
+const Alert = React.forwardRef(function Alert(props, ref) {
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
+
 const Modalcomments = ({ comment }) => {
 
   const navigate = useNavigate(); //Redireccionar
   const { id } = useParams(); //Id del producto
   const tokenUser = localStorage.getItem('token')   //Token del usuario
   const [open, setOpen] = React.useState(false);  //Abrir el modal
+  const [openMessage, setOpenMessage] = React.useState(false);  //Abrir el modal 
   const [error, setError] = useState(false);  //Error
+  
+
   //Funciones para abrir y cerrar el modal
   const handleOpen = () => {
     setOpen(true);
@@ -34,12 +42,21 @@ const Modalcomments = ({ comment }) => {
   const handleClose = () => {
     setOpen(false);
   };
+  const handleClick = () => {
+    setOpenMessage(true);
+  };
+  const handleCloseMessage = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setOpenMessage(false);
+  };
 
   //Fomulario
   const [form, setForm] = useState({
     comment: comment?.comment ?? '',
   });
-  
+
   //Función para cambiar el estado del formulario
   const handleChange = (e) => {
     setForm({
@@ -69,16 +86,21 @@ const Modalcomments = ({ comment }) => {
         { ...form }, { headers: { 'accept': 'application/json', 'authorization': tokenUser } }
 
       )
-      navigate(`/viewproduct/${id}`)
-      window.location.href = `/viewproduct/${id}`;
+      /* navigate(`/viewproduct/${id}`)
+      window.location.href = `/viewproduct/${id}`; */
+      handleClick();
+      handleClose();
+      
     } catch (error) {
       console.log(error)
+      
     }
-  },[tokenUser, form, id, navigate, comment]);
+  }, [tokenUser, form, id, navigate, comment]);
 
   //Función para enviar el formulario
   useEffect(() => {
     handleSubmit()
+
   }, [handleSubmit])
 
 
@@ -104,7 +126,12 @@ const Modalcomments = ({ comment }) => {
 
               style={{ width: 400, height: 100, marginBottom: 10 }}
             />
-            <Button variant="contained" type='submit' >Contained</Button>
+            <Button variant="contained"  onClick={handleClick} type='submit' >Contained</Button>
+            <Snackbar open={openMessage}  >
+              <Alert onClose={handleCloseMessage} severity="success" sx={{ width: '100%' }}>
+                Su reporte ha sido enviado
+              </Alert>
+            </Snackbar>
           </form>
 
 

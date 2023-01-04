@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import './Form.css'
+import './FormCreProduct.css'
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Grid from '@mui/material/Grid';
@@ -8,7 +8,7 @@ import axios from 'axios';
 import { MenuItem } from '@mui/material';
 
 
-const Form = ({ products }) => {
+const FormCreProduct = ({ products }) => {
 
     const navigate = useNavigate(); // Función para navegar
     const tokenUser = localStorage.getItem('token') // Función para traer el token del usuario
@@ -229,4 +229,4 @@ const Form = ({ products }) => {
     )
 }
 
-export default Form
+export default FormCreProduct

@@ -1,12 +1,12 @@
 import React from 'react'
 import './CreateProduct.css'
-import Form from '../../components/Form/Form'
+import FormCreProduct from "../../components/Forms/FormCreProduct/FormCreProduct";
 
 export function CreateProduct() {
   return (
     <div>
         <div className="create-product">
-            <Form />
+            <FormCreProduct />
         
         </div>
         

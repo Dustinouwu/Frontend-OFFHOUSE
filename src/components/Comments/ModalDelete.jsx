@@ -1,12 +1,10 @@
 import { Button, Grid, MenuItem, TextareaAutosize, TextField } from '@mui/material'
 import React, { useCallback, useEffect, useState } from 'react'
-import RateReviewIcon from '@mui/icons-material/RateReview';
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import FlagIcon from '@mui/icons-material/Flag';
-import Stack from '@mui/material/Stack';
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
 
@@ -123,11 +121,10 @@ const ModalDelete = ({ report }) => {
             <Modal
                 open={open}
                 onClose={handleClose}
-
             >
                 <Box sx={{ '& .MuiTextField-root': { ml: 0, mb: 2, width: '47ch' }, gap: '2%', ...style, width: 400 }}>
                     <form onSubmit={handleSubmit}>
-                        <h2>Ingrese su comentario</h2>
+                        <h2>Ingreso información sobre el reporte</h2>
                         <Grid item xs={1}>
                             <TextField
                                 id="filled-select-currency-native"
@@ -158,15 +155,13 @@ const ModalDelete = ({ report }) => {
                             minRows={3}
                             style={{ width: 400, height: 100, marginBottom: 10 }}
                         />
-                        <Button variant="contained" type='submit' onClick={handleClick}>Contained</Button>
+                        <Button variant="contained" type='submit' onClick={handleClick} style={{backgroundColor: 'red'}}>ENVIAR</Button>
                         <Snackbar open={openMessage}  >
                             <Alert onClose={handleCloseMessage} severity="success" sx={{ width: '100%' }}>
                                 Su reporte ha sido enviado
                             </Alert>
                         </Snackbar>
                     </form>
-
-
                 </Box>
             </Modal>
         </div>
@@ -176,60 +171,3 @@ const ModalDelete = ({ report }) => {
 export default ModalDelete
 
 
-{/* <div>
-            <Button
-                variant="text"
-                startIcon={<FlagIcon style={{ color: 'white' }} />}
-                style={{ color: 'white', backgroundColor: 'red' }}
-                onClick={handleOpen}
-
-            >
-                REPORTAR
-            </Button>
-            <Modal
-                open={open}
-                onClose={handleClose}
-
-            >
-                <Box sx={{ '& .MuiTextField-root': { ml: 0, mb: 2, width: '47ch' }, gap: '2%', ...style, width: 400, }}>
-                    <form  onSubmit={handleSubmit} >
-                        <h2>Ingrese su reporte</h2>
-
-                        <Grid item xs={1}>
-                            <TextField
-                                id="filled-select-currency-native"
-                                label="Motivo de reporte"
-                                name='state_appliance'
-                                value={form.title}
-                                onChange={handleChange}
-                                select
-                                InputLabelProps={{
-                                    native: true,
-                                }}
-                            >
-                                <MenuItem value="Nuevo" selected>Vende una copia o falsificación</MenuItem>
-                                <MenuItem value="Usado">El producto es ilegal</MenuItem>
-                                <MenuItem value="Reacondicionado">Quiere cobrar un precio diferente al de la publicación </MenuItem>
-                                <MenuItem value="Reparado">Ofrece métodos de pagos no autorizados</MenuItem>
-                                <MenuItem value="Reparado">Tiene contenido ofensivo</MenuItem>
-                                <MenuItem value="Reparado">Creo que es un intento de fraude</MenuItem>
-                                <MenuItem value="Reparado">La información no corresponde al producto</MenuItem>
-                                <MenuItem value="Reparado">Publica con envio gratis, pero luego quiere cobrar el servicio</MenuItem>
-                            </TextField>
-                        </Grid>
-                        <h4>Descripción</h4>
-                        <TextareaAutosize
-                            name="report"
-                            value={form.description}
-                            aria-label="minimum height"
-                            minRows={3}
-                            onChange={handleChange}
-                            style={{ width: 400, height: 100, marginBottom: 10 }}
-                        />
-                        <Button variant="contained" type='submit' style={{ backgroundColor: 'red' }} >Reportar</Button>
-                    </form>
-
-
-                </Box>
-            </Modal>
-        </div> */}
