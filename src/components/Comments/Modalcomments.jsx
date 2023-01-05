@@ -33,7 +33,7 @@ const Modalcomments = ({ comment }) => {
   const [open, setOpen] = React.useState(false);  //Abrir el modal
   const [openMessage, setOpenMessage] = React.useState(false);  //Abrir el modal 
   const [error, setError] = useState(false);  //Error
-  
+
 
   //Funciones para abrir y cerrar el modal
   const handleOpen = () => {
@@ -86,11 +86,12 @@ const Modalcomments = ({ comment }) => {
         { ...form }, { headers: { 'accept': 'application/json', 'authorization': tokenUser } }
 
       )
-      /* navigate(`/viewproduct/${id}`)
-      window.location.href = `/viewproduct/${id}`; */
+      navigate(`/viewproduct/${id}`)
+      window.location.href = `/viewproduct/${id}`;
+      setForm({ comment: '' });
       handleClick();
       handleClose();
-      
+      handleCloseMessage();
     } catch (error) {
       console.log(error)
       
@@ -101,7 +102,7 @@ const Modalcomments = ({ comment }) => {
   useEffect(() => {
     handleSubmit()
 
-  }, [handleSubmit])
+  }, [])
 
 
 

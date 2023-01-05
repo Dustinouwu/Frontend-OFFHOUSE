@@ -17,7 +17,7 @@ const Comments = ({ comment }) => {
     const { id } = useParams(); //Trae el id de la url
     const tokenUser = localStorage.getItem('token') //Trae el token del usuario
     const [comments, setComments] = useState([]) //Estado para guardar los comentarios
-    const [showComments, setShowComments] = useState([]) //Estado para mostrar los comentarios
+    const [showComments, setShowComments] = useState({}) //Estado para mostrar los comentarios
     const [user, setUser] = useState([]) //Estado para traer 
 
     // Trae los comentarios por producto
@@ -85,9 +85,9 @@ const Comments = ({ comment }) => {
     // Actualiza el comentario
     useEffect(() => {
         getComments()
-        getCommentsShow()
+        
         getUser()
-    }, [getCommentsShow])
+    }, [])
 
 
     return (

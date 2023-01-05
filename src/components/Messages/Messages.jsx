@@ -1,11 +1,12 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
-
+import Sidebar from './Sidebar'
+import Message from './Message'
 
 const Messages = () => {
 
-    const [contacts, setContacts] = useState([])
+    /* const [contacts, setContacts] = useState([])
     const tokenUser = localStorage.getItem('token')
     const { id } = useParams()
 
@@ -39,9 +40,19 @@ const Messages = () => {
     useEffect(() => {
         getContacts()
     }, [])
-
+ */
     return (
-        <div>
+        <div className="messages">
+
+            <Message />
+
+        </div>
+    )
+}
+
+export default Messages
+
+{/* <div style={{display: 'flex', flexDirection: 'row'}}>
             <div>
                 <h1>CONTACTOS</h1>
                 {
@@ -62,8 +73,4 @@ const Messages = () => {
                 <h1>MENSAJES</h1>
 
             </div>
-        </div>
-    )
-}
-
-export default Messages
+        </div> */}
