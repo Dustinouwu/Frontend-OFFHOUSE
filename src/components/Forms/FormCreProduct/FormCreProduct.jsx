@@ -67,7 +67,7 @@ const FormCreProduct = ({ products }) => {
         <div style={{ marginLeft: '3%', marginRight: '3%' }} >
             <div className='formproduct' >
                 <h1 id='labelhelp'>
-                    {products?.id ? 'Editar Producto ' : 'Crear un Producto'}
+                    {products?.id ? 'Editar Producto' : 'Crear un Producto'}
                 </h1>
                 <form className='formproduct' onSubmit={handleSubmit} >
                     {error &&

@@ -37,9 +37,18 @@ export const Profile = () => {
                 <div style={{ display: 'flex', gap: '6rem', marginLeft: '5%' }}>
                     <img src={avatar} alt="avatar" style={{ width: '15%' }} />
                     <h1 id='labelprod'>{user.username}</h1>
-
-                    
                 </div>
+                <div>
+                <h2 id='labelprod'>Nombre: {user.first_name} </h2>
+                <h2 id='labelprod'>Apellido: {user.last_name} </h2>
+                <h2 id='labelprod'>Email: {user.email} </h2>
+                <h2 id='labelprod'>Teléfono: {user.home_phone} </h2>
+                <h2 id='labelprod'>Celular: {user.personal_phone} </h2>
+                <h2 id='labelprod'>Dirección: {user.address} </h2>
+
+                </div>
+
+
 
             </div>
 
