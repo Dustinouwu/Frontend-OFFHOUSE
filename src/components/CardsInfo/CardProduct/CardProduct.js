@@ -5,6 +5,7 @@ import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import Comments from '../../Comments/Comments'
 import SendIcon from '@mui/icons-material/Send';
+import ModalMessage from './ModalMessage'
 export const CardProduct = () => {
 
     const { id } = useParams(); //Trae el id de la url
@@ -32,7 +33,7 @@ export const CardProduct = () => {
 
     return (
 
-        <div style={{ marginLeft: '5%', marginRight: '5%', marginTop: '2%', paddingTop:'5%', paddingLeft:'2%',paddingBottom:'5%', paddingRight:'2%', borderRadius:'35px', backgroundColor: '#D9D9D9' }} >
+        <div style={{ marginLeft: '5%', marginRight: '5%', marginTop: '2%', paddingTop: '5%', paddingLeft: '2%', paddingBottom: '5%', paddingRight: '2%', borderRadius: '35px', backgroundColor: '#D9D9D9' }} >
             <div style={{ display: 'flex', gap: '6rem', marginLeft: '5%' }}>
                 <CardMedia
                     component="img"
@@ -49,9 +50,8 @@ export const CardProduct = () => {
                     <h2 id='labelprod'>Precio: ${product.price} </h2>
                     <h2 id='labelprod'>Estado: {product.state_appliance}</h2>
                     <h2 id='labelprod'>Marca: {product.brand} </h2>
-                    <Button variant="text" startIcon={<SendIcon style={{ color: 'white' }} />} style={{ color: 'white', fontWeight: 'bold', backgroundColor: '#FF9901' }}>
-                        CONTACTAR CON EL VENDEDOR
-                    </Button>
+                    <h2 id='labelprod'>userid: {product.user_id} </h2>
+                    < ModalMessage product={product}/>
                 </div>
 
             </div>
@@ -60,7 +60,7 @@ export const CardProduct = () => {
                 <h2 id='labelprod2'>{product.detail}</h2>
             </div>
             <div>
-                <div className='footer-lineseparator' style={{ marginTop: '1%', backgroundColor:'black' }}></div>
+                <div className='footer-lineseparator' style={{ marginTop: '1%', backgroundColor: 'black' }}></div>
                 <h1 id='labelhelp'>Comentarios</h1>
                 <Comments />
 
