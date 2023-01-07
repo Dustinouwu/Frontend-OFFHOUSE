@@ -3,20 +3,21 @@
   background-color: #FF9901;
   position: relative;
   border-right: 0px solid rgb(0, 0, 0);
-  
+
 }
 
 
 .userChat {
   padding: 10px;
   display: flex;
-  
+
   align-items: center;
   gap: 10px;
   color: rgb(0, 0, 0);
   cursor: pointer;
 }
-.chats{
+
+.chats {
   height: calc(100% - 116px);
   overflow: scroll;
 }
@@ -24,6 +25,7 @@
 .chats::-webkit-scrollbar {
   width: 6px;
 }
+
 .chats::-webkit-scrollbar-thumb {
   background-color: #000000;
   border-radius: 10px;
@@ -44,7 +46,7 @@
 .userChatInfo span {
   font-size: 1.2rem;
   font-weight: 500;
-  
+
 }
 
 .userChatInfo p {
@@ -74,7 +76,7 @@
 
 .chat {
   flex: 2;
-  
+
 }
 
 .chatInfo {
@@ -85,7 +87,7 @@
   justify-content: space-between;
   padding: 10px;
   color: black;
-  
+
 }
 
 .input {
@@ -160,6 +162,7 @@
 
 .messageContent p {
   background-color: #FF9901;
+  color: white;
   padding: 10px 20px;
   border-radius: 0px 10px 10px 10px;
   max-width: max-content;
@@ -169,8 +172,28 @@
   width: 50%;
 }
 
-.owner {
-  flex-direction: row-reverse;
+.messageContentOwner {
+  
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 10px;
+  margin-left: 100px;
+  
+
+}
+.messageContentOwner img {
+  
+  align-items: center;
+}
+
+.messageContentOwner p {
+  background-color: #965b02fd;
+  color: white;
+  display: flex;
+  align-items: flex-end;
+  padding: 10px 20px;
+  border-radius: 10px 0px 10px 10px;
 }
 
 .navbar {
@@ -208,6 +231,4 @@
   cursor: pointer;
 }
 
-@media screen and (max-width: 480px) {
- 
-}
+@media screen and (max-width: 480px) {}

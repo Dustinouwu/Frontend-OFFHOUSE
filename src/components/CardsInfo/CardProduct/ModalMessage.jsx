@@ -59,7 +59,6 @@ const ModalMessage = ({ message, product }) => {
         to: message?.to ?? '',
         message: message?.message ?? '',
     });
-    console.log('form', form)
     
    
 

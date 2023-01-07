@@ -7,7 +7,8 @@ const Message = ({ message }) => {
     const { id } = useParams();
     const tokenUser = localStorage.getItem('token')
     const [messages, setMessages] = useState([])
-    console.log('idmensage:', id)
+    
+    
 
     useEffect(() => {
         const getMessage = async () => {
@@ -17,7 +18,7 @@ const Message = ({ message }) => {
                     { headers: { 'accept': 'application/json', 'authorization': tokenUser } }
                 )
                 setMessages(response.data.data.messages)
-
+                
             } catch (error) {
                 console.log(error)
             }
@@ -39,15 +40,16 @@ const Message = ({ message }) => {
                                 message.from != id // Si el id del remitente es el mismo que el id del usuario actual...
                                     ? (
                                         <div>
+                                            <div className="messageContentOwner">
+                                                <img
 
-                                            <img
-                                                
-                                                src='https://danzeria.com/wp-content/uploads/2014/09/Daft-Punk2-600x271.jpg'
-                                                alt="qwe"
-                                            />
-                                            <div className="messageContent">
-                                                
+                                                    src='https://danzeria.com/wp-content/uploads/2014/09/Daft-Punk2-600x271.jpg'
+                                                    alt="qwe"
+                                                />
+
+
                                                 <p>{message.message}</p>
+                                                <span>just now</span>
                                             </div>
                                         </div>
                                     ) : (
@@ -59,13 +61,14 @@ const Message = ({ message }) => {
                                                 alt="qwe"
                                             />
                                             <div className="messageContent">
-                                               
+
                                                 <p>{message.message}</p>
+                                                <span>just now</span>
                                             </div>
                                         </div>
                                     )
                             }
-                            <span>just now</span>
+                            
                         </div>
 
                     </div >
