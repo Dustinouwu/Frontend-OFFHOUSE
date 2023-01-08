@@ -2,29 +2,44 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom';
 import './index.css'
-const Message = ({ message }) => {
+import Pusher from 'pusher-js'
+const Message = () => {
 
     const { id } = useParams();
     const tokenUser = localStorage.getItem('token')
     const [messages, setMessages] = useState([])
-    
-    
+    const [message, setMessage] = useState('')
+    let allMessages = []
+
 
     useEffect(() => {
-        const getMessage = async () => {
-            try {
-                const response = await axios.get(
-                    `https://offhouse.herokuapp.com/api/user/${id}/messages`,
-                    { headers: { 'accept': 'application/json', 'authorization': tokenUser } }
-                )
-                setMessages(response.data.data.messages)
-                
-            } catch (error) {
-                console.log(error)
-            }
-        }
+        Pusher.logToConsole = true;
+
+        const pusher = new Pusher('ce70af3d29d33f7d5525', {
+            cluster: 'us2'
+        });
+
+        const channel = pusher.subscribe('chat');
+        channel.bind('message', function (data) {
+            allMessages.push(data)
+            setMessages(allMessages)
+        });
         getMessage()
     }, [id])
+
+    const getMessage = async () => {
+        try {
+            const response = await axios.get(
+                `https://offhouse.herokuapp.com/api/user/${id}/messages`,
+                { headers: { 'accept': 'application/json', 'authorization': tokenUser } }
+            )
+            setMessages(response.data.data.messages)
+
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
 
 
 
@@ -68,7 +83,7 @@ const Message = ({ message }) => {
                                         </div>
                                     )
                             }
-                            
+
                         </div>
 
                     </div >

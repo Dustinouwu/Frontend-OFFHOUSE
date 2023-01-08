@@ -14,8 +14,8 @@ const Input = ({ message }) => {
         to: message?.to ?? '',
         message: message?.message ?? '',
     });
-    console.log('ID:', id)
-    console.log('form', form)
+    
+    
 
     const handleChange = (e) => {
         setForm({
@@ -53,10 +53,7 @@ const Input = ({ message }) => {
     }, [ id, message]);
 
     //Función para enviar el formulario
-    useEffect(() => {
-        handleSubmit()
-
-    }, [])
+    
 
 
     return (

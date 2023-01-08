@@ -7,15 +7,16 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import CircleIcon from '@mui/icons-material/Circle';
 import { Button, CardActionArea } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 import axios from 'axios';
-
+import { Pageerror } from '../../../pages';
 export default function MultiActionAreaCard() {
 
   const navigate = useNavigate(); // Para poder navegar entre las páginas
   const token = localStorage.getItem('token');
   const [products, setProducts] = useState([]);
+  const [error, setError] = useState('')
 
   /* FUNCION PARA PODER SACAR LOS PRODUCTOS DE LA API */
   const getProducts = async () => {
@@ -26,8 +27,13 @@ export default function MultiActionAreaCard() {
       );
       console.log(response.data.data.products.data);
       setProducts(response.data.data.products.data);
+      if (response.status === 403) {
+        setError('')
+      }
     } catch (error) {
       console.log(error);
+      setError(error.response.data.message)
+      console.log(error.response.data.message, 'error');
     }
   };
 
@@ -48,7 +54,7 @@ export default function MultiActionAreaCard() {
 
   return (
     <div>
-
+    
       <Container sx={{ py: 5 }} maxWidth="lg">
         <Grid container spacing={2}>
           {products.map((products, index) => (
