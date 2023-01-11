@@ -79,7 +79,7 @@ const ModalEdit = ({ comment }) => {
                 `https://offhouse.herokuapp.com/api/products/${id}/comments/${comment.id}`,
                 { ...form }, { headers: { 'accept': 'application/json', 'authorization': tokenUser } }
             )
-            /* window.location.href = `/viewproduct/${id}`; */
+            
             handleClose();
             handleClick();
         } catch (error) {

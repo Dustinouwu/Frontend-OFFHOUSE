@@ -32,9 +32,9 @@ const FormsProducts = () => {
   /* MUESTRA DE PRODUCTO POR USUARIO  */
   const getProductsUser = async () => {
     try {
-      const response = await axios.post(
-        'https://offhouse.herokuapp.com/api/products/myProducts',
-        { headers: { 'accept': 'application/json' } },
+      const response = await axios.get(
+        'https://offhouse.herokuapp.com/api/products/myProducts/list',
+        { headers: { 'accept': 'application/json', 'authorization': tokenUser } },
         config
       );
       setProducts(response.data.data.products.data);
@@ -54,15 +54,10 @@ const FormsProducts = () => {
         );
         await getProductsUser();
         console.log(response.data.data.products.data);
-
-
       } catch (error) {
         console.log(error);
       }
     }
-
-
-
   };
 
 
@@ -91,7 +86,7 @@ const FormsProducts = () => {
             <TableHead >
               <TableRow >
                 <TableCell >Nombre de Producto</TableCell>
-
+                <TableCell >Imagen</TableCell>
                 <TableCell align="right" > </TableCell>
               </TableRow>
             </TableHead>
@@ -104,6 +99,9 @@ const FormsProducts = () => {
 
                   <TableCell component="th" scope="row"  >
                     {products.title}
+                  </TableCell>
+                  <TableCell component="th" scope="row"  >
+                    <img src={products.image} alt="imagen" style={{ width: '100px', height: '100px' }} />
                   </TableCell>
 
                   <TableCell align="right" >

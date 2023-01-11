@@ -3,13 +3,13 @@ import React, { useCallback, useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom';
 import './index.css'
 
-const Input = ({ message }) => {
+const Input = () => {
 
     const navigate = useNavigate(); //Redireccionar
     const { id } = useParams(); //Id del producto
     const tokenUser = localStorage.getItem('token')   //Token del usuario
     const [error, setError] = useState(false);  //Error
-    console.log('idmensage:', id)
+    const [message, setMessage] = useState(''); //Mensajes
     const [form, setForm] = useState({
         to: message?.to ?? '',
         message: message?.message ?? '',
@@ -24,8 +24,9 @@ const Input = ({ message }) => {
         });
     };
 
+    
     //Función para enviar el formulario
-    const handleSubmit = useCallback(async (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         if (Object.values(form).includes('')) {
             setError(true);
@@ -36,26 +37,18 @@ const Input = ({ message }) => {
 
             return;
         }
-
         try {
             console.log(message)
             await axios.post(
                 `https://offhouse.herokuapp.com/api/user/send`,
                 { ...form }, { headers: { 'accept': 'application/json', 'authorization': tokenUser } }
             )
-
-            setForm({ message: '' });
-
+            setForm({ message: '', to: ''});
+    
         } catch (error) {
             console.log(error)
-
         }
-    }, [ id, message]);
-
-    //Función para enviar el formulario
-    
-
-
+    };
     return (
         <form onSubmit={handleSubmit}>
             <div className="input" >

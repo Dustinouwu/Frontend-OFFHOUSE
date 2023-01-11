@@ -182,6 +182,10 @@
   
 
 }
+.scrollarea {
+  min-height: 500px;
+}
+
 .messageContentOwner img {
   
   align-items: center;

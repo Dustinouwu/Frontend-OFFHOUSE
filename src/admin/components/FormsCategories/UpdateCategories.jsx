@@ -1,40 +1,43 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react"
-import { useParams } from "react-router-dom";
-import FormUpdataPro from "../../components/Forms/FormCreProduct/FormUpdataPro";
-export const UpdateProduct = () => {
+import { useNavigate, useParams } from "react-router-dom";
+import FormsCategories from "./FormsCategories";
+
+const UpdateCategories = () => {
+
     const { id } = useParams();
-    const [product, setProduct] = useState({});
-    const tokenUser = localStorage.getItem("token");
-    console.log(id);
+    const navigate = useNavigate();
+    const [categorie, setCategories] = useState({});
+    const tokenUser = localStorage.getItem('token')
+
     useEffect(() => {
-        const getProduct = async () => {
+
+        const getCategories = async () => {
             try {
                 const response = await axios.get(
-                    `https://offhouse.herokuapp.com/api/products/${id}/view`,
+                    `https://offhouse.herokuapp.com/api/admin/categories/${id}`,
                     { headers: { 'accept': 'application/json', 'authorization': tokenUser } }
                 )
-                const user = { ...response.data.data.product, id }
-                
-                setProduct(user);
-                console.log(setProduct);
-                console.log(user);
+                const user = { ...response.data.data.categorie, id }
+                setCategories(user);
+                console.log('update:', user);
             } catch (error) {
                 console.log(error);
             }
+
         }
-        getProduct()
+        getCategories()
     }, [])
 
     return (
         <div>
             <div className="create-product">
                 {
-                    Object.keys(product).length > 0 ?
+                    Object.keys(categorie).length > 0 ?
                         (
                             <>
-                                <FormUpdataPro products={product} />
-                                
+                                <FormsCategories categories={categorie} />
+
                             </>
                         )
                         :
@@ -45,6 +48,6 @@ export const UpdateProduct = () => {
             </div>
         </div>
     )
-
 }
 
+export default UpdateCategories

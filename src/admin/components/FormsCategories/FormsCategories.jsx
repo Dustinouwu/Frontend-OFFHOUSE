@@ -1,84 +1,127 @@
-import React from 'react'
-import './FormsCategories.css'
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
+
+import React, { useEffect, useState } from 'react'
+import CssBaseline from '@mui/material/CssBaseline';
+import Container from '@mui/material/Container';
 import Paper from '@mui/material/Paper';
-import Button from '@mui/material/Button';
-import DeleteIcon from '@mui/icons-material/Delete';
-import ButtonGroup from '@mui/material/ButtonGroup';
-import EditIcon from '@mui/icons-material/Edit';
-import HeaderAdmin from '../Layouts/HeaderAdmin';
-import AddIcon from '@mui/icons-material/Add';
-function createData(id, name) {
-    return { id, name };
-}
+import Typography from '@mui/material/Typography';
+import Grid from '@mui/material/Grid';
+import TextField from '@mui/material/TextField';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { Button } from '@mui/material';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
-const rows = [
-    createData(1, 'Frozen yoghurt'),
-    createData(2, 'Ice cream sandwich'),
-    createData(3, 'Eclair'),
-    createData(4, 'Cupcake'),
-    createData(5, 'Gingerbread'),
-];
 
-const FormsCategories = () => {
+
+
+
+
+const theme = createTheme();
+
+const FormsCategories = ({ categories }) => {
+
+    const tokenUser = localStorage.getItem('token')
+    const navigate = useNavigate();
+    const [error, setError] = useState(false);
+    const [form, setForm] = useState({
+        name: categories?.name ?? '',
+        imagen: categories?.imagen ?? '',
+
+    })
+    const handleForm = (e) => {
+        setForm({
+            ...form,
+            [e.target.name]: e.target.value
+        });
+    }
+    console.log(form)
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        if (Object.values(form).includes('')) {
+            console.log('error');
+            setError(true);
+            return;
+        }
+
+        try {
+
+            if (categories?.id) {
+                await axios.put(
+                    `https://offhouse.herokuapp.com/api/admin/categories/${categories.id}`,
+                    { ...form }, { headers: { 'accept': 'application/json', 'authorization': tokenUser } }
+                );
+            } else {
+                await axios.post(
+                    'https://offhouse.herokuapp.com/api/admin/categories',
+                    { ...form }, { headers: { 'accept': 'application/json', 'authorization': tokenUser } }
+                )
+            }
+            console.log('Categoria creada')
+            navigate('/crudcateg');
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+
+
+
     return (
-        <>
-            <HeaderAdmin />
-            <div style={{ marginLeft: '3%', marginRight: '3%', marginTop: '3%', paddingLeft: '3%', paddingRight: '3%', paddingBottom: '3%', paddingTop: '3%', borderRadius: '10px', backgroundColor: '#D9D9D9' }}>
-                <h1 id='labelhelp'>CRUD CATEGORIAS</h1>
-                <Button variant="contained" endIcon={<AddIcon style={{ backgroundColor: 'black', borderRadius: '10px' }} />} sx={{ mt: '1%' }}>
-                    Añadir categoria
-                </Button>
-                <TableContainer component={Paper} sx={{ mt: '1%', backgroundColor: '#BCB8B8' }}>
-                    <Table aria-label="simple table">
-                        <TableHead >
-                            <TableRow >
-                                <TableCell >Id</TableCell>
-                                <TableCell align="right"  >Nombre Categoría</TableCell>
-                                <TableCell align="right" > </TableCell>
-                            </TableRow>
-                        </TableHead>
-                        <TableBody>
-                            {rows.map((row) => (
-                                <TableRow
-                                    key={row.name}
-                                    sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+        <ThemeProvider theme={theme}>
+            <CssBaseline />
+            <Container component="main" maxWidth="sm" sx={{ mb: 4 }}>
+                <Paper variant="outlined" sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 3 } }}>
+                    <Typography component="h1" variant="h4" align="center">
+                        Formulario Categorías
+                    </Typography>
+                    <Typography component="h4" variant="h7" align="center">
+                        {categories?.id ? 'Actualizar Categoría' : 'Crear Categoría'}
+                    </Typography>
+                    <form onSubmit={handleSubmit}>
+
+
+                        <Grid container spacing={3} >
+                            <Grid item xs={12}>
+                                <TextField
+                                    id="name"
+                                    name="name"
+                                    label="Nombre de la categoría"
+                                    value={form.name}
+                                    fullWidth
+                                    autoComplete="shipping address-line2"
+                                    variant="standard"
+                                    onChange={handleForm}
+                                />
+                            </Grid>
+                            <Grid item xs={12} >
+                                <TextField
+                                    id="imagen"
+                                    name="imagen"
+                                    label="Ingrese la URL del producto"
+                                    value={form.imagen}
+                                    fullWidth
+                                    autoComplete="shipping address-line2"
+                                    variant="standard"
+                                    onChange={handleForm}
+                                />
+                            </Grid>
+                            <Grid item xs={12} >
+                                <Button
+                                    variant="contained"
+                                    sx={{ mt: '1%', backgroundColor: '#000', alignItems: 'center' }}
                                 >
-                                    <TableCell component="th" scope="row" >
-                                        {row.id}
-                                    </TableCell>
-                                    <TableCell component="th" scope="row" align="right" >
-                                        {row.name}
-                                    </TableCell>
+                                    CONFIRMAR
+                                </Button>
 
-                                    <TableCell align="right" >
-                                        <ButtonGroup sx={{ gap: 0.5 }} orientation="vertical">
-                                            <Button variant="text" startIcon={<DeleteIcon style={{ color: 'white' }} />} style={{ color: 'white', backgroundColor: 'red' }}>
-                                                Delete
-                                            </Button>
-                                            <Button variant="text" startIcon={<EditIcon style={{ color: 'white' }} />} style={{ color: 'white', backgroundColor: 'green' }}>
-                                                Edit
-                                            </Button>
-                                        </ButtonGroup>
+                            </Grid>
 
-
-
-                                    </TableCell>
-                                </TableRow>
-                            ))}
-                        </TableBody>
-                    </Table>
-                </TableContainer>
-            </div>
-        </>
-
-
-    )
+                        </Grid>
+                    </form>
+                </Paper>
+            </Container>
+        </ThemeProvider>
+    );
 }
 
 export default FormsCategories

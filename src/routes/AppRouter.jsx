@@ -1,23 +1,25 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { Routes, Route } from 'react-router-dom';
 import Header from '../components/Layouts/Header/Header';
 import FormsUsers from '../../src/admin/components/FormsUsers/FormsUsers';
 import AuthProvider from '../contexts/auth/AuthProvider';
-import FormsCategories from '../../src/admin/components/FormsCategories/FormsCategories';
+import CrudCategories from '../admin/components/FormsCategories/CrudCategories';
 import FormsCom from '../../src/admin/components/FormsCom/FormsCom';
 import FormsReports from '../../src/admin/components/FormsReports/FormsReports';
 import { Home, Login, ResetPassword, CreateUser, CreateProduct, Help, Chats, Chatings, ProductList, UpdateProduct, ViewProduct, Categories, CategProdView, Profile, UpdateProfile } from '../pages';
 import { PrivateRoute } from "./PrivateRoute";
 import { PublicRoute } from "./PublicRoute";
 import { HomeAdmin, LoginAdmin } from '../admin/pages';
+import UpdateCategories from '../admin/components/FormsCategories/UpdateCategories';
 import HeaderAdmin from '../admin/components/Layouts/HeaderAdmin';
+import FormsCategories from '../admin/components/FormsCategories/FormsCategories';
 import Chatting from '../components/TestMessage/Chatting';
-import axios from 'axios';
+
 
 
 export const AppRouter = () => {
 
-    const user = JSON.parse(localStorage.getItem('user'));
+    const user = JSON.parse(localStorage.getItem('user')) || {};
 
     return (
 
@@ -25,16 +27,18 @@ export const AppRouter = () => {
 
             <Routes>
                 {/* RUTAS PUBLICAS */}
-                <Route path='login/*' element={
-                    <PublicRoute>
-                        <Routes>
-                            <Route path='/*' element={<Login />} />
-                            <Route path='admin/*' element={<LoginAdmin />} />
-                            <Route path='createuser/*' element={<CreateUser />} />
-                            <Route path='resetpssw/*' element={<ResetPassword></ResetPassword>}></Route>
-                        </Routes>
-                    </PublicRoute>
-                } />
+                
+                        <Route path='login/*' element={
+                            <PublicRoute>
+                                <Routes>
+                                    <Route path='/*' element={<Login />} />
+                                    <Route path='admin/*' element={<LoginAdmin />} />
+                                    <Route path='createuser/*' element={<CreateUser />} />
+                                    <Route path='resetpssw/*' element={<ResetPassword></ResetPassword>}></Route>
+                                </Routes>
+                            </PublicRoute>
+                        } />
+                    
 
                 {/* RUTAS PRIVADAS */}
                 <Route path='/*' element={
@@ -65,19 +69,21 @@ export const AppRouter = () => {
 
                             </Route>
 
-                            
+                            <Route element={<HeaderAdmin/>}>
                                 {user.role === 'admin' && (
                                     <>
                                         <Route index path='/homeAdmin' element={<HomeAdmin />} />
                                         <Route path='crudusers' element={<FormsUsers />}></Route>
-                                        <Route path='crudcateg' element={<FormsCategories />}></Route>
+                                        <Route path='crudcateg' element={<CrudCategories />}></Route>
+                                        <Route path='formsCategories' element={<FormsCategories />}></Route>
+                                        <Route path='updateCategories/edit/:id' element={<UpdateCategories />}></Route>
                                         <Route path='crudcoms' element={<FormsCom />}></Route>
                                         <Route path='crudreports' element={<FormsReports />}></Route>
                                         <Route path='crudusers' element={<FormsUsers />}></Route>
                                     </>
 
                                 )}
-                         
+                            </Route>
                         </Routes>
                     </PrivateRoute>
                 } />
