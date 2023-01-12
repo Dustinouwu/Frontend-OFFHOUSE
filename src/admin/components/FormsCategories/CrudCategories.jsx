@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import './FormsCategories.css'
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -79,7 +78,7 @@ const CrudCategories = () => {
                                         {categories.name}
                                     </TableCell>
                                     <TableCell component="th" scope="row" align="right" >
-                                        <img src={categories.image} alt="" style={{ width: '50px', height: '50px' }} />
+                                        <img src={categories.imagen} alt="" style={{ width: '50px', height: '50px' }} />
                                     </TableCell>
 
                                     <TableCell align="right" >
@@ -91,15 +90,12 @@ const CrudCategories = () => {
                                                 variant="text"
                                                 startIcon={<EditIcon style={{ color: 'white' }} />}
                                                 style={{ color: 'white', backgroundColor: 'green' }}
-                                                onClick={() => navigate(`/updateCategories/edit/${categories.id}`)}
+                                                onClick={() => navigate(`/formsCategories/edit/${categories.id}`)}
                                             >
 
                                                 Edit
                                             </Button>
                                         </ButtonGroup>
-
-
-
                                     </TableCell>
                                 </TableRow>
                             ))}

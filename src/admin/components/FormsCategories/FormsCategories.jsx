@@ -11,11 +11,6 @@ import { Button } from '@mui/material';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
-
-
-
-
-
 const theme = createTheme();
 
 const FormsCategories = ({ categories }) => {
@@ -57,9 +52,9 @@ const FormsCategories = ({ categories }) => {
                     { ...form }, { headers: { 'accept': 'application/json', 'authorization': tokenUser } }
                 )
             }
-            console.log('Categoria creada')
             navigate('/crudcateg');
         } catch (error) {
+            setError(error.response.data.message)
             console.log(error)
         }
     }
@@ -79,7 +74,11 @@ const FormsCategories = ({ categories }) => {
                         {categories?.id ? 'Actualizar Categoría' : 'Crear Categoría'}
                     </Typography>
                     <form onSubmit={handleSubmit}>
-
+                        {error &&
+                            <label className="label-error-createu">
+                                {error}
+                            </label>
+                        }
 
                         <Grid container spacing={3} >
                             <Grid item xs={12}>
@@ -109,6 +108,7 @@ const FormsCategories = ({ categories }) => {
                             <Grid item xs={12} >
                                 <Button
                                     variant="contained"
+                                    onClick={handleSubmit}
                                     sx={{ mt: '1%', backgroundColor: '#000', alignItems: 'center' }}
                                 >
                                     CONFIRMAR

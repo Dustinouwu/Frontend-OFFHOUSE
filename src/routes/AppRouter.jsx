@@ -4,8 +4,8 @@ import Header from '../components/Layouts/Header/Header';
 import FormsUsers from '../../src/admin/components/FormsUsers/FormsUsers';
 import AuthProvider from '../contexts/auth/AuthProvider';
 import CrudCategories from '../admin/components/FormsCategories/CrudCategories';
-import FormsCom from '../../src/admin/components/FormsCom/FormsCom';
-import FormsReports from '../../src/admin/components/FormsReports/FormsReports';
+import CrudCom from '../admin/components/FormsCom/CrudCom';
+import FormsReports from '../admin/components/FormsReports/CrudReports';
 import { Home, Login, ResetPassword, CreateUser, CreateProduct, Help, Chats, Chatings, ProductList, UpdateProduct, ViewProduct, Categories, CategProdView, Profile, UpdateProfile } from '../pages';
 import { PrivateRoute } from "./PrivateRoute";
 import { PublicRoute } from "./PublicRoute";
@@ -62,6 +62,7 @@ export const AppRouter = () => {
                                         <Route path='/CreateProduct/edit/:id' element={<UpdateProduct />} />
                                         <Route path='/productlist' element={<ProductList />}></Route>
                                         <Route path='/EditProfile' element={<UpdateProfile />}></Route>
+                                        
                                     </>
                                 )}
 
@@ -76,8 +77,8 @@ export const AppRouter = () => {
                                         <Route path='crudusers' element={<FormsUsers />}></Route>
                                         <Route path='crudcateg' element={<CrudCategories />}></Route>
                                         <Route path='formsCategories' element={<FormsCategories />}></Route>
-                                        <Route path='updateCategories/edit/:id' element={<UpdateCategories />}></Route>
-                                        <Route path='crudcoms' element={<FormsCom />}></Route>
+                                        <Route path='formsCategories/edit/:id' element={<UpdateCategories />}></Route>
+                                        <Route path='crudcoms' element={<CrudCom />}></Route>
                                         <Route path='crudreports' element={<FormsReports />}></Route>
                                         <Route path='crudusers' element={<FormsUsers />}></Route>
                                     </>
