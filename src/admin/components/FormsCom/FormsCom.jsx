@@ -12,36 +12,32 @@ import { useNavigate, useParams } from 'react-router-dom';
 
 const theme = createTheme();
 
-const FormsUsers = () => {
+const FormsComs = () => {
 
     const tokenUser = localStorage.getItem('token')
     const navigate = useNavigate();
-    const [users, setUsers] = useState({});
+    const [comments, setComments] = useState({});
     const [error, setError] = useState(false);
     const { id } = useParams();
 
 
     useEffect(() => {
-        const shoUsers = async () => {
+        const showComment = async () => {
             try {
                 const response = await axios.get(
-                    `https://offhouse.herokuapp.com/api/admin/customers/${id}`,
+                    `https://offhouse.herokuapp.com/api/admin/comments/${id}`,
                     { headers: { 'accept': 'application/json', 'authorization': tokenUser } }
                 )
-                setUsers(response.data.data.customer);
+                setComments(response.data.data.comment);
 
             } catch (error) {
                 console.log(error)
             }
 
         }
-        shoUsers()
+        showComment()
     }, [])
 
-    const newDate = (date) => {
-        const newDate = date.split('T')
-        return newDate[0]
-    }
 
     return (
         <ThemeProvider theme={theme}>
@@ -49,7 +45,7 @@ const FormsUsers = () => {
             <Container component="main" maxWidth="sm" sx={{ mb: 4 }}>
                 <Paper variant="outlined" sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 3 } }}>
                     <Typography component="h1" variant="h4" align="center" sx={{ mb: 10 }}>
-                        Tarjeta Usuario
+                        Tarjeta Comentario
                     </Typography>
 
                     <form>
@@ -64,8 +60,8 @@ const FormsUsers = () => {
                                 <TextField
                                     id="id"
                                     name="id"
-                                    label="ID del usuario"
-                                    value={users.id}
+                                    label="ID del comentario"
+                                    value={comments.id}
                                     fullWidth
                                     autoComplete="shipping address-line2"
                                     variant="standard"
@@ -79,8 +75,8 @@ const FormsUsers = () => {
                                 <TextField
                                     id="role_id"
                                     name="role_id"
-                                    label="Rol de usuario"
-                                    value={users.role_id}
+                                    label="Comentario"
+                                    value={comments.comment}
                                     fullWidth
                                     autoComplete="shipping address-line2"
                                     variant="standard"
@@ -94,8 +90,8 @@ const FormsUsers = () => {
                                 <TextField
                                     id="username"
                                     name="Usuario"
-                                    label="Nombre de Usuario"
-                                    value={users.username}
+                                    label="ID del usuario"
+                                    value={comments.user_id}
                                     fullWidth
                                     autoComplete="shipping address-line2"
                                     variant="standard"
@@ -109,8 +105,8 @@ const FormsUsers = () => {
                                 <TextField
                                     id="username"
                                     name="first_name"
-                                    label="Nombre"
-                                    value={users.first_name}
+                                    label="ID del producto"
+                                    value={comments.product_id}
                                     fullWidth
                                     autoComplete="shipping address-line2"
                                     variant="standard"
@@ -124,83 +120,8 @@ const FormsUsers = () => {
                                 <TextField
                                     id="username"
                                     name="last_name"
-                                    label="Apellido"
-                                    value={users.last_name}
-                                    fullWidth
-                                    autoComplete="shipping address-line2"
-                                    variant="standard"
-                                    InputLabelProps={{
-                                        shrink: true,
-                                    }}
-
-                                />
-                            </Grid>
-                            <Grid item xs={12} >
-                                <TextField
-                                    id="personal_phone"
-                                    name="personal_phone"
-                                    label="Celular"
-                                    value={users.personal_phone}
-                                    fullWidth
-                                    autoComplete="shipping address-line2"
-                                    variant="standard"
-                                    InputLabelProps={{
-                                        shrink: true,
-                                    }}
-
-                                />
-                            </Grid>
-                            <Grid item xs={12} >
-                                <TextField
-                                    id="home_phone"
-                                    name="home_phone"
-                                    label="Teléfono"
-                                    value={users.home_phone}
-                                    fullWidth
-                                    autoComplete="shipping address-line2"
-                                    variant="standard"
-                                    InputLabelProps={{
-                                        shrink: true,
-                                    }}
-
-                                />
-                            </Grid>
-                            <Grid item xs={12} >
-                                <TextField
-                                    id="rollo"
-                                    name="mail"
-                                    label="Email"
-                                    value={users.email}
-                                    fullWidth
-                                    autoComplete="shipping address-line2"
-                                    variant="standard"
-                                    InputLabelProps={{
-                                        shrink: true,
-                                    }}
-
-                                />
-                            </Grid>
-                            <Grid item xs={12} >
-                                <TextField
-                                    id="rollo"
-                                    name="email_verified_at"
-                                    label="Fecha de verificación de email"
-                                    value={users.email_verified_at}
-                                    fullWidth
-                                    autoComplete="shipping address-line2"
-                                    variant="standard"
-                                    InputLabelProps={{
-                                        shrink: true,
-                                    }}
-
-                                />
-                            </Grid>
-                            <Grid item xs={12} >
-                                <TextField
-                                    id="rollo"
-                                    name="created_at"
-                                    label="Fecha de creación de usuario"
-                                    value={users.created_at}
+                                    label="Fecha de creación"
+                                    value={comments.created_at}
                                     fullWidth
                                     autoComplete="shipping address-line2"
                                     variant="standard"
@@ -214,7 +135,7 @@ const FormsUsers = () => {
                                 <Button
                                     variant="contained"
                                     sx={{ mt: '1%', backgroundColor: '#000', alignItems: 'center' }}
-                                    onClick={() => navigate('/crudusers')}
+                                    onClick={() => navigate('/crudcoms')}
                                 >
                                     Regresar
                                 </Button>
@@ -229,4 +150,4 @@ const FormsUsers = () => {
     )
 }
 
-export default FormsUsers
+export default FormsComs

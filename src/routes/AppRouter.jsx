@@ -1,7 +1,7 @@
 import React from 'react'
 import { Routes, Route } from 'react-router-dom';
 import Header from '../components/Layouts/Header/Header';
-import FormsUsers from '../../src/admin/components/FormsUsers/FormsUsers';
+import CrudUsers from '../admin/components/FormsUsers/CrudUsers';
 import AuthProvider from '../contexts/auth/AuthProvider';
 import CrudCategories from '../admin/components/FormsCategories/CrudCategories';
 import CrudCom from '../admin/components/FormsCom/CrudCom';
@@ -13,10 +13,12 @@ import { HomeAdmin, LoginAdmin } from '../admin/pages';
 import UpdateCategories from '../admin/components/FormsCategories/UpdateCategories';
 import HeaderAdmin from '../admin/components/Layouts/HeaderAdmin';
 import FormsCategories from '../admin/components/FormsCategories/FormsCategories';
+import FormsUsers from '../admin/components/FormsUsers/FormsUsers';
 import Chatting from '../components/TestMessage/Chatting';
-
-
-
+import FormsComs from '../admin/components/FormsCom/FormsCom';
+import CrudProducts from '../admin/components/FormsProducts/CrudProducts';
+import FormsProducts from '../admin/components/FormsProducts/FormsProducts';
+import CrudSubscription from '../admin/components/FormsSubscription/CrudSubscription';
 export const AppRouter = () => {
 
     const user = JSON.parse(localStorage.getItem('user')) || {};
@@ -74,13 +76,17 @@ export const AppRouter = () => {
                                 {user.role === 'admin' && (
                                     <>
                                         <Route index path='/homeAdmin' element={<HomeAdmin />} />
-                                        <Route path='crudusers' element={<FormsUsers />}></Route>
                                         <Route path='crudcateg' element={<CrudCategories />}></Route>
                                         <Route path='formsCategories' element={<FormsCategories />}></Route>
                                         <Route path='formsCategories/edit/:id' element={<UpdateCategories />}></Route>
                                         <Route path='crudcoms' element={<CrudCom />}></Route>
+                                        <Route path='formsComs/view/:id' element={<FormsComs />}></Route>
                                         <Route path='crudreports' element={<FormsReports />}></Route>
-                                        <Route path='crudusers' element={<FormsUsers />}></Route>
+                                        <Route path='crudusers' element={<CrudUsers />}></Route>
+                                        <Route path='formsUsers/view/:id' element={<FormsUsers />}></Route>
+                                        <Route path='crudproducts' element={<CrudProducts />}></Route>
+                                        <Route path='formsProducts/view/:id' element={<FormsProducts />}></Route>
+                                        <Route path='crudsubscription' element={<CrudSubscription />}></Route>
                                     </>
 
                                 )}
