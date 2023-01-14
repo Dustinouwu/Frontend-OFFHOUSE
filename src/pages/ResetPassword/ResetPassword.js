@@ -35,14 +35,14 @@ export const ResetPassword = () => {
 
             <div className="login-container">
                 <form className="formlogin">
-                    <Title text='Recovery password '></Title>
+                    <Title text='Recuperación de contraseña '></Title>
                     
                     <Label
-                        text='EMAIL'
+                        text='CORREO'
                     />
 
                     <input
-                        id="email"
+                        id="mailcre"
                         type='email'
                         
                         className="inputstyle"
@@ -54,17 +54,17 @@ export const ResetPassword = () => {
 
 
                     <div className="submit-button-container">
-                        <button>LOGIN </button>
+                        <button>CONFIRMAR </button>
                     </div>
 
                     
 
                     <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
-                        <h5>Create your account</h5>
+                        <h5>Crea tu cuenta</h5>
 
                         <div className="signup-container">
                             
-                            <Link to="/*" ><h5 className="singupl">Do you already have an account?</h5></Link>
+                            <Link to="/*" ><h5 className="singupl">Ya tienes una cuenta?</h5></Link>
                         </div>
 
                         

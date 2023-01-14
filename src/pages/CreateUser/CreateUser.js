@@ -78,7 +78,7 @@ export const CreateUser = ({ register }) => {
             <div className="login-container">
 
                 <form className="formregister" onSubmit={handleSubmit}>
-                    <Title text='Register to OFFHOUSE'></Title>
+                    <Title text='Registro para OFFHUSE'></Title>
                     {error &&
                         <label className="label-error-createu">
                             {error}
@@ -124,7 +124,7 @@ export const CreateUser = ({ register }) => {
                                 value={form.username}
                                 className="inputcreateuser"
                                 name='username'
-                                placeholder="example"
+                                placeholder="Pepito"
                                 onChange={handleChange}
                             />
                             <input
@@ -133,7 +133,7 @@ export const CreateUser = ({ register }) => {
                                 value={form.first_name}
                                 className="inputcreateuser"
                                 name='first_name'
-                                placeholder="example"
+                                placeholder="Raúl"
                                 onChange={handleChange}
                             />
                             <input
@@ -142,7 +142,7 @@ export const CreateUser = ({ register }) => {
                                 value={form.last_name}
                                 className="inputcreateuser"
                                 name='last_name'
-                                placeholder="example"
+                                placeholder="Muzo"
                                 onChange={handleChange}
                             />
                             <input
@@ -160,7 +160,7 @@ export const CreateUser = ({ register }) => {
                                 value={form.home_phone}
                                 className="inputcreateuser"
                                 name='home_phone'
-                                placeholder="example"
+                                placeholder="2476391"
                                 onChange={handleChange}
                             />
                             <input
@@ -169,7 +169,7 @@ export const CreateUser = ({ register }) => {
                                 value={form.personal_phone}
                                 className="inputcreateuser"
                                 name='personal_phone'
-                                placeholder="example"
+                                placeholder="0987335353"
                                 onChange={handleChange}
                             />
                             <input
@@ -178,7 +178,7 @@ export const CreateUser = ({ register }) => {
                                 value={form.address}
                                 className="inputcreateuser"
                                 name='address'
-                                placeholder="example"
+                                placeholder="Quito - Quitumbe"
                                 onChange={handleChange}
                             />
                             <input
@@ -187,7 +187,7 @@ export const CreateUser = ({ register }) => {
                                 value={form.password}
                                 className="inputcreateuser"
                                 name='password'
-                                placeholder="example"
+                                placeholder="***************"
                                 onChange={handleChange}
                             />
                             <input
@@ -196,7 +196,7 @@ export const CreateUser = ({ register }) => {
                                 value={form.password_confirmation}
                                 className="inputcreateuser"
                                 name='password_confirmation'
-                                placeholder="example"
+                                placeholder="***************"
                                 onChange={handleChange}
                             />
                         </div>
@@ -204,7 +204,7 @@ export const CreateUser = ({ register }) => {
                     <div className="submit-button-container">
 
                         <button >
-                            CONFIRM
+                            CONFIRMAR
                         </button>
 
                     </div>
@@ -212,7 +212,7 @@ export const CreateUser = ({ register }) => {
 
 
                 <div className="signup-container">
-                    <Link to="/" ><h5 className="singupl">Do you already have an account?</h5></Link>
+                    <Link to="/" ><h5 className="singupl">Ya tienes una cuenta?</h5></Link>
                 </div>
 
             </div>

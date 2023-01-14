@@ -42,9 +42,6 @@ export const Login = () => {
 
     return (
         <div className="main-container">
-
-            {/* <div className="image-container"> */}
-            {/* <img src={Imagenes.img1} alt='Imagen Electrodomésticos'></img> */}
             <Grid container component="main" sx={{ height: '100vh' }}>
                 <Grid
                     item
@@ -56,12 +53,9 @@ export const Login = () => {
                         backgroundRepeat: 'no-repeat',
                         backgroundSize: 'cover',
                         backgroundPosition: 'center',
-                        
                     }}
                 />
             </Grid>
-            {/*  </div> */}
-
             <div className="login-container">
                 <form className="formlogin" onSubmit={onLogin}>
                     <Title text='Login to OFFHOUSE'></Title>

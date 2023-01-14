@@ -23,6 +23,7 @@ export const CategoriesView = () => {
         { headers: { 'accept': 'application/json', 'authorization': token } }
       );
       setCategories(response.data.data.categories);
+      console.log(response.data.data.categories);
     } catch (error) {
       console.log(error);
     }
@@ -31,7 +32,7 @@ export const CategoriesView = () => {
   // Obtener categorías al cargar el componente
   useEffect(() => {
     getCategories();
-  }, [getCategories]);
+  }, []);
 
 
   return (
@@ -64,7 +65,7 @@ export const CategoriesView = () => {
                         width: '100%',
                         height: '200px',
                       }}
-                      image={categories.image}
+                      image={categories.imagen}
                       alt="random"
                     />
                     <CardContent >

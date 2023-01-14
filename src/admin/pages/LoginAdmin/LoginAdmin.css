@@ -17,18 +17,43 @@ img {
     padding: 0%;
     margin: 0%;
 }
-#email{
-    background-image: url(../../../assets/img/Mail.png);
-    background-position: 10px ;
+#user {
+    background-image: url(../../../assets/img/User.png);
+    background-position: 10px;
     padding-left: 60px;
-    background-size:auto;
+    background-size: auto;
     background-repeat: no-repeat;
 }
-#password{
+
+#passwordcre {
     background-image: url(../../../assets/img/Keyhole.png);
-    background-position: 10px ;
+    background-position: 10px;
     padding-left: 60px;
-    background-size:auto;
+    background-size: auto;
+    background-repeat: no-repeat;
+}
+
+#mailcre {
+    background-image: url(../../../assets/img/Mail.png);
+    background-position: 10px;
+    padding-left: 60px;
+    background-size: auto;
+    background-repeat: no-repeat;
+}
+
+#telf {
+    background-image: url(../../../assets/img/Phone.png);
+    background-position: 10px;
+    padding-left: 60px;
+    background-size: auto;
+    background-repeat: no-repeat;
+}
+
+#dirre {
+    background-image: url(../../../assets/img/MapPin.png);
+    background-position: 10px;
+    padding-left: 60px;
+    background-size: auto;
     background-repeat: no-repeat;
 }
 

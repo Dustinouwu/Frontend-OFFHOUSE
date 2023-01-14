@@ -64,7 +64,7 @@ const Header = () => {
                     <Link to="/home">
                         <img src={Imagenes.img4} alt="logo" />
                     </Link>
-                    <h1>OFF HOUSE</h1>
+                    <h1 id='theader'>OFF HOUSE</h1>
                 </div>
 
                 <form id='formsearch'>

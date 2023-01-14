@@ -6,19 +6,20 @@ import Imagenes from '../../../Imagenes';
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../contexts";
 import axios from "axios";
-import { Button, Grid } from "@mui/material";
+import { Grid } from "@mui/material";
 
 
 
 export const LoginAdmin = () => {
 
-    const navigate = useNavigate(); /* Navegación */
+    const navigate = useNavigate();
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [error, setError] = useState('')
-    const { login } = useContext(AuthContext); /* Función para poder autenticarse */
+    const { login } = useContext(AuthContext);
 
-     /* Función inicio de sesión admin*/
+
+
     const onLogin = async (e) => {
         e.preventDefault();
         try {
@@ -29,10 +30,16 @@ export const LoginAdmin = () => {
             )
             const { access_token, token_type, user } = response.data.data
             login(user, `${token_type} ${access_token}`);
-            navigate('/homeadmin');
+            const { role } = user;
+            if (role === 'admin') {
+                navigate('/homeAdmin');
+            } else {
+                navigate('/home');
+            }
             if (response.status === 422) {
                 setError('')
-            } 
+            }
+            window.location.reload()
         } catch (error) {
             setError(error.response.data.message)
             console.log(error.response.data.message, 'error');
@@ -61,7 +68,7 @@ export const LoginAdmin = () => {
 
             <div className="login-container">
                 <form className="formlogin" onSubmit={onLogin}>
-                    <Title text='Login to OFFHOUSE'></Title>
+                    <Title text='Inicio de Sesión OFFHOUSE'></Title>
                     {error &&
                         <label className="label-error-login">
                             {error}
@@ -69,11 +76,11 @@ export const LoginAdmin = () => {
                     }
 
                     <Label
-                        text='USERNAME'
+                        text='CORREO'
                     />
 
                     <input
-                        id="email"
+                        id="mailcre"
                         type='email'
                         value={email}
                         className="inputstyle"
@@ -81,11 +88,11 @@ export const LoginAdmin = () => {
                         onChange={e => setEmail(e.target.value)}>
                     </input>
                     <Label
-                        text='PASSWORD'
+                        text='CONTRASEÑA'
                     />
 
                     <input
-                        id="contraseña"
+                        id="passwordcre"
                         type='password'
                         value={password}
                         className="inputstyle"
@@ -95,13 +102,21 @@ export const LoginAdmin = () => {
                     </input>
                     <div className="submit-button-container">
                         <button  >
-                            LOGIN
+                            INGRESAR
                         </button>
                     </div>
+                    <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
+                        <h5>Crea tu cuenta</h5>
 
-                    <Button variant="contained" style={{ marginTop: '25px', backgroundColor: '#ff9900bd' }}>
-                        <Link to="/login" style={{ textDecoration: 'none', color: 'white' }} >ROL: ADMINISTRADOR</Link>
-                    </Button>
+                        <div className="signup-container">
+                            <h5>No eres miembro? </h5>
+                            <Link to="createuser/*" ><h5 className="singupl">Regístrate</h5></Link>
+                        </div>
+
+                        <div className="signup-container">
+                            <Link to="resetpssw/*" ><h5 className="singupl">¿No recuerdas tu contraseña?</h5></Link>
+                        </div>
+                    </div>
 
 
                 </form>
