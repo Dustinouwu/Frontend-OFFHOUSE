@@ -17,15 +17,16 @@ import { Link, Outlet, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../contexts';
 import Logout from '@mui/icons-material/Logout';
 import ListItemIcon from '@mui/material/ListItemIcon';
+import Settings from '@mui/icons-material/Settings';
 
 const pages = ['Products', 'Pricing', 'Blog'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
-const HeaderAdmin = () => { 
+const HeaderAdmin = () => {
 
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
-
+  const [anchorEl, setAnchorEl] = React.useState(null);
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
@@ -40,7 +41,12 @@ const HeaderAdmin = () => {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
-
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
   const navigate = useNavigate(); // Función para navegar
   const { user, logout } = useContext(AuthContext); // Función para traer la función para logout
   const tokenUser = localStorage.getItem('token') // Función para traer el token del usuario
@@ -65,7 +71,7 @@ const HeaderAdmin = () => {
   return (
     <div>
       <div st>
-        <AppBar position="static" sx={{backgroundColor: '#FF9901'}}>
+        <AppBar position="static" sx={{ backgroundColor: '#FF9901' }}>
           <Container maxWidth="xl">
             <Toolbar disableGutters>
 
@@ -118,10 +124,10 @@ const HeaderAdmin = () => {
                   }}
                 >
 
-                  <MenuItem  onClick={handleCloseNavMenu}>
+                  <MenuItem onClick={handleCloseNavMenu}>
                     <Typography textAlign="center">Usuarios</Typography>
                   </MenuItem>
-                  <MenuItem  onClick={handleCloseNavMenu}>
+                  <MenuItem onClick={handleCloseNavMenu}>
                     <Typography textAlign="center">Categorías</Typography>
                   </MenuItem>
 
@@ -147,43 +153,43 @@ const HeaderAdmin = () => {
                 OFF-HOUSE
               </Typography>
               <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-                  <Button
-                    onClick={() => navigate(`/crudusers`)}
-                    
-                    sx={{ my: 2, color: 'white', display: 'block', '&:hover': { color: 'white' } }}
-                  >
-                   Usuarios
-                  </Button>
-                  <Button
-                    onClick={() => navigate(`/crudcateg`)}
-                    sx={{ my: 2, color: 'white', display: 'block' }}
-                  >
-                   Categorías
-                  </Button>
-                  <Button
-                    onClick={() => navigate(`/crudcoms`)}
-                    sx={{ my: 2, color: 'white', display: 'block' }}
-                  >
-                   Comentarios
-                  </Button>
-                  <Button
-                    onClick={() => navigate(`/crudreports`)}
-                    sx={{ my: 2, color: 'white', display: 'block' }}
-                  >
-                   Reportes
-                  </Button>
-                  <Button
-                    onClick={() => navigate(`/crudproducts`)}
-                    sx={{ my: 2, color: 'white', display: 'block' }}
-                  >
-                   Productos
-                  </Button>
-                  <Button
-                    onClick={() => navigate(`/crudsubscription`)}
-                    sx={{ my: 2, color: 'white', display: 'block' }}
-                  >
-                   Suscripción
-                  </Button>
+                <Button
+                  onClick={() => navigate(`/crudusers`)}
+
+                  sx={{ my: 2, color: 'white', display: 'block', '&:hover': { color: 'white' } }}
+                >
+                  Usuarios
+                </Button>
+                <Button
+                  onClick={() => navigate(`/crudcateg`)}
+                  sx={{ my: 2, color: 'white', display: 'block' }}
+                >
+                  Categorías
+                </Button>
+                <Button
+                  onClick={() => navigate(`/crudcoms`)}
+                  sx={{ my: 2, color: 'white', display: 'block' }}
+                >
+                  Comentarios
+                </Button>
+                <Button
+                  onClick={() => navigate(`/crudreports`)}
+                  sx={{ my: 2, color: 'white', display: 'block' }}
+                >
+                  Reportes
+                </Button>
+                <Button
+                  onClick={() => navigate(`/crudproducts`)}
+                  sx={{ my: 2, color: 'white', display: 'block' }}
+                >
+                  Productos
+                </Button>
+                <Button
+                  onClick={() => navigate(`/crudsubscription`)}
+                  sx={{ my: 2, color: 'white', display: 'block' }}
+                >
+                  Suscripción
+                </Button>
 
               </Box>
               <Box sx={{ flexGrow: 0 }}>

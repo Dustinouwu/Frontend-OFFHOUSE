@@ -11,7 +11,15 @@ import { Link, useNavigate } from 'react-router-dom';
 import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 import axios from 'axios';
 import { Pageerror } from '../../../pages';
-export default function MultiActionAreaCard() {
+import { useScrollTrigger } from '@mui/material';
+import PropTypes from 'prop-types';
+import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
+import Fade from '@mui/material/Fade';
+import Box from '@mui/material/Box';
+import Fab from '@mui/material/Fab';
+
+
+export default function MultiActionAreaCard(props) {
 
   const navigate = useNavigate(); // Para poder navegar entre las páginas
   const token = localStorage.getItem('token');
@@ -53,8 +61,8 @@ export default function MultiActionAreaCard() {
 
 
   return (
-    <div>
-    
+    <div style={{ marginLeft: '10%' }}>
+
       <Container sx={{ py: 5 }} maxWidth="lg">
         <Grid container spacing={2}>
           {products.map((products, index) => (
@@ -62,11 +70,14 @@ export default function MultiActionAreaCard() {
               <Card
                 sx={{
                   height: '100%',
-                  maxWidth: '250px',
+                  maxWidth: '270px',
                   display: 'flex',
                   flexDirection: 'column',
                   borderRadius: 3,
-                  border: 3,
+                  border: 0,
+                  boxShadow: '15px 0 5px -5px rgba(0, 0, 0, 0.2), -8px 0 15px -5px rgba(0, 0, 0, 0.2)',
+                  flexWrap: 'wrap',
+                  alignItems: 'flex-end',
                 }}
               >
                 <CardActionArea>
@@ -82,13 +93,17 @@ export default function MultiActionAreaCard() {
                     alt="random"
                   />
                   <CardContent >
-                    <Typography variant="h5" component="h3">
+                    <Typography variant="h5" component="h3" style={{ color: 'green' }}>
                       ${products.price}
                     </Typography>
-                    <Typography variant="h6" component="h5">
+                    <Typography
+                      variant="h6"
+                      component="h6"
+                      style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'normal', wordWrap: 'break-word', maxHeight: '30px' }}
+                    >
                       {products.title}
                     </Typography>
-                    <div className="rtcontainer" style={{ display: 'flex' }}>
+                    <div className="rtcontainer" style={{ display: 'flex', height: '100%' }}>
                       <CircleIcon style={{ color: colorprod2[index], paddingRight: '10px', width: '20' }} />
                       <Typography noWrap style={{ paddingTop: '2px' }} >
                         {products.state_appliance}
@@ -99,21 +114,16 @@ export default function MultiActionAreaCard() {
                 <Button
                   variant="text"
                   startIcon={<RemoveRedEyeIcon style={{ color: 'white' }} />}
-                  style={{ color: 'white', backgroundColor: '#FF9901' }}
+                  style={{ color: 'white', backgroundColor: '#FF9901', position: 'absolute', display: 'fixed', }}
                   onClick={() => navigate(`/viewproduct/${products.id}`)}
                 >
-                  Ver Producto
+                  Ver
                 </Button>
               </Card>
             </Grid>
           ))}
         </Grid>
-
       </Container>
-
-
-
-
     </div>
   );
 }

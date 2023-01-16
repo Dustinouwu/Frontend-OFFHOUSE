@@ -23,7 +23,9 @@ const SearchBarContainer = styled(motion.div)`
     &::-webkit-scrollbar {
         width:0;
     }
-    
+    @media only screen and (min-width: 768px) {
+        width: 40%; /* solo se aplica en pantallas mayores a 768px*/
+      }
 `;
 
 const SearchInputContainer = styled.div`

@@ -121,12 +121,12 @@ const ModalMessage = ({ message, product }) => {
             >
                 <Box sx={{ '& .MuiTextField-root': { ml: 0, mb: 2, width: '47ch' }, gap: '2%', ...style, width: 400 }}>
                     <form onSubmit={handleSubmit}>
-                        <h2>Ingreso información sobre el reporte</h2>
+                        <h2>Ingrese el mensaje que quiere enviar</h2>
                         <Grid item xs={1}>
                             <input type="hidden" name="to" value={form.to=product?.user_id}  />
                             <TextField
                                 id="filled-select-currency-native"
-                                label="Motivo de reporte"
+                                label="Mensaje"
                                 name='message'
                                 onChange={handleChange}
                                 value={form.message}
@@ -149,7 +149,7 @@ const ModalMessage = ({ message, product }) => {
 
                             </TextField>
                         </Grid>
-                        <Button variant="contained" type='submit' onClick={handleClick} style={{backgroundColor: 'green'}}>ENVIAR</Button>
+                        <Button variant="contained" type='submit' onClick={handleClick} style={{backgroundColor: '#FF9901'}}>ENVIAR</Button>
                         <Snackbar open={openMessage}  >
                             <Alert onClose={handleCloseMessage} severity="success" sx={{ width: '100%' }}>
                                 Su mensaje ha sido enviado

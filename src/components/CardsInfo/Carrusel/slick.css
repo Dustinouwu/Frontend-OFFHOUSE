@@ -8,7 +8,6 @@
 {
     font-size: 0;
     line-height: 0;
-
     position: absolute;
     top: 50%;
 
@@ -33,9 +32,9 @@
 .slick-next:hover,
 .slick-next:focus
 {
-    color: transparent;
+    color: red;
     outline: none;
-    background: transparent;
+    background: red;
 }
 .slick-prev:hover:before,
 .slick-prev:focus:before,
@@ -58,7 +57,7 @@
     line-height: 1;
 
     opacity: .75;
-    color: white;
+    color: rgb(121, 4, 4);
 
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;

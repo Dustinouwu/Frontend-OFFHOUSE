@@ -6,12 +6,20 @@ import Grid from '@mui/material/Grid';
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { Button, MenuItem } from '@mui/material';
-import IconButton from '@mui/material/IconButton';
-import PhotoCamera from '@mui/icons-material/PhotoCamera';
+import CssBaseline from '@mui/material/CssBaseline';
+import Container from '@mui/material/Container';
+import Paper from '@mui/material/Paper';
+import Typography from '@mui/material/Typography';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { TextareaAutosize } from '@mui/material';
+import PhotoLibraryIcon from '@mui/icons-material/PhotoLibrary';
+const theme = createTheme();
+
 
 const FormCreProduct = ({ products }) => {
     const tokenUser = localStorage.getItem('token')
     const { id } = useParams();
+    const navigate = useNavigate();
     const [title, setTitle] = useState('');
     const [price, setPrice] = useState('');
     const [detail, setDetail] = useState('');
@@ -22,9 +30,9 @@ const FormCreProduct = ({ products }) => {
     const [categorie_id, setcategorieId] = useState('');
     const [image, setImage] = useState(null);
     const [error, setError] = useState(false); // Constante para mostrar errores
-    
 
-    
+
+
     async function handleSubmit(event) {
         event.preventDefault();
 
@@ -51,19 +59,243 @@ const FormCreProduct = ({ products }) => {
                     },
                 }
             )
-                      
-            
+
+
         } catch (error) {
             console.error(error);
         }
     }
 
 
+    const [imageUrl, setImageUrl] = useState(null);
 
-   
+    const handleImageChange = (event) => {
+        setImage(event.target.files[0]);
+
+        const reader = new FileReader();
+        reader.onload = (e) => {
+            setImageUrl(e.target.result);
+        };
+        reader.readAsDataURL(event.target.files[0]);
+    };
+
+
+
 
     return (
-        <div style={{ marginLeft: '3%', marginRight: '3%' }} >
+        <ThemeProvider theme={theme}>
+            <CssBaseline />
+            <Container component="main" maxWidth="sm" sx={{ mb: 4 }}>
+                <Paper variant="outlined" sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 3 } }}>
+                    <Typography component="h1" variant="h4" align="center" sx={{ mb: 10 }}>
+                        Crear tu producto
+                    </Typography>
+
+                    <form onSubmit={handleSubmit}>
+                        {error &&
+                            <label className="label-error-createu">
+                                {error}
+                            </label>
+                        }
+
+                        <Grid container spacing={3} >
+                            <Grid item xs={6} >
+                                <TextField
+                                    id="role_id"
+                                    name="role_id"
+                                    label="Nombre del producto"
+                                    onChange={(event) => setTitle(event.target.value)}
+                                    fullWidth
+                                    autoComplete="shipping address-line2"
+                                    variant="standard"
+                                    InputLabelProps={{
+                                        shrink: true,
+                                    }}
+
+                                />
+                            </Grid>
+                            <Grid item xs={6} >
+                                <TextField
+                                    id="username"
+                                    name="Usuario"
+                                    label="Marca"
+                                    onChange={(event) => setBrand(event.target.value)}
+                                    fullWidth
+                                    autoComplete="shipping address-line2"
+                                    variant="standard"
+                                    InputLabelProps={{
+                                        shrink: true,
+                                    }}
+
+                                />
+                            </Grid>
+                            <Grid item xs={6} >
+                                <TextField
+                                    id="username"
+                                    name="Usuario"
+                                    type="number"
+                                    label="Precio del producto"
+                                    onChange={(event) => setPrice(event.target.value)}
+                                    fullWidth
+                                    autoComplete="shipping address-line2"
+                                    variant="standard"
+                                    InputLabelProps={{
+                                        shrink: true,
+                                    }}
+
+                                />
+                            </Grid>
+                            <Grid item xs={6} >
+                                <TextField
+                                    id="username"
+                                    name="last_name"
+                                    type="number"
+                                    label="Stock del producto"
+                                    onChange={(event) => setStock(event.target.value)}
+                                    fullWidth
+                                    autoComplete="shipping address-line2"
+                                    variant="standard"
+                                    InputLabelProps={{
+                                        shrink: true,
+                                    }}
+
+                                />
+                            </Grid>
+
+
+                            <Grid item xs={6} >
+                                <TextField
+                                    id="username"
+                                    name="last_name"
+                                    label="Estado del producto"
+                                    select
+                                    fullWidth
+                                    onChange={(event) => setStateAppliance(event.target.value)}
+                                    autoComplete="shipping address-line2"
+                                    variant="standard"
+                                    InputLabelProps={{
+                                        shrink: true,
+                                    }}
+                                >
+                                    <MenuItem value="Nuevo" selected>Nuevo</MenuItem>
+                                    <MenuItem value="Usado">Usado</MenuItem>
+                                    <MenuItem value="Reacondicionado">Reacondicionado</MenuItem>
+                                    <MenuItem value="Reparado">Reparado</MenuItem>
+                                </TextField>
+                            </Grid>
+                            <Grid item xs={6} >
+                                <TextField
+                                    id="username"
+                                    name='delivery_method'
+                                    label="Método de entrega"
+                                    select
+                                    fullWidth
+                                    onChange={(event) => setdeliveryMethod(event.target.value)}
+                                    autoComplete="shipping address-line2"
+                                    variant="standard"
+                                    InputLabelProps={{
+                                        shrink: true,
+                                    }}
+                                >
+                                    <MenuItem value="Envio gratis" selected>Envio gratis</MenuItem>
+                                    <MenuItem value="Acuerdo Mutuo">Acuerdo Mutuo</MenuItem>
+                                </TextField>
+                            </Grid>
+                            <Grid item xs={12} >
+                                <TextField
+                                    id="username"
+                                    label="Categoria"
+                                    name='categorie_id'
+                                    select
+                                    fullWidth
+                                    onChange={(event) => setcategorieId(event.target.value)}
+                                    autoComplete="shipping address-line2"
+                                    variant="standard"
+                                    InputLabelProps={{
+                                        shrink: true,
+                                    }}
+                                >
+                                    <MenuItem value="1" selected>Refrigeradores</MenuItem>
+                                    <MenuItem value="2">Cocina</MenuItem>
+                                    <MenuItem value="3">Microondas</MenuItem>
+                                    <MenuItem value="4">Iron</MenuItem>
+                                    <MenuItem value="5">Lavadora</MenuItem>
+                                    <MenuItem value="6">Televisión</MenuItem>
+                                </TextField>
+                            </Grid>
+
+                            <Grid item xs={12} sx={{display: 'flex', flexDirection: 'column'}}>
+                                <Typography component="h5" variant="h8" align="left" sx={{ color: 'rgba(0, 0, 0, 0.6)' }}>
+                                    Subir una imagen
+                                </Typography>
+                                {imageUrl && <img src={imageUrl} alt="Preview" style={{ width: '40%' }} />}
+                                <Button variant="contained" component="label" sx={{width: '40%', marginTop: '2%' }}>
+                                    <PhotoLibraryIcon />
+                                    Subir imagen
+                                    <input
+                                        hidden
+                                        type="file"
+                                        accept="image/*"
+                                        id="image" name='image'
+                                        onChange={(event) => {
+                                            setImage(event.target.files[0]);
+                                            handleImageChange(event);
+                                        }} />
+
+                                </Button>
+
+                            </Grid>
+
+
+                            <Grid item xs={12} >
+                                <Typography component="h5" variant="h8" align="left" sx={{ color: 'rgba(0, 0, 0, 0.6)' }}>
+                                    Detalle del Producto
+                                </Typography>
+                                <TextareaAutosize
+                                    maxRows={5}
+                                    label="Stock del producto"
+                                    aria-label="maximum height"
+                                    multiline
+
+                                    placeholder="Coloca el detalle del producto"
+                                    onChange={(event) => setDetail(event.target.value)}
+                                    style={{ width: '100%', height: '80px' }}
+                                />
+                            </Grid>
+
+
+
+
+                            <Grid item xs={12} >
+                                <Button
+                                    variant="contained"
+                                    sx={{ mt: '1%', backgroundColor: '#000', alignItems: 'center' }}
+                                    onClick={(event) => {
+                                        handleSubmit(event);
+                                        navigate("/productlist");
+                                    }}
+                                >
+                                    Confirmar
+                                </Button>
+
+                            </Grid>
+                        </Grid>
+                    </form>
+                </Paper>
+            </Container>
+        </ThemeProvider>
+    )
+
+
+
+
+
+
+}
+
+export default FormCreProduct
+
+{/* <div style={{ marginLeft: '3%', marginRight: '3%' }} >
             <div className='formproduct' >
                 <h1 id='labelhelp'>
                     {products?.id ? 'Editar Producto' : 'Crear un Producto'}
@@ -224,19 +456,7 @@ const FormCreProduct = ({ products }) => {
             </div>
 
 
-        </div>
-    )
-
-
-
-
-
-
-}
-
-export default FormCreProduct
-
-
+        </div> */}
 /* const navigate = useNavigate(); // Función para navegar
     const tokenUser = localStorage.getItem('token') // Función para traer el token del usuario
     const [error, setError] = useState(false); // Constante para mostrar errores

@@ -12,7 +12,8 @@ export const CardProduct = () => {
     const tokenUser = localStorage.getItem('token') //Trae el token del usuario
     const [product, setProduct] = useState({})  //Estado para guardar los datos del producto
 
-    //Trae los datos del producto
+
+
     useEffect(() => {
         const getProduct = async () => {
             try {
@@ -20,8 +21,9 @@ export const CardProduct = () => {
                     `https://offhouse.herokuapp.com/api/products/${id}`,
                     { headers: { 'accept': 'application/json', 'authorization': tokenUser } }
                 )
-                const user = { ...response.data.data.product, id }
-                setProduct(user);
+                const user2 = { ...response.data.data.product, id }
+                setProduct(user2);
+                console.log(user2)
 
             } catch (error) {
                 console.log(error);
@@ -50,8 +52,9 @@ export const CardProduct = () => {
                     <h2 id='labelprod'>Precio: ${product.price} </h2>
                     <h2 id='labelprod'>Estado: {product.state_appliance}</h2>
                     <h2 id='labelprod'>Marca: {product.brand} </h2>
+                    <h2 id='labelprod'>Stock: {product.stock} </h2>
                     <h2 id='labelprod'>userid: {product.user_id} </h2>
-                    < ModalMessage product={product}/>
+                    < ModalMessage product={product} />
                 </div>
 
             </div>

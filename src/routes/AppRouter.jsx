@@ -19,6 +19,7 @@ import FormsComs from '../admin/components/FormsCom/FormsCom';
 import CrudProducts from '../admin/components/FormsProducts/CrudProducts';
 import FormsProducts from '../admin/components/FormsProducts/FormsProducts';
 import CrudSubscription from '../admin/components/FormsSubscription/CrudSubscription';
+import NewHeader from '../components/Layouts/Header/NewHeader';
 export const AppRouter = () => {
 
     const user = JSON.parse(localStorage.getItem('user')) || {};
@@ -45,7 +46,7 @@ export const AppRouter = () => {
                 <Route path='/*' element={
                     <PrivateRoute>
                         <Routes>
-                            <Route element={<Header />}>
+                            <Route element={<NewHeader />}>
 
                                 {user.role === 'customer' && (
                                     <>

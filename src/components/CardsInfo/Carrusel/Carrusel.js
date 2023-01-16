@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react"
 import Slider from "react-slick";
 import './index.css'
-import './slick.css'
 import "slick-carousel/slick/slick-theme.css";
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';

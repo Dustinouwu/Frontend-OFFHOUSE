@@ -1,11 +1,9 @@
-body {
-    background: #ccc;
-}
 
 .App {
     width: 70%;
     margin: 0 auto;
     margin-top: 50px;
+
 }
 
 .slick-slide>div {
@@ -20,8 +18,9 @@ body {
     background: white;
     border-radius: 8px;
     overflow: hidden;
-
+    background: rgb(241, 241, 241);
     height: 370px;
+    box-shadow: 15px 0 5px -5px rgba(0, 0, 0, 0.2), -8px 0 15px -5px rgba(0, 0, 0, 0.2);
     color: #fff;
     cursor: pointer;
 }
