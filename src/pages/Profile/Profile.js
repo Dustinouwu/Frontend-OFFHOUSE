@@ -16,45 +16,25 @@ import FileCopyIcon from '@mui/icons-material/FileCopy';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import MenuIcon from '@mui/icons-material/Menu';
-const StyledMenu = styled((props) => (
-    <Menu
-        elevation={0}
-        anchorOrigin={{
-            vertical: 'bottom',
-            horizontal: 'right',
-        }}
-        transformOrigin={{
-            vertical: 'top',
-            horizontal: 'right',
-        }}
-        {...props}
-    />
-))(({ theme }) => ({
-    '& .MuiPaper-root': {
-        borderRadius: 6,
-        marginTop: theme.spacing(1),
-        minWidth: 180,
-        color:
-            'black',
-        boxShadow:
-            'rgb(255, 255, 255) 0px 0px 0px 0px, rgba(0, 0, 0, 0.05) 0px 0px 0px 1px, rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px',
-        '& .MuiMenu-list': {
-            padding: '4px 0',
-            backgroundColor: '#F2C94C'
-        },
-        '& .MuiMenuItem-root': {
-            '& .MuiSvgIcon-root': {
-                fontSize: 18,
-                color: 'black',
-                marginRight: theme.spacing(1.5),
-                
-            },
-            '&:active': {
-                backgroundColor: '#F2C94C'
-            },
-        },
-    },
-}));
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import CardMedia from '@mui/material/CardMedia';
+import Typography from '@mui/material/Typography';
+import { CardActionArea, CardActions } from '@mui/material';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemText from '@mui/material/ListItemText';
+import KeyIcon from '@mui/icons-material/Key';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+const style = {
+    width: '100%',
+    maxWidth: '100%',
+    bgcolor: 'background.paper',
+    borderTop: '1px solid   #e0e0e0',
+    borderLeft: '1px solid   #e0e0e0',
+    borderRight: '1px solid   #e0e0e0',
+    borderBottom: '1px solid   #e0e0e0',
+};
 
 
 export const Profile = () => {
@@ -64,14 +44,6 @@ export const Profile = () => {
     const [user, setUser] = useState([])
     const [avatar, setAvatar] = useState([])
 
-    const [anchorEl, setAnchorEl] = React.useState(null);
-    const open = Boolean(anchorEl);
-    const handleClick = (event) => {
-        setAnchorEl(event.currentTarget);
-    };
-    const handleClose = () => {
-        setAnchorEl(null);
-    };
 
     const getUser = async () => {
         try {
@@ -91,13 +63,116 @@ export const Profile = () => {
     }
 
     useEffect(() => {
-
         getUser()
-
     }, [])
 
     return (
         <div>
+            <div style={{ display: 'flex', gap: '3rem', marginTop: '5%', marginLeft: '5%', marginRight: '5%' }}>
+                <Card sx={{ maxWidth: 350 }}>
+                    <CardActionArea>
+                        <CardMedia
+                            component="img"
+                            image={avatar}
+                            style={{ width: '50%', marginBottom: '5%', display: 'flex', alignItems: 'center', flexDirection: 'column', marginLeft: '25%', marginTop: '10%', borderRadius: '25px' }}
+                            alt="green iguana"
+                        />
+                        <CardContent>
+                            <Typography gutterBottom variant="h4" component="div" align='center'>
+                                {user.username}
+                            </Typography>
+                            <Typography variant="body2" color="text.secondary" align='center'>
+                                {user.email}
+                            </Typography>
+                        </CardContent>
+                    </CardActionArea>
+                    <CardActions sx={{ display: "flex", justifyContent: "center" }}>
+                        <Button size="small" color="primary" variant="contained" onClick={() => navigate('/productlist')} >
+                            Mis productos
+                        </Button>
+                    </CardActions>
+                </Card>
+                <List sx={style} component="nav" aria-label="mailbox folders" >
+                    <ListItem >
+                        <ListItemText primary="Nombre" />
+                        <ListItemText secondary={user.first_name} align='center' />
+                    </ListItem>
+                    <Divider />
+                    <ListItem divider>
+                        <ListItemText primary="Apellido" />
+                        <ListItemText secondary={user.last_name} align='center' />
+                    </ListItem>
+                    <ListItem >
+                        <ListItemText primary="Email" />
+                        <ListItemText secondary={user.email} align='center' />
+                    </ListItem>
+                    <Divider />
+                    <ListItem >
+                        <ListItemText primary="Teléfono" />
+                        <ListItemText secondary={user.home_phone} align='center' />
+                    </ListItem>
+                    <Divider />
+                    <ListItem >
+                        <ListItemText primary="Celular" />
+                        <ListItemText secondary={user.personal_phone} align='center' />
+                    </ListItem>
+                    <Divider />
+                    <ListItem >
+                        <ListItemText primary="Dirección" />
+                        <ListItemText secondary={user.address} align='center' />
+                    </ListItem>
+                    <Divider />
+                    <ListItem sx={{ mt: '1.6%' }}>
+                        <Button size="small" color="primary" variant="contained" placement="bottom" onClick={() => navigate('/editProfile')}>
+                            Editar
+                        </Button>
+                    </ListItem>
+                </List>
+
+            </div>
+            <div style={{ display: 'flex', gap: '3rem', marginTop: '2%', marginLeft: '5%' }}>
+                <Card sx={{ maxWidth: ' 100%' }}>
+                    <CardActionArea>
+                        <CardContent>
+                            <Typography  variant="h5" component="div" align='center'>
+                                Actualizar la contraseña
+                            </Typography>
+                        </CardContent>
+                    </CardActionArea>
+                    <CardActions sx={{ display: "flex", justifyContent: "center" }}>
+
+                        <Button size="small" color="primary" variant="contained" onClick={() => navigate('/EditPassword')} >
+                            <KeyIcon />
+                            Contraseña
+                        </Button>
+                    </CardActions>
+                </Card>
+                <Card sx={{ maxWidth: ' 100%' }}>
+                    <CardActionArea>
+                        <CardContent>
+                            <Typography  variant="h5" component="div" align='center'>
+                                Cambiar Imagen de perfil
+                            </Typography>
+                        </CardContent>
+                    </CardActionArea>
+                    <CardActions sx={{ display: "flex", justifyContent: "center" }}>
+
+                        <Button size="small" color="primary" variant="contained" onClick={() => navigate('/EditAvatar')} >
+                            <AccountCircleIcon />
+                            Avatar
+                        </Button>
+                    </CardActions>
+                </Card>
+            </div>
+        </div>
+
+
+    )
+}
+
+
+
+{/* <div>
             <div className='profile-main' style={{ marginLeft: '5%', marginRight: '5%', marginTop: '2%', marginBottom: '5%', paddingTop: '5%', paddingLeft: '2%', paddingBottom: '5%', paddingRight: '2%', borderRadius: '35px', backgroundColor: '#D9D9D9' }} >
                 <div style={{ display: 'flex', gap: '6rem', marginLeft: '5%' }}>
                     <div style={{ display: 'flex', alignItems: 'center', flexDirection: 'column', width: '15%' }}>
@@ -172,7 +247,4 @@ export const Profile = () => {
 
             </div>
 
-        </div >
-    )
-}
-
+        </div > */}

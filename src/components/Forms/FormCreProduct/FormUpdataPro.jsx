@@ -59,7 +59,7 @@ const FormUpdataProduct = ({ products }) => {
     const config = {
         headers: { Authorization: `${tokenUser}` }
     };
-    console.log(products.title)
+
     // Función para manejar el submit
     const handleSubmit = async (e) => {
         e.preventDefault();

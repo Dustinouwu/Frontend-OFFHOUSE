@@ -91,7 +91,7 @@ const Header = () => {
                             >
                                 <Avatar id="avatar-header"
                                     alt={user.username}
-                                    src="/static/images/avatar/1.jpg"
+                                    src={user.avatar}
                                     sx={{ width: 45, height: 45 }}
                                     overlap="circular">
                                         

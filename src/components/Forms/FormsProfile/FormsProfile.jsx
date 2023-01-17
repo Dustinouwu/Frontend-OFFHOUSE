@@ -1,12 +1,16 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import './FormsProfile.css'
-
-import Label from "../../atoms/Label/Label";
-import Labelgiant from "../../atoms/Labelgiant/Labelgiant";
+import TextField from '@mui/material/TextField';
+import Grid from '@mui/material/Grid';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-
-
+import { Button } from '@mui/material';
+import CssBaseline from '@mui/material/CssBaseline';
+import Container from '@mui/material/Container';
+import Paper from '@mui/material/Paper';
+import Typography from '@mui/material/Typography';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+const theme = createTheme();
 
 const FormsProfile = ({ profile }) => {
 
@@ -35,7 +39,7 @@ const FormsProfile = ({ profile }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (Object.values(form).includes('')){
+    if (Object.values(form).includes('')) {
       console.log('error');
       setError(true);
       return;
@@ -55,7 +59,175 @@ const FormsProfile = ({ profile }) => {
 
 
   return (
-    <div style={{ display: 'flex', justifyContent: 'center', marginTop: '2%', marginBottom: '5%' }}>
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <Container component="main" maxWidth="sm" sx={{ mb: 4 }}>
+        <Paper variant="outlined" sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 3 } }}>
+          <Typography component="h1" variant="h4" align="center" sx={{ mb: 10 }}>
+            Editar tu perfil
+          </Typography>
+
+          <form onSubmit={handleSubmit}>
+            {error &&
+              <label className="label-error-createu">
+                {error}
+              </label>
+            }
+
+            <Grid container spacing={3} >
+              <Grid item xs={12} >
+                <TextField
+                  id="role_id"
+                  name="username"
+                  label="Nombre de usuario"
+                  value={form.username}
+                  onChange={handleForm}
+                  fullWidth
+                  autoComplete="shipping address-line2"
+                  variant="standard"
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+
+                />
+              </Grid>
+              <Grid item xs={6} >
+                <TextField
+                  id="username"
+                  name='first_name'
+                  label="Nombre"
+                  onChange={handleForm}
+                  value={form.first_name}
+                  fullWidth
+                  autoComplete="shipping address-line2"
+                  variant="standard"
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+
+                />
+              </Grid>
+              <Grid item xs={6} >
+                <TextField
+                  id="username"
+                  name="last_name"
+                  label="Apellido"
+                  value={form.last_name}
+                  onChange={handleForm}
+                  fullWidth
+                  autoComplete="shipping address-line2"
+                  variant="standard"
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+
+                />
+              </Grid>
+              <Grid item xs={12} >
+                <TextField
+                  id="username"
+                  name="email"
+                  type="email"
+                  label="Email"
+                  value={form.email}
+                  onChange={handleForm}
+                  fullWidth
+                  autoComplete="shipping address-line2"
+                  variant="standard"
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+
+                />
+              </Grid>
+              <Grid item xs={6} >
+                <TextField
+                  id="username"
+                  label="Teléfono"
+                  name='home_phone'
+                  type='number'
+                  fullWidth
+                  onChange={handleForm}
+                  value={form.home_phone}
+                  autoComplete="shipping address-line2"
+                  variant="standard"
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                >
+                </TextField>
+              </Grid>
+              <Grid item xs={6} >
+                <TextField
+                  id="username"
+                  label="Celular"
+                  name='personal_phone'
+                  type='number'
+                  fullWidth
+                  onChange={handleForm}
+                  value={form.personal_phone}
+                  autoComplete="shipping address-line2"
+                  variant="standard"
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                >
+                </TextField>
+              </Grid>
+              <Grid item xs={12} >
+                <TextField
+                  id="username"
+                  label="Dirección"
+                  name='address'
+                  fullWidth
+                  value={form.address}
+                  onChange={handleForm}
+                  autoComplete="shipping address-line2"
+                  variant="standard"
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                >
+                </TextField>
+              </Grid>
+              <Grid item xs={6} >
+                <Button
+                  variant="contained"
+                  sx={{ mt: '1%', backgroundColor: '#000', alignItems: 'center' }}
+                  onClick={(event) => {
+                    handleSubmit(event);
+                  }}
+                >
+                  Confirmar
+                </Button>
+
+              </Grid>
+              <Grid item xs={6} >
+                <Button
+                  variant="contained"
+                  sx={{ mt: '1%', backgroundColor: '#000', alignItems: 'center' }}
+                  onClick={() => navigate('/profile')}
+                >
+                  Cancelar
+                </Button>
+
+              </Grid>
+            </Grid>
+          </form>
+        </Paper>
+      </Container>
+    </ThemeProvider>
+
+  )
+}
+
+export default FormsProfile
+
+
+
+
+
+/* <div style={{ display: 'flex', justifyContent: 'center', marginTop: '2%', marginBottom: '5%' }}>
 
       <div className="profile-container">
         
@@ -181,9 +353,4 @@ const FormsProfile = ({ profile }) => {
 
 
 
-    </div>
-
-  )
-}
-
-export default FormsProfile
+    </div> */
