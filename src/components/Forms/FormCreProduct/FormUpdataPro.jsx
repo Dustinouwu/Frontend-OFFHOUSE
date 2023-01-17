@@ -14,6 +14,7 @@ import CssBaseline from '@mui/material/CssBaseline';
 import Container from '@mui/material/Container';
 import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
+
 //HASTA AQUÍ 
 
 const theme = createTheme();
@@ -22,7 +23,7 @@ const FormUpdataProduct = ({ products }) => {
     const navigate = useNavigate(); // Función para navegar
     const tokenUser = localStorage.getItem('token') // Función para traer el token del usuario
     const [error, setError] = useState(false); // Constante para mostrar errores
-    const [imageUrl, setImageUrl] = useState(null);
+    const [imageUrl, setImageUrl] = useState(products.image);
 
     const [title, setTitle] = useState('');
     const [price, setPrice] = useState('');
@@ -32,6 +33,8 @@ const FormUpdataProduct = ({ products }) => {
     const [brand, setBrand] = useState('');
     const [delivery_method, setdeliveryMethod] = useState('');
     const [categorie_id, setcategorieId] = useState('');
+    const [phone, setPhone] = useState('');
+    const [address, setAddress] = useState('');
     const [image, setImage] = useState(null);
 
 
@@ -60,7 +63,9 @@ const FormUpdataProduct = ({ products }) => {
     // Función para manejar el submit
     const handleSubmit = async (e) => {
         e.preventDefault();
-
+        const response = await fetch(imageUrl);
+        const blob = await response.blob();
+        const file = new File([blob], 'image.jpg', { type: 'image/jpeg' });
         const formData = new FormData();
         formData.append('title', title);
         formData.append('price', price);
@@ -70,17 +75,19 @@ const FormUpdataProduct = ({ products }) => {
         formData.append('brand', brand);
         formData.append('delivery_method', delivery_method);
         formData.append('categorie_id', categorie_id);
-        formData.append('image', image);
+        formData.append('phone', phone);
+        formData.append('address', address);
+        formData.append('image', file);
         console.log(formData);
         try {
             console.log(products)
 
             await axios.post(
-                `https://offhouse.herokuapp.com/api/products/${products.id}`,
+                `https://offhouse.herokuapp.com/api/products/${products.id}/update`,
                 formData, { headers: { 'Content-Type': 'multipart/form-data', 'authorization': tokenUser } }
             );
 
-            navigate('/productlist')
+            navigate("/productlist");
         } catch (error) {
             setError(error.response.data.message)
             console.log(error);
@@ -97,6 +104,8 @@ const FormUpdataProduct = ({ products }) => {
         setBrand(products.brand);
         setdeliveryMethod(products.delivery_method);
         setcategorieId(products.categorie_id);
+        setPhone(products.phone);
+        setAddress(products.address);
         setImage(products.image);
         setImageUrl(products.image);
     }, [])
@@ -121,7 +130,7 @@ const FormUpdataProduct = ({ products }) => {
                             <Grid item xs={6} >
                                 <TextField
                                     id="role_id"
-                                    name="role_id"
+                                    name="title"
                                     label="Nombre del producto"
                                     value={title}
                                     onChange={(event) => setTitle(event.target.value)}
@@ -137,7 +146,7 @@ const FormUpdataProduct = ({ products }) => {
                             <Grid item xs={6} >
                                 <TextField
                                     id="username"
-                                    name="Usuario"
+                                    name="brand"
                                     label="Marca"
                                     value={brand}
                                     onChange={(event) => setBrand(event.target.value)}
@@ -153,7 +162,7 @@ const FormUpdataProduct = ({ products }) => {
                             <Grid item xs={6} >
                                 <TextField
                                     id="username"
-                                    name="Usuario"
+                                    name="price"
                                     type="number"
                                     value={price}
                                     label="Precio del producto"
@@ -170,7 +179,7 @@ const FormUpdataProduct = ({ products }) => {
                             <Grid item xs={6} >
                                 <TextField
                                     id="username"
-                                    name="last_name"
+                                    name="stock"
                                     type="number"
                                     value={stock}
                                     label="Stock del producto"
@@ -249,32 +258,60 @@ const FormUpdataProduct = ({ products }) => {
                                     <MenuItem value="6">Televisión</MenuItem>
                                 </TextField>
                             </Grid>
-                            <Grid item xs={6} sx={{display: 'flex', flexDirection: 'column'}} >
-                                <Typography component="h5" variant="h8" align="left" sx={{color: 'rgba(0, 0, 0, 0.6)' }}>
+                            <Grid item xs={6} >
+                                <TextField
+                                    id="username"
+                                    label="Teléfono"
+                                    name='phone'
+                                    value={phone}
+                                    type='number'
+                                    fullWidth
+                                    onChange={(event) => setPhone(event.target.value)}
+                                    autoComplete="shipping address-line2"
+                                    variant="standard"
+                                    InputLabelProps={{
+                                        shrink: true,
+                                    }}
+                                >
+                                </TextField>
+                            </Grid>
+                            <Grid item xs={6} >
+                                <TextField
+                                    id="username"
+                                    label="Dirección"
+                                    name='address'
+                                    value={address}
+                                    fullWidth
+                                    onChange={(event) => setAddress(event.target.value)}
+                                    autoComplete="shipping address-line2"
+                                    variant="standard"
+                                    InputLabelProps={{
+                                        shrink: true,
+                                    }}
+                                >
+                                </TextField>
+                            </Grid>
+                            <Grid item xs={6} sx={{ display: 'flex', flexDirection: 'column' }} >
+                                <Typography component="h5" variant="h8" align="left" sx={{ color: 'rgba(0, 0, 0, 0.6)' }}>
                                     Imagen del producto
                                 </Typography>
                                 <img id="preview-img" src={imageUrl} alt="preview" style={{ width: '50%' }}
                                 />
-                                <Button variant="contained" component="label" style={{ width: '50%', marginTop:'2%' }}>
+                                <Button variant="contained" component="label" style={{ width: '50%', marginTop: '2%' }}>
                                     <PhotoLibraryIcon />
                                     Subir imagen
                                     <input
                                         hidden
                                         type="file"
                                         accept="image/*"
+
                                         id="image" name='image'
                                         onChange={(event) => {
                                             setImage(event.target.files[0]);
                                             handleImageChange(event);
                                         }} />
-
                                 </Button>
                             </Grid>
-
-
-
-
-
                             <Grid item xs={12} >
                                 <Typography component="h5" variant="h8" align="left" sx={{ color: 'rgba(0, 0, 0, 0.6)' }}>
                                     Detalle del Producto
@@ -292,15 +329,13 @@ const FormUpdataProduct = ({ products }) => {
 
                             </Grid>
 
-                            
-                            
+
                             <Grid item xs={12} >
                                 <Button
                                     variant="contained"
                                     sx={{ mt: '1%', backgroundColor: '#000', alignItems: 'center' }}
                                     onClick={(event) => {
                                         handleSubmit(event);
-                                        navigate("/productlist");
                                     }}
                                 >
                                     Confirmar

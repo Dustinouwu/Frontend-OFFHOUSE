@@ -23,6 +23,10 @@ import { AuthContext } from '../../../contexts';
 import { Avatar, Divider } from '@mui/material'
 import Settings from '@mui/icons-material/Settings';
 import ListItemIcon from '@mui/material/ListItemIcon';
+import Logout from '@mui/icons-material/Logout';
+import Inventory2Icon from '@mui/icons-material/Inventory2';
+
+
 const Search = styled('div')(({ theme }) => ({
     position: 'relative',
     borderRadius: '25px',
@@ -129,24 +133,31 @@ export default function PrimarySearchAppBar() {
             open={isMenuOpen}
             onClose={handleMenuClose}
         >
-            <Link to="/profile" style={{ textDecoration: 'none', color: 'rgb(55, 65, 81)' }} >
-                <MenuItem>
-                    <Avatar
 
-                        src={Imagenes.avatar}
-                        sx={{ width: 30, height: 30 }}
-                        overlap="circular" />
-                    Mi perfil
-                </MenuItem>
-            </Link>
-
-            <Divider />
             <MenuItem>
+                <Avatar
+                    src={Imagenes.avatar}
+                    sx={{ width: 30, height: 30 }}
+                    overlap="circular" 
+                    fontSize="small"/>
+                    
+                Mi perfil
+            </MenuItem>
+            <Divider />
+            <MenuItem onClick={() => navigate("/editProfile")}>
                 <ListItemIcon>
                     <Settings fontSize="small" />
                 </ListItemIcon>
-                Settings
+                Configuración Perfil
             </MenuItem>
+            
+            <MenuItem onClick={onLogout}>
+                <ListItemIcon>
+                    <Logout fontSize="small" />
+                </ListItemIcon>
+                Cierre de sesión
+            </MenuItem>
+            
             <MenuItem onClick={handleMenuClose}>My account</MenuItem>
         </Menu>
     );
@@ -279,7 +290,7 @@ export default function PrimarySearchAppBar() {
             <div className='navv-container'>
                 <Nav />
             </div>
-            <Outlet />
+            
         </div>
     );
 }

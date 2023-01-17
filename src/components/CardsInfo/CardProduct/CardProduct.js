@@ -11,8 +11,23 @@ export const CardProduct = () => {
     const { id } = useParams(); //Trae el id de la url
     const tokenUser = localStorage.getItem('token') //Trae el token del usuario
     const [product, setProduct] = useState({})  //Estado para guardar los datos del producto
+    const [user, setUser] = useState([])
+
+    const getUser = async () => {
+        try {
+            const response = await axios.get(
+                `https://offhouse.herokuapp.com/api/profile`,
+                { headers: { 'accept': 'application/json', 'authorization': tokenUser } }
+            )
+            setUser(response.data.data.user);
+                
+            console.log(response.data.data.user);
 
 
+        } catch (error) {
+            console.log(error);
+        }
+    }
 
     useEffect(() => {
         const getProduct = async () => {
@@ -23,14 +38,20 @@ export const CardProduct = () => {
                 )
                 const user2 = { ...response.data.data.product, id }
                 setProduct(user2);
-                console.log(user2)
+                
+   
 
             } catch (error) {
                 console.log(error);
             }
         }
         getProduct()
+        getUser()
     }, [id, tokenUser])
+
+    console.log(user.id);
+    console.log(product.user_id);
+    
 
 
     return (
@@ -52,8 +73,10 @@ export const CardProduct = () => {
                     <h2 id='labelprod'>Precio: ${product.price} </h2>
                     <h2 id='labelprod'>Estado: {product.state_appliance}</h2>
                     <h2 id='labelprod'>Marca: {product.brand} </h2>
-                    <h2 id='labelprod'>Stock: {product.stock} </h2>
-                    <h2 id='labelprod'>userid: {product.user_id} </h2>
+                    <h2 id='labelprod'>Stock: {product.stock} </h2>    
+                    <h2 id='labelprod'>Celular: {product.phone} </h2>      
+                    <h2 id='labelprod'>Dirección: {product.address} </h2>     
+                    <h2 id='labelprod'>Fecha de publicación: {product.updated_at} </h2>    
                     < ModalMessage product={product} />
                 </div>
 

@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import './Search.css'
 import SearchIcon from '@mui/icons-material/Search';
 import CloseIcon from '@mui/icons-material/Close';
@@ -130,6 +130,27 @@ function Search(props) {
     const [searchQuery, setSearchQuery] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
     const [tvShows, setTvShows] = useState([])
+    const [product, setProduct] = useState([])
+    const token = localStorage.getItem('token');
+
+    const getProducts = async () => {
+        try {
+            const response = await axios.get(
+                'https://offhouse.herokuapp.com/api/products',
+                { headers: { 'accept': 'application/json', 'authorization': token } }
+            );
+            console.log(response.data.data.products.data);
+            setProduct(response.data.data.products.data);
+        } catch (error) {
+            console.log(error);
+            console.log(error.response.data.message, 'error');
+        }
+    };
+
+    useEffect(() => {
+        getProducts();
+    }, []);
+
 
 
     const expandContainer = () => {

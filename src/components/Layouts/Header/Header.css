@@ -63,7 +63,7 @@
 .other-container {
     display: flex;
     align-items: center;
-    gap: 3rem;
+    gap: 1rem;
 }
 
 .foo-container {

@@ -56,7 +56,7 @@ const Header = () => {
 
     return (
         <div >
-            <NewHeader />
+            {/* <NewHeader /> */}
             <div className="header-container">
 
                 <div className='lhd-container'>
@@ -77,13 +77,7 @@ const Header = () => {
                             <ChatBubbleOutlineIcon size="25px" style={{ color: 'black' }} />
                         </Badge>
                     </Link>
-
-                    <IconButton color="primary" aria-label="upload picture" component="label" onClick={onLogout}>
-                        <input hidden accept="image/*" />
-                        <LogoutIcon style={{ color: 'black' }} />
-                    </IconButton>
-
-
+                    
                     <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
 
                         <Tooltip title="Account settings">

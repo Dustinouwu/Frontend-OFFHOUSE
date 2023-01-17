@@ -28,6 +28,8 @@ const FormCreProduct = ({ products }) => {
     const [brand, setBrand] = useState('');
     const [delivery_method, setdeliveryMethod] = useState('');
     const [categorie_id, setcategorieId] = useState('');
+    const [phone, setPhone] = useState('');
+    const [address, setAddress] = useState('');
     const [image, setImage] = useState(null);
     const [error, setError] = useState(false); // Constante para mostrar errores
 
@@ -45,6 +47,8 @@ const FormCreProduct = ({ products }) => {
         formData.append('brand', brand);
         formData.append('delivery_method', delivery_method);
         formData.append('categorie_id', categorie_id);
+        formData.append('phone', phone);
+        formData.append('address', address);
         formData.append('image', image);
         console.log(formData);
 
@@ -59,7 +63,7 @@ const FormCreProduct = ({ products }) => {
                     },
                 }
             )
-
+            navigate('/productlist');
 
         } catch (error) {
             console.error(error);
@@ -223,6 +227,37 @@ const FormCreProduct = ({ products }) => {
                                     <MenuItem value="6">Televisión</MenuItem>
                                 </TextField>
                             </Grid>
+                            <Grid item xs={6} >
+                                <TextField
+                                    id="username"
+                                    label="Teléfono"
+                                    name='phone'
+                                    type='number'
+                                    fullWidth
+                                    onChange={(event) => setPhone(event.target.value)}
+                                    autoComplete="shipping address-line2"
+                                    variant="standard"
+                                    InputLabelProps={{
+                                        shrink: true,
+                                    }}
+                                >
+                                </TextField>
+                            </Grid>
+                            <Grid item xs={6} >
+                                <TextField
+                                    id="username"
+                                    label="Dirección"
+                                    name='address'
+                                    fullWidth
+                                    onChange={(event) => setAddress(event.target.value)}
+                                    autoComplete="shipping address-line2"
+                                    variant="standard"
+                                    InputLabelProps={{
+                                        shrink: true,
+                                    }}
+                                >
+                                </TextField>
+                            </Grid>
 
                             <Grid item xs={12} sx={{display: 'flex', flexDirection: 'column'}}>
                                 <Typography component="h5" variant="h8" align="left" sx={{ color: 'rgba(0, 0, 0, 0.6)' }}>
@@ -263,16 +298,12 @@ const FormCreProduct = ({ products }) => {
                                 />
                             </Grid>
 
-
-
-
                             <Grid item xs={12} >
                                 <Button
                                     variant="contained"
                                     sx={{ mt: '1%', backgroundColor: '#000', alignItems: 'center' }}
                                     onClick={(event) => {
                                         handleSubmit(event);
-                                        navigate("/productlist");
                                     }}
                                 >
                                     Confirmar
