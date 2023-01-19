@@ -175,12 +175,6 @@ const Header = () => {
 
                             </MenuItem>
                         </Link>
-                        <MenuItem>
-                            <ListItemIcon>
-                                <Settings fontSize="small" />
-                            </ListItemIcon>
-                            Settings
-                        </MenuItem>
                         <MenuItem onClick={onLogout}>
                             <ListItemIcon>
                                 <Logout fontSize="small" />

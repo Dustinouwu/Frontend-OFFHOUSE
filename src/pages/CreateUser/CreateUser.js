@@ -46,7 +46,7 @@ export const CreateUser = ({ register }) => {
         home_phone: '',
         personal_phone: '',
         address: '',
-        password: '',
+        password: 'La contraseña necesita mínimo: una mayúsucla, una minúscula, un carácter especial y un número',
         password_confirmation: '',
     });
 
@@ -74,7 +74,7 @@ export const CreateUser = ({ register }) => {
 
             console.log(response);
         } catch (error) {
-            setError(error.response.data.errors[Object.keys(error.response.data.errors)[1]])
+            setError(error.response.data.errors)
             console.log(error);
         }
     }
@@ -271,9 +271,9 @@ export const CreateUser = ({ register }) => {
                                     fullWidth
                                     onChange={(event) => {
                                         setHome_phone(event.target.value)
-                                        if (event.target.value.length > 10) {
+                                        if (event.target.value.length > 7) {
                                             setErrors({ ...errors, home_phone: true });
-                                            setErrorMessages({ ...errorMessages, home_phone: 'No más de 10 caracteres' })
+                                            setErrorMessages({ ...errorMessages, home_phone: 'No más de 7 caracteres' })
                                         } else if (event.target.value.length < 5) {
                                             setErrors({ ...errors, home_phone: true });
                                             setErrorMessages({ ...errorMessages, home_phone: 'No menos de 5 caracteres' })
@@ -348,9 +348,9 @@ export const CreateUser = ({ register }) => {
                                     value={address}
                                     onChange={(event) => {
                                         setAddress(event.target.value)
-                                        if (event.target.value.length > 15) {
+                                        if (event.target.value.length > 50) {
                                             setErrors({ ...errors, address: true });
-                                            setErrorMessages({ ...errorMessages, address: 'No más de 15 caracteres' })
+                                            setErrorMessages({ ...errorMessages, address: 'No más de 50 caracteres' })
                                         } else if (event.target.value.length < 5) {
                                             setErrors({ ...errors, address: true });
                                             setErrorMessages({ ...errorMessages, address: 'No menos de 5 caracteres' })
@@ -432,9 +432,12 @@ export const CreateUser = ({ register }) => {
                                         } else if (event.target.value.length < 5) {
                                             setErrors({ ...errors, password_confirmation: true });
                                             setErrorMessages({ ...errorMessages, password_confirmation: 'No menos de 5 caracteres' })
+                                        } else if (event.target.value !== password) { // Condición para comparar si las contraseñas son iguales
+                                            setErrors({ ...errors, password_confirmation: true });
+                                            setErrorMessages({ ...errorMessages, password_confirmation: 'Las contraseñas no coinciden' });
                                         } else {
                                             setErrors({ ...errors, password_confirmation: false });
-                                            setErrorMessages({ ...errorMessages, password_confirmation: '' })
+                                            setErrorMessages({ ...errorMessages, password_confirmation: '' });
                                         }
                                     }}
                                     onBlur={(event) => {
@@ -484,11 +487,11 @@ export const CreateUser = ({ register }) => {
                     </form>
 
                 </Container>
-            </ThemeProvider><div className="logo-container">
+            </ThemeProvider>
+            <div className="logo-container">
                 <img src={Imagenes.img4} alt='Logopq'></img>
             </div>
         </div>
-
     )
 }
 

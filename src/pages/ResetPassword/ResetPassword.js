@@ -51,8 +51,6 @@ export const ResetPassword = () => {
                     </input>
                     
 
-
-
                     <div className="submit-button-container">
                         <button>CONFIRMAR </button>
                     </div>
