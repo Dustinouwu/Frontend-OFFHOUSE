@@ -1,12 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import './FormCreProduct.css'
-import Box from '@mui/material/Box';
-import TextField from '@mui/material/TextField';
 import Grid from '@mui/material/Grid';
-import { Button } from '@mui/material';
+import { Button, Stack, Alert, MenuItem, TextField } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { MenuItem } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { TextareaAutosize } from '@mui/material';
 import PhotoLibraryIcon from '@mui/icons-material/PhotoLibrary';
@@ -14,7 +11,6 @@ import CssBaseline from '@mui/material/CssBaseline';
 import Container from '@mui/material/Container';
 import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
-
 //HASTA AQUÍ 
 
 const theme = createTheme();
@@ -37,7 +33,33 @@ const FormUpdataProduct = ({ products }) => {
     const [address, setAddress] = useState('');
     const [image, setImage] = useState(null);
 
+    const [errors, setErrors] = useState({
+        title: false,
+        price: false,
+        detail: false,
+        stock: false,
+        state_appliance: false,
+        brand: false,
+        delivery_method: false,
+        categorie_id: false,
+        phone: false,
+        address: false,
+        image: false,
+    })
 
+    const [errorMessages, setErrorMessages] = useState({
+        title: '',
+        price: '',
+        detail: '',
+        stock: '',
+        state_appliance: '',
+        brand: '',
+        delivery_method: '',
+        categorie_id: '',
+        phone: '',
+        address: '',
+        image: '',
+    })
 
     function handleImageChange(event) {
         const file = event.target.files[0];
@@ -93,6 +115,7 @@ const FormUpdataProduct = ({ products }) => {
             console.log(error);
         }
     }
+    
 
 
     useEffect(() => {
@@ -121,25 +144,43 @@ const FormUpdataProduct = ({ products }) => {
 
                     <form onSubmit={handleSubmit}>
                         {error &&
-                            <label className="label-error-createu">
-                                {error}
-                            </label>
-                        }
 
+                            <Alert severity="error" sx={{ mb: '3%' }}>Llene todos los campos!</Alert>
+                        }
                         <Grid container spacing={3} >
-                            <Grid item xs={6} >
+                            <Grid item xs={12} >
                                 <TextField
                                     id="role_id"
                                     name="title"
                                     label="Nombre del producto"
                                     value={title}
-                                    onChange={(event) => setTitle(event.target.value)}
+                                    onChange={(event) => {
+                                        setTitle(event.target.value);
+                                        if (event.target.value.length > 50) {
+                                            setErrors({ ...errors, title: true });
+                                            setErrorMessages({ ...errorMessages, title: 'No más de 50 caracteres' })
+                                        } else if (event.target.value.length < 5) {
+                                            setErrors({ ...errors, title: true });
+                                            setErrorMessages({ ...errorMessages, title: 'No menos de 5 caracteres' })
+                                        } else {
+                                            setErrors({ ...errors, title: false });
+                                            setErrorMessages({ ...errorMessages, title: '' })
+                                        }
+                                    }}
+                                    onBlur={(event) => {
+                                        if (event.target.value === '') {
+                                            setErrors({ ...errors, title: true });
+                                            setErrorMessages({ ...errorMessages, title: 'Este campo es obligatorio' });
+                                        }
+                                    }}
                                     fullWidth
                                     autoComplete="shipping address-line2"
                                     variant="standard"
                                     InputLabelProps={{
                                         shrink: true,
                                     }}
+                                    error={errors.title}
+                                    helperText={errorMessages.title}
 
                                 />
                             </Grid>
@@ -149,14 +190,33 @@ const FormUpdataProduct = ({ products }) => {
                                     name="brand"
                                     label="Marca"
                                     value={brand}
-                                    onChange={(event) => setBrand(event.target.value)}
+                                    onChange={(event) => {
+                                        setBrand(event.target.value)
+                                        if (event.target.value.length > 20) {
+                                            setErrors({ ...errors, brand: true });
+                                            setErrorMessages({ ...errorMessages, brand: 'No más de 20 caracteres' })
+                                        } else if (event.target.value.length < 3) {
+                                            setErrors({ ...errors, brand: true });
+                                            setErrorMessages({ ...errorMessages, brand: 'No menos de 3 caracteres' })
+                                        } else {
+                                            setErrors({ ...errors, brand: false });
+                                            setErrorMessages({ ...errorMessages, brand: '' })
+                                        }
+                                    }}
+                                    onBlur={(event) => {
+                                        if (event.target.value === '') {
+                                            setErrors({ ...errors, brand: true });
+                                            setErrorMessages({ ...errorMessages, brand: 'Este campo es obligatorio' });
+                                        }
+                                    }}
                                     fullWidth
                                     autoComplete="shipping address-line2"
                                     variant="standard"
                                     InputLabelProps={{
                                         shrink: true,
                                     }}
-
+                                    error={errors.brand}
+                                    helperText={errorMessages.brand}
                                 />
                             </Grid>
                             <Grid item xs={6} >
@@ -166,13 +226,33 @@ const FormUpdataProduct = ({ products }) => {
                                     type="number"
                                     value={price}
                                     label="Precio del producto"
-                                    onChange={(event) => setPrice(event.target.value)}
+                                    onChange={(event) => {
+                                        setPrice(event.target.value)
+                                        if (event.target.value.length > 5) {
+                                            setErrors({ ...errors, price: true });
+                                            setErrorMessages({ ...errorMessages, price: 'No más de 5 caracteres' })
+                                        } else if (event.target.value.length < 1) {
+                                            setErrors({ ...errors, price: true });
+                                            setErrorMessages({ ...errorMessages, price: 'No menos de 1 caracteres' })
+                                        } else {
+                                            setErrors({ ...errors, price: false });
+                                            setErrorMessages({ ...errorMessages, price: '' })
+                                        }
+                                    }}
+                                    onBlur={(event) => {
+                                        if (event.target.value === '') {
+                                            setErrors({ ...errors, price: true });
+                                            setErrorMessages({ ...errorMessages, price: 'Este campo es obligatorio' });
+                                        }
+                                    }}
                                     fullWidth
                                     autoComplete="shipping address-line2"
                                     variant="standard"
                                     InputLabelProps={{
                                         shrink: true,
                                     }}
+                                    error={errors.price}
+                                    helperText={errorMessages.price}
 
                                 />
                             </Grid>
@@ -183,14 +263,33 @@ const FormUpdataProduct = ({ products }) => {
                                     type="number"
                                     value={stock}
                                     label="Stock del producto"
-                                    onChange={(event) => setStock(event.target.value)}
+                                    onChange={(event) => {
+                                        setStock(event.target.value)
+                                        if (event.target.value.length > 5) {
+                                            setErrors({ ...errors, stock: true });
+                                            setErrorMessages({ ...errorMessages, stock: 'No más de 5 caracteres' })
+                                        } else if (event.target.value.length < 1) {
+                                            setErrors({ ...errors, stock: true });
+                                            setErrorMessages({ ...errorMessages, stock: 'No menos de 1 caracteres' })
+                                        } else {
+                                            setErrors({ ...errors, stock: false });
+                                            setErrorMessages({ ...errorMessages, stock: '' })
+                                        }
+                                    }}
+                                    onBlur={(event) => {
+                                        if (event.target.value === '') {
+                                            setErrors({ ...errors, stock: true });
+                                            setErrorMessages({ ...errorMessages, stock: 'Este campo es obligatorio' });
+                                        }
+                                    }}
                                     fullWidth
                                     autoComplete="shipping address-line2"
                                     variant="standard"
                                     InputLabelProps={{
                                         shrink: true,
                                     }}
-
+                                    error={errors.stock}
+                                    helperText={errorMessages.stock}
                                 />
                             </Grid>
 
@@ -235,6 +334,43 @@ const FormUpdataProduct = ({ products }) => {
                                     <MenuItem value="Acuerdo Mutuo">Acuerdo Mutuo</MenuItem>
                                 </TextField>
                             </Grid>
+                            <Grid item xs={6} >
+                                <TextField
+                                    id="username"
+                                    label="Teléfono"
+                                    name='phone'
+                                    value={phone}
+                                    type='number'
+                                    fullWidth
+                                    onChange={(event) => {
+                                        setPhone(event.target.value)
+                                        if (event.target.value.length > 10) {
+                                            setErrors({ ...errors, phone: true });
+                                            setErrorMessages({ ...errorMessages, phone: 'No más de 10 caracteres' })
+                                        } else if (event.target.value.length < 7) {
+                                            setErrors({ ...errors, phone: true });
+                                            setErrorMessages({ ...errorMessages, phone: 'No menos de 7 caracteres' })
+                                        } else {
+                                            setErrors({ ...errors, phone: false });
+                                            setErrorMessages({ ...errorMessages, phone: '' })
+                                        }
+                                    }}
+                                    onBlur={(event) => {
+                                        if (event.target.value === '') {
+                                            setErrors({ ...errors, phone: true });
+                                            setErrorMessages({ ...errorMessages, phone: 'Este campo es obligatorio' });
+                                        }
+                                    }}
+                                    autoComplete="shipping address-line2"
+                                    variant="standard"
+                                    InputLabelProps={{
+                                        shrink: true,
+                                    }}
+                                    error={errors.phone}
+                                    helperText={errorMessages.phone}
+                                >
+                                </TextField>
+                            </Grid>
                             <Grid item xs={12} >
                                 <TextField
                                     id="username"
@@ -258,31 +394,33 @@ const FormUpdataProduct = ({ products }) => {
                                     <MenuItem value="6">Televisión</MenuItem>
                                 </TextField>
                             </Grid>
-                            <Grid item xs={6} >
-                                <TextField
-                                    id="username"
-                                    label="Teléfono"
-                                    name='phone'
-                                    value={phone}
-                                    type='number'
-                                    fullWidth
-                                    onChange={(event) => setPhone(event.target.value)}
-                                    autoComplete="shipping address-line2"
-                                    variant="standard"
-                                    InputLabelProps={{
-                                        shrink: true,
-                                    }}
-                                >
-                                </TextField>
-                            </Grid>
-                            <Grid item xs={6} >
+
+                            <Grid item xs={12} >
                                 <TextField
                                     id="username"
                                     label="Dirección"
                                     name='address'
                                     value={address}
                                     fullWidth
-                                    onChange={(event) => setAddress(event.target.value)}
+                                    onChange={(event) => {
+                                        setAddress(event.target.value)
+                                        if (event.target.value.length > 50) {
+                                            setErrors({ ...errors, address: true });
+                                            setErrorMessages({ ...errorMessages, address: 'No más de 50 caracteres' })
+                                        } else if (event.target.value.length < 5) {
+                                            setErrors({ ...errors, address: true });
+                                            setErrorMessages({ ...errorMessages, address: 'No menos de 5 caracteres' })
+                                        } else {
+                                            setErrors({ ...errors, address: false });
+                                            setErrorMessages({ ...errorMessages, address: '' })
+                                        }
+                                    }}
+                                    onBlur={(event) => {
+                                        if (event.target.value === '') {
+                                            setErrors({ ...errors, address: true });
+                                            setErrorMessages({ ...errorMessages, address: 'Este campo es obligatorio' });
+                                        }
+                                    }}
                                     autoComplete="shipping address-line2"
                                     variant="standard"
                                     InputLabelProps={{

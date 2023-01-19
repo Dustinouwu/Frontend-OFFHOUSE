@@ -1,9 +1,9 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import TextField from '@mui/material/TextField';
 import Grid from '@mui/material/Grid';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { Button } from '@mui/material';
+import { Button, Alert } from '@mui/material';
 import CssBaseline from '@mui/material/CssBaseline';
 import Container from '@mui/material/Container';
 import Paper from '@mui/material/Paper';
@@ -17,45 +17,44 @@ const FormPassword = (uppassword) => {
 
     const navigate = useNavigate();
     const tokenUser = localStorage.getItem("token");
-
     const [error, setError] = useState(false);
-    const [form, setForm] = useState({
-        password: uppassword?.password ?? '',
-        password_confirmation: uppassword?.password_confirmation ?? '',
+    const [password, setPassword] = useState('');
+    const [password_confirmation, setPassword_confirmation] = useState('');
 
+    const [errors, setErrors] = useState({
+        password: '',
+        password_confirmation: '',
     });
 
-    const handleChange = (e) => {
-        setForm({
-            ...form,
-            [e.target.name]: e.target.value
-        })
-    }
+    const [errorMessages, setErrorMessages] = useState({
+        password: '',
+        password_confirmation: '',
+    });
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        if (Object.values(form).includes('')) {
-            console.log('error');
-            setError(true);
-            return;
-        }
+        const formData = new FormData();
+        formData.append('password', password);
+        formData.append('password_confirmation', password_confirmation);
 
         try {
             const response = await axios.post(
                 `https://offhouse.herokuapp.com/api/update-password`,
-                { ...form }, { headers: { 'accept': 'application/json', 'authorization': tokenUser } }
+                formData, { headers: { 'accept': 'application/json', 'authorization': tokenUser } }
             )
 
             navigate('/profile');
-            if (response.status === 422) {
-                setError('')
-            }
+
         } catch (error) {
             setError(error.response.data.message)
-            console.log(error);
+            console.log(error.response.data.message);
         }
     }
 
+    useEffect(() => {
+        setPassword(uppassword.password)
+        setPassword_confirmation(uppassword.password_confirmation)
+    }, [])
 
     return (
         <ThemeProvider theme={theme}>
@@ -68,10 +67,17 @@ const FormPassword = (uppassword) => {
 
                     <form onClick={handleSubmit}>
                         {error &&
-                            <label className="label-error-createu">
-                                {error}
-                            </label>
+
+                            <Alert severity="warning" sx={{ mb: '3%' }}>- Las contraseñas deben coincidir! <br/> - La contraseña debe tener almenos un número
+                            <br/> - La contraseña debe tener almenos una letra mayúscula
+                            <br/> - La contraseña debe tener almenos una letra minúscula
+                            <br/> - La contraseña debe tener almenos un caracter especial
+                            <br/> - La contraseña debe tener almenos 8 caracteres
+                            <br/> - La contraseña no debe tener espacios en blanco
+                            
+                            </Alert>
                         }
+                        
 
                         <Grid container spacing={3} >
                             <Grid item xs={12} >
@@ -80,15 +86,34 @@ const FormPassword = (uppassword) => {
                                     name="password"
                                     label="Contraseña"
                                     type="password"
-                                    value={form.password}
-                                    onChange={handleChange}
+                                    value={password}
+                                    onChange={(event) => {
+                                        setPassword(event.target.value)
+                                        if (event.target.value.length > 50) {
+                                            setErrors({ ...errors, password: true });
+                                            setErrorMessages({ ...errorMessages, password: 'No más de 25 caracteres' })
+                                        } else if (event.target.value.length < 5) {
+                                            setErrors({ ...errors, password: true });
+                                            setErrorMessages({ ...errorMessages, password: 'No menos de 5 caracteres' })
+                                        } else {
+                                            setErrors({ ...errors, password: false });
+                                            setErrorMessages({ ...errorMessages, password: '' })
+                                        }
+                                    }}
+                                    onBlur={(event) => {
+                                        if (event.target.value === '') {
+                                            setErrors({ ...errors, password: true });
+                                            setErrorMessages({ ...errorMessages, password: 'Este campo es obligatorio' });
+                                        }
+                                    }}
                                     fullWidth
                                     autoComplete="shipping address-line2"
                                     variant="standard"
                                     InputLabelProps={{
                                         shrink: true,
                                     }}
-
+                                    error={errors.password}
+                                    helperText={errorMessages.password}
                                 />
                             </Grid>
                             <Grid item xs={12} >
@@ -97,15 +122,34 @@ const FormPassword = (uppassword) => {
                                     name='password_confirmation'
                                     label="Confirmar Contraseña"
                                     type="password"
-                                    value={form.password_confirmation}
-                                    onChange={handleChange}
+                                    value={password_confirmation}
+                                    onChange={(event) => {
+                                        setPassword_confirmation(event.target.value)
+                                        if (event.target.value.length > 50) {
+                                            setErrors({ ...errors, password_confirmation: true });
+                                            setErrorMessages({ ...errorMessages, password_confirmation: 'No más de 25 caracteres' })
+                                        } else if (event.target.value.length < 5) {
+                                            setErrors({ ...errors, password_confirmation: true });
+                                            setErrorMessages({ ...errorMessages, password_confirmation: 'No menos de 5 caracteres' })
+                                        } else {
+                                            setErrors({ ...errors, password_confirmation: false });
+                                            setErrorMessages({ ...errorMessages, password_confirmation: '' })
+                                        }
+                                    }}
+                                    onBlur={(event) => {
+                                        if (event.target.value === '') {
+                                            setErrors({ ...errors, password_confirmation: true });
+                                            setErrorMessages({ ...errorMessages, password_confirmation: 'Este campo es obligatorio' });
+                                        }
+                                    }}
                                     fullWidth
                                     autoComplete="shipping address-line2"
                                     variant="standard"
                                     InputLabelProps={{
                                         shrink: true,
                                     }}
-
+                                    error={errors.password_confirmation}
+                                    helperText={errorMessages.password_confirmation}
                                 />
                             </Grid>
                             <Grid item xs={6} >

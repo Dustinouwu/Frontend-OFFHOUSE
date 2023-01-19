@@ -6,7 +6,7 @@ import Imagenes from '../../../Imagenes';
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../contexts";
 import axios from "axios";
-import { Grid } from "@mui/material";
+import { Alert, Grid } from "@mui/material";
 
 
 
@@ -22,6 +22,8 @@ export const LoginAdmin = () => {
 
     const onLogin = async (e) => {
         e.preventDefault();
+
+
         try {
             const response = await axios.post(
                 'https://offhouse.herokuapp.com/api/login',
@@ -36,12 +38,18 @@ export const LoginAdmin = () => {
             } else {
                 navigate('/home');
             }
-            if (response.status === 422) {
-                setError('')
-            }
             window.location.reload()
         } catch (error) {
-            setError(error.response.data.message)
+            if (error.response && error.response.status === 400) {
+                setError(error.response.data.message)
+            } else if (error.response && error.response.status === 422) {
+                setError('Se requiere un correo y una contraseña');
+            } else if (error.response && error.response.status === 404) {
+                setError('Correo o contraseña incorrectos');
+            }
+            else {
+                setError('Error del servidor');
+            }
             console.log(error.response.data.message, 'error');
 
         }
@@ -57,7 +65,7 @@ export const LoginAdmin = () => {
                     sm={false}
                     md={7}
                     sx={{
-                        backgroundImage: 'url(https://source.unsplash.com/random)',
+                        backgroundImage: 'url(https://images.unsplash.com/photo-1632923565835-6582b54f2105?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=688&q=80)',
                         backgroundRepeat: 'no-repeat',
                         backgroundSize: 'cover',
                         backgroundPosition: 'center',
@@ -70,9 +78,8 @@ export const LoginAdmin = () => {
                 <form className="formlogin" onSubmit={onLogin}>
                     <Title text='Inicio de Sesión OFFHOUSE'></Title>
                     {error &&
-                        <label className="label-error-login">
-                            {error}
-                        </label>
+
+                        <Alert severity="error" sx={{ mb: '3%' }}>{error}</Alert>
                     }
 
                     <Label

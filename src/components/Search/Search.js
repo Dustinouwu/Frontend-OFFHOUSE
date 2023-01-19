@@ -139,7 +139,6 @@ function Search(props) {
                 'https://offhouse.herokuapp.com/api/products',
                 { headers: { 'accept': 'application/json', 'authorization': token } }
             );
-            console.log(response.data.data.products.data);
             setProduct(response.data.data.products.data);
         } catch (error) {
             console.log(error);

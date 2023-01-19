@@ -5,7 +5,7 @@ import TextField from '@mui/material/TextField';
 import Grid from '@mui/material/Grid';
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
-import { Button, MenuItem } from '@mui/material';
+import { Alert, Button, makeStyles, MenuItem, Stack } from '@mui/material';
 import CssBaseline from '@mui/material/CssBaseline';
 import Container from '@mui/material/Container';
 import Paper from '@mui/material/Paper';
@@ -13,8 +13,10 @@ import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { TextareaAutosize } from '@mui/material';
 import PhotoLibraryIcon from '@mui/icons-material/PhotoLibrary';
-const theme = createTheme();
+import Snackbar from '@mui/material/Snackbar'
 
+
+const theme = createTheme();
 
 const FormCreProduct = ({ products }) => {
     const tokenUser = localStorage.getItem('token')
@@ -31,8 +33,35 @@ const FormCreProduct = ({ products }) => {
     const [phone, setPhone] = useState('');
     const [address, setAddress] = useState('');
     const [image, setImage] = useState(null);
-    const [error, setError] = useState(false); // Constante para mostrar errores
+    const [imageUrl, setImageUrl] = useState(null);
+    const [error, setError] = useState(false);
+    const [errors, setErrors] = useState({
+        title: false,
+        price: false,
+        detail: false,
+        stock: false,
+        state_appliance: false,
+        brand: false,
+        delivery_method: false,
+        categorie_id: false,
+        phone: false,
+        address: false,
+        image: false,
+    })
 
+    const [errorMessages, setErrorMessages] = useState({
+        title: '',
+        price: '',
+        detail: '',
+        stock: '',
+        state_appliance: '',
+        brand: '',
+        delivery_method: '',
+        categorie_id: '',
+        phone: '',
+        address: '',
+        image: '',
+    })
 
 
     async function handleSubmit(event) {
@@ -64,14 +93,14 @@ const FormCreProduct = ({ products }) => {
                 }
             )
             navigate('/productlist');
-
         } catch (error) {
             console.error(error);
+            setError(error.response.data.message)
         }
     }
 
 
-    const [imageUrl, setImageUrl] = useState(null);
+
 
     const handleImageChange = (event) => {
         setImage(event.target.files[0]);
@@ -85,36 +114,60 @@ const FormCreProduct = ({ products }) => {
 
 
 
+    useEffect(() => {
+        handleSubmit();
+    }, [handleSubmit])
+
+
+
 
     return (
         <ThemeProvider theme={theme}>
             <CssBaseline />
-            <Container component="main" maxWidth="sm" sx={{ mb: 4 }}>
+            <Container component="main" maxWidth="md" sx={{ mb: 4 }}>
                 <Paper variant="outlined" sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 3 } }}>
                     <Typography component="h1" variant="h4" align="center" sx={{ mb: 10 }}>
                         Crear tu producto
                     </Typography>
-
                     <form onSubmit={handleSubmit}>
                         {error &&
-                            <label className="label-error-createu">
-                                {error}
-                            </label>
-                        }
 
+                            <Alert severity="error" sx={{ mb: '3%' }}>Llene todos los campos!</Alert>
+                        }
                         <Grid container spacing={3} >
-                            <Grid item xs={6} >
+                            <Grid item xs={12} >
                                 <TextField
                                     id="role_id"
                                     name="role_id"
                                     label="Nombre del producto"
-                                    onChange={(event) => setTitle(event.target.value)}
+                                    onChange={(event) => {
+                                        setTitle(event.target.value);
+                                        if (event.target.value.length > 50) {
+                                            setErrors({ ...errors, title: true });
+                                            setErrorMessages({ ...errorMessages, title: 'No más de 50 caracteres' })
+                                        } else if (event.target.value.length < 5) {
+                                            setErrors({ ...errors, title: true });
+                                            setErrorMessages({ ...errorMessages, title: 'No menos de 5 caracteres' })
+                                        } else {
+                                            setErrors({ ...errors, title: false });
+                                            setErrorMessages({ ...errorMessages, title: '' })
+                                        }
+                                    }}
+                                    onBlur={(event) => {
+                                        if (event.target.value === '') {
+                                            setErrors({ ...errors, title: true });
+                                            setErrorMessages({ ...errorMessages, title: 'Este campo es obligatorio' });
+                                        }
+                                    }}
                                     fullWidth
                                     autoComplete="shipping address-line2"
                                     variant="standard"
                                     InputLabelProps={{
                                         shrink: true,
                                     }}
+                                    required
+                                    error={errors.title}
+                                    helperText={errorMessages.title}
 
                                 />
                             </Grid>
@@ -123,14 +176,34 @@ const FormCreProduct = ({ products }) => {
                                     id="username"
                                     name="Usuario"
                                     label="Marca"
-                                    onChange={(event) => setBrand(event.target.value)}
+                                    onChange={(event) => {
+                                        setBrand(event.target.value)
+                                        if (event.target.value.length > 20) {
+                                            setErrors({ ...errors, brand: true });
+                                            setErrorMessages({ ...errorMessages, brand: 'No más de 20 caracteres' })
+                                        } else if (event.target.value.length < 3) {
+                                            setErrors({ ...errors, brand: true });
+                                            setErrorMessages({ ...errorMessages, brand: 'No menos de 3 caracteres' })
+                                        } else {
+                                            setErrors({ ...errors, brand: false });
+                                            setErrorMessages({ ...errorMessages, brand: '' })
+                                        }
+                                    }}
+                                    onBlur={(event) => {
+                                        if (event.target.value === '') {
+                                            setErrors({ ...errors, brand: true });
+                                            setErrorMessages({ ...errorMessages, brand: 'Este campo es obligatorio' });
+                                        }
+                                    }}
                                     fullWidth
                                     autoComplete="shipping address-line2"
                                     variant="standard"
                                     InputLabelProps={{
                                         shrink: true,
                                     }}
-
+                                    required
+                                    error={errors.brand}
+                                    helperText={errorMessages.brand}
                                 />
                             </Grid>
                             <Grid item xs={6} >
@@ -139,13 +212,35 @@ const FormCreProduct = ({ products }) => {
                                     name="Usuario"
                                     type="number"
                                     label="Precio del producto"
-                                    onChange={(event) => setPrice(event.target.value)}
+                                    onChange={(event) => {
+                                        setPrice(event.target.value)
+                                        if (event.target.value.length > 5) {
+                                            setErrors({ ...errors, price: true });
+                                            setErrorMessages({ ...errorMessages, price: 'No más de 5 caracteres' })
+                                        } else if (event.target.value.length < 1) {
+                                            setErrors({ ...errors, price: true });
+                                            setErrorMessages({ ...errorMessages, price: 'No menos de 1 caracteres' })
+                                        } else {
+                                            setErrors({ ...errors, price: false });
+                                            setErrorMessages({ ...errorMessages, price: '' })
+                                        }
+                                    }}
+                                    onBlur={(event) => {
+                                        if (event.target.value === '') {
+                                            setErrors({ ...errors, price: true });
+                                            setErrorMessages({ ...errorMessages, price: 'Este campo es obligatorio' });
+                                        }
+                                    }}
                                     fullWidth
                                     autoComplete="shipping address-line2"
                                     variant="standard"
                                     InputLabelProps={{
                                         shrink: true,
                                     }}
+                                    required
+                                    error={errors.price}
+                                    helperText={errorMessages.price}
+
 
                                 />
                             </Grid>
@@ -155,13 +250,34 @@ const FormCreProduct = ({ products }) => {
                                     name="last_name"
                                     type="number"
                                     label="Stock del producto"
-                                    onChange={(event) => setStock(event.target.value)}
+                                    onChange={(event) => {
+                                        setStock(event.target.value)
+                                        if (event.target.value.length > 5) {
+                                            setErrors({ ...errors, stock: true });
+                                            setErrorMessages({ ...errorMessages, stock: 'No más de 5 caracteres' })
+                                        } else if (event.target.value.length < 1) {
+                                            setErrors({ ...errors, stock: true });
+                                            setErrorMessages({ ...errorMessages, stock: 'No menos de 1 caracteres' })
+                                        } else {
+                                            setErrors({ ...errors, stock: false });
+                                            setErrorMessages({ ...errorMessages, stock: '' })
+                                        }
+                                    }}
+                                    onBlur={(event) => {
+                                        if (event.target.value === '') {
+                                            setErrors({ ...errors, stock: true });
+                                            setErrorMessages({ ...errorMessages, stock: 'Este campo es obligatorio' });
+                                        }
+                                    }}
                                     fullWidth
                                     autoComplete="shipping address-line2"
                                     variant="standard"
                                     InputLabelProps={{
                                         shrink: true,
                                     }}
+                                    required
+                                    error={errors.stock}
+                                    helperText={errorMessages.stock}
 
                                 />
                             </Grid>
@@ -174,12 +290,17 @@ const FormCreProduct = ({ products }) => {
                                     label="Estado del producto"
                                     select
                                     fullWidth
-                                    onChange={(event) => setStateAppliance(event.target.value)}
+
+
+                                    onChange={(event) => {
+                                        setStateAppliance(event.target.value)
+                                    }}
                                     autoComplete="shipping address-line2"
                                     variant="standard"
                                     InputLabelProps={{
                                         shrink: true,
                                     }}
+                                    required
                                 >
                                     <MenuItem value="Nuevo" selected>Nuevo</MenuItem>
                                     <MenuItem value="Usado">Usado</MenuItem>
@@ -193,6 +314,7 @@ const FormCreProduct = ({ products }) => {
                                     name='delivery_method'
                                     label="Método de entrega"
                                     select
+
                                     fullWidth
                                     onChange={(event) => setdeliveryMethod(event.target.value)}
                                     autoComplete="shipping address-line2"
@@ -205,12 +327,51 @@ const FormCreProduct = ({ products }) => {
                                     <MenuItem value="Acuerdo Mutuo">Acuerdo Mutuo</MenuItem>
                                 </TextField>
                             </Grid>
+                            <Grid item xs={6} >
+                                <TextField
+                                    id="username"
+                                    label="Teléfono"
+                                    name='phone'
+                                    type='number'
+                                    fullWidth
+                                    onChange={(event) => {
+                                        setPhone(event.target.value)
+                                        if (event.target.value.length > 10) {
+                                            setErrors({ ...errors, phone: true });
+                                            setErrorMessages({ ...errorMessages, phone: 'No más de 10 caracteres' })
+                                        } else if (event.target.value.length < 7) {
+                                            setErrors({ ...errors, phone: true });
+                                            setErrorMessages({ ...errorMessages, phone: 'No menos de 7 caracteres' })
+                                        } else {
+                                            setErrors({ ...errors, phone: false });
+                                            setErrorMessages({ ...errorMessages, phone: '' })
+                                        }
+                                    }}
+                                    onBlur={(event) => {
+                                        if (event.target.value === '') {
+                                            setErrors({ ...errors, phone: true });
+                                            setErrorMessages({ ...errorMessages, phone: 'Este campo es obligatorio' });
+                                        }
+                                    }}
+
+                                    autoComplete="shipping address-line2"
+                                    variant="standard"
+                                    InputLabelProps={{
+                                        shrink: true,
+                                    }}
+                                    required
+                                    error={errors.phone}
+                                    helperText={errorMessages.phone}
+                                >
+                                </TextField>
+                            </Grid>
                             <Grid item xs={12} >
                                 <TextField
                                     id="username"
                                     label="Categoria"
                                     name='categorie_id'
                                     select
+
                                     fullWidth
                                     onChange={(event) => setcategorieId(event.target.value)}
                                     autoComplete="shipping address-line2"
@@ -218,6 +379,9 @@ const FormCreProduct = ({ products }) => {
                                     InputLabelProps={{
                                         shrink: true,
                                     }}
+                                    required
+                                    error={errors.categorie_id}
+                                    helperText={errorMessages.categorie_id}
                                 >
                                     <MenuItem value="1" selected>Refrigeradores</MenuItem>
                                     <MenuItem value="2">Cocina</MenuItem>
@@ -227,44 +391,50 @@ const FormCreProduct = ({ products }) => {
                                     <MenuItem value="6">Televisión</MenuItem>
                                 </TextField>
                             </Grid>
-                            <Grid item xs={6} >
-                                <TextField
-                                    id="username"
-                                    label="Teléfono"
-                                    name='phone'
-                                    type='number'
-                                    fullWidth
-                                    onChange={(event) => setPhone(event.target.value)}
-                                    autoComplete="shipping address-line2"
-                                    variant="standard"
-                                    InputLabelProps={{
-                                        shrink: true,
-                                    }}
-                                >
-                                </TextField>
-                            </Grid>
-                            <Grid item xs={6} >
+
+                            <Grid item xs={12} >
                                 <TextField
                                     id="username"
                                     label="Dirección"
                                     name='address'
                                     fullWidth
-                                    onChange={(event) => setAddress(event.target.value)}
+                                    onChange={(event) => {
+                                        setAddress(event.target.value)
+                                        if (event.target.value.length > 50) {
+                                            setErrors({ ...errors, address: true });
+                                            setErrorMessages({ ...errorMessages, address: 'No más de 50 caracteres' })
+                                        } else if (event.target.value.length < 5) {
+                                            setErrors({ ...errors, address: true });
+                                            setErrorMessages({ ...errorMessages, address: 'No menos de 5 caracteres' })
+                                        } else {
+                                            setErrors({ ...errors, address: false });
+                                            setErrorMessages({ ...errorMessages, address: '' })
+                                        }
+                                    }}
+                                    onBlur={(event) => {
+                                        if (event.target.value === '') {
+                                            setErrors({ ...errors, address: true });
+                                            setErrorMessages({ ...errorMessages, address: 'Este campo es obligatorio' });
+                                        }
+                                    }}
                                     autoComplete="shipping address-line2"
                                     variant="standard"
                                     InputLabelProps={{
                                         shrink: true,
                                     }}
+                                    required
+                                    error={errors.address}
+                                    helperText={errorMessages.address}
                                 >
                                 </TextField>
                             </Grid>
 
-                            <Grid item xs={12} sx={{display: 'flex', flexDirection: 'column'}}>
+                            <Grid item xs={12} sx={{ display: 'flex', flexDirection: 'column' }}>
                                 <Typography component="h5" variant="h8" align="left" sx={{ color: 'rgba(0, 0, 0, 0.6)' }}>
                                     Subir una imagen
                                 </Typography>
                                 {imageUrl && <img src={imageUrl} alt="Preview" style={{ width: '40%' }} />}
-                                <Button variant="contained" component="label" sx={{width: '40%', marginTop: '2%' }}>
+                                <Button variant="contained" component="label" sx={{ width: '40%', marginTop: '2%' }}>
                                     <PhotoLibraryIcon />
                                     Subir imagen
                                     <input
@@ -275,7 +445,9 @@ const FormCreProduct = ({ products }) => {
                                         onChange={(event) => {
                                             setImage(event.target.files[0]);
                                             handleImageChange(event);
-                                        }} />
+                                        }}
+
+                                    />
 
                                 </Button>
 
@@ -292,9 +464,9 @@ const FormCreProduct = ({ products }) => {
                                     aria-label="maximum height"
                                     multiline
 
-                                    placeholder="Coloca el detalle del producto"
                                     onChange={(event) => setDetail(event.target.value)}
                                     style={{ width: '100%', height: '80px' }}
+
                                 />
                             </Grid>
 
@@ -316,387 +488,6 @@ const FormCreProduct = ({ products }) => {
             </Container>
         </ThemeProvider>
     )
-
-
-
-
-
-
 }
-
 export default FormCreProduct
 
-{/* <div style={{ marginLeft: '3%', marginRight: '3%' }} >
-            <div className='formproduct' >
-                <h1 id='labelhelp'>
-                    {products?.id ? 'Editar Producto' : 'Crear un Producto'}
-                </h1>
-                <form className='formproduct' onSubmit={handleSubmit} >
-                    {error &&
-                        <label className="label-error-createu">
-                            {error}
-                        </label>
-                    }
-                    <Box sx={{
-                        '& .MuiTextField-root': { ml: 4, width: '40ch' },
-                    }} >
-                        <Grid container rowSpacing={5} columnSpacing={{ xs: 1, sm: 3, md: 1 }}>
-                            <Grid item xs={6}>
-                                <TextField
-                                    id="outlined-number"
-                                    name='title'
-                                    
-                                    label="Nombre Producto"
-                                    type="text"
-                                    InputLabelProps={{
-                                        shrink: true,
-                                    }}
-                                    onChange={(event) => setTitle(event.target.value)}
-
-                                />
-                            </Grid>
-                            <Grid item xs={6}>
-                                <TextField
-                                    id="outlined-number"
-                                    name='brand'
-                                    
-                                    label="Marca"
-                                    type="text"
-                                    InputLabelProps={{
-                                        shrink: true,
-                                    }}
-                                    onChange={(event) => setBrand(event.target.value)}
-                                />
-                            </Grid>
-                            <Grid item xs={6}>
-                                <TextField
-                                    id="outlined-number"
-                                    name='stock'
-                                    
-                                    label="Stock"
-                                    type="number"
-                                    InputLabelProps={{
-                                        shrink: true,
-                                    }}
-                                    onChange={(event) => setStock(event.target.value)}
-                                />
-                            </Grid>
-                            <Grid item xs={6}>
-                                <TextField
-                                    id="outlined-number"
-                                    label="Estado del producto"
-                                    name='state_appliance'
-                                    
-                                    select
-                                    InputLabelProps={{
-                                        shrink: true,
-                                    }}
-                                    onChange={(event) => setStateAppliance(event.target.value)}
-                                >
-                                    <MenuItem value="Nuevo" selected>Nuevo</MenuItem>
-                                    <MenuItem value="Usado">Usado</MenuItem>
-                                    <MenuItem value="Reacondicionado">Reacondicionado</MenuItem>
-                                    <MenuItem value="Reparado">Reparado</MenuItem>
-                                </TextField>
-                            </Grid>
-                            <Grid item xs={6}>
-                                <TextField
-                                    id="outlined-number"
-                                    label="Precio"
-                                    name='price'
-                                    
-                                    type="number"
-                                    InputLabelProps={{
-                                        shrink: true,
-                                    }}
-                                    onChange={(event) => setPrice(event.target.value)}
-
-                                />
-                            </Grid>
-                            <Grid item xs={6}>
-                                <TextField
-                                    id="outlined-number"
-                                    label="Método de entrega"
-                                    name='delivery_method'
-                                 
-                                    select
-                                    InputLabelProps={{
-                                        shrink: true,
-                                    }}
-                                    onChange={(event) => setdeliveryMethod(event.target.value)}
-                                >
-                                    <MenuItem value="Envio gratis" selected>Envio gratis</MenuItem>
-                                    <MenuItem value="Acuerdo Mutuo">Acuerdo Mutuo</MenuItem>
-                                </TextField>
-
-                            </Grid>
-                            <Grid item xs={6}>
-                                <TextField
-                                    id="outlined-number"
-                                    label="Categoria"
-                                    name='categorie_id'
-                                    
-                                    select
-                                    InputLabelProps={{
-                                        shrink: true,
-                                    }}
-                                    onChange={(event) => setcategorieId(event.target.value)}
-
-                                >
-                                    <MenuItem value="1" selected>Refrigeradores</MenuItem>
-                                    <MenuItem value="2">Cocina</MenuItem>
-                                    <MenuItem value="3">Microondas</MenuItem>
-                                    <MenuItem value="4">Iron</MenuItem>
-                                    <MenuItem value="5">Lavadora</MenuItem>
-                                    <MenuItem value="6">Televisión</MenuItem>
-                                </TextField>
-                            </Grid>
-                            <Grid item xs={6}>
-                                <Button variant="contained" component="label">
-                                    Upload
-                                    <input hidden type="file" accept="image/*" id="image" name='image' onChange={(event) => setImage(event.target.files[0])} />
-                                </Button>
-                            </Grid>
-                            <Grid item xs={6}>
-                                <TextField
-                                    id="outlined-multiline-static"
-                                    label="Descripción"
-                                    name='detail'
-                                   
-                                    multiline
-                                    onChange={(event) => setDetail(event.target.value)}
-                                    rows={6}
-                                    InputLabelProps={{
-                                        shrink: true,
-                                    }}
-                                />
-                            </Grid>
-                            <Grid item xs={6}>
-                            </Grid>
-                        </Grid>
-                    </Box>
-                    <div className="submit-button-container" style={{ paddingBottom: '5rem' }}>
-
-                        <button >
-                            CONFIRM
-                        </button>
-
-                    </div>
-                </form>
-
-            </div>
-
-
-        </div> */}
-/* const navigate = useNavigate(); // Función para navegar
-    const tokenUser = localStorage.getItem('token') // Función para traer el token del usuario
-    const [error, setError] = useState(false); // Constante para mostrar errores
-
-    //Formulario
-    const [form, setForm] = useState({
-        title: products?.title ?? '',
-        price: products?.price ?? '',
-        detail: products?.detail ?? '',
-        stock: products?.stock ?? '',
-        state_appliance: products?.state_appliance ?? '',
-        brand: products?.brand ?? '',
-        delivery_method: products?.delivery_method ?? '',
-        categorie_id: products?.categorie_id ?? '',
-        image: products?.image ?? '',
-    });
-    // Función para manejar el formulario
-    const handleForm = (e) => {
-        setForm({
-            ...form,
-            [e.target.name]: e.target.value
-        });
-    }
-    const config = {
-        headers: { Authorization: `${tokenUser}` }
-    };
-
-    
-    // Función para manejar el submit
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        try {
-            console.log(products)
-            if (products?.id) {
-                await axios.post(
-                    `https://offhouse.herokuapp.com/api/products/${products.id}`,
-                    { ...form }, { headers: { 'Content-Type': 'multipart/form-data', 'authorization': tokenUser } }
-                );
-            } else {
-                await axios.post(
-                    `https://offhouse.herokuapp.com/api/products`,
-                    { ...form }, { headers: { 'Content-Type': 'multipart/form-data', 'authorization': tokenUser } }
-                );
-            }
-            navigate('/productlist')
-        } catch (error) {
-            setError(error.response.data.message)
-            console.log(error);
-        }
-    }
-
-    return (
-        <div style={{ marginLeft: '3%', marginRight: '3%' }} >
-            <div className='formproduct' >
-                <h1 id='labelhelp'>
-                    {products?.id ? 'Editar Producto' : 'Crear un Producto'}
-                </h1>
-                <form className='formproduct' onSubmit={handleSubmit} >
-                    {error &&
-                        <label className="label-error-createu">
-                            {error}
-                        </label>
-                    }
-                    <Box sx={{
-                        '& .MuiTextField-root': { ml: 4, width: '40ch' },
-                    }} >
-                        <Grid container rowSpacing={5} columnSpacing={{ xs: 1, sm: 3, md: 1 }}>
-                            <Grid item xs={6}>
-                                <TextField
-                                    id="outlined-number"
-                                    name='title'
-                                    value={form.title}
-                                    label="Nombre Producto"
-                                    type="text"
-                                    InputLabelProps={{
-                                        shrink: true,
-                                    }}
-                                    onChange={handleForm}
-                                />
-                            </Grid>
-                            <Grid item xs={6}>
-                                <TextField
-                                    id="outlined-number"
-                                    name='brand'
-                                    value={form.brand}
-                                    label="Marca"
-                                    type="text"
-                                    InputLabelProps={{
-                                        shrink: true,
-                                    }}
-                                    onChange={handleForm}
-                                />
-                            </Grid>
-                            <Grid item xs={6}>
-                                <TextField
-                                    id="outlined-number"
-                                    name='stock'
-                                    value={form.stock}
-                                    label="Stock"
-                                    type="number"
-                                    InputLabelProps={{
-                                        shrink: true,
-                                    }}
-                                    onChange={handleForm}
-                                />
-                            </Grid>
-                            <Grid item xs={6}>
-                                <TextField
-                                    id="outlined-number"
-                                    label="Estado del producto"
-                                    name='state_appliance'
-                                    value={form.state_appliance}
-                                    select
-                                    InputLabelProps={{
-                                        shrink: true,
-                                    }}
-                                    onChange={handleForm}
-                                >
-                                    <MenuItem value="Nuevo" selected>Nuevo</MenuItem>
-                                    <MenuItem value="Usado">Usado</MenuItem>
-                                    <MenuItem value="Reacondicionado">Reacondicionado</MenuItem>
-                                    <MenuItem value="Reparado">Reparado</MenuItem>
-                                </TextField>
-                            </Grid>
-                            <Grid item xs={6}>
-                                <TextField
-                                    id="outlined-number"
-                                    label="Precio"
-                                    name='price'
-                                    value={form.price}
-                                    type="number"
-                                    InputLabelProps={{
-                                        shrink: true,
-                                    }}
-                                    onChange={handleForm}
-                                />
-                            </Grid>
-                            <Grid item xs={6}>
-                                <TextField
-                                    id="outlined-number"
-                                    label="Método de entrega"
-                                    name='delivery_method'
-                                    value={form.delivery_method}
-                                    select
-                                    InputLabelProps={{
-                                        shrink: true,
-                                    }}
-                                    onChange={handleForm}
-                                >
-                                    <MenuItem value="Envio gratis" selected>Envio gratis</MenuItem>
-                                    <MenuItem value="Acuerdo Mutuo">Acuerdo Mutuo</MenuItem>
-                                </TextField>
-
-                            </Grid>
-                            <Grid item xs={6}>
-                                <TextField
-                                    id="outlined-number"
-                                    label="Categoria"
-                                    name='categorie_id'
-                                    value={form.categorie_id}
-                                    select
-                                    InputLabelProps={{
-                                        shrink: true,
-                                    }}
-                                    onChange={handleForm}
-                                >
-                                    <MenuItem value="1" selected>Refrigeradores</MenuItem>
-                                    <MenuItem value="2">Cocina</MenuItem>
-                                    <MenuItem value="3">Microondas</MenuItem>
-                                    <MenuItem value="4">Iron</MenuItem>
-                                    <MenuItem value="5">Lavadora</MenuItem>
-                                    <MenuItem value="6">Televisión</MenuItem>
-                                </TextField>
-                            </Grid>
-                            <Grid item xs={6}>
-                                <Button variant="contained" component="label">
-                                    Upload
-                                    <input hidden type="file" accept="image/*" value={form.image} name='image' onChange={handleForm}/>
-                                </Button>
-                            </Grid>
-                            <Grid item xs={6}>
-                                <TextField
-                                    id="outlined-multiline-static"
-                                    label="Descripción"
-                                    name='detail'
-                                    value={form.detail}
-                                    multiline
-                                    onChange={handleForm}
-                                    rows={6}
-                                    InputLabelProps={{
-                                        shrink: true,
-                                    }}
-                                />
-                            </Grid>
-                            <Grid item xs={6}>
-                            </Grid>
-                        </Grid>
-                    </Box>
-                    <div className="submit-button-container" style={{ paddingBottom: '5rem' }}>
-
-                        <button >
-                            CONFIRM
-                        </button>
-
-                    </div>
-                </form>
-
-            </div>
-
-
-        </div>
-    )*/

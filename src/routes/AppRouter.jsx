@@ -21,6 +21,7 @@ import FormsProducts from '../admin/components/FormsProducts/FormsProducts';
 import CrudSubscription from '../admin/components/FormsSubscription/CrudSubscription';
 import FormPassword from '../components/Forms/FormPassword/FormPassword';
 import FormAvatar from '../components/Forms/FormsAvatar/FormAvatar';
+import UpdateAvatar from '../components/Forms/FormsAvatar/UpdateAvatar';
 export const AppRouter = () => {
 
     const user = JSON.parse(localStorage.getItem('user')) || {};
@@ -66,7 +67,7 @@ export const AppRouter = () => {
                                         <Route path='/productlist' element={<ProductList />}></Route>
                                         <Route path='/EditProfile' element={<UpdateProfile />}></Route>
                                         <Route path='/EditPassword' element={<FormPassword />}></Route>
-                                        <Route path='/EditAvatar' element={<FormAvatar />}></Route>
+                                        <Route path='/EditAvatar' element={<UpdateAvatar />}></Route>
                                     </>
                                 )}
 

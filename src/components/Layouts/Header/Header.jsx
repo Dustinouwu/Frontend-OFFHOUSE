@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import './Header.css';
 import Imagenes from "../../../Imagenes";
 import Search from "../../Search/Search";
@@ -26,6 +26,7 @@ const Header = () => {
     const navigate = useNavigate(); // Función para navegar
     const { user, logout } = useContext(AuthContext); // Función para traer la función para logout
     const tokenUser = localStorage.getItem('token') // Función para traer el token del usuario
+    const [avatar, setAvatar] = useState({});
     const [anchorEl, setAnchorEl] = React.useState(null);
     const open = Boolean(anchorEl);
     const handleClick = (event) => {
@@ -54,6 +55,23 @@ const Header = () => {
         }
     }
 
+    
+
+    useEffect(() => {
+        const getUser = async () => {
+            try {
+                const response = await axios.get(
+                    `https://offhouse.herokuapp.com/api/profile`,
+                    { headers: { 'accept': 'application/json', 'authorization': tokenUser } }
+                )
+                setAvatar(response.data.data.avatar);
+            } catch (error) {
+                console.log(error);
+            }
+        }
+        getUser()
+    }, [])
+
     return (
         <div >
             {/* <NewHeader /> */}
@@ -77,7 +95,7 @@ const Header = () => {
                             <ChatBubbleOutlineIcon size="25px" style={{ color: 'black' }} />
                         </Badge>
                     </Link>
-                    
+
                     <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
 
                         <Tooltip title="Account settings">
@@ -91,10 +109,10 @@ const Header = () => {
                             >
                                 <Avatar id="avatar-header"
                                     alt={user.username}
-                                    src={user.avatar}
+                                    src={avatar}
                                     sx={{ width: 45, height: 45 }}
                                     overlap="circular">
-                                        
+
 
                                 </Avatar>
                             </IconButton>
@@ -138,22 +156,22 @@ const Header = () => {
                     >
                         <Link to="/profile" style={{ textDecoration: 'none', color: 'rgb(55, 65, 81)' }} >
                             <MenuItem>
-                                <Avatar 
-                               
-                                src="/static/images/avatar/1.jpg"
-                                
-                                overlap="circular"/>
+                                <Avatar
+
+                                    src="/static/images/avatar/1.jpg"
+
+                                    overlap="circular" />
                                 Mi perfil
                             </MenuItem>
                         </Link>
                         <Divider />
                         <Link to="/productlist" style={{ textDecoration: 'none', color: 'rgb(55, 65, 81)' }}>
                             <MenuItem>
-                                
-                                    <Inventory2Icon>
-                                        <Settings fontSize="small" />
-                                    </Inventory2Icon>
-                                    Mis productos
+
+                                <Inventory2Icon>
+                                    <Settings fontSize="small" />
+                                </Inventory2Icon>
+                                Mis productos
 
                             </MenuItem>
                         </Link>

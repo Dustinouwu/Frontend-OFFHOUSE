@@ -1,39 +1,34 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react"
 import { useParams } from "react-router-dom";
-import FormUpdataPro from "../../components/Forms/FormCreProduct/FormUpdataPro";
-export const UpdateProduct = () => {
-    const { id } = useParams();
-    const [product, setProduct] = useState({});
+import FormAvatar from "./FormAvatar";
+const UpdateAvatar = () => {
+    const [user, setuser] = useState({});
     const tokenUser = localStorage.getItem("token");
-    console.log(id);
+    const { id } = useParams();
     useEffect(() => {
-        const getProduct = async () => {
+        const getUser = async () => {
             try {
                 const response = await axios.get(
-                    `https://offhouse.herokuapp.com/api/products/${id}/view`,
+                    `https://offhouse.herokuapp.com/api/profile`,
                     { headers: { 'accept': 'application/json', 'authorization': tokenUser } }
                 )
-                const user = { ...response.data.data.product, id }
-                
-                setProduct(user);
-                console.log(setProduct);
-                console.log(user);
+                setuser(response.data.data.avatar);
             } catch (error) {
                 console.log(error);
             }
         }
-        getProduct()
+        getUser()
     }, [])
 
     return (
         <div>
             <div className="create-product">
                 {
-                    Object.keys(product).length > 0 ?
+                    Object.keys(user).length > 0 ?
                         (
                             <>
-                                <FormUpdataPro products={product} />
+                                <FormAvatar avatar={user} />
                             </>
                         )
                         :
@@ -45,5 +40,7 @@ export const UpdateProduct = () => {
         </div>
     )
 
+
 }
 
+export default UpdateAvatar;

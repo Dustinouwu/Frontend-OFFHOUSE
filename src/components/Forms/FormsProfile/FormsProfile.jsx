@@ -1,10 +1,10 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './FormsProfile.css'
 import TextField from '@mui/material/TextField';
 import Grid from '@mui/material/Grid';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { Button } from '@mui/material';
+import { Button, Alert } from '@mui/material';
 import CssBaseline from '@mui/material/CssBaseline';
 import Container from '@mui/material/Container';
 import Paper from '@mui/material/Paper';
@@ -16,47 +16,69 @@ const FormsProfile = ({ profile }) => {
 
   const navigate = useNavigate();
   const tokenUser = localStorage.getItem("token");
-
   const [error, setError] = useState(false);
-  const [form, setForm] = useState({
-    username: profile?.username ?? '',
-    first_name: profile?.first_name ?? '',
-    last_name: profile?.last_name ?? '',
-    email: profile?.email ?? '',
-    home_phone: profile?.home_phone ?? '',
-    personal_phone: profile?.personal_phone ?? '',
-    address: profile?.address ?? '',
-  });
+  const [username, setUsername] = useState('');
+  const [first_name, setFirst_name] = useState('');
+  const [last_name, setLast_name] = useState('');
+  const [email, setEmail] = useState('');
+  const [home_phone, setHome_phone] = useState('');
+  const [personal_phone, setPersonal_phone] = useState('');
+  const [address, setAddress] = useState('');
 
-  const handleForm = (e) => {
-    setForm({
-      ...form,
-      [e.target.name]: e.target.value
-    });
-  }
+  const [errors, setErrors] = useState({
+    username: '',
+    first_name: '',
+    last_name: '',
+    email: '',
+    home_phone: '',
+    personal_phone: '',
+    address: '',
+  })
 
+  const [errorMessages, setErrorMessages] = useState({
+    username: '',
+    first_name: '',
+    last_name: '',
+    email: '',
+    home_phone: '',
+    personal_phone: '',
+    address: '',
+  })
 
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (Object.values(form).includes('')) {
-      console.log('error');
-      setError(true);
-      return;
-    }
+
+    const formData = new FormData();
+    formData.append('username', username);
+    formData.append('first_name', first_name);
+    formData.append('last_name', last_name);
+    formData.append('email', email);
+    formData.append('home_phone', home_phone);
+    formData.append('personal_phone', personal_phone);
+    formData.append('address', address);
 
     try {
       await axios.post(
         `https://offhouse.herokuapp.com/api/profile`,
-        { ...form }, { headers: { 'accept': 'application/json', 'authorization': tokenUser } }
+        formData, { headers: { 'accept': 'application/json', 'authorization': tokenUser } }
       );
       navigate('/profile');
     } catch (error) {
       console.log(error);
+      setError(error.response.data.message)
     }
   }
 
-
+  useEffect(() => {
+    setUsername(profile.username)
+    setFirst_name(profile.first_name)
+    setLast_name(profile.last_name)
+    setEmail(profile.email)
+    setHome_phone(profile.home_phone)
+    setPersonal_phone(profile.personal_phone)
+    setAddress(profile.address)
+  }, [])
 
   return (
     <ThemeProvider theme={theme}>
@@ -69,9 +91,8 @@ const FormsProfile = ({ profile }) => {
 
           <form onSubmit={handleSubmit}>
             {error &&
-              <label className="label-error-createu">
-                {error}
-              </label>
+
+              <Alert severity="error" sx={{ mb: '3%' }}>Llene todos los campos!</Alert>
             }
 
             <Grid container spacing={3} >
@@ -80,14 +101,35 @@ const FormsProfile = ({ profile }) => {
                   id="role_id"
                   name="username"
                   label="Nombre de usuario"
-                  value={form.username}
-                  onChange={handleForm}
+                  value={username}
+                  onChange={(event) => {
+                    setUsername(event.target.value)
+                    if (event.target.value.length > 50) {
+                      setErrors({ ...errors, username: true });
+                      setErrorMessages({ ...errorMessages, username: 'No más de 25 caracteres' })
+                    } else if (event.target.value.length < 5) {
+                      setErrors({ ...errors, username: true });
+                      setErrorMessages({ ...errorMessages, username: 'No menos de 5 caracteres' })
+                    } else {
+                      setErrors({ ...errors, username: false });
+                      setErrorMessages({ ...errorMessages, username: '' })
+                    }
+                  }}
+                  onBlur={(event) => {
+                    if (event.target.value === '') {
+                      setErrors({ ...errors, username: true });
+                      setErrorMessages({ ...errorMessages, username: 'Este campo es obligatorio' });
+                    }
+                  }}
+
                   fullWidth
                   autoComplete="shipping address-line2"
                   variant="standard"
                   InputLabelProps={{
                     shrink: true,
                   }}
+                  error={errors.username}
+                  helperText={errorMessages.username}
 
                 />
               </Grid>
@@ -96,15 +138,34 @@ const FormsProfile = ({ profile }) => {
                   id="username"
                   name='first_name'
                   label="Nombre"
-                  onChange={handleForm}
-                  value={form.first_name}
+                  value={first_name}
+                  onChange={(event) => {
+                    setFirst_name(event.target.value)
+                    if (event.target.value.length > 25) {
+                      setErrors({ ...errors, first_name: true });
+                      setErrorMessages({ ...errorMessages, first_name: 'No más de 25 caracteres' })
+                    } else if (event.target.value.length < 5) {
+                      setErrors({ ...errors, first_name: true });
+                      setErrorMessages({ ...errorMessages, first_name: 'No menos de 5 caracteres' })
+                    } else {
+                      setErrors({ ...errors, first_name: false });
+                      setErrorMessages({ ...errorMessages, first_name: '' })
+                    }
+                  }}
+                  onBlur={(event) => {
+                    if (event.target.value === '') {
+                      setErrors({ ...errors, first_name: true });
+                      setErrorMessages({ ...errorMessages, first_name: 'Este campo es obligatorio' });
+                    }
+                  }}
                   fullWidth
                   autoComplete="shipping address-line2"
                   variant="standard"
                   InputLabelProps={{
                     shrink: true,
                   }}
-
+                  error={errors.first_name}
+                  helperText={errorMessages.first_name}
                 />
               </Grid>
               <Grid item xs={6} >
@@ -112,14 +173,34 @@ const FormsProfile = ({ profile }) => {
                   id="username"
                   name="last_name"
                   label="Apellido"
-                  value={form.last_name}
-                  onChange={handleForm}
+                  value={last_name}
+                  onChange={(event) => {
+                    setLast_name(event.target.value)
+                    if (event.target.value.length > 25) {
+                      setErrors({ ...errors, last_name: true });
+                      setErrorMessages({ ...errorMessages, last_name: 'No más de 25 caracteres' })
+                    } else if (event.target.value.length < 5) {
+                      setErrors({ ...errors, last_name: true });
+                      setErrorMessages({ ...errorMessages, last_name: 'No menos de 5 caracteres' })
+                    } else {
+                      setErrors({ ...errors, last_name: false });
+                      setErrorMessages({ ...errorMessages, last_name: '' })
+                    }
+                  }}
+                  onBlur={(event) => {
+                    if (event.target.value === '') {
+                      setErrors({ ...errors, last_name: true });
+                      setErrorMessages({ ...errorMessages, last_name: 'Este campo es obligatorio' });
+                    }
+                  }}
                   fullWidth
                   autoComplete="shipping address-line2"
                   variant="standard"
                   InputLabelProps={{
                     shrink: true,
                   }}
+                  error={errors.last_name}
+                  helperText={errorMessages.last_name}
 
                 />
               </Grid>
@@ -129,14 +210,34 @@ const FormsProfile = ({ profile }) => {
                   name="email"
                   type="email"
                   label="Email"
-                  value={form.email}
-                  onChange={handleForm}
+                  value={email}
+                  onChange={(event) => {
+                    setEmail(event.target.value)
+                    if (event.target.value.length > 30) {
+                      setErrors({ ...errors, email: true });
+                      setErrorMessages({ ...errorMessages, email: 'No más de 30 caracteres' })
+                    } else if (event.target.value.length < 5) {
+                      setErrors({ ...errors, email: true });
+                      setErrorMessages({ ...errorMessages, email: 'No menos de 5 caracteres' })
+                    } else {
+                      setErrors({ ...errors, email: false });
+                      setErrorMessages({ ...errorMessages, email: '' })
+                    }
+                  }}
+                  onBlur={(event) => {
+                    if (event.target.value === '') {
+                      setErrors({ ...errors, email: true });
+                      setErrorMessages({ ...errorMessages, email: 'Este campo es obligatorio' });
+                    }
+                  }}
                   fullWidth
                   autoComplete="shipping address-line2"
                   variant="standard"
                   InputLabelProps={{
                     shrink: true,
                   }}
+                  error={errors.email}
+                  helperText={errorMessages.email}
 
                 />
               </Grid>
@@ -147,13 +248,34 @@ const FormsProfile = ({ profile }) => {
                   name='home_phone'
                   type='number'
                   fullWidth
-                  onChange={handleForm}
-                  value={form.home_phone}
+                  onChange={(event) => {
+                    setHome_phone(event.target.value)
+                    if (event.target.value.length > 10) {
+                      setErrors({ ...errors, home_phone: true });
+                      setErrorMessages({ ...errorMessages, home_phone: 'No más de 10 caracteres' })
+                    } else if (event.target.value.length < 5) {
+                      setErrors({ ...errors, home_phone: true });
+                      setErrorMessages({ ...errorMessages, home_phone: 'No menos de 5 caracteres' })
+                    } else {
+                      setErrors({ ...errors, home_phone: false });
+                      setErrorMessages({ ...errorMessages, home_phone: '' })
+                    }
+                  }}
+                  onBlur={(event) => {
+                    if (event.target.value === '') {
+                      setErrors({ ...errors, home_phone: true });
+                      setErrorMessages({ ...errorMessages, home_phone: 'Este campo es obligatorio' });
+                    }
+                  }}
+                  value={home_phone}
                   autoComplete="shipping address-line2"
+                  required
                   variant="standard"
                   InputLabelProps={{
                     shrink: true,
                   }}
+                  error={errors.home_phone}
+                  helperText={errorMessages.home_phone}
                 >
                 </TextField>
               </Grid>
@@ -164,13 +286,33 @@ const FormsProfile = ({ profile }) => {
                   name='personal_phone'
                   type='number'
                   fullWidth
-                  onChange={handleForm}
-                  value={form.personal_phone}
+                  onChange={(event) => {
+                    setPersonal_phone(event.target.value)
+                    if (event.target.value.length > 15) {
+                      setErrors({ ...errors, personal_phone: true });
+                      setErrorMessages({ ...errorMessages, personal_phone: 'No más de 15 caracteres' })
+                    } else if (event.target.value.length < 5) {
+                      setErrors({ ...errors, personal_phone: true });
+                      setErrorMessages({ ...errorMessages, personal_phone: 'No menos de 5 caracteres' })
+                    } else {
+                      setErrors({ ...errors, personal_phone: false });
+                      setErrorMessages({ ...errorMessages, personal_phone: '' })
+                    }
+                  }}
+                  onBlur={(event) => {
+                    if (event.target.value === '') {
+                      setErrors({ ...errors, personal_phone: true });
+                      setErrorMessages({ ...errorMessages, personal_phone: 'Este campo es obligatorio' });
+                    }
+                  }}
+                  value={personal_phone}
                   autoComplete="shipping address-line2"
                   variant="standard"
                   InputLabelProps={{
                     shrink: true,
                   }}
+                  error={errors.personal_phone}
+                  helperText={errorMessages.personal_phone}
                 >
                 </TextField>
               </Grid>
@@ -180,13 +322,34 @@ const FormsProfile = ({ profile }) => {
                   label="Dirección"
                   name='address'
                   fullWidth
-                  value={form.address}
-                  onChange={handleForm}
+                  value={address}
+                  onChange={(event) => {
+                    setAddress(event.target.value)
+                    if (event.target.value.length > 15) {
+                      setErrors({ ...errors, address: true });
+                      setErrorMessages({ ...errorMessages, address: 'No más de 15 caracteres' })
+                    } else if (event.target.value.length < 5) {
+                      setErrors({ ...errors, address: true });
+                      setErrorMessages({ ...errorMessages, address: 'No menos de 5 caracteres' })
+                    } else {
+                      setErrors({ ...errors, address: false });
+                      setErrorMessages({ ...errorMessages, address: '' })
+                    }
+                  }}
+                  onBlur={(event) => {
+                    if (event.target.value === '') {
+                      setErrors({ ...errors, address: true });
+                      setErrorMessages({ ...errorMessages, address: 'Este campo es obligatorio' });
+                    }
+                  }}
                   autoComplete="shipping address-line2"
                   variant="standard"
                   InputLabelProps={{
                     shrink: true,
                   }}
+                  error={errors.address}
+                  helperText={errorMessages.address}
+
                 >
                 </TextField>
               </Grid>

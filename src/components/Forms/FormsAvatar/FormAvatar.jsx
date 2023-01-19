@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
-import Box from '@mui/material/Box';
+
 import TextField from '@mui/material/TextField';
 import Grid from '@mui/material/Grid';
-import { Button } from '@mui/material';
+import { Button, Alert } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { MenuItem } from '@mui/material';
@@ -16,11 +16,11 @@ import Typography from '@mui/material/Typography';
 
 const theme = createTheme();
 
-const FormAvatar = (products) => {
+const FormAvatar = (avatar) => {
     const navigate = useNavigate(); // Función para navegar
     const tokenUser = localStorage.getItem('token') // Función para traer el token del usuario
     const [error, setError] = useState(false); // Constante para mostrar errores
-    const [imageUrl, setImageUrl] = useState(products.image);
+    const [imageUrl, setImageUrl] = useState(avatar.avatar);
     const [image, setImage] = useState(null);
 
     function handleImageChange(event) {
@@ -69,8 +69,8 @@ const FormAvatar = (products) => {
     }
 
     useEffect(() => {
-        setImage(products);
-        setImageUrl(avatar);
+        setImage(avatar.avatar);
+        setImageUrl(avatar.avatar);
     }, [])
 
 
@@ -85,18 +85,17 @@ const FormAvatar = (products) => {
 
                     <form onSubmit={handleSubmit}>
                         {error &&
-                            <label className="label-error-createu">
-                                {error}
-                            </label>
+
+                            <Alert severity="error" sx={{ mb: '3%' }}>Error al subir la imagen!</Alert>
                         }
 
                         <Grid container spacing={3} >
-                            
+
                             <Grid item xs={6} sx={{ display: 'flex', flexDirection: 'column' }} >
                                 <Typography component="h5" variant="h8" align="left" sx={{ color: 'rgba(0, 0, 0, 0.6)' }}>
                                     Avatar
                                 </Typography>
-                                 <img id="preview-img" src={avatar} alt="preview" style={{ width: '50%' }}
+                                <img id="preview-img" src={imageUrl} alt="preview"
                                 />
                                 <Button variant="contained" component="label" style={{ width: '50%', marginTop: '2%' }}>
                                     <PhotoLibraryIcon />
