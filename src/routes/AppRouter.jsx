@@ -22,6 +22,7 @@ import CrudSubscription from '../admin/components/FormsSubscription/CrudSubscrip
 import FormPassword from '../components/Forms/FormPassword/FormPassword';
 import FormAvatar from '../components/Forms/FormsAvatar/FormAvatar';
 import UpdateAvatar from '../components/Forms/FormsAvatar/UpdateAvatar';
+import Paypal from '../components/CardsInfo/CardPaypal/Paypal';
 export const AppRouter = () => {
 
     const user = JSON.parse(localStorage.getItem('user')) || {};
@@ -32,17 +33,17 @@ export const AppRouter = () => {
 
             <Routes>
                 {/* RUTAS PUBLICAS */}
-                
-                        <Route path='login/*' element={
-                            <PublicRoute>
-                                <Routes>
-                                    <Route path='/*' element={<LoginAdmin />} />
-                                    <Route path='createuser/*' element={<CreateUser />} />
-                                    <Route path='resetpssw/*' element={<ResetPassword></ResetPassword>}></Route>
-                                </Routes>
-                            </PublicRoute>
-                        } />
-                    
+
+                <Route path='login/*' element={
+                    <PublicRoute>
+                        <Routes>
+                            <Route path='/*' element={<LoginAdmin />} />
+                            <Route path='createuser/*' element={<CreateUser />} />
+                            <Route path='resetpssw/*' element={<ResetPassword></ResetPassword>}></Route>
+                        </Routes>
+                    </PublicRoute>
+                } />
+
 
                 {/* RUTAS PRIVADAS */}
                 <Route path='/*' element={
@@ -65,6 +66,7 @@ export const AppRouter = () => {
                                         <Route path='/profile' element={<Profile />} />
                                         <Route path='/CreateProduct/edit/:id' element={<UpdateProduct />} />
                                         <Route path='/productlist' element={<ProductList />}></Route>
+                                        <Route path='/payment/product/:id' element={<Paypal />}></Route>
                                         <Route path='/EditProfile' element={<UpdateProfile />}></Route>
                                         <Route path='/EditPassword' element={<FormPassword />}></Route>
                                         <Route path='/EditAvatar' element={<UpdateAvatar />}></Route>
@@ -75,7 +77,7 @@ export const AppRouter = () => {
 
                             </Route>
 
-                            <Route element={<HeaderAdmin/>}>
+                            <Route element={<HeaderAdmin />}>
                                 {user.role === 'admin' && (
                                     <>
                                         <Route index path='/homeAdmin' element={<HomeAdmin />} />

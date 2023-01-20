@@ -76,10 +76,10 @@ export const CategProdCards = () => {
 
 
     return (
-        <div>
-           <Labelgiant
-           text={categories.name}
-           />
+        <div style={{ marginLeft: '10%' }}>
+            <Labelgiant
+                text={categories.name}
+            />
             <Container sx={{ py: 5 }} maxWidth="lg">
                 <Grid container spacing={2}>
                     {filterProducts.map((products, index) => (
@@ -87,11 +87,14 @@ export const CategProdCards = () => {
                             <Card
                                 sx={{
                                     height: '100%',
-                                    maxWidth: '250px',
+                                    maxWidth: '270px',
                                     display: 'flex',
                                     flexDirection: 'column',
                                     borderRadius: 3,
-                                    border: 3,
+                                    border: 0,
+                                    boxShadow: '15px 0 5px -5px rgba(0, 0, 0, 0.2), -8px 0 15px -5px rgba(0, 0, 0, 0.2)',
+                                    flexWrap: 'wrap',
+                                    alignItems: 'flex-end',
                                 }}
                             >
                                 <CardActionArea>
@@ -110,7 +113,7 @@ export const CategProdCards = () => {
                                         <Typography variant="h5" component="h3">
                                             ${products.price}
                                         </Typography>
-                                        <Typography variant="h6" component="h5">
+                                        <Typography variant="h6" component="h5" style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'normal', wordWrap: 'break-word', maxHeight: '30px' }}>
                                             {products.title}
                                         </Typography>
                                         <div className="rtcontainer" style={{ display: 'flex' }}>
@@ -123,8 +126,8 @@ export const CategProdCards = () => {
                                 </CardActionArea>
                                 <Button
                                     variant="text"
-                                    startIcon={<RemoveRedEyeIcon style={{ color: 'white' }} />}
-                                    style={{ color: 'white', backgroundColor: '#FF9901' }}
+                                    startIcon={<RemoveRedEyeIcon style={{ color: 'white' }}  />}
+                                    style={{ color: 'white', backgroundColor: '#FF9901', position: 'absolute', display: 'fixed', }}
                                     onClick={() => navigate(`/viewproduct/${products.id}`)}
                                 >
                                     Ver Producto

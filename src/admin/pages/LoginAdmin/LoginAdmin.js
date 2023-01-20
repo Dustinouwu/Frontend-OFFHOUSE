@@ -46,6 +46,8 @@ export const LoginAdmin = () => {
                 setError('Se requiere un correo y una contraseña');
             } else if (error.response && error.response.status === 404) {
                 setError('Correo o contraseña incorrectos');
+            }   else if (error.response && error.response.status === 403) {
+                setError('El usuario ya se encuentra autenticado');
             }
             else {
                 setError('Error del servidor');

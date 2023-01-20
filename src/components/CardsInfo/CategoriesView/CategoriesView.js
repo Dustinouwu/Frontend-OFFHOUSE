@@ -40,7 +40,7 @@ export const CategoriesView = () => {
       <Labelgiant
         text={"Categorías"}
       />
-      <div style={{ marginTop: '2%', }}>
+      <div style={{ marginTop: '2%', marginLeft: '10%' }}>
 
         <Container sx={{ py: 1 }} maxWidth="lg">
           <Grid container spacing={2}>
@@ -49,11 +49,14 @@ export const CategoriesView = () => {
                 <Card
                   sx={{
                     height: '100%',
-                    maxWidth: '250px',
+                    maxWidth: '270px',
                     display: 'flex',
                     flexDirection: 'column',
                     borderRadius: 3,
-                    border: 3,
+                    border: 0,
+                    boxShadow: '15px 0 5px -5px rgba(0, 0, 0, 0.2), -8px 0 15px -5px rgba(0, 0, 0, 0.2)',
+                    flexWrap: 'wrap',
+                    alignItems: 'flex-end',
                   }}
                 >
                   <CardActionArea onClick={() => navigate(`/categories/view/${categories.id}`)}>

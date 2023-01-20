@@ -43,7 +43,10 @@ export const Profile = () => {
     const navigate = useNavigate();
     const [user, setUser] = useState([])
     const [avatar, setAvatar] = useState([])
-
+    const [form, setForm] = useState({
+        id: '',
+    
+    })
 
     const getUser = async () => {
         try {
@@ -75,7 +78,7 @@ export const Profile = () => {
                             component="img"
                             image={avatar}
                             style={{ width: '50%', marginBottom: '5%', display: 'flex', alignItems: 'center', flexDirection: 'column', marginLeft: '25%', marginTop: '10%', borderRadius: '25px' }}
-                            alt="green iguana"
+                            alt="avatar user"
                         />
                         <CardContent>
                             <Typography gutterBottom variant="h4" component="div" align='center'>

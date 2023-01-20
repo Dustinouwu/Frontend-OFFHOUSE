@@ -122,7 +122,12 @@ const FormsProducts = () => {
                       >
                         Editar
                       </Button>
-                      <Button variant="text" startIcon={<WorkspacePremiumIcon style={{ color: 'white' }} />} style={{ color: 'white', backgroundColor: 'blue' }}>
+                      <Button 
+                      variant="text" 
+                      startIcon={<WorkspacePremiumIcon style={{ color: 'white' }} />} 
+                      style={{ color: 'white', backgroundColor: 'blue' }}
+                      onClick={() =>  navigate(`/payment/product/${products.id}`) }
+                      >
                         Subscripción
                       </Button>
                     </ButtonGroup>
@@ -133,7 +138,6 @@ const FormsProducts = () => {
           </Table>
         </TableContainer>
       </div>
-      <Footer />
     </div>
 
   )

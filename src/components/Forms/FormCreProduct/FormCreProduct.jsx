@@ -181,9 +181,9 @@ const FormCreProduct = ({ products }) => {
                                         if (event.target.value.length > 20) {
                                             setErrors({ ...errors, brand: true });
                                             setErrorMessages({ ...errorMessages, brand: 'No más de 20 caracteres' })
-                                        } else if (event.target.value.length < 3) {
+                                        } else if (event.target.value.length < 1) {
                                             setErrors({ ...errors, brand: true });
-                                            setErrorMessages({ ...errorMessages, brand: 'No menos de 3 caracteres' })
+                                            setErrorMessages({ ...errorMessages, brand: 'No menos de 1 caracter' })
                                         } else {
                                             setErrors({ ...errors, brand: false });
                                             setErrorMessages({ ...errorMessages, brand: '' })
@@ -464,6 +464,7 @@ const FormCreProduct = ({ products }) => {
                                     aria-label="maximum height"
                                     multiline
 
+                                    height='100%'
                                     onChange={(event) => setDetail(event.target.value)}
                                     style={{ width: '100%', height: '80px' }}
 
