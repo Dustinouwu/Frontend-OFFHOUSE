@@ -11,6 +11,7 @@ const CrudProducts = () => {
 
     const navigate = useNavigate();  // Navegar entre rutas
     const [products, setProducts] = useState([])
+    const [users, setUsers] = useState([])
     const tokenUser = localStorage.getItem('token')
     const [pageSize, setPageSize] = React.useState(10);
     const config = {
@@ -25,10 +26,27 @@ const CrudProducts = () => {
                 config
             )
             setProducts(response.data.data.products)
+            console.log(response.data.data.products, 'products');
         } catch (error) {
             console.log(error.response.data.message, 'error');
         }
     }
+
+    const getUsers = async () => {
+        try {
+            const response = await axios.get(
+                'https://offhouse.herokuapp.com/api/admin/customers',
+                { headers: { 'accept': 'application/json', 'authorization': tokenUser } },
+                config
+            )
+            setUsers(response.data.data.customers)
+
+
+        } catch (error) {
+            console.log(error.response.data.message, 'error');
+        }
+    }
+
 
     const deleteProducts = async (id) => {
         if (window.confirm('¿Estás seguro de que quieres eliminar este producto?')) {
@@ -45,9 +63,14 @@ const CrudProducts = () => {
         }
     }
 
+    const getUserName = (id) => {
+        const user = users.find(user => user.id === id)
+        return user.username
+    }
+
     useEffect(() => {
         getProducts();
-
+        getUsers();
     }, []);
 
     const columns = [
@@ -60,7 +83,9 @@ const CrudProducts = () => {
         { field: 'delivery_method', headerName: 'Método de envio', width: 150 },
         { field: 'brand', headerName: 'Marca', width: 150 },
         { field: 'categorie_id', headerName: 'Categoría', width: 150 },
-        { field: 'user_id', headerName: 'Usuario', width: 250 },
+
+        { field: 'user_id', headerName: 'Usuario', width: 250, valueGetter: (params) => getUserName(params.value) },
+
         {
             field: 'actions',
             type: 'actions',
@@ -82,8 +107,6 @@ const CrudProducts = () => {
         },
 
     ];
-
-
 
     return (
 

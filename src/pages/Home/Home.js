@@ -14,7 +14,6 @@ export const Home = () => {
             <div >
                 <SampleNextArrow />
                 <CardsSubscription />
-                
                 <Divider sx={{mt: 5}}/>
                 <MultiActionAreaCard />
                 <Footer />          

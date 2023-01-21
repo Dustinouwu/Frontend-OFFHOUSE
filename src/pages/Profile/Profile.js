@@ -45,7 +45,7 @@ export const Profile = () => {
     const [avatar, setAvatar] = useState([])
     const [form, setForm] = useState({
         id: '',
-    
+
     })
 
     const getUser = async () => {
@@ -133,11 +133,11 @@ export const Profile = () => {
                 </List>
 
             </div>
-            <div style={{ display: 'flex', gap: '3rem', marginTop: '2%', marginLeft: '5%' }}>
-                <Card sx={{ maxWidth: ' 100%' }}>
+            <div style={{ display: 'flex', flexDirection: 'row', gap: '3rem', marginTop: '2%', marginLeft: '5%', marginRight: '5%' }}>
+                <Card sx={{ maxWidth: 300 }}>
                     <CardActionArea>
                         <CardContent>
-                            <Typography  variant="h5" component="div" align='center'>
+                            <Typography variant="h5" component="div" align='center'>
                                 Actualizar la contraseña
                             </Typography>
                         </CardContent>
@@ -150,10 +150,10 @@ export const Profile = () => {
                         </Button>
                     </CardActions>
                 </Card>
-                <Card sx={{ maxWidth: ' 100%' }}>
+                <Card sx={{ maxWidth: 300 }}>
                     <CardActionArea>
                         <CardContent>
-                            <Typography  variant="h5" component="div" align='center'>
+                            <Typography variant="h5" component="div" align='center'>
                                 Cambiar Imagen de perfil
                             </Typography>
                         </CardContent>
@@ -163,6 +163,22 @@ export const Profile = () => {
                         <Button size="small" color="primary" variant="contained" onClick={() => navigate('/EditAvatar')} >
                             <AccountCircleIcon />
                             Avatar
+                        </Button>
+                    </CardActions>
+                </Card>
+                <Card sx={{ maxWidth: 300 }}>
+                    <CardActionArea>
+                        <CardContent>
+                            <Typography variant="h5" component="div" align='center'>
+                                Ver mis productos con suscriptoción
+                            </Typography>
+                        </CardContent>
+                    </CardActionArea>
+                    <CardActions sx={{ display: "flex", justifyContent: "center" }}>
+
+                        <Button size="small" color="primary" variant="contained" onClick={() => navigate('/productsprimium')} >
+                            <AccountCircleIcon />
+                            Productos Premium 
                         </Button>
                     </CardActions>
                 </Card>

@@ -3,9 +3,14 @@ import axios from 'axios'
 import { useParams } from 'react-router-dom'
 import Comments from '../../Comments/Comments'
 import SendIcon from '@mui/icons-material/Send';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemText from '@mui/material/ListItemText';
+import {
+    List,
+    ListItem,
+    ListItemText,
+    Alert
+} from '@mui/material';
+
+
 import {
     Button,
     Card,
@@ -32,7 +37,7 @@ const Paypal = () => {
     const tokenUser = localStorage.getItem('token') //Trae el token del usuario
     const [product, setProduct] = useState({})  //Estado para guardar los datos del producto
     const [user, setUser] = useState([])
-
+    const [error, setError] = useState(false)
     const getUser = async () => {
         try {
             const response = await axios.get(
@@ -46,10 +51,12 @@ const Paypal = () => {
         }
     }
 
+    
     const postSubsciptipn = async () => {
         try {
             const response = await axios.post(
                 `https://offhouse.herokuapp.com/api/subscriptions`,
+                { product_id: id },
                 { headers: { 'accept': 'application/json', 'authorization': tokenUser } }
             )
 
@@ -58,17 +65,16 @@ const Paypal = () => {
         }
     }
 
-    console.log(id);
+
     useEffect(() => {
         const getProduct = async () => {
             try {
                 const response = await axios.get(
                     `https://offhouse.herokuapp.com/api/products/${id}`,
-                    { product_id: id, headers: { 'accept': 'application/json', 'authorization': tokenUser } }
+                    { headers: { 'accept': 'application/json', 'authorization': tokenUser } }
                 )
                 const user2 = { ...response.data.data.product, id }
                 setProduct(user2);
-                console.log(response.data.data.product);
             } catch (error) {
                 console.log(error);
             }
@@ -155,7 +161,7 @@ const Paypal = () => {
                 <PayPalScriptProvider options={{ "client-id": "AT0xfwubetSem8Phs-ka4eLvDlYeNqja0LvhkgXs4BfBVFc1lRixxDwlVifa2ah239-olrO_UdwI5zVF" }}>
                     <PayPalButtons style={{ layout: "horizontal" }}
                         onApprove={(data, actions) => {
-                            postSubsciptipn();
+                            postSubsciptipn()
                             return actions.order.capture().then((details) => {
                                 const name = details.payer.name.given_name;
                                 alert(`Transaction completed by ${name}`);

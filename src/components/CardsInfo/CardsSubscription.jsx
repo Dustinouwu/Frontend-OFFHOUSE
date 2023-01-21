@@ -9,36 +9,9 @@ import { useNavigate } from 'react-router-dom';
 const CardsSubscription = () => {
     const navigate = useNavigate();
     return (
-        <div style={{ marginTop: '5%', marginLeft: '25%', marginRight: '25%', display: 'flex' }}>
-            <Card sx={{ maxWidth: 300, mr: 5, boxShadow: '15px 0 5px -5px rgba(0, 0, 0, 0.2), -8px 0 15px -5px rgba(0, 0, 0, 0.2)', }}>
-                <CardContent>
-                    <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-                        SUBSCRIPCIÓN
-                    </Typography>
-                    <Divider />
-                    <Typography variant="body2" sx={{ color: '#FF9901', fontSize: 50 }}>
-                        $ 4.99
-                    </Typography>
-                    <Typography variant="h5" component="div">
-                        Quieres Que tu producto sea visible dentro de la plataforma?
-                    </Typography>
-                    <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                        Por un módico precio, tu producto será visible para todos los usuarios de la plataforma
-                    </Typography>
-                    <Typography variant="body2" sx={{ fontSize: 16 }}>
-                        <strong>Dudas resueltas</strong> con priridad
-                    </Typography>
-                </CardContent>
-                <Divider />
-                <CardActions>
-                    <Button 
-                    size="small" 
-                    variant="contained" 
-                    sx={{ backgroundColor: '#FF9901', color: 'white', '&:hover': { backgroundColor: '#FF9901' } }}
-                    >Suscribirse</Button>
-                </CardActions>
-            </Card>
-            <Card sx={{ maxWidth: 300, boxShadow: '15px 0 5px -5px rgba(0, 0, 0, 0.2), -8px 0 15px -5px rgba(0, 0, 0, 0.2)', }}>
+        <div style={{ marginTop: '5%', marginLeft: '25%', marginRight: '15%' }}>
+            
+            <Card sx={{ maxWidth: 700, mb: 5, boxShadow: '15px 0 5px -5px rgba(0, 0, 0, 0.2), -8px 0 15px -5px rgba(0, 0, 0, 0.2)', }}>
                 <CardContent>
                     <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
                         PUBLICA UN PRODUCTO
@@ -65,6 +38,34 @@ const CardsSubscription = () => {
                         onClick={() => navigate(`/CreateProduct`)}
                         sx={{ backgroundColor: '#FF9901', color: 'white', '&:hover': { backgroundColor: '#FF9901' } }}
                     >Vende tu Producto</Button>
+                </CardActions>
+            </Card>
+            <Card sx={{ maxWidth: 700, mr: 5, boxShadow: '15px 0 5px -5px rgba(0, 0, 0, 0.2), -8px 0 15px -5px rgba(0, 0, 0, 0.2)', }}>
+                <CardContent>
+                    <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
+                        REALIZA TU SUBSCRIPCIÓN
+                    </Typography>
+                    <Divider />
+                    <Typography variant="body2" sx={{ color: '#FF9901', fontSize: 50 }}>
+                        $ 4.99
+                    </Typography>
+                    <Typography variant="h5" component="div">
+                        Quieres que tu producto sea visible dentro de la plataforma?
+                    </Typography>
+                    <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                        Por un módico precio, tu producto será visible para todos los usuarios de la plataforma, y se mostrará en esta sección
+                    </Typography>
+                    <Typography variant="body2" sx={{ fontSize: 16 }}>
+                        <strong>Dudas resueltas</strong> con prioridad
+                    </Typography>
+                </CardContent>
+                <Divider />
+                <CardActions>
+                    <Button 
+                    size="small" 
+                    variant="contained" 
+                    sx={{ backgroundColor: '#FF9901', color: 'white', '&:hover': { backgroundColor: '#FF9901' } }}
+                    >Suscríbete</Button>
                 </CardActions>
             </Card>
         </div>

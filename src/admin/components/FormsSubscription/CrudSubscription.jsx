@@ -4,9 +4,21 @@ import { useNavigate } from 'react-router-dom';
 import PersonSearchIcon from '@mui/icons-material/PersonSearch';
 import axios from 'axios';
 import { DataGrid, GridActionsCellItem } from '@mui/x-data-grid';
+import Alert from '@mui/material/Alert';
+
+const styles = {
+  width: 'fit-content',
+  height: '20%',
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  margin: 'auto',
+  marginTop: '10px',
+  marginBottom: '10px',
+  borderRadius: '20px',
 
 
-
+}
 const CrudSubscription = () => {
 
   const navigate = useNavigate();  // Navegar entre rutas
@@ -25,6 +37,31 @@ const CrudSubscription = () => {
         config
       )
       setSubs(response.data.data.subscriptions)
+      console.log(response.data.data.subscriptions, 'subs');
+    } catch (error) {
+      console.log(error.response.data.message, 'error');
+    }
+  }
+
+  const changeStatus = (status) => {
+    if (status === 'active') {
+      return <Alert severity="success" variant="outlined" sx={styles}>Activo</Alert>
+    } else if (status === 'expired') {
+      return <Alert severity="warning" variant="outlined" sx={styles}>Expirado</Alert>
+    } else if (status === 'canceled') {
+      return <Alert severity="error" variant="outlined" sx={styles}>Cancelado</Alert>
+    }
+  }
+
+  // cambiar el estado inactivo a activo y viceversa 
+  const changeStatusSub = async (id) => {
+    try {
+      const response = await axios.put(
+        `https://offhouse.herokuapp.com/api/admin/subscriptions/{id}`,
+        { headers: { 'accept': 'application / json', 'authorization': tokenUser } },
+        config  // token
+      )
+      console.log(response.data.data.subscriptions, 'subs');
     } catch (error) {
       console.log(error.response.data.message, 'error');
     }
@@ -32,12 +69,11 @@ const CrudSubscription = () => {
 
   useEffect(() => {
     getSubs();
-
   }, []);
 
   const columns = [
     { field: 'id', headerName: 'ID', width: 70 },
-    { field: 'status', headerName: 'Estado', width: 100 },
+    { field: 'status', headerName: 'Estado', width: 150, renderCell: (params) => changeStatus(params.value) },
     { field: 'payment_method', headerName: 'Método de pago', width: 160 },
     { field: 'start_date', headerName: 'Fecha de inicio', width: 150 },
     { field: 'end_date', headerName: 'Fecha de culminación', width: 150 },
@@ -56,6 +92,14 @@ const CrudSubscription = () => {
           icon={<PersonSearchIcon />}
           label="View"
         />,
+        <GridActionsCellItem
+          icon={<DeleteIcon />}
+          label="Delete"
+          onClick={() => {
+            console.log(params.row.id);
+          }}
+        />,
+
       ],
     },
 

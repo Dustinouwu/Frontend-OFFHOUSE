@@ -23,6 +23,8 @@ import FormPassword from '../components/Forms/FormPassword/FormPassword';
 import FormAvatar from '../components/Forms/FormsAvatar/FormAvatar';
 import UpdateAvatar from '../components/Forms/FormsAvatar/UpdateAvatar';
 import Paypal from '../components/CardsInfo/CardPaypal/Paypal';
+import Productpremium from '../pages/Profile/Productpremium';
+
 export const AppRouter = () => {
 
     const user = JSON.parse(localStorage.getItem('user')) || {};
@@ -66,6 +68,7 @@ export const AppRouter = () => {
                                         <Route path='/profile' element={<Profile />} />
                                         <Route path='/CreateProduct/edit/:id' element={<UpdateProduct />} />
                                         <Route path='/productlist' element={<ProductList />}></Route>
+                                        <Route path='/productsprimium' element={<Productpremium />}></Route>
                                         <Route path='/payment/product/:id' element={<Paypal />}></Route>
                                         <Route path='/EditProfile' element={<UpdateProfile />}></Route>
                                         <Route path='/EditPassword' element={<FormPassword />}></Route>
