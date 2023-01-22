@@ -67,59 +67,67 @@ export default function MultiActionAreaCard(props) {
         <Grid container spacing={2}>
           {products.map((products, index) => (
             <Grid item key={products.id} xs={12} sm={6} md={4} >
+              { products.featured === 1 ? 
               <Card
-                sx={{
-                  height: '100%',
-                  maxWidth: '270px',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  borderRadius: 3,
-                  border: 0,
-                  boxShadow: '15px 0 5px -5px rgba(0, 0, 0, 0.2), -8px 0 15px -5px rgba(0, 0, 0, 0.2)',
-                  flexWrap: 'wrap',
-                  alignItems: 'flex-end',
-                }}
+              sx={{
+                height: '100%',
+                maxWidth: '270px',
+                display: 'flex',
+                flexDirection: 'column',
+                borderRadius: 3,
+                border: 0,
+                boxShadow: '15px 0 5px -5px rgba(0, 0, 0, 0.2), -8px 0 15px -5px rgba(0, 0, 0, 0.2)',
+                flexWrap: 'wrap',
+                alignItems: 'flex-end',
+              }}
+            >
+              {products.featured === 1 ? <Button style={{ backgroundColor: 'green', color: 'white', width: '100%', height: '30px', fontSize: '12px' }}>Destacado</Button> : null
+              }
+              <CardActionArea>
+                <CardMedia
+                  component="img"
+                  sx={{
+                    // 16:9
+                    py: '5%',
+                    width: '100%',
+                    height: '200px',
+                  }}
+                  image={products.image}
+                  alt="random"
+                />
+                <CardContent >
+                  <Typography variant="h5" component="h3" style={{ color: 'green' }}>
+                    ${products.price}
+                  </Typography>
+                  <Typography
+                    variant="h6"
+                    component="h6"
+                    style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'normal', wordWrap: 'break-word', maxHeight: '30px' }}
+                  >
+                    {products.title}
+                  </Typography>
+                  <div className="rtcontainer" style={{ display: 'flex', height: '100%' }}>
+                    <CircleIcon style={{ color: colorprod2[index], paddingRight: '10px', width: '20' }} />
+                    <Typography noWrap style={{ paddingTop: '2px' }} >
+                      {products.state_appliance}
+                    <br />
+                      {products.featured}
+                    </Typography>
+                  </div>
+                </CardContent>
+              </CardActionArea>
+              <Button
+                variant="text"
+                startIcon={<RemoveRedEyeIcon style={{ color: 'white' }} />}
+                style={{ color: 'white', backgroundColor: '#FF9901', position: 'absolute', display: 'fixed', }}
+                onClick={() => navigate(`/viewproduct/${products.id}`)}
               >
-                <CardActionArea>
-                  <CardMedia
-                    component="img"
-                    sx={{
-                      // 16:9
-                      py: '5%',
-                      width: '100%',
-                      height: '200px',
-                    }}
-                    image={products.image}
-                    alt="random"
-                  />
-                  <CardContent >
-                    <Typography variant="h5" component="h3" style={{ color: 'green' }}>
-                      ${products.price}
-                    </Typography>
-                    <Typography
-                      variant="h6"
-                      component="h6"
-                      style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'normal', wordWrap: 'break-word', maxHeight: '30px' }}
-                    >
-                      {products.title}
-                    </Typography>
-                    <div className="rtcontainer" style={{ display: 'flex', height: '100%' }}>
-                      <CircleIcon style={{ color: colorprod2[index], paddingRight: '10px', width: '20' }} />
-                      <Typography noWrap style={{ paddingTop: '2px' }} >
-                        {products.state_appliance}
-                      </Typography>
-                    </div>
-                  </CardContent>
-                </CardActionArea>
-                <Button
-                  variant="text"
-                  startIcon={<RemoveRedEyeIcon style={{ color: 'white' }} />}
-                  style={{ color: 'white', backgroundColor: '#FF9901', position: 'absolute', display: 'fixed', }}
-                  onClick={() => navigate(`/viewproduct/${products.id}`)}
-                >
-                  Ver
-                </Button>
-              </Card>
+                Ver
+              </Button>
+            </Card>
+              :
+              null
+            }
             </Grid>
           ))}
         </Grid>

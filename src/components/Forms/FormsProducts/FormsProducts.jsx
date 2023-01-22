@@ -66,11 +66,7 @@ const FormsProducts = () => {
     getProductsUser();
 
   }, []);
-
-
-
-
-
+  
   return (
     <div>
       <div style={{ marginLeft: '3%', marginRight: '3%', marginTop: '3%', marginBottom: '3%', paddingLeft: '3%', paddingRight: '3%', paddingBottom: '3%', paddingTop: '3%', borderRadius: '10px', backgroundColor: '#D9D9D9' }}>

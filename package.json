@@ -31,6 +31,7 @@
     "react-spinners": "^0.13.7",
     "slick-carousel": "^1.8.1",
     "sort-by": "^1.2.0",
+    "victory": "^36.6.8",
     "web-vitals": "^2.1.4"
   },
   "scripts": {

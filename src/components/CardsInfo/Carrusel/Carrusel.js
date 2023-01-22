@@ -98,17 +98,20 @@ const SimpleSlider = () => {
       <Slider {...settings}>
         {firstTenProducts.map((item) => (
           <div className="card">
+            {item.featured === 1 ? 
             <div className="card-top">
               <CardMedia
                 component="img"
                 image={item.image}
                 alt="green iguana"
               />
-            </div>
             <div className="card-bottom">
               <h3 id="titless">{item.title}</h3>
               <h3 id="pricess">${item.price}</h3>
             </div>
+            </div>  
+            : null
+            }
           </div>
         ))}
       </Slider>

@@ -20,6 +20,27 @@ export const LoginAdmin = () => {
 
     const [loading, setLoading] = useState(false);
 
+    //Sacar todos los errores que me da error y ponerlos en un .map 
+    const errorMap = {
+        'The email field is required.': 'El campo de correo es requerido',
+        'The password field is required.': 'El campo de contraseña es requerido',
+        'The email must be a valid email address.': 'El correo debe ser un correo valido',
+        'The email has already been taken.': 'El correo ya se encuentra registrado',
+        'The password must be at least 8 characters.': 'La contraseña debe tener al menos 8 caracteres',
+        'The password confirmation does not match.': 'La confirmación de la contraseña no coincide',
+        'The password confirmation field is required.': 'El campo de confirmación de la contraseña es requerido',
+        'The password field is required.': 'El campo de contraseña es requerido',
+    }
+
+    // Poner los errores traducidos en el state de error
+    const setErrorTranslated = (error) => {
+        if (errorMap[error]) {
+            setError(errorMap[error])
+        } else {
+            setError(error)
+        }
+    }
+
 
 
     const onLogin = async (e) => {
@@ -43,18 +64,10 @@ export const LoginAdmin = () => {
             }
             window.location.reload()
         } catch (error) {
-            if (error.response && error.response.status === 400) {
-                setError(error.response.data.message)
-            } else if (error.response && error.response.status === 422) {
-                setError('Se requiere un correo y una contraseña');
-            } else if (error.response && error.response.status === 404) {
-                setError('Correo o contraseña incorrectos');
-            } else if (error.response && error.response.status === 403) {
-                setError('El usuario ya se encuentra autenticado');
+            if (error.response && error.response.data && error.response.data.message) {
+                setErrorTranslated(error.response.data.message)
             }
-            else {
-                setError('Error del servidor');
-            }
+
             console.log(error.response.data.message, 'error');
             setLoading(false);
 

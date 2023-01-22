@@ -3,7 +3,7 @@ import './ResetPassword.css';
 import Title from "../../components/atoms/Title/Title";
 import Label from "../../components/atoms/Label/Label";
 import Imagenes from '../../Imagenes';
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { Alert, Grid } from '@mui/material';
 import axios from 'axios';
 
@@ -17,34 +17,37 @@ export const FormResetPassword = () => {
     const navigate = useNavigate();
     const [error, setError] = useState('')
 
+    const { tokendos } = useParams();
+
 
     const forgotPassword = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post(
-                'https://offhouse.herokuapp.com/api/forgot-password',
-                { email, password, password_confirmation },
+            await axios.post(
+                'https://offhouse.herokuapp.com/api/reset-password',
+                { email, password, password_confirmation, token: tokendos },
                 { headers: { 'accept': 'application/json' } }
             )
-
+            navigate('/login');
         } catch (error) {
             if (error.response && error.response.status === 400) {
                 setError(error.response.data.message)
             } else if (error.response && error.response.status === 422) {
-                setError('LLene todos los campos');
+                setError('Se requiere un correo ');
             } else if (error.response && error.response.status === 404) {
                 setError('No se ha encontrado ha encontrado un correo asociado en nuestro sistema');
             } else if (error.response && error.response.status === 403) {
                 setError('El usuario ya se encuentra autenticado');
             }
+            console.log(error.response.data.message, 'error');
+            console.error(error);
         }
     }
 
     return (
         <div className="main-container">
 
-            {/* <div className="image-container"> */}
-            {/* <img src={Imagenes.img1} alt='Imagen Electrodomésticos'></img> */}
+
             <Grid container component="main" sx={{ height: '100vh' }}>
                 <Grid
                     item
@@ -60,7 +63,7 @@ export const FormResetPassword = () => {
                     }}
                 />
             </Grid>
-            {/*  </div> */}
+
 
             <div className="login-container">
                 <form className="formlogin" onSubmit={forgotPassword}>

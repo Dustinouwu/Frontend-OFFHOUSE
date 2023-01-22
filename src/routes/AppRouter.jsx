@@ -20,7 +20,6 @@ import CrudProducts from '../admin/components/FormsProducts/CrudProducts';
 import FormsProducts from '../admin/components/FormsProducts/FormsProducts';
 import CrudSubscription from '../admin/components/FormsSubscription/CrudSubscription';
 import FormPassword from '../components/Forms/FormPassword/FormPassword';
-import FormAvatar from '../components/Forms/FormsAvatar/FormAvatar';
 import UpdateAvatar from '../components/Forms/FormsAvatar/UpdateAvatar';
 import Paypal from '../components/CardsInfo/CardPaypal/Paypal';
 import Productpremium from '../pages/Profile/Productpremium';
@@ -42,7 +41,7 @@ export const AppRouter = () => {
                             <Route path='/*' element={<LoginAdmin />} />
                             <Route path='createuser/*' element={<CreateUser />} />
                             <Route path='resetpssw/*' element={<ResetPassword></ResetPassword>}></Route>
-                            <Route path='resetpssw/confirmation/:token' element={<FormResetPassword></FormResetPassword>}></Route>
+                            <Route path='resetpssw/confirmation/:tokendos' element={<FormResetPassword></FormResetPassword>}></Route>
                         </Routes>
                     </PublicRoute>
                 } />

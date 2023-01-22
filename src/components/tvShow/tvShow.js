@@ -11,12 +11,12 @@ const TvshowContainer = styled.div`
 `;
 
 const Thumbnail = styled.img`
-    width: auto;
+    width: 115px;
     height: 100%;
     display: flex;
     flex: 0.3;
     img {
-    width: auto;
+    width: 50px;
     height: 100%;
     }
 `;
@@ -36,18 +36,29 @@ const Rating = styled.span`
     display: flex;
     flex: 0.5;
 `;
+
+//constante para poner hacer un onclick y adentro un navigate 
+const Rute = styled.input`
+    flex: 0.2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    &:hover {
+        color: #dfdfdf;
+    }
+`;
+
 function TvShow(props) {
 
-    const { thumbanilSrc, name, rating } = props;
+    const { thumbanilSrc, name, rating, rute } = props;
     return (
-        <TvshowContainer>
-            <Thumbnail
-                src={thumbanilSrc}
-            />
+        <TvshowContainer onClick={rute}>
+
+            <Thumbnail src={thumbanilSrc} />
+            <Rating>{rating}</Rating>
             <Name>{name}</Name>
-            {rating &&
-                <Rating>{rating}</Rating>
-            }
+            
         </TvshowContainer>
     )
 }

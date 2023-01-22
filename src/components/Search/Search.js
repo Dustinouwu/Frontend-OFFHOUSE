@@ -8,6 +8,7 @@ import MoonLoader from 'react-spinners/MoonLoader';
 import useDebounceHook from '../../hooks/debounceHook';
 import axios from 'axios';
 import TvShow from '../tvShow/tvShow';
+import { useNavigate } from 'react-router-dom';
 
 
 const SearchBarContainer = styled(motion.div)`
@@ -132,23 +133,7 @@ function Search(props) {
     const [tvShows, setTvShows] = useState([])
     const [product, setProduct] = useState([])
     const token = localStorage.getItem('token');
-
-    const getProducts = async () => {
-        try {
-            const response = await axios.get(
-                'https://offhouse.herokuapp.com/api/products',
-                { headers: { 'accept': 'application/json', 'authorization': token } }
-            );
-            setProduct(response.data.data.products.data);
-        } catch (error) {
-            console.log(error);
-            console.log(error.response.data.message, 'error');
-        }
-    };
-
-    useEffect(() => {
-        getProducts();
-    }, []);
+    const navigate = useNavigate();
 
 
 
@@ -160,14 +145,14 @@ function Search(props) {
         setIsExpanded(false);
         setSearchQuery("");
         setIsLoading(false);
-        setTvShows([]);
+        setProduct([]);
         if (inputRef.current) {
             inputRef.current.value = '';
         }
     }
 
     const prepareSearchQuery = () => {
-        const url = `https://api.tvmaze.com/search/shows?q=${searchQuery}`;
+        const url = `https://offhouse.herokuapp.com/api/search?title=${searchQuery}`;
         return encodeURI(url);
     }
 
@@ -179,14 +164,15 @@ function Search(props) {
         setIsLoading(true);
         const URL = prepareSearchQuery(searchQuery);
 
-        const response = await axios.get(URL).catch((err) => {
+        const response = await axios.get(URL, { headers: { 'accept': 'application/json', 'authorization': token } }).catch((err) => {
             console.log("Err: ", err);
         });
 
         if (response) {
-            console.log("response: ", response.data);
-            setTvShows(response.data);
+            console.log("response: ", response.data.data.product.data);
+            setProduct(response.data.data.product.data);
         }
+        setIsLoading(false);
         setIsLoading(false);
     }
 
@@ -196,7 +182,7 @@ function Search(props) {
         setSearchQuery(e.target.value);
     }
 
-    const isEmpty = !tvShows || tvShows.length === 0;
+    const isEmpty = !product || product.length === 0;
 
     useDebounceHook(searchQuery, 500, searchTvShow);
 
@@ -239,13 +225,16 @@ function Search(props) {
                     </LoadginWrapper>
                 )}
                 {!isLoading && !isEmpty && <>
-                    {tvShows.map((tvShow) => (
+                    {product.map((product) => (
                         <TvShow
-                            key={tvShow.show.id}
-                            thumbanilSrc={tvShow.show.image.medium}
-                            name={tvShow.show.name}
-                            rating={tvShow.show.rating.average}
+                            rute={() => navigate(`/viewproduct/${product.id}`)}
+                            key={product.id}
+                            rating={product.id}
+                            thumbanilSrc={product.image}
+                            name={product.title}
                         />
+
+
                     ))}
                 </>}
             </SearchContent>
