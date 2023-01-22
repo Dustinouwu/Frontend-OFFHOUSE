@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import DeleteIcon from '@mui/icons-material/Delete';
 import { useNavigate } from 'react-router-dom';
 import PersonSearchIcon from '@mui/icons-material/PersonSearch';
+import DoDisturbOffIcon from '@mui/icons-material/DoDisturbOff';
 import axios from 'axios';
 import { DataGrid, GridActionsCellItem } from '@mui/x-data-grid';
 import Alert from '@mui/material/Alert';
@@ -55,15 +56,18 @@ const CrudSubscription = () => {
 
   // cambiar el estado inactivo a activo y viceversa 
   const changeStatusSub = async (id) => {
-    try {
-      const response = await axios.put(
-        `https://offhouse.herokuapp.com/api/admin/subscriptions/{id}`,
-        { headers: { 'accept': 'application / json', 'authorization': tokenUser } },
-        config  // token
-      )
-      console.log(response.data.data.subscriptions, 'subs');
-    } catch (error) {
-      console.log(error.response.data.message, 'error');
+    if (window.confirm('¿Desea cambiar el estado de la suscripción?')) {
+      try {
+        const response = await axios.post(
+          `https://offhouse.herokuapp.com/api/admin/subscriptions/${id}/cancel`,
+          { headers: { 'accept': 'application/json', 'authorization': tokenUser } },
+          config
+        )
+        console.log(response.data.message, 'response');
+        getSubs()
+      } catch (error) {
+        console.log(error.response.data.message, 'error');
+      }
     }
   }
 
@@ -89,14 +93,10 @@ const CrudSubscription = () => {
       cellClassName: 'actions',
       getActions: (params) => [
         <GridActionsCellItem
-          icon={<PersonSearchIcon />}
-          label="View"
-        />,
-        <GridActionsCellItem
-          icon={<DeleteIcon />}
+          icon={<DoDisturbOffIcon />}
           label="Delete"
           onClick={() => {
-            console.log(params.row.id);
+            changeStatusSub(params.id)
           }}
         />,
 

@@ -5,11 +5,21 @@ import {
     CardContent,
     CardMedia,
     Button,
-    Typography
+    Typography,
+    Alert,
+    Grid,
+    Paper
 } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
+import { styled } from '@mui/material/styles';
 import axios from 'axios';
 
+const Img = styled('img')({
+    margin: 'auto',
+    display: 'block',
+    maxWidth: '200px',
+    maxHeight: '200px',
+});
 const Productpremium = () => {
 
     const navigate = useNavigate(); // Para poder navegar entre las páginas
@@ -58,11 +68,24 @@ const Productpremium = () => {
     const getImageAndTitle = (id) => {
         const product = productsbyid.find((product) => product.id === id);
         if (product) {
-          return { image: product.image, title: product.title }
+            return { image: product.image, title: product.title }
         } else {
-          return { image: '', title: '' }
+            return { image: '', title: '' }
         }
     }
+
+    //poner una barra dependiendo del estado del producto
+    const getBar = (product) => {
+        if (product.status === 'active') {
+            return <Alert severity="success">Suscripción Activa</Alert>
+        } else if (product.status === 'expired') {
+            return <Alert severity="warning">Suscripción expirada</Alert>
+        } else if (product.status === 'canceled') {
+            return <Alert severity="error">Suscripción cancelada</Alert>
+        }
+    }
+
+
 
     useEffect(() => {
         getProducts();
@@ -72,33 +95,63 @@ const Productpremium = () => {
 
     return (
         <div>
+            <Typography gutterBottom variant="h3" component="div" align='center' sx={{ mt: 5 }}>
+                Mis suscripciones
+            </Typography>
             {
                 products.map((product) => (
-                    <Card sx={{ maxWidth: '100%', mt: 10, ml: 10, mr: 10 }}>
-                        <CardMedia
-                            sx={{ float: "left", width: 200, height: 200 }}
-                            component="img"
-                            alt="green iguana"
-                            image={getImageAndTitle(product.product_id).image}
-                        />
-                        <CardContent>
-                            <Typography gutterBottom variant="h5" component="div">
-                                {getImageAndTitle(product.product_id).title}
-                            </Typography>
-                            <Typography variant="body2" color="text.secondary">
-                                Lizards are a widespread group of squamate reptiles, with over 6,000
-                                species, ranging across all continents except Antarctica
-                            </Typography>
-                        </CardContent>
-                        <CardActions>
-                            <Button size="small">Share</Button>
-                            <Button size="small">Learn More</Button>
-                        </CardActions>
-                    </Card>
+                    <Paper
+                        sx={{
+                            p: 2,
+                            margin: 'auto',
+                            maxWidth: '80%',
+                            flexGrow: 1,
+                            mt: 3,
+                            mb: 3,
+                            backgroundColor: (theme) =>
+                                theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+                        }}
+                    >
+                        <Grid container spacing={2}>
+
+                            <Grid item>
+                                <Img alt="complex" src={getImageAndTitle(product.product_id).image} />
+                            </Grid>
+                            <Grid item xs={12} sm container>
+                                <Grid item xs container direction="column" spacing={2}>
+                                    <Grid item xs>
+                                        <Typography gutterBottom variant="h5" component="div">
+                                            {getImageAndTitle(product.product_id).title}
+                                        </Typography>
+                                        <Typography variant="body2" color="text.secondary">
+                                            Fecha de inicio: {product.start_date}
+                                        </Typography>
+                                        <Typography variant="body2" color="text.secondary">
+                                            Fecha de vencimiento: <strong>{product.end_date}</strong>
+                                        </Typography>
+                                        <Typography variant="body2" color="text.secondary">
+                                            Precio de suscripción: ${product.price}
+                                        </Typography>
+                                    </Grid>
+                                    <Grid item>
+                                        <Button size="small" variant='contained' align='center' sx={{ whiteSpace: 'nowrap', mb: 5 }} onClick={() => navigate(`/payment/product/${product.product_id}`)}>
+                                            visualizar suscripción
+                                        </Button>
+                                    </Grid>
+                                </Grid>
+                                <Grid item xs={12} sm={10}  md={6} >
+                                    <Typography variant="subtitle1" component="div">
+                                        {getBar(product)}
+                                    </Typography>
+                                </Grid>
+                            </Grid>
+                        </Grid>
+                    </Paper>
                 ))
             }
-        </div>
+        </div >
     )
 }
 
 export default Productpremium
+
