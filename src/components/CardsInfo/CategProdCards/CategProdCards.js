@@ -49,13 +49,14 @@ export const CategProdCards = () => {
                 { headers: { 'accept': 'application/json', 'authorization': token } },
                 config
             )
-            console.log(response.data.data.products.data);
+
             setProducts(response.data.data.products.data);
+            console.log(response.data.data.products.data, id ,'productos')
         } catch (error) {
             console.log(error);
         }
     };
-
+    console.log(products, 'productos')
     // Filtrar productos por categoría
     const filterProducts = products.filter(products => products.categorie_id === categories.id);
     console.log(filterProducts);
@@ -126,7 +127,7 @@ export const CategProdCards = () => {
                                 </CardActionArea>
                                 <Button
                                     variant="text"
-                                    startIcon={<RemoveRedEyeIcon style={{ color: 'white' }}  />}
+                                    startIcon={<RemoveRedEyeIcon style={{ color: 'white' }} />}
                                     style={{ color: 'white', backgroundColor: '#FF9901', position: 'absolute', display: 'fixed', }}
                                     onClick={() => navigate(`/viewproduct/${products.id}`)}
                                 >

@@ -6,7 +6,7 @@ import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import CircleIcon from '@mui/icons-material/Circle';
-import { Button, CardActionArea } from '@mui/material';
+import { Button, CardActionArea, Pagination } from '@mui/material';
 import { Link, useNavigate } from 'react-router-dom';
 import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 import axios from 'axios';
@@ -21,20 +21,22 @@ import Fab from '@mui/material/Fab';
 
 export default function MultiActionAreaCard(props) {
 
+  
   const navigate = useNavigate(); // Para poder navegar entre las páginas
   const token = localStorage.getItem('token');
   const [products, setProducts] = useState([]);
   const [error, setError] = useState('')
-
+  const [page, setPage] = useState(1);
+  const [lastPage, setLastPage] = useState('');
   /* FUNCION PARA PODER SACAR LOS PRODUCTOS DE LA API */
-  const getProducts = async () => {
+  const getProducts = async (page) => {
     try {
       const response = await axios.get(
-        'https://offhouse.herokuapp.com/api/products',
+        `https://offhouse.herokuapp.com/api/products?page=${page}`,
         { headers: { 'accept': 'application/json', 'authorization': token } }
       );
-      console.log(response.data.data.products.data);
       setProducts(response.data.data.products.data);
+      setLastPage(response.data.data.pagination.last_page);
       if (response.status === 403) {
         setError('')
       }
@@ -44,13 +46,13 @@ export default function MultiActionAreaCard(props) {
       console.log(error.response.data.message, 'error');
     }
   };
-
   /* FUNCIÓN PARA RENDERIZAR LA FUNCIÓN getProducts AL CARGAR LA PÁGINA*/
   useEffect(() => {
     getProducts();
+    page === 1 ? setPage(1) : setPage(lastPage);
   }, []);
 
-  /*FUNCIÓN PARA CAMBIAR EL COLOR DEPENDIENDO EL ESTADO*/
+  //FUNCIÓN PARA CAMBIAR EL COLOR DEPENDIENDO EL ESTADO/
   const colorprod2 = products.map((products) => {
     return (
       products.state_appliance === 'Nuevo' ? "#0FFF18" : '#FF0000' && products.state_appliance === 'nuevo' ? "#0FFF18" : '#FF0000' && products.state_appliance === 'reacondicionado' ? "#FFF100" : '#FF0000'
@@ -67,7 +69,7 @@ export default function MultiActionAreaCard(props) {
         <Grid container spacing={2}>
           {products.map((products, index) => (
             <Grid item key={products.id} xs={12} sm={6} md={4} >
-              { products.featured === 1 ? 
+
               <Card
               sx={{
                 height: '100%',
@@ -125,14 +127,15 @@ export default function MultiActionAreaCard(props) {
                 Ver
               </Button>
             </Card>
-              :
-              null
-            }
             </Grid>
           ))}
         </Grid>
       </Container>
-    </div>
+      <Pagination count={lastPage} variant="outlined" page={page} onChange={(event, value) => {
+          setPage(value);
+          getProducts(value);
+}} />
+      </div>
   );
 }
 
@@ -176,4 +179,4 @@ export default function MultiActionAreaCard(props) {
                 </CardContent>
               </CardActionArea>
             </Card>
-          </Grid> */}
+          </Grid> */}

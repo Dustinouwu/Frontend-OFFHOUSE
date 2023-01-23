@@ -112,7 +112,7 @@ const ModalMessage = ({ message, product }) => {
 
     return (
         <div>
-            <Button variant="text" onClick={handleOpen}  startIcon={<SendIcon style={{ color: 'white' }} />} style={{ color: 'white', fontWeight: 'bold', backgroundColor: '#FF9901' }}>
+            <Button variant="text" onClick={handleOpen}  startIcon={<SendIcon style={{ color: 'white' }} />} style={{ color: 'white', fontWeight: 'bold', backgroundColor: '#FF9901', whiteSpace: 'nowrap' }}>
                 CONTACTAR CON EL VENDEDOR
             </Button>
             <Modal

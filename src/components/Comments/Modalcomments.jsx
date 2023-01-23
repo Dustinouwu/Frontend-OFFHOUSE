@@ -108,7 +108,7 @@ const Modalcomments = ({ comment }) => {
 
   return (
     <div>
-      <Button variant="text" onClick={handleOpen} startIcon={<RateReviewIcon style={{ color: 'white' }} />} style={{ color: 'white', backgroundColor: '#5CA637' }}>
+      <Button variant="text" onClick={handleOpen} startIcon={<RateReviewIcon style={{ color: 'white' }} />} style={{ color: 'white', backgroundColor: '#5CA637', whiteSpace: 'nowrap' }}>
         Enviar Comentario
       </Button>
       <Modal
