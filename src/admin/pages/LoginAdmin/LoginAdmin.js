@@ -136,7 +136,7 @@ export const LoginAdmin = () => {
 
                         <div className="signup-container">
                             <h5>No eres miembro? </h5>
-                            <Link to="createuser/*" ><h5 className="singupl">Regístrate</h5></Link>
+                            <Link to="createuser" ><h5 className="singupl">Regístrate</h5></Link>
                         </div>
 
                         <div className="signup-container">

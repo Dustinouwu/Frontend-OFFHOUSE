@@ -6,7 +6,7 @@ import AuthProvider from '../contexts/auth/AuthProvider';
 import CrudCategories from '../admin/components/FormsCategories/CrudCategories';
 import CrudCom from '../admin/components/FormsCom/CrudCom';
 import FormsReports from '../admin/components/FormsReports/CrudReports';
-import { Home, ResetPassword, CreateUser, CreateProduct, Help, FormResetPassword, Chats, Chatings, ProductList, UpdateProduct, ViewProduct, Categories, CategProdView, Profile, UpdateProfile } from '../pages';
+import { Home, ResetPassword, CreateUser,LandingPage, CreateProduct, Help, FormResetPassword, Chats, Chatings, ProductList, UpdateProduct, ViewProduct, Categories, CategProdView, Profile, UpdateProfile } from '../pages';
 import { PrivateRoute } from "./PrivateRoute";
 import { PublicRoute } from "./PublicRoute";
 import { HomeAdmin, LoginAdmin } from '../admin/pages';

@@ -9,4 +9,5 @@ export {ProductList} from './ProductList/ProductList';
 export {ViewProduct} from './ViewProduct/ViewProduct';
 export {Categories,CategProdView} from './Categories'
 export {Profile, UpdateProfile} from './Profile';
+export {LandingPage} from './LandingPage/LandingPage.jsx';
 

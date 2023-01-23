@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-
+import "remixicon/fonts/remixicon.css"
 import { AppRouter } from './routes';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
