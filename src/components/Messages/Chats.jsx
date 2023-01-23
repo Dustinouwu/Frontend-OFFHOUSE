@@ -1,9 +1,10 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import './index.css'
 
 const Chats = () => {
+
     const [contacts, setContacts] = useState([])
     const navigate = useNavigate();
     const tokenUser = localStorage.getItem('token')
@@ -20,12 +21,14 @@ const Chats = () => {
         }
     }
 
-    
+
     useEffect(() => {
         getContacts()
-        
+
     }, [])
 
+    
+    
 
 
 
@@ -33,8 +36,8 @@ const Chats = () => {
         <div className='chats' >
             {contacts.map((contacts) => (
                 <div className='userChat'>
-                    <div key={contacts.id} 
-                    onClick={() => navigate(`/chats/${contacts.id}`)}
+                    <div key={contacts.id}
+                        onClick={() => navigate(`/chats/${contacts.id}`)}
                     >
                         <img src={contacts.avatar} alt='user' />
                         <div className='userChatInfo'>

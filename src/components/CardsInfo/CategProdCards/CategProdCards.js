@@ -6,7 +6,7 @@ import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import CircleIcon from '@mui/icons-material/Circle';
-import { Button, CardActionArea } from '@mui/material';
+import { Button, CardActionArea, Pagination } from '@mui/material';
 import { useNavigate, useParams } from 'react-router-dom';
 import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 import Labelgiant from "../../atoms/Labelgiant/Labelgiant";
@@ -22,6 +22,8 @@ export const CategProdCards = () => {
     const token = localStorage.getItem('token'); // Obtenciíon del token del local storage
     const [categories, setCategories] = useState([])  // Constante para las categorías
     const [products, setProducts] = useState([]);   // Constante para los productos
+    const [page, setPage] = useState(1);
+    const [lastPage, setLastPage] = useState('');
 
     const config = {
         headers: { Authorization: `${token}` }
@@ -34,7 +36,6 @@ export const CategProdCards = () => {
                 `https://offhouse.herokuapp.com/api/admin/categories/${id}`,
                 { headers: { 'accept': 'application/json', 'authorization': token } }
             )
-
             setCategories(response.data.data.categorie);
         } catch (error) {
             console.log(error);
@@ -42,29 +43,25 @@ export const CategProdCards = () => {
     };
 
     // Obtener productos
-    const getCatProduct = async () => {
+    const getCatProduct = async (page) => {
         try {
             const response = await axios.get(
-                `https://offhouse.herokuapp.com/api/products`,
+                `https://offhouse.herokuapp.com/api/filter/products?categorie_id=${categories.id}&page=${page}`,
                 { headers: { 'accept': 'application/json', 'authorization': token } },
                 config
             )
-
-            setProducts(response.data.data.products.data);
-            console.log(response.data.data.products.data, id ,'productos')
+            setProducts(response.data.data.product.data);
+            setLastPage(response.data.data.pagination.last_page);
         } catch (error) {
             console.log(error);
         }
-    };
-    console.log(products, 'productos')
-    // Filtrar productos por categoría
-    const filterProducts = products.filter(products => products.categorie_id === categories.id);
-    console.log(filterProducts);
-
-    // Renderizar categorías y productos
+    };   
+    // Renderizar categorías y productos 
     useEffect(() => {
         getCategories()
         getCatProduct()
+        categories.id = id
+        page === 1 ? setPage(1) : setPage(lastPage);
     }, [])
 
     //Función para cambiar el color del estado del producto
@@ -83,7 +80,7 @@ export const CategProdCards = () => {
             />
             <Container sx={{ py: 5 }} maxWidth="lg">
                 <Grid container spacing={2}>
-                    {filterProducts.map((products, index) => (
+                    {products.map((products, index) => (
                         <Grid item key={products.id} xs={12} sm={6} md={4} >
                             <Card
                                 sx={{
@@ -117,6 +114,9 @@ export const CategProdCards = () => {
                                         <Typography variant="h6" component="h5" style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'normal', wordWrap: 'break-word', maxHeight: '30px' }}>
                                             {products.title}
                                         </Typography>
+                                        <Typography variant="h6" component="h5" style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'normal', wordWrap: 'break-word', maxHeight: '30px' }}>
+                                            {products.categorie_id}
+                                        </Typography>
                                         <div className="rtcontainer" style={{ display: 'flex' }}>
                                             <CircleIcon style={{ color: colorprod2[index], paddingRight: '10px', width: '20' }} />
                                             <Typography noWrap style={{ paddingTop: '2px' }} >
@@ -127,7 +127,7 @@ export const CategProdCards = () => {
                                 </CardActionArea>
                                 <Button
                                     variant="text"
-                                    startIcon={<RemoveRedEyeIcon style={{ color: 'white' }} />}
+                                    startIcon={<RemoveRedEyeIcon style={{ color: 'white' }}  />}
                                     style={{ color: 'white', backgroundColor: '#FF9901', position: 'absolute', display: 'fixed', }}
                                     onClick={() => navigate(`/viewproduct/${products.id}`)}
                                 >
@@ -140,8 +140,11 @@ export const CategProdCards = () => {
                 </Grid>
 
             </Container>
-        </div>
-    )
+            <Pagination count={lastPage} variant="outlined" page={page} onChange={(event , value) => {
+          setPage(value);
+          getCatProduct(value);
+          window.scrollTo(0, 0);
+}} />
+        </div>
+    )
 }
-
-
