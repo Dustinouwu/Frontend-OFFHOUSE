@@ -169,7 +169,10 @@
 }
 
 .messageContent img {
-  width: 50%;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
 }
 
 .messageContentOwner {
@@ -187,12 +190,15 @@
 }
 
 .messageContentOwner img {
-  
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
   align-items: center;
 }
 
 .messageContentOwner p {
-  background-color: #965b02fd;
+  background-color: #1c8d54fd;
   color: white;
   display: flex;
   align-items: flex-end;

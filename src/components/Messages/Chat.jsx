@@ -17,7 +17,6 @@ const Chat = () => {
                 { headers: { 'accept': 'application/json', 'authorization': tokenUser } }
             )
             setContacts(response.data.data.contacts)
-            console.log(response.data.data.contacts)
         } catch (error) {
             console.log(error)
         }
@@ -29,12 +28,16 @@ const Chat = () => {
         
     }, [])
 
-    //Sacar del getContacts el
+    //Sacar del getContacts el username 
+    const username = contacts.map((contacts) => contacts.username)
+    console.log(username)
+
+
 
     return (
         <div className="chat">
             <div className="chatInfo">
-                <span>{}</span>
+                <span>{username}</span>
                 
             </div>
             <Messages />

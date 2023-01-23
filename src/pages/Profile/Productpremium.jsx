@@ -8,7 +8,8 @@ import {
     Typography,
     Alert,
     Grid,
-    Paper
+    Paper,
+    Pagination
 } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { styled } from '@mui/material/styles';
@@ -28,18 +29,21 @@ const Productpremium = () => {
     const [products, setProducts] = useState([])
     const [productsbyid, setProductsbyid] = useState([])
     const [error, setError] = useState('')
+    const [page, setPage] = useState(1)
+    const [lastPage, setLastPage] = useState('')
+
     const config = {
         headers: { Authorization: `${tokenUser}` }
     };
 
-    const getProducts = async () => {
+    const getProducts = async (page) => {
         try {
             const response = await axios.get(
-                'https://offhouse.herokuapp.com/api/subscriptions',
+             `https://offhouse.herokuapp.com/api/subscriptions?page=${page}`,
                 { headers: { 'accept': 'application/json', 'authorization': token } }
             );
-            console.log(response.data.data.subscriptions);
-            setProducts(response.data.data.subscriptions);
+            setProducts(response.data.data.subscriptions.data);
+            setLastPage(response.data.data.pagination.last_page)
             if (response.status === 403) {
                 setError('')
             }
@@ -85,11 +89,10 @@ const Productpremium = () => {
         }
     }
 
-
-
     useEffect(() => {
         getProducts();
         getProductsUser();
+        page === 1 ? setPage(1) : setPage(lastPage);
     }, []);
 
 
@@ -149,9 +152,13 @@ const Productpremium = () => {
                     </Paper>
                 ))
             }
+           <Pagination count={lastPage} variant="outlined" page={page} onChange={(event, value) => {
+          setPage(value);
+          getProducts(value);
+          window.scrollTo(0, 0);
+          }} />
         </div >
     )
 }
 
-export default Productpremium
-
+export default Productpremium

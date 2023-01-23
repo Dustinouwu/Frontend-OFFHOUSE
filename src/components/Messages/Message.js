@@ -9,8 +9,9 @@ const Message = () => {
     const tokenUser = localStorage.getItem('token')
     const [messages, setMessages] = useState([])
     const [user, setUser] = useState([])
+    const [avatar, setAvatar] = useState([])
     const [error, setError] = useState(false);  //Error
-    const [hasLoadedMessages, setHasLoadedMessages] = useState(false);
+    const [contacts, setContacts] = useState([])
 
     const getUser = async () => {
 
@@ -20,6 +21,7 @@ const Message = () => {
                 { headers: { 'accept': 'application/json', 'authorization': tokenUser } }
             )
             setUser(response.data.data.user, id)
+            setAvatar(response.data.data.avatar)
             console.log(response.data.data.user, id)
         } catch (error) {
 
@@ -27,7 +29,7 @@ const Message = () => {
     }
 
 
-    const getMessage = useCallback( async () => {
+    const getMessage = useCallback(async () => {
         try {
             const response = await axios.get(
                 `https://offhouse.herokuapp.com/api/user/${id}/messages`,
@@ -38,8 +40,20 @@ const Message = () => {
             console.log(error)
         }
     }
-        )
-    
+    )
+
+    const getContacts = async () => {
+        try {
+            const response = await axios.get(
+                `https://offhouse.herokuapp.com/api/user/contacts`,
+                { headers: { 'accept': 'application/json', 'authorization': tokenUser } }
+            )
+            setContacts(response.data.data.contacts)
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
 
     useEffect(() => {
 
@@ -53,14 +67,15 @@ const Message = () => {
             setMessages([...messages, data])
 
 
-            console.log(setMessages)
+            
         });
-        
+
         getMessage()
         getUser();
+        getContacts();
     }, [id])
-    console.log('FROM:',user.id)
-    console.log('TO:',id)
+/*     console.log('FROM:', user.id)
+    console.log('TO:', id) */
 
 
     /* const filteredMessages = () => {
@@ -69,26 +84,69 @@ const Message = () => {
         );
     }; */
 
+    //Sacar la fecha y hora de creacion del mensaje por cada mensaje y solo una sola vez sin que se repita
+    const dateFormatedMessage = useMemo(() => {
+        return messages.map((message) => {
+            const date = new Date(message.created_at);
+            const dateFormated = date.toLocaleString();
+            return dateFormated;
+        });
+    }, [messages]);
+    
+
+    
+
+    //Sacar el avatar del getContacts comparando el id del getContacts con el id del la ruta para sacar el avatar del contacto
+    const avatarChat = useMemo(() => {
+        return contacts.map((contact) => {
+            if (contact.id === parseInt(id)) {
+                return contact.avatar
+            }
+        });
+    }, [contacts, id]);
+    console.log(avatarChat)
+    
+    
+
+
     return (
         <div>
             <div>
                 {
                     messages.map((message) => (
-                        (message.from === user.id || message.to === user.id)? (
-                        <div className='message'>
-                            <div className="messageInfo" key={message.id}>
-                                <div>
-                                    <div className="messageContentOwner">
-                                        <img
-                                            src='https://danzeria.com/wp-content/uploads/2014/09/Daft-Punk2-600x271.jpg'
-                                            alt="qwe"
-                                        />
-                                        <p>{message.message}</p>
-                                        <span>just now</span>
+                        (message.from === user.id || message.to === user.id) ? (
+                            /* condicional para que los mensajes del remitente y del receptor tengan un formato diferente */
+                            (message.from === user.id) ? (
+                                <div className='messageContentOwner'>
+                                    <div className="messageInfo" key={message.id}>
+                                        <div>
+                                            <div className="messageContentOwner">
+                                                <img
+                                                    src={avatar}
+                                                    alt="qwe"
+                                                />
+                                                <p>{message.message}</p>
+                                                <span>{dateFormatedMessage}</span>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
-                        </div >
+                                </div >
+                            ) : (
+                                <div className='message'>
+                                    <div className="messageInfo" key={message.id}>
+                                        <div>
+                                            <div className="messageContent">
+                                                <img
+                                                    src={avatarChat}
+                                                    alt="qwe"
+                                                />
+                                                <p>{message.message}</p>
+                                                <span>{dateFormatedMessage}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div >
+                            )
                         ) : (
                             <h1></h1>
                         )
