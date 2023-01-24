@@ -28,8 +28,8 @@ const Chat = () => {
         
     }, [])
 
-    //Sacar del getContacts el username 
-    const username = contacts.map((contacts) => contacts.username)
+    //Sacar del getContacts el username comparando el id con el id de los contactos
+    const username = contacts.find((contact) => contact.id === parseInt(id))?.username
     console.log(username)
 
 

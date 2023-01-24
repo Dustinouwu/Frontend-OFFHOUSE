@@ -58,7 +58,6 @@ export const AppRouter = () => {
                                         <Route index path='/home' element={<Home />} />
 
                                         <Route path='/help' element={<Help />} />
-                                        <Route path='/test' element={<Chatting />} />
                                         <Route path='/viewproduct/:id' element={<ViewProduct />} />
                                         <Route path='/chats' element={<Chats />} />
                                         <Route path='/chats/:id' element={<Chatings />} />

@@ -15,11 +15,11 @@ const SearchBarContainer = styled(motion.div)`
     display: flex;
     width: 40%;
     flex-direction: column;
-    position: absolute;
     background-color: #D39C49;
     border-radius: 25px;
     box-shadow: 0px 2px 12px 3px rgba(0, 0, 0, 0.14);
-
+    position: absolute;
+    z-index: 999;
     overflow: hidden;
     &::-webkit-scrollbar {
         width:0;

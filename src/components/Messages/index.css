@@ -75,7 +75,7 @@
 }
 
 .chat {
-  flex: 2;
+  flex: 3;
 
 }
 
@@ -214,6 +214,7 @@
   padding: 10px;
   justify-content: space-between;
   color: #000000;
+  border-bottom: 1px solid #000000;
 }
 
 .logo {

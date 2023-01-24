@@ -1,8 +1,8 @@
-/* .footercatch{
+.footercatch {
     position: absolute;
-    bottom: 0;
+    width: 100%;
     z-index: 100;
-} */
+}
 
 .footer-container {
     display: flex;
@@ -12,7 +12,8 @@
     color: #fff;
     background-color: #000;
     font-size: 15px;
-    
+
+
 }
 
 .footer-section-container {

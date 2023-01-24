@@ -20,6 +20,7 @@ import Settings from '@mui/icons-material/Settings';
 import Logout from '@mui/icons-material/Logout';
 import Inventory2Icon from '@mui/icons-material/Inventory2';
 import NewHeader from './NewHeader';
+import Footer from '../Footer/Footer';
 
 const Header = () => {
 
@@ -189,6 +190,9 @@ const Header = () => {
 
             <div className='navv-container'>
                 <Nav />
+            </div>
+            <div>
+                
             </div>
             <Outlet />
         </div>

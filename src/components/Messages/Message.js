@@ -67,15 +67,15 @@ const Message = () => {
             setMessages([...messages, data])
 
 
-            
+
         });
 
         getMessage()
         getUser();
         getContacts();
     }, [id])
-/*     console.log('FROM:', user.id)
-    console.log('TO:', id) */
+    /*     console.log('FROM:', user.id)
+        console.log('TO:', id) */
 
 
     /* const filteredMessages = () => {
@@ -92,9 +92,9 @@ const Message = () => {
             return dateFormated;
         });
     }, [messages]);
-    
 
-    
+
+
 
     //Sacar el avatar del getContacts comparando el id del getContacts con el id del la ruta para sacar el avatar del contacto
     const avatarChat = useMemo(() => {
@@ -105,9 +105,10 @@ const Message = () => {
         });
     }, [contacts, id]);
     console.log(avatarChat)
-    
-    
 
+
+    const username = contacts.find((contact) => contact.id === parseInt(id))?.avatar
+    console.log(username)
 
     return (
         <div>
@@ -126,7 +127,7 @@ const Message = () => {
                                                     alt="qwe"
                                                 />
                                                 <p>{message.message}</p>
-                                                <span>{dateFormatedMessage}</span>
+                                               
                                             </div>
                                         </div>
                                     </div>
@@ -137,11 +138,11 @@ const Message = () => {
                                         <div>
                                             <div className="messageContent">
                                                 <img
-                                                    src={avatarChat}
+                                                    src={username}
                                                     alt="qwe"
                                                 />
                                                 <p>{message.message}</p>
-                                                <span>{dateFormatedMessage}</span>
+                                               
                                             </div>
                                         </div>
                                     </div>
