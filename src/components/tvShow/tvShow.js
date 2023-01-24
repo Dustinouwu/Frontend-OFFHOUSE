@@ -56,8 +56,9 @@ function TvShow(props) {
         <TvshowContainer onClick={rute}>
 
             <Thumbnail src={thumbanilSrc} />
-            <Rating>{rating}</Rating>
+            
             <Name>{name}</Name>
+            <Rating>${rating}</Rating>
             
         </TvshowContainer>
     )

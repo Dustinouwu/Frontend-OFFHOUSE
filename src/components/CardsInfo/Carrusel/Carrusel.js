@@ -25,7 +25,7 @@ const SimpleSlider = () => {
   const getProducts = async () => {
     try {
       const response = await axios.get(
-        'https://offhouse.herokuapp.com/api/products',
+        'https://offhouse.herokuapp.com/api/featured/products',
         { headers: { 'accept': 'application/json', 'authorization': token } }
       );
       console.log(response.data.data.products.data);
@@ -40,12 +40,13 @@ const SimpleSlider = () => {
     }
   };
 
+
   /* FUNCIÓN PARA RENDERIZAR LA FUNCIÓN getProducts AL CARGAR LA PÁGINA*/
   useEffect(() => {
     getProducts();
   }, []);
 
-  /*FUNCIÓN PARA CAMBIAR EL COLOR DEPENDIENDO EL ESTADO*/
+
   const colorprod2 = products.map((products) => {
     return (
       products.state_appliance === 'Nuevo' ? "#0FFF18" : '#FF0000' && products.state_appliance === 'nuevo' ? "#0FFF18" : '#FF0000' && products.state_appliance === 'reacondicionado' ? "#FFF100" : '#FF0000'
@@ -90,15 +91,101 @@ const SimpleSlider = () => {
       },
     ],
   };
-  const firstTenProducts = products.slice(0, 10);
-  console.log(firstTenProducts);
+
+  // filtrar los productos con featured = 1
+  const firstTenProducts = products.filter((item) => item.featured === 1);
 
   return (
     <div className="App">
+      <h2 className="title">Destacados de Refrigeradoras</h2>
       <Slider {...settings}>
         {firstTenProducts.map((item) => (
           <div className="card">
-            {item.featured === 1 ? 
+            {item.categorie_id === 1  ? 
+            <div className="card-top">
+              <CardMedia
+                component="img"
+                image={item.image}
+                alt="green iguana"
+              />
+            <div className="card-bottom">
+              <h3 id="titless">{item.title}</h3>
+              <h3 id="pricess">${item.price}</h3>
+            </div>
+            </div>  
+            : null
+            }
+          </div>
+        ))}
+      </Slider>
+      <h2 className="title">Destacados de Cocinas</h2>
+      <Slider {...settings}>
+        {firstTenProducts.map((item) => (
+          <div className="card">
+            {item.categorie_id === 2  ? 
+            <div className="card-top">
+              <CardMedia
+                component="img"
+                image={item.image}
+                alt="green iguana"
+              />
+            <div className="card-bottom">
+              <h3 id="titless">{item.title}</h3>
+              <h3 id="pricess">${item.price}</h3>
+            </div>
+            </div>  
+            : null
+            }
+          </div>
+        ))}
+      </Slider>
+      <h2 className="title">Destacados de Microondas </h2>
+      <Slider {...settings}>
+        {firstTenProducts.map((item) => (
+          <div className="card">
+            {item.categorie_id === 3  ? 
+            <div className="card-top">
+              <CardMedia
+                component="img"
+                image={item.image}
+                alt="green iguana"
+              />
+            <div className="card-bottom">
+              <h3 id="titless">{item.title}</h3>
+              <h3 id="pricess">${item.price}</h3>
+            </div>
+            </div>  
+            : null
+            }
+          </div>
+        ))}
+      </Slider>
+      <h2 className="title">Destacados de Planchas</h2>
+      <Slider {...settings}>
+        {firstTenProducts.map((item) => (
+          <div className="card">
+            {item.categorie_id === 4  ? 
+            <div className="card-top">
+              <CardMedia
+                component="img"
+                image={item.image}
+                alt="green iguana"
+              />
+            <div className="card-bottom">
+              <h3 id="titless">{item.title}</h3>
+              <h3 id="pricess">${item.price}</h3>
+            </div>
+            </div>  
+            : null
+            }
+          </div>
+        ))}
+      </Slider>
+      <h2 className="title">Destacados de Lavadoras</h2>
+      <Slider {...settings}>
+        {firstTenProducts.map((item) => (
+          <div className="card">
+            {item.categorie_id === 5  ? 
             <div className="card-top">
               <CardMedia
                 component="img"
@@ -119,4 +206,4 @@ const SimpleSlider = () => {
   );
 }
 
-export default SimpleSlider
+export default SimpleSlider

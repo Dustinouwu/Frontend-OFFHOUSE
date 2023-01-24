@@ -9,6 +9,7 @@ import { CardActionArea } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import Labelgiant from "../../atoms/Labelgiant/Labelgiant";
 import axios from 'axios';
+import Footer from '../../Layouts/Footer/Footer';
 export const CategoriesView = () => {
 
   const navigate = useNavigate(); // Para navegar entre rutas
@@ -84,6 +85,7 @@ export const CategoriesView = () => {
         </Container>
 
       </div>
+      <Footer />
     </div>
   )
 }

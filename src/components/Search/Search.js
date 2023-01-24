@@ -99,6 +99,7 @@ const SearchContent = styled.div`
     display: flex;
     flex-direction: column;
     padding: 1em;
+    cursor: pointer;
 
     &::-webkit-scrollbar {
         width:0;
@@ -229,9 +230,10 @@ function Search(props) {
                         <TvShow
                             rute={() => navigate(`/viewproduct/${product.id}`)}
                             key={product.id}
-                            rating={product.id}
+                            
                             thumbanilSrc={product.image}
                             name={product.title}
+                            rating={product.price}
                         />
 
 

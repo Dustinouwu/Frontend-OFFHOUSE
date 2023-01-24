@@ -1,5 +1,4 @@
 import './FormsProducts.css'
-import Footer from '../../Layouts/Footer/Footer';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -17,7 +16,7 @@ import { useNavigate } from 'react-router-dom';
 import WorkspacePremiumIcon from '@mui/icons-material/WorkspacePremium';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
-
+import Footer from '../../Layouts/Footer/Footer';
 
 const FormsProducts = () => {
 

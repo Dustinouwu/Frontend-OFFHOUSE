@@ -79,7 +79,7 @@ const Paypal = () => {
             console.log(error);
         }
     }
-    
+
 
 
     useEffect(() => {
@@ -112,7 +112,15 @@ const Paypal = () => {
                         <CardMedia
                             component="img"
                             image={product.image}
-                            style={{ width: '50%', display: 'flex', alignItems: 'center', flexDirection: 'column', marginLeft: '25%', marginTop: '1%', borderRadius: '25px' }}
+                            style={{
+                                width: '50%',
+                                display: 'flex',
+                                alignItems: 'center',
+                                flexDirection: 'column',
+                                marginLeft: '25%',
+                                marginTop: '1%',
+                                borderRadius: '25px'
+                            }}
                             alt="avatar user"
                         />
                         <CardContent>

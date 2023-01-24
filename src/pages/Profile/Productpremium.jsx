@@ -9,7 +9,8 @@ import {
     Alert,
     Grid,
     Paper,
-    Pagination
+    Pagination,
+    Container
 } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { styled } from '@mui/material/styles';
@@ -39,7 +40,7 @@ const Productpremium = () => {
     const getProducts = async (page) => {
         try {
             const response = await axios.get(
-             `https://offhouse.herokuapp.com/api/subscriptions?page=${page}`,
+                `https://offhouse.herokuapp.com/api/subscriptions?page=${page}`,
                 { headers: { 'accept': 'application/json', 'authorization': token } }
             );
             setProducts(response.data.data.subscriptions.data);
@@ -142,7 +143,7 @@ const Productpremium = () => {
                                         </Button>
                                     </Grid>
                                 </Grid>
-                                <Grid item xs={12} sm={10}  md={6} >
+                                <Grid item xs={12} sm={10} md={6} >
                                     <Typography variant="subtitle1" component="div">
                                         {getBar(product)}
                                     </Typography>
@@ -152,13 +153,16 @@ const Productpremium = () => {
                     </Paper>
                 ))
             }
-           <Pagination count={lastPage} variant="outlined" page={page} onChange={(event, value) => {
-          setPage(value);
-          getProducts(value);
-          window.scrollTo(0, 0);
-          }} />
+            <Container sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <Pagination count={lastPage} variant="outlined" page={page} onChange={(event, value) => {
+                    setPage(value);
+                    getProducts(value);
+                    window.scrollTo(0, 0);
+                }} />
+
+            </Container>
         </div >
     )
 }
 
-export default Productpremium
+export default Productpremium

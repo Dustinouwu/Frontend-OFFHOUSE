@@ -5,6 +5,7 @@ import Footer from "../../components/Layouts/Footer/Footer";
 import SubscriptionBar from "../../components/SubscriptionBar/SubscriptionBar";
 import SampleNextArrow from "../../components/CardsInfo/Carrusel/Carrusel";
 import CardsSubscription from "../../components/CardsInfo/CardsSubscription";
+import Banner from "../../components/CardsInfo/Banner/Banner";
 import { Divider } from "@mui/material";
 
 export const Home = () => {
@@ -12,11 +13,13 @@ export const Home = () => {
         <div className="HomeContainer">
 
             <div >
+                <Banner />
+                {/* <CardsSubscription /> */}
                 <SampleNextArrow />
-                <CardsSubscription />
-                <Divider sx={{mt: 5}}/>
-                <MultiActionAreaCard />
-                <Footer />          
+
+                <Divider sx={{ mt: 5 }} />
+                {/*  <MultiActionAreaCard /> */}
+                <Footer />
             </div>
         </div>
     )

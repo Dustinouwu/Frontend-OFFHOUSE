@@ -22,6 +22,10 @@
     flex: 1;
 }
 
+#theader{
+    cursor: pointer;
+}
+
 .lhd-container {
     display: flex;
     align-items: center;

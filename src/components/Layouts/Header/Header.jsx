@@ -56,7 +56,7 @@ const Header = () => {
         }
     }
 
-    
+
 
     useEffect(() => {
         const getUser = async () => {
@@ -77,14 +77,16 @@ const Header = () => {
         <div >
             {/* <NewHeader /> */}
             <div className="header-container">
+                <Link to="/home">
+                    <div className='lhd-container'>
 
-                <div className='lhd-container'>
-                    <Link to="/home">
                         <img src={Imagenes.img4} alt="logo" />
-                    </Link>
-                    <h1 id='theader'>OFF HOUSE</h1>
-                </div>
 
+
+                        <h1 id='theader' >OFF HOUSE</h1>
+
+                    </div>
+                </Link>
                 <form id='formsearch'>
                     <Search />
 
@@ -192,7 +194,7 @@ const Header = () => {
                 <Nav />
             </div>
             <div>
-                
+
             </div>
             <Outlet />
         </div>

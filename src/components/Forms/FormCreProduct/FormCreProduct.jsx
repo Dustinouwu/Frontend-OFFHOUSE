@@ -14,6 +14,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { TextareaAutosize } from '@mui/material';
 import PhotoLibraryIcon from '@mui/icons-material/PhotoLibrary';
 import Snackbar from '@mui/material/Snackbar'
+import Footer from '../../Layouts/Footer/Footer';
 
 
 const theme = createTheme();
@@ -487,6 +488,7 @@ const FormCreProduct = ({ products }) => {
                     </form>
                 </Paper>
             </Container>
+            <Footer />
         </ThemeProvider>
     )
 }

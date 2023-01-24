@@ -144,9 +144,9 @@ const FormsProfile = ({ profile }) => {
                     if (event.target.value.length > 25) {
                       setErrors({ ...errors, first_name: true });
                       setErrorMessages({ ...errorMessages, first_name: 'No más de 25 caracteres' })
-                    } else if (event.target.value.length < 5) {
+                    } else if (event.target.value.length < 3) {
                       setErrors({ ...errors, first_name: true });
-                      setErrorMessages({ ...errorMessages, first_name: 'No menos de 5 caracteres' })
+                      setErrorMessages({ ...errorMessages, first_name: 'No menos de 3 caracteres' })
                     } else {
                       setErrors({ ...errors, first_name: false });
                       setErrorMessages({ ...errorMessages, first_name: '' })
@@ -250,21 +250,15 @@ const FormsProfile = ({ profile }) => {
                   fullWidth
                   onChange={(event) => {
                     setHome_phone(event.target.value)
-                    if (event.target.value.length > 10) {
+                    if (event.target.value.length > 7) {
                       setErrors({ ...errors, home_phone: true });
-                      setErrorMessages({ ...errorMessages, home_phone: 'No más de 10 caracteres' })
-                    } else if (event.target.value.length < 5) {
+                      setErrorMessages({ ...errorMessages, home_phone: 'No más de 7 caracteres' })
+                    } else if (event.target.value.length < 7) {
                       setErrors({ ...errors, home_phone: true });
-                      setErrorMessages({ ...errorMessages, home_phone: 'No menos de 5 caracteres' })
+                      setErrorMessages({ ...errorMessages, home_phone: 'No menos de 7 caracteres' })
                     } else {
                       setErrors({ ...errors, home_phone: false });
                       setErrorMessages({ ...errorMessages, home_phone: '' })
-                    }
-                  }}
-                  onBlur={(event) => {
-                    if (event.target.value === '') {
-                      setErrors({ ...errors, home_phone: true });
-                      setErrorMessages({ ...errorMessages, home_phone: 'Este campo es obligatorio' });
                     }
                   }}
                   value={home_phone}
@@ -288,12 +282,12 @@ const FormsProfile = ({ profile }) => {
                   fullWidth
                   onChange={(event) => {
                     setPersonal_phone(event.target.value)
-                    if (event.target.value.length > 15) {
+                    if (event.target.value.length > 10) {
                       setErrors({ ...errors, personal_phone: true });
-                      setErrorMessages({ ...errorMessages, personal_phone: 'No más de 15 caracteres' })
-                    } else if (event.target.value.length < 5) {
+                      setErrorMessages({ ...errorMessages, personal_phone: 'No más de 10 caracteres' })
+                    } else if (event.target.value.length < 10) {
                       setErrors({ ...errors, personal_phone: true });
-                      setErrorMessages({ ...errorMessages, personal_phone: 'No menos de 5 caracteres' })
+                      setErrorMessages({ ...errorMessages, personal_phone: 'No menos de 10 caracteres' })
                     } else {
                       setErrors({ ...errors, personal_phone: false });
                       setErrorMessages({ ...errorMessages, personal_phone: '' })

@@ -25,7 +25,7 @@ export const MenuData2 = [
         cName: 'nav-links'
     },
     {
-        title: 'Tus productos',
+        title: 'Mis productos',
         path: '/productlist',
         cName: 'nav-links'
     }

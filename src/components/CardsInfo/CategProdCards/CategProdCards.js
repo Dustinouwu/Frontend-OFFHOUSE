@@ -6,16 +6,16 @@ import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import CircleIcon from '@mui/icons-material/Circle';
-import { Button, CardActionArea, Pagination } from '@mui/material';
-import { useNavigate, useParams } from 'react-router-dom';
+import { Button, CardActionArea, CardActions, Pagination } from '@mui/material';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 import Labelgiant from "../../atoms/Labelgiant/Labelgiant";
 import axios from 'axios';
+import Footer from '../../Layouts/Footer/Footer';
 
 
 
-
-export const CategProdCards = () => {
+export const  CategProdCards = () => {
 
     const { id } = useParams(); // Obtener el id de la categoría de la URL
     const navigate = useNavigate(); // Para navegar entre rutas
@@ -24,6 +24,7 @@ export const CategProdCards = () => {
     const [products, setProducts] = useState([]);   // Constante para los productos
     const [page, setPage] = useState(1);
     const [lastPage, setLastPage] = useState('');
+    const [itemsPerPage, setItemsPerPage] = useState(10);
 
     const config = {
         headers: { Authorization: `${token}` }
@@ -46,16 +47,16 @@ export const CategProdCards = () => {
     const getCatProduct = async (page) => {
         try {
             const response = await axios.get(
-                `https://offhouse.herokuapp.com/api/filter/products?categorie_id=${categories.id}&page=${page}`,
+                `https://offhouse.herokuapp.com/api/products`,
                 { headers: { 'accept': 'application/json', 'authorization': token } },
                 config
             )
-            setProducts(response.data.data.product.data);
-            setLastPage(response.data.data.pagination.last_page);
+            setProducts(response.data.data.products.data);
+
         } catch (error) {
             console.log(error);
         }
-    };   
+    };
     // Renderizar categorías y productos 
     useEffect(() => {
         getCategories()
@@ -74,47 +75,48 @@ export const CategProdCards = () => {
 
 
     return (
-        <div style={{ marginLeft: '10%' }}>
-            <Labelgiant
-                text={categories.name}
-            />
-            <Container sx={{ py: 5 }} maxWidth="lg">
-                <Grid container spacing={2}>
-                    {products.map((products, index) => (
-                        <Grid item key={products.id} xs={12} sm={6} md={4} >
-                            <Card
-                                sx={{
-                                    height: '100%',
-                                    maxWidth: '270px',
-                                    display: 'flex',
-                                    flexDirection: 'column',
-                                    borderRadius: 3,
-                                    border: 0,
-                                    boxShadow: '15px 0 5px -5px rgba(0, 0, 0, 0.2), -8px 0 15px -5px rgba(0, 0, 0, 0.2)',
-                                    flexWrap: 'wrap',
-                                    alignItems: 'flex-end',
-                                }}
-                            >
-                                <CardActionArea>
-                                    <CardMedia
-                                        component="img"
-                                        sx={{
-                                            // 16:9
-                                            py: '5%',
-                                            width: '100%',
-                                            height: '200px',
-                                        }}
-                                        image={products.image}
-                                        alt="random"
-                                    />
-                                    <CardContent >
-                                        <Typography variant="h5" component="h3">
-                                            ${products.price}
-                                        </Typography>
-                                        <Typography variant="h6" component="h5" style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'normal', wordWrap: 'break-word', maxHeight: '30px' }}>
-                                            {products.title}
-                                        </Typography>
-                                        <Typography variant="h6" component="h5" style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'normal', wordWrap: 'break-word', maxHeight: '30px' }}>
+        <div >
+            <div style={{ marginLeft: '10%' }}>
+                <Labelgiant
+                    text={categories.name}
+                />
+                <Container sx={{ py: 5 }} maxWidth="lg">
+                    <Grid container spacing={2}>
+                        {products.slice(0, itemsPerPage).map((products, index) => (
+                            <Grid item key={products.id} xs={12} sm={6} md={4} >
+                                <Card
+                                    sx={{
+                                        height: '100%',
+                                        maxWidth: '270px',
+                                        display: 'flex',
+                                        flexDirection: 'column',
+                                        borderRadius: 3,
+                                        border: 0,
+                                        boxShadow: '15px 0 5px -5px rgba(0, 0, 0, 0.2), -8px 0 15px -5px rgba(0, 0, 0, 0.2)',
+                                        flexWrap: 'wrap',
+                                        alignItems: 'flex-end',
+                                    }}
+                                >
+                                    <CardActionArea>
+                                        <CardMedia
+                                            component="img"
+                                            sx={{
+                                                // 16:9
+                                                py: '5%',
+                                                width: '100%',
+                                                height: '200px',
+                                            }}
+                                            image={products.image}
+                                            alt="random"
+                                        />
+                                        <CardContent >
+                                            <Typography variant="h5" component="h3">
+                                                ${products.price}
+                                            </Typography>
+                                            <Typography variant="h6" component="h5" style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'normal', wordWrap: 'break-word', maxHeight: '30px' }}>
+                                                {products.title}
+                                            </Typography>
+                                            <Typography variant="h6" component="h5" style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'normal', wordWrap: 'break-word', maxHeight: '30px' }}>
                                             {products.categorie_id}
                                         </Typography>
                                         <div className="rtcontainer" style={{ display: 'flex' }}>
@@ -123,8 +125,8 @@ export const CategProdCards = () => {
                                                 {products.state_appliance}
                                             </Typography>
                                         </div>
-                                    </CardContent>
-                                </CardActionArea>
+                                        </CardContent>
+                                    </CardActionArea>
                                 <Button
                                     variant="text"
                                     startIcon={<RemoveRedEyeIcon style={{ color: 'white' }}  />}
@@ -134,17 +136,14 @@ export const CategProdCards = () => {
                                     Ver Producto
                                 </Button>
 
-                            </Card>
-                        </Grid>
-                    ))}
-                </Grid>
+                                </Card>
+                            </Grid>
+                        ))}
+                    </Grid>
 
-            </Container>
-            <Pagination count={lastPage} variant="outlined" page={page} onChange={(event , value) => {
-          setPage(value);
-          getCatProduct(value);
-          window.scrollTo(0, 0);
-}} />
-        </div>
-    )
+                </Container>
+                <button onClick={() => setItemsPerPage(itemsPerPage + 10)}>Ver más</button>
+            </div>
+        </div>
+    )
 }

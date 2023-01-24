@@ -64,8 +64,10 @@ export const LoginAdmin = () => {
             }
             window.location.reload()
         } catch (error) {
-            if (error.response && error.response.data && error.response.data.message) {
+            if (error.response.data.message) {
                 setErrorTranslated(error.response.data.message)
+            } else {
+                setErrorTranslated(error.response.data.errors)
             }
 
             console.log(error.response.data.message, 'error');

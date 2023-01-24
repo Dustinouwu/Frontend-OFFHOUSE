@@ -162,9 +162,9 @@ export const CreateUser = ({ register }) => {
                                         if (event.target.value.length > 25) {
                                             setErrors({ ...errors, first_name: true });
                                             setErrorMessages({ ...errorMessages, first_name: 'No más de 25 caracteres' })
-                                        } else if (event.target.value.length < 5) {
+                                        } else if (event.target.value.length < 3) {
                                             setErrors({ ...errors, first_name: true });
-                                            setErrorMessages({ ...errorMessages, first_name: 'No menos de 5 caracteres' })
+                                            setErrorMessages({ ...errorMessages, first_name: 'No menos de 3 caracteres' })
                                         } else {
                                             setErrors({ ...errors, first_name: false });
                                             setErrorMessages({ ...errorMessages, first_name: '' })
@@ -198,9 +198,9 @@ export const CreateUser = ({ register }) => {
                                         if (event.target.value.length > 25) {
                                             setErrors({ ...errors, last_name: true });
                                             setErrorMessages({ ...errorMessages, last_name: 'No más de 25 caracteres' })
-                                        } else if (event.target.value.length < 5) {
+                                        } else if (event.target.value.length < 3) {
                                             setErrors({ ...errors, last_name: true });
-                                            setErrorMessages({ ...errorMessages, last_name: 'No menos de 5 caracteres' })
+                                            setErrorMessages({ ...errorMessages, last_name: 'No menos de 3 caracteres' })
                                         } else {
                                             setErrors({ ...errors, last_name: false });
                                             setErrorMessages({ ...errorMessages, last_name: '' })
@@ -274,18 +274,12 @@ export const CreateUser = ({ register }) => {
                                         if (event.target.value.length > 7) {
                                             setErrors({ ...errors, home_phone: true });
                                             setErrorMessages({ ...errorMessages, home_phone: 'No más de 7 caracteres' })
-                                        } else if (event.target.value.length < 5) {
+                                        } else if (event.target.value.length < 7) {
                                             setErrors({ ...errors, home_phone: true });
-                                            setErrorMessages({ ...errorMessages, home_phone: 'No menos de 5 caracteres' })
+                                            setErrorMessages({ ...errorMessages, home_phone: 'No menos de 7 caracteres' })
                                         } else {
                                             setErrors({ ...errors, home_phone: false });
                                             setErrorMessages({ ...errorMessages, home_phone: '' })
-                                        }
-                                    }}
-                                    onBlur={(event) => {
-                                        if (event.target.value === '') {
-                                            setErrors({ ...errors, home_phone: true });
-                                            setErrorMessages({ ...errorMessages, home_phone: 'Este campo es obligatorio' });
                                         }
                                     }}
                                     value={home_phone}
@@ -313,9 +307,9 @@ export const CreateUser = ({ register }) => {
                                         if (event.target.value.length > 10) {
                                             setErrors({ ...errors, personal_phone: true });
                                             setErrorMessages({ ...errorMessages, personal_phone: 'No más de 10 caracteres' })
-                                        } else if (event.target.value.length < 5) {
+                                        } else if (event.target.value.length < 10) {
                                             setErrors({ ...errors, personal_phone: true });
-                                            setErrorMessages({ ...errorMessages, personal_phone: 'No menos de 5 caracteres' })
+                                            setErrorMessages({ ...errorMessages, personal_phone: 'No menos de 10 caracteres' })
                                         } else {
                                             setErrors({ ...errors, personal_phone: false });
                                             setErrorMessages({ ...errorMessages, personal_phone: '' })
@@ -351,9 +345,9 @@ export const CreateUser = ({ register }) => {
                                         if (event.target.value.length > 50) {
                                             setErrors({ ...errors, address: true });
                                             setErrorMessages({ ...errorMessages, address: 'No más de 50 caracteres' })
-                                        } else if (event.target.value.length < 5) {
+                                        } else if (event.target.value.length < 3) {
                                             setErrors({ ...errors, address: true });
-                                            setErrorMessages({ ...errorMessages, address: 'No menos de 5 caracteres' })
+                                            setErrorMessages({ ...errorMessages, address: 'No menos de 3 caracteres' })
                                         } else {
                                             setErrors({ ...errors, address: false });
                                             setErrorMessages({ ...errorMessages, address: '' })

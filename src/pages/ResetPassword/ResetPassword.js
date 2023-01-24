@@ -23,12 +23,12 @@ export const ResetPassword = () => {
                 { email },
                 { headers: { 'accept': 'application/json' } }
             )
-
+                navigate('/login')
         } catch (error) {
             if (error.response && error.response.status === 400) {
                 setError(error.response.data.message)
             } else if (error.response && error.response.status === 422) {
-                setError('Se requiere un correo ');
+                setError('Se requiere un correo válido');
             } else if (error.response && error.response.status === 404) {
                 setError('No se ha encontrado ha encontrado un correo asociado en nuestro sistema');
             } else if (error.response && error.response.status === 403) {

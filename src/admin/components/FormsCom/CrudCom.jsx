@@ -68,6 +68,7 @@ const CrudCom = () => {
                 <GridActionsCellItem
                     icon={<DeleteIcon />}
                     label="Delete"
+                    onClick={() => deleteComment(params.id)}
                 />,
             ],
         },

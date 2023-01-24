@@ -11,6 +11,7 @@ import CssBaseline from '@mui/material/CssBaseline';
 import Container from '@mui/material/Container';
 import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
+import Footer from '../../Layouts/Footer/Footer';
 //HASTA AQUÍ 
 
 const theme = createTheme();
@@ -484,6 +485,7 @@ const FormUpdataProduct = ({ products }) => {
                     </form>
                 </Paper>
             </Container>
+            <Footer />
         </ThemeProvider>
 
 

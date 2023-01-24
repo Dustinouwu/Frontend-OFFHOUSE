@@ -82,11 +82,11 @@ export const CardProduct = () => {
                             sx={{
                                 margin: 'auto',
                                 display: 'block',
-                                width: '40%',
+                                width: '60%',
                                 py: '2%',
-                                maxWidth: '500px',
-                                maxHeight: '500px',
-
+                                maxWidth: '200px',
+                                maxHeight: '200px',
+                                objectFit: 'cover'
                             }}
                             image={product.image}
                         />

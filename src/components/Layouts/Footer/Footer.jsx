@@ -13,7 +13,7 @@ function Footer() {
       <div className='footer-lineseparator'></div>
       <footer className='footer-dir'>
           <h5>Quito-Ecuador</h5>
-          <h5>Derechos reservados © 2022</h5>
+          <h5>Derechos reservados © 2023</h5>
       </footer>
     </div>
   )
