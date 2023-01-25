@@ -143,7 +143,7 @@ const SimpleSlider = () => {
       <Slider {...settings}>
         {firstTenProducts.map((item) => (
           <div className="card">
-            {item.categorie_id === 3  ? 
+            {item.categorie_id === 1  ? 
             <div className="card-top">
               <CardMedia
                 component="img"
@@ -164,7 +164,7 @@ const SimpleSlider = () => {
       <Slider {...settings}>
         {firstTenProducts.map((item) => (
           <div className="card">
-            {item.categorie_id === 4  ? 
+            {item.categorie_id === 1  ? 
             <div className="card-top">
               <CardMedia
                 component="img"
@@ -185,7 +185,7 @@ const SimpleSlider = () => {
       <Slider {...settings}>
         {firstTenProducts.map((item) => (
           <div className="card">
-            {item.categorie_id === 5  ? 
+            {item.categorie_id === 1  ? 
             <div className="card-top">
               <CardMedia
                 component="img"
