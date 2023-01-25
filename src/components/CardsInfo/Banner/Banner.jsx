@@ -42,7 +42,7 @@ const Banner = () => {
                                 A tan solo <b>4.99</b>
                             </p>
 
-                            <a href="#" class="banner-btn">Shop now</a>
+                            <a href="#" class="banner-btn" onClick={() => navigate('/help')}>Haz Click Aquí </a>
 
                         </div>
 

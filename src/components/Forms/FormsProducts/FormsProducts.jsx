@@ -23,7 +23,7 @@ const FormsProducts = () => {
   const navigate = useNavigate(); /* FUNCIÓN PÁRA NAVEGAR */
   const [products, setProducts] = useState([]);  /* FUNCIÓN PARA LISTAR LOS PRODUCTOS */
   const tokenUser = localStorage.getItem('token')  /* FUNCIÓN PARA PODER RECUPERAR EL TOKEN */
-
+  const user = JSON.parse(localStorage.getItem('user')) || {};
   const config = {
     headers: { Authorization: `${tokenUser}` }
   };
@@ -32,11 +32,11 @@ const FormsProducts = () => {
   const getProductsUser = async () => {
     try {
       const response = await axios.get(
-        'https://offhouse.herokuapp.com/api/products/myProducts/list',
+        'https://offhouse.herokuapp.com/api/products',
         { headers: { 'accept': 'application/json', 'authorization': tokenUser } },
         config
       );
-      setProducts(response.data.data.products.data);
+      setProducts(response.data.data.products);
     } catch (error) {
       console.log(error.response.data.message, 'error');
     }
@@ -65,6 +65,11 @@ const FormsProducts = () => {
     getProductsUser();
 
   }, []);
+
+  //Filtro de productos por usuario
+  const filterProducts = products.filter((product) => product.user_id === user.id);
+  
+  
   
   return (
     <div>
@@ -86,7 +91,7 @@ const FormsProducts = () => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {products.map((products, index) => (
+              {filterProducts.map((products, index) => (
                 <TableRow
                   key={products.id}
                   sx={{ '&:last-child td, &:last-child th': { border: 0 } }}

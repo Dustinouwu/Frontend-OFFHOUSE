@@ -25,11 +25,11 @@ const SimpleSlider = () => {
   const getProducts = async () => {
     try {
       const response = await axios.get(
-        'https://offhouse.herokuapp.com/api/featured/products',
+        'https://offhouse.herokuapp.com/api/products',
         { headers: { 'accept': 'application/json', 'authorization': token } }
       );
-      console.log(response.data.data.products.data);
-      setProducts(response.data.data.products.data);
+      console.log(response.data.data.products);
+      setProducts(response.data.data.products);
       if (response.status === 403) {
         setError('')
       }

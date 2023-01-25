@@ -6,16 +6,20 @@ export const UpdateProduct = () => {
     const { id } = useParams();
     const [product, setProduct] = useState({});
     const tokenUser = localStorage.getItem("token");
-    console.log(id);
+    const user = JSON.parse(localStorage.getItem('user')) || {};
+    
+
+
+
     useEffect(() => {
         const getProduct = async () => {
             try {
                 const response = await axios.get(
-                    `https://offhouse.herokuapp.com/api/products/${id}/view`,
+                    `https://offhouse.herokuapp.com/api/products/${id}`,
                     { headers: { 'accept': 'application/json', 'authorization': tokenUser } }
                 )
                 const user = { ...response.data.data.product, id }
-                
+
                 setProduct(user);
                 console.log(setProduct);
                 console.log(user);
@@ -26,22 +30,33 @@ export const UpdateProduct = () => {
         getProduct()
     }, [])
 
+
     return (
         <div>
-            <div className="create-product">
-                {
-                    Object.keys(product).length > 0 ?
-                        (
-                            <>
-                                <FormUpdataPro products={product} />
-                            </>
-                        )
-                        :
-                        (
-                            <h1>Loading...</h1>
-                        )
-                }
-            </div>
+            {
+                user.id === product.user_id ?
+                    (
+                        <div className="create-product">
+                            {
+                                Object.keys(product).length > 0 ?
+                                    (
+                                        <>
+                                            <FormUpdataPro products={product} />
+                                        </>
+                                    )
+                                    :
+                                    (
+                                        <h1>Loading...</h1>
+                                    )
+                            }
+                        </div>
+                    )
+                    :
+                    (
+                        <h1>Loading...</h1>
+                    )
+            }
+
         </div>
     )
 

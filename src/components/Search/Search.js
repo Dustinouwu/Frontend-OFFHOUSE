@@ -170,8 +170,8 @@ function Search(props) {
         });
 
         if (response) {
-            console.log("response: ", response.data.data.product.data);
-            setProduct(response.data.data.product.data);
+            console.log("response: ", response.data.data.product);
+            setProduct(response.data.data.product);
         }
         setIsLoading(false);
         setIsLoading(false);

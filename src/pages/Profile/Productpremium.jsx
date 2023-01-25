@@ -30,8 +30,6 @@ const Productpremium = () => {
     const [products, setProducts] = useState([])
     const [productsbyid, setProductsbyid] = useState([])
     const [error, setError] = useState('')
-    const [page, setPage] = useState(1)
-    const [lastPage, setLastPage] = useState('')
 
     const config = {
         headers: { Authorization: `${tokenUser}` }
@@ -40,11 +38,10 @@ const Productpremium = () => {
     const getProducts = async (page) => {
         try {
             const response = await axios.get(
-                `https://offhouse.herokuapp.com/api/subscriptions?page=${page}`,
+                `https://offhouse.herokuapp.com/api/subscriptions`,
                 { headers: { 'accept': 'application/json', 'authorization': token } }
             );
-            setProducts(response.data.data.subscriptions.data);
-            setLastPage(response.data.data.pagination.last_page)
+            setProducts(response.data.data.subscriptions);
             if (response.status === 403) {
                 setError('')
             }
@@ -58,12 +55,12 @@ const Productpremium = () => {
     const getProductsUser = async () => {
         try {
             const response = await axios.get(
-                'https://offhouse.herokuapp.com/api/products/myProducts/list',
+                'https://offhouse.herokuapp.com/api/products',
                 { headers: { 'accept': 'application/json', 'authorization': tokenUser } },
                 config
             );
-            setProductsbyid(response.data.data.products.data);
-            console.log(response.data.data.products.data);
+            setProductsbyid(response.data.data.products);
+            console.log(response.data.data.products);
         } catch (error) {
             console.log(error.response.data.message, 'error');
         }
@@ -78,6 +75,7 @@ const Productpremium = () => {
             return { image: '', title: '' }
         }
     }
+    console.log(getImageAndTitle);
 
     //poner una barra dependiendo del estado del producto
     const getBar = (product) => {
@@ -93,7 +91,6 @@ const Productpremium = () => {
     useEffect(() => {
         getProducts();
         getProductsUser();
-        page === 1 ? setPage(1) : setPage(lastPage);
     }, []);
 
 
@@ -153,14 +150,7 @@ const Productpremium = () => {
                     </Paper>
                 ))
             }
-            <Container sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                <Pagination count={lastPage} variant="outlined" page={page} onChange={(event, value) => {
-                    setPage(value);
-                    getProducts(value);
-                    window.scrollTo(0, 0);
-                }} />
-
-            </Container>
+           
         </div >
     )
 }

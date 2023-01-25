@@ -24,7 +24,7 @@ export const  CategProdCards = () => {
     const [products, setProducts] = useState([]);   // Constante para los productos
     const [page, setPage] = useState(1);
     const [lastPage, setLastPage] = useState('');
-    const [itemsPerPage, setItemsPerPage] = useState(10);
+    const [itemsPerPage, setItemsPerPage] = useState(9);
 
     const config = {
         headers: { Authorization: `${token}` }
@@ -51,7 +51,7 @@ export const  CategProdCards = () => {
                 { headers: { 'accept': 'application/json', 'authorization': token } },
                 config
             )
-            setProducts(response.data.data.products.data);
+            setProducts(response.data.data.products);
 
         } catch (error) {
             console.log(error);
@@ -73,6 +73,13 @@ export const  CategProdCards = () => {
 
     });
 
+    //Filtro de productos por categoría
+    const filterProducts = products.filter((products) => {
+        return products.categorie_id === categories.id
+    })
+
+    console.log(filterProducts);
+
 
     return (
         <div >
@@ -82,7 +89,7 @@ export const  CategProdCards = () => {
                 />
                 <Container sx={{ py: 5 }} maxWidth="lg">
                     <Grid container spacing={2}>
-                        {products.slice(0, itemsPerPage).map((products, index) => (
+                        {filterProducts.slice(0, itemsPerPage).map((products, index) => (
                             <Grid item key={products.id} xs={12} sm={6} md={4} >
                                 <Card
                                     sx={{
@@ -140,9 +147,8 @@ export const  CategProdCards = () => {
                             </Grid>
                         ))}
                     </Grid>
-
                 </Container>
-                <button onClick={() => setItemsPerPage(itemsPerPage + 10)}>Ver más</button>
+                <button onClick={() => setItemsPerPage(itemsPerPage + 9)}>Ver más</button>
             </div>
         </div>
     )
