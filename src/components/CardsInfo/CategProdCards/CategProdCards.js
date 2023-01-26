@@ -15,7 +15,7 @@ import Footer from '../../Layouts/Footer/Footer';
 
 
 
-export const  CategProdCards = () => {
+export const CategProdCards = () => {
 
     const { id } = useParams(); // Obtener el id de la categoría de la URL
     const navigate = useNavigate(); // Para navegar entre rutas
@@ -123,32 +123,32 @@ export const  CategProdCards = () => {
                                             <Typography variant="h6" component="h5" style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'normal', wordWrap: 'break-word', maxHeight: '30px' }}>
                                                 {products.title}
                                             </Typography>
-                                            <Typography variant="h6" component="h5" style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'normal', wordWrap: 'break-word', maxHeight: '30px' }}>
-                                            {products.categorie_id}
-                                        </Typography>
-                                        <div className="rtcontainer" style={{ display: 'flex' }}>
-                                            <CircleIcon style={{ color: colorprod2[index], paddingRight: '10px', width: '20' }} />
-                                            <Typography noWrap style={{ paddingTop: '2px' }} >
-                                                {products.state_appliance}
-                                            </Typography>
-                                        </div>
+                                            <div className="rtcontainer" style={{ display: 'flex' }}>
+                                                <CircleIcon style={{ color: colorprod2[index], paddingRight: '10px', width: '20' }} />
+                                                <Typography noWrap style={{ paddingTop: '2px' }} >
+                                                    {products.state_appliance}
+                                                </Typography>
+                                            </div>
                                         </CardContent>
                                     </CardActionArea>
-                                <Button
-                                    variant="text"
-                                    startIcon={<RemoveRedEyeIcon style={{ color: 'white' }}  />}
-                                    style={{ color: 'white', backgroundColor: '#FF9901', position: 'absolute', display: 'fixed', }}
-                                    onClick={() => navigate(`/viewproduct/${products.id}`)}
-                                >
-                                    Ver Producto
-                                </Button>
+                                    <Button
+                                        variant="text"
+                                        startIcon={<RemoveRedEyeIcon style={{ color: 'white' }} />}
+                                        style={{ color: 'white', backgroundColor: '#FF9901', position: 'absolute', display: 'fixed', }}
+                                        onClick={() => navigate(`/viewproduct/${products.id}`)}
+                                    >
+                                        Ver Producto
+                                    </Button>
 
                                 </Card>
                             </Grid>
                         ))}
                     </Grid>
                 </Container>
-                <button onClick={() => setItemsPerPage(itemsPerPage + 9)}>Ver más</button>
+                <Container sx={{ display: 'flex', justifyContent: 'center' }} maxWidth="lg" >
+
+                    <Button color="secondary" onClick={() => setItemsPerPage(itemsPerPage + 9)} sx={{ color: '#000' }}>Ver más</Button>
+                </Container>
             </div>
         </div>
     )

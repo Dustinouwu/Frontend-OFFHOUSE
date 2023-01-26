@@ -6,6 +6,7 @@ import DoDisturbOffIcon from '@mui/icons-material/DoDisturbOff';
 import axios from 'axios';
 import { DataGrid, GridActionsCellItem } from '@mui/x-data-grid';
 import Alert from '@mui/material/Alert';
+import DoneAllIcon from '@mui/icons-material/DoneAll';
 
 const styles = {
   width: 'fit-content',
@@ -71,6 +72,22 @@ const CrudSubscription = () => {
     }
   }
 
+  const acceptSub = async (id) => {
+    if (window.confirm('¿Desea aceptar la suscripción?')) {
+      try {
+        const response = await axios.post(
+          `https://offhouse.herokuapp.com/api/admin/subscriptions/${id}`,
+          { headers: { 'accept': 'application/json', 'authorization': tokenUser } },
+          config
+        )
+        console.log(response.data.message, 'response');
+        getSubs()
+      } catch (error) {
+        console.log(error.response.data.message, 'error');
+      }
+    }
+  }
+
   useEffect(() => {
     getSubs();
   }, []);
@@ -97,6 +114,13 @@ const CrudSubscription = () => {
           label="Delete"
           onClick={() => {
             changeStatusSub(params.id)
+          }}
+        />,
+        <GridActionsCellItem
+          icon={<DoneAllIcon />}
+          label="Delete"
+          onClick={() => {
+            acceptSub(params.id)
           }}
         />,
 

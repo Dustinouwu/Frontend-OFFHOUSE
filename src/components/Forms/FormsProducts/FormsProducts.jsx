@@ -68,18 +68,28 @@ const FormsProducts = () => {
 
   //Filtro de productos por usuario
   const filterProducts = products.filter((product) => product.user_id === user.id);
-  
-  
-  
+
+
+
   return (
     <div>
       <div style={{ marginLeft: '3%', marginRight: '3%', marginTop: '3%', marginBottom: '3%', paddingLeft: '3%', paddingRight: '3%', paddingBottom: '3%', paddingTop: '3%', borderRadius: '10px', backgroundColor: '#D9D9D9' }}>
+        <div style={{ display: 'flex', justifyContent: 'center' }}>
         <h1 id='labelhelp'>MIS PRODUCTOS</h1>
-        <Link href="/createproduct" underline="none">
-          <Button variant="contained" endIcon={<AddIcon style={{ backgroundColor: 'black', borderRadius: '10px' }} />} sx={{ mt: '1%', backgroundColor: '#000' }}>
-            Subir un nuevo producto
-          </Button>
-        </Link>
+        </div>
+        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+
+          <Link href="/createproduct" underline="none">
+            <Button variant="contained" endIcon={<AddIcon style={{ backgroundColor: 'black', borderRadius: '10px' }} />} sx={{ mt: '1%', backgroundColor: '#000' }}>
+              Subir un nuevo producto
+            </Button>
+          </Link>
+          <Link href="/productsprimium" underline="none">
+            <Button variant="contained" endIcon={<WorkspacePremiumIcon style={{ backgroundColor: 'black', borderRadius: '10px' }} />} sx={{ mt: '1%', backgroundColor: '#000' }}>
+              Mis productos premium
+            </Button>
+          </Link>
+        </div>
 
         <TableContainer component={Paper} sx={{ mt: '1%', backgroundColor: '#BCB8B8' }}>
           <Table aria-label="simple table">
@@ -118,15 +128,15 @@ const FormsProducts = () => {
                         variant="text"
                         startIcon={<EditIcon style={{ color: 'white' }} />}
                         style={{ color: 'white', backgroundColor: 'green' }}
-                        onClick={() =>  navigate(`/CreateProduct/edit/${products.id}`) }
+                        onClick={() => navigate(`/CreateProduct/edit/${products.id}`)}
                       >
                         Editar
                       </Button>
-                      <Button 
-                      variant="text" 
-                      startIcon={<WorkspacePremiumIcon style={{ color: 'white' }} />} 
-                      style={{ color: 'white', backgroundColor: 'blue' }}
-                      onClick={() =>  navigate(`/payment/product/${products.id}`) }
+                      <Button
+                        variant="text"
+                        startIcon={<WorkspacePremiumIcon style={{ color: 'white' }} />}
+                        style={{ color: 'white', backgroundColor: 'blue' }}
+                        onClick={() => navigate(`/payment/product/${products.id}`)}
                       >
                         Subscripción
                       </Button>

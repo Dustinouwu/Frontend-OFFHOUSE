@@ -6,6 +6,7 @@ import MuiAccordionSummary from '@mui/material/AccordionSummary';
 import MuiAccordionDetails from '@mui/material/AccordionDetails';
 import Typography from '@mui/material/Typography';
 import { Button, Divider } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 
 const Accordion = styled((props) => (
   <MuiAccordion disableGutters elevation={0} square {...props} />
@@ -45,6 +46,7 @@ const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
 
 function HelpInformation() {
 
+  const navigate = useNavigate();
   const [expanded, setExpanded] = React.useState('panel1');
 
   const handleChange = (panel) => (event, newExpanded) => {
@@ -63,44 +65,30 @@ function HelpInformation() {
         </AccordionSummary>
         <AccordionDetails>
           <Typography>
-            Para poder realizar tu suscripción primero tiene que crear un producto, si queires hacerlo
-            haz click en el botón de aquí
+            Para poder realizar tu suscripción primero tiene que crear un producto, si quieres hacerlo
+            haz click en el botón "Crear tu producto"
           </Typography>
-          <Button variant="contained" color="primary" size="small" sx={{ ml: 1 }}>
+          <Button variant="contained" color="primary" size="small" sx={{ ml: 1 }} onClick={() => navigate('/CreateProduct')}>
             Crear tu producto
           </Button>
           <Divider sx={{ my: 2 }} />
           <Typography>
-            Si ya tienes un producto creado, puedes suscribirte a el, para hacerlo haz click en el botón de aquí
+            Si ya tienes un producto creado, puedes suscribirlo, haciendo click en el botón "Mis productos"
           </Typography>
-          <Button variant="contained" color="primary" size="small" sx={{ ml: 1 }}>
+          <Button variant="contained" color="primary" size="small" sx={{ ml: 1 }} onClick={() => navigate('/productlist')}>
             Mis productos
           </Button>
         </AccordionDetails>
       </Accordion>
       <Accordion expanded={expanded === 'panel2'} onChange={handleChange('panel2')}>
         <AccordionSummary aria-controls="panel2d-content" id="panel2d-header">
-          <Typography>Collapsible Group Item #2</Typography>
+          <Typography>Contáctanos</Typography>
         </AccordionSummary>
         <AccordionDetails>
           <Typography>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-            malesuada lacus ex, sit amet blandit leo lobortis eget. Lorem ipsum dolor
-            sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex,
-            sit amet blandit leo lobortis eget.
-          </Typography>
-        </AccordionDetails>
-      </Accordion>
-      <Accordion expanded={expanded === 'panel3'} onChange={handleChange('panel3')}>
-        <AccordionSummary aria-controls="panel3d-content" id="panel3d-header">
-          <Typography>Collapsible Group Item #3</Typography>
-        </AccordionSummary>
-        <AccordionDetails>
-          <Typography>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-            malesuada lacus ex, sit amet blandit leo lobortis eget. Lorem ipsum dolor
-            sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex,
-            sit amet blandit leo lobortis eget.
+            Puedes comunicarnos cualquier duda o sugerencia a través de nuestro correo electrónico 
+            <br/>
+            <strong>eduardo.muzo@epn.edu.ec</strong>
           </Typography>
         </AccordionDetails>
       </Accordion>

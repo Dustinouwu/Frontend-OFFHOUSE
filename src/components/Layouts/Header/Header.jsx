@@ -94,9 +94,9 @@ const Header = () => {
 
                 <div className='other-container'>
                     <Link to="/chats">
-                        <Badge badgeContent={4} color="primary" invisible={false}>
-                            <ChatBubbleOutlineIcon size="25px" style={{ color: 'black' }} />
-                        </Badge>
+
+                        <ChatBubbleOutlineIcon size="25px" style={{ color: 'black' }} />
+
                     </Link>
 
                     <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>

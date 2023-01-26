@@ -26,6 +26,7 @@ import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import KeyIcon from '@mui/icons-material/Key';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import WorkspacePremiumIcon from '@mui/icons-material/WorkspacePremium';
 const style = {
     width: '100%',
     maxWidth: '100%',
@@ -177,7 +178,7 @@ export const Profile = () => {
                     <CardActions sx={{ display: "flex", justifyContent: "center" }}>
 
                         <Button size="small" color="primary" variant="contained" onClick={() => navigate('/productsprimium')} >
-                            <AccountCircleIcon />
+                            <WorkspacePremiumIcon />
                             Productos Premium 
                         </Button>
                     </CardActions>

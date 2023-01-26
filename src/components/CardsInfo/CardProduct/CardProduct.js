@@ -84,9 +84,9 @@ export const CardProduct = () => {
                                 display: 'block',
                                 width: '60%',
                                 py: '2%',
-                                maxWidth: '200px',
+                                maxWidth: '400px',
                                 maxHeight: '200px',
-                                objectFit: 'cover'
+                                
                             }}
                             image={product.image}
                         />

@@ -66,7 +66,7 @@ const Paypal = () => {
                 { product_id: id },
                 { headers: { 'accept': 'application/json', 'authorization': tokenUser } }
             )
-            navigate('/profile')
+            navigate('/productsprimium')
             handleOnSuccess(user)
         } catch (error) {
             if (error.response && error.response.status === 400) {
