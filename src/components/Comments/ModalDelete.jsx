@@ -122,10 +122,10 @@ const ModalDelete = ({ report }) => {
                 open={open}
                 onClose={handleClose}
             >
-                <Box sx={{ '& .MuiTextField-root': { ml: 0, mb: 2, width: '47ch' }, gap: '2%', ...style, width: 400 }}>
+                <Box sx={{ '& .MuiTextField-root': { ml: 0, mb: 2, width: '50ch' }, gap: '2%', ...style, width: 450, pr:10 }}>
                     <form onSubmit={handleSubmit}>
                         <h2>Ingreso información sobre el reporte</h2>
-                        <Grid item xs={1}>
+                        <Grid item xs={1} sx={{width: 'auto'}}>
                             <TextField
                                 id="filled-select-currency-native"
                                 label="Motivo de reporte"
@@ -144,7 +144,7 @@ const ModalDelete = ({ report }) => {
                                 <MenuItem value="Tiene contenido ofensivo">Tiene contenido ofensivo</MenuItem>
                                 <MenuItem value="Creo que es un intento de fraude">Creo que es un intento de fraude</MenuItem>
                                 <MenuItem value="La información no corresponde al producto">La información no corresponde al producto</MenuItem>
-                                <MenuItem value="Publica con envio gratis, pero luego quiere cobrar el servicio">Publica con envio gratis, pero luego quiere cobrar el servicio</MenuItem>
+
                             </TextField>
                         </Grid>
                         <TextareaAutosize

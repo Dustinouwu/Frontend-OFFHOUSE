@@ -85,7 +85,7 @@ export const CardProduct = () => {
                                 width: '60%',
                                 py: '2%',
                                 maxWidth: '400px',
-                                maxHeight: '200px',
+                                maxHeight: '600px',
                                 
                             }}
                             image={product.image}

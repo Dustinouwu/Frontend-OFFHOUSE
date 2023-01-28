@@ -36,6 +36,7 @@ const Message = () => {
                 { headers: { 'accept': 'application/json', 'authorization': tokenUser } }
             )
             setMessages(response.data.data.messages)
+            console.log("------------------------------------------------------------------------------------------")
         } catch (error) {
             console.log(error)
         }
@@ -58,7 +59,7 @@ const Message = () => {
     useEffect(() => {
 
         Pusher.logToConsole = true;
-        const pusher = new Pusher('ce70af3d29d33f7d5525', {
+        const pusher = new Pusher('8031fead247c518cc207', {
             cluster: 'us2'
         });
 
@@ -73,7 +74,7 @@ const Message = () => {
         getMessage()
         getUser();
         getContacts();
-    }, [id])
+    }, [id, messages, getMessage, getUser, getContacts])
     /*     console.log('FROM:', user.id)
         console.log('TO:', id) */
 

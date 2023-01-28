@@ -94,7 +94,7 @@ const CrudSubscription = () => {
 
   const columns = [
     { field: 'id', headerName: 'ID', width: 70 },
-    { field: 'status', headerName: 'Estado', width: 150, renderCell: (params) => changeStatus(params.value) },
+    { field: 'status', headerName: 'Estado', width: 200, renderCell: (params) => changeStatus(params.value) },
     { field: 'payment_method', headerName: 'Método de pago', width: 160 },
     { field: 'start_date', headerName: 'Fecha de inicio', width: 150 },
     { field: 'end_date', headerName: 'Fecha de culminación', width: 150 },

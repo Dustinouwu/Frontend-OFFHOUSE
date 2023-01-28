@@ -85,7 +85,7 @@ export const FormResetPassword = () => {
                     >
                     </input>
                     <Label
-                        text='PASSWORD'
+                        text='CONTRASEÑA'
                     />
 
                     <input

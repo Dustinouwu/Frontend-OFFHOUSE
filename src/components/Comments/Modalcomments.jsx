@@ -127,7 +127,7 @@ const Modalcomments = ({ comment }) => {
 
               style={{ width: 400, height: 100, marginBottom: 10 }}
             />
-            <Button variant="contained"  onClick={handleClick} type='submit' >Contained</Button>
+            <Button variant="contained"  onClick={handleClick} type='submit' >Enviar comentario</Button>
             <Snackbar open={openMessage}  >
               <Alert onClose={handleCloseMessage} severity="success" sx={{ width: '100%' }}>
                 Su reporte ha sido enviado
