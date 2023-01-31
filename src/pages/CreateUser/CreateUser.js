@@ -82,24 +82,10 @@ export const CreateUser = ({ register }) => {
 
     return (
         <div style={{ display: 'flex', width: '100%', overflow: 'hidden' }}>
-            <Grid container sx={{ height: '100vh' }}>
-                <Grid
-                    item
-                    xs={false}
-                    sm={false}
-                    md={8.7}
-                    sx={{
-                        backgroundImage: 'url(https://images.unsplash.com/photo-1632923565835-6582b54f2105?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=688&q=80)',
-                        backgroundRepeat: 'no-repeat',
-                        backgroundSize: 'cover',
-                        backgroundPosition: 'center',
-
-                    }}
-                />
-            </Grid>
+            
             <ThemeProvider theme={theme}>
                 <CssBaseline />
-                <Container component="main" maxWidth="sm" sx={{ mb: 0, mr: 25, mt: 10 }}>
+                <Container component="main" maxWidth="sm" sx={{ mb: 0, mt: 10 }}>
 
                     <Typography component="h1" variant="h4" align="center" sx={{ mb: 0 }}>
                         CREA TU PERFIL

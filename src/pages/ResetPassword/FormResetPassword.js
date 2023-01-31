@@ -67,7 +67,7 @@ export const FormResetPassword = () => {
 
             <div className="login-container">
                 <form className="formlogin" onSubmit={forgotPassword}>
-                    <Title text='Recuperación de contraseña '></Title>
+                    <Title text='Restablecer de contraseña '></Title>
                     {error &&
                         <Alert severity="error" sx={{ mb: '3%' }}>{error}</Alert>
                     }
