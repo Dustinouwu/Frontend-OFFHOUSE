@@ -260,10 +260,7 @@ export const CreateUser = ({ register }) => {
                                         if (event.target.value.length > 7) {
                                             setErrors({ ...errors, home_phone: true });
                                             setErrorMessages({ ...errorMessages, home_phone: 'No más de 7 caracteres' })
-                                        } else if (event.target.value.length < 7) {
-                                            setErrors({ ...errors, home_phone: true });
-                                            setErrorMessages({ ...errorMessages, home_phone: 'No menos de 7 caracteres' })
-                                        } else {
+                                        }  else {
                                             setErrors({ ...errors, home_phone: false });
                                             setErrorMessages({ ...errorMessages, home_phone: '' })
                                         }
@@ -372,7 +369,7 @@ export const CreateUser = ({ register }) => {
                                             setErrorMessages({ ...errorMessages, password: 'No más de 15 caracteres' })
                                         } else if (event.target.value.length < 5) {
                                             setErrors({ ...errors, password: true });
-                                            setErrorMessages({ ...errorMessages, password: 'No menos de 5 caracteres' })
+                                            setErrorMessages({ ...errorMessages, password: 'Tu clave necesita almenos: 5 carácteres, una mayúscula, una minúscula, un número y un simbolo' })
                                         } else {
                                             setErrors({ ...errors, password: false });
                                             setErrorMessages({ ...errorMessages, password: '' })
@@ -411,7 +408,7 @@ export const CreateUser = ({ register }) => {
                                             setErrorMessages({ ...errorMessages, password_confirmation: 'No más de 15 caracteres' })
                                         } else if (event.target.value.length < 5) {
                                             setErrors({ ...errors, password_confirmation: true });
-                                            setErrorMessages({ ...errorMessages, password_confirmation: 'No menos de 5 caracteres' })
+                                            setErrorMessages({ ...errorMessages, password_confirmation: 'Tu clave necesita almenos: 5 carácteres, una mayúscula, una minúscula, un número y un simbolo' })
                                         } else if (event.target.value !== password) { // Condición para comparar si las contraseñas son iguales
                                             setErrors({ ...errors, password_confirmation: true });
                                             setErrorMessages({ ...errorMessages, password_confirmation: 'Las contraseñas no coinciden' });

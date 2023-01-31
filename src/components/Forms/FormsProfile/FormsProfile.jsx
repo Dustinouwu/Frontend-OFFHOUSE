@@ -319,12 +319,12 @@ const FormsProfile = ({ profile }) => {
                   value={address}
                   onChange={(event) => {
                     setAddress(event.target.value)
-                    if (event.target.value.length > 15) {
+                    if (event.target.value.length > 100) {
                       setErrors({ ...errors, address: true });
-                      setErrorMessages({ ...errorMessages, address: 'No más de 15 caracteres' })
-                    } else if (event.target.value.length < 5) {
+                      setErrorMessages({ ...errorMessages, address: 'No más de 100 caracteres' })
+                    } else if (event.target.value.length < 3) {
                       setErrors({ ...errors, address: true });
-                      setErrorMessages({ ...errorMessages, address: 'No menos de 5 caracteres' })
+                      setErrorMessages({ ...errorMessages, address: 'No menos de 3 caracteres' })
                     } else {
                       setErrors({ ...errors, address: false });
                       setErrorMessages({ ...errorMessages, address: '' })

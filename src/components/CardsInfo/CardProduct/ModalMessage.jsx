@@ -136,16 +136,9 @@ const ModalMessage = ({ message, product }) => {
                                 }}
                             >
                                 <MenuItem value={`Hola que tal, necesito información del producto "${product?.title}"`} selected>Hola que tal, necesito información del producto</MenuItem>
-                                <MenuItem value="Hola, necesito saber si el producto está disponible">Hola, necesito saber si el producto está disponible</MenuItem>
-                                <MenuItem value="Hola, necesito saber si el producto está en buen estado">Hola, necesito saber si el producto está en buen estado</MenuItem>
-                                <MenuItem value="Hola, necesito saber si el producto es original">Hola, necesito saber si el producto es original</MenuItem>
-                                <MenuItem value="Hola, necesito saber si el producto es nuevo">Hola, necesito saber si el producto es nuevo</MenuItem>
-                                <MenuItem value="Hola, necesito saber si el producto es usado">Hola, necesito saber si el producto es usado</MenuItem>
-                                <MenuItem value="Hola, necesito saber si el producto es de segunda mano">Hola, necesito saber si el producto es de segunda mano</MenuItem>
-                                <MenuItem value="Hola, necesito saber si el producto es de primera mano">Hola, necesito saber si el producto es de primera mano</MenuItem>
-                                <MenuItem value="Hola, necesito saber si el producto es de segunda">Hola, necesito saber si el producto es de segunda</MenuItem>
-                                <MenuItem value="Hola, necesito saber si el producto es de primera">Hola, necesito saber si el producto es de primera</MenuItem>
-                                <MenuItem value="Hola, necesito saber si el producto es de segunda mano">Hola, necesito saber si el producto es de segunda mano</MenuItem>
+                                <MenuItem value={`Hola, necesito saber si el producto "${product?.title}" está disponible`}>Hola, necesito saber si el producto está disponible</MenuItem>
+                                <MenuItem value={`Hola, necesito saber si el producto "${product?.title}" es original`}>Hola, necesito saber si el producto es original</MenuItem>
+                                
 
                             </TextField>
                         </Grid>

@@ -82,10 +82,11 @@ export const CardProduct = () => {
                             sx={{
                                 margin: 'auto',
                                 display: 'block',
-                                width: '60%',
-                                py: '2%',
+                                width: '100%',
+                                py: '6%',
+                                pb: '6%',
                                 maxWidth: '400px',
-                                maxHeight: '600px',
+                                maxHeight: '400px',
                                 
                             }}
                             image={product.image}
@@ -97,22 +98,40 @@ export const CardProduct = () => {
                     <Grid item xs={12} sm={6} md={6} lg={6} xl={6}>
                         <CardContent>
                             <Typography variant="h6" component="div" color="success">
-                                Precio: ${product.price}
+                                <strong>Precio: </strong>
+                            </Typography>
+                            <Typography variant="h6" component="div" color="success">
+                                ${product.price}
+                            </Typography>
+                            <Typography variant="h6" color="text.primary">
+                            <strong>Estado: </strong> 
                             </Typography>
                             <Typography variant="h6" color="text.secondary">
-                                Estado: {product.state_appliance}
+                            {product.state_appliance}
+                            </Typography>
+                            <Typography variant="h6" color="text.primary">
+                               <strong> Marca:</strong> 
                             </Typography>
                             <Typography variant="h6" color="text.secondary">
-                                Marca: {product.brand}
+                              {product.brand}
+                            </Typography>
+                            <Typography variant="h6" color="text.primary">
+                            <strong> Stock:</strong>  
                             </Typography>
                             <Typography variant="h6" color="text.secondary">
-                                Stock: {product.stock}
+                             {product.stock}
+                            </Typography>
+                            <Typography variant="h6" color="text.primary">
+                            <strong> Celular:</strong>  
                             </Typography>
                             <Typography variant="h6" color="text.secondary">
-                                Celular: {product.phone}
+                            {product.phone}
+                            </Typography>
+                            <Typography variant="h6" color="text.primary">
+                            <strong> Dirección:</strong>  
                             </Typography>
                             <Typography variant="h6" color="text.secondary">
-                                Dirección: {product.address}
+                              {product.address}
                             </Typography>
 
                         </CardContent>

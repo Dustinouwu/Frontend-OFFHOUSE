@@ -47,12 +47,8 @@ const SimpleSlider = () => {
   }, []);
 
 
-  const colorprod2 = products.map((products) => {
-    return (
-      products.state_appliance === 'Nuevo' ? "#0FFF18" : '#FF0000' && products.state_appliance === 'nuevo' ? "#0FFF18" : '#FF0000' && products.state_appliance === 'reacondicionado' ? "#FFF100" : '#FF0000'
-    )
-
-  });
+  
+  
   const settings = {
     dots: true,
     infinite: true,
@@ -101,7 +97,38 @@ const SimpleSlider = () => {
   const firstTenProducts3 = firstTenProducts.filter((item) => item.categorie_id === 3);
   const firstTenProducts4 = firstTenProducts.filter((item) => item.categorie_id === 4);
   const firstTenProducts5 = firstTenProducts.filter((item) => item.categorie_id === 5);
+  const colorprod2 = firstTenProducts1.map((products) => {
+    return (
+      products.state_appliance === 'Nuevo' ? "#0FFF18" : '#FF0000' && products.state_appliance === 'nuevo' ? "#0FFF18" : '#FF0000' && products.state_appliance === 'reacondicionado' ? "#FFF100" : '#FF0000'
+    )
 
+  });
+  const colorprod3 = firstTenProducts2.map((products) => {
+    return (
+      products.state_appliance === 'Nuevo' ? "#0FFF18" : '#FF0000' && products.state_appliance === 'nuevo' ? "#0FFF18" : '#FF0000' && products.state_appliance === 'reacondicionado' ? "#FFF100" : '#FF0000'
+    )
+
+  });
+  const colorprod4 = firstTenProducts3.map((products) => {
+    return (
+      products.state_appliance === 'Nuevo' ? "#0FFF18" : '#FF0000' && products.state_appliance === 'nuevo' ? "#0FFF18" : '#FF0000' && products.state_appliance === 'reacondicionado' ? "#FFF100" : '#FF0000'
+    )
+
+  });
+  const colorprod5 = firstTenProducts4.map((products) => {
+    return (
+      products.state_appliance === 'Nuevo' ? "#0FFF18" : '#FF0000' && products.state_appliance === 'nuevo' ? "#0FFF18" : '#FF0000' && products.state_appliance === 'reacondicionado' ? "#FFF100" : '#FF0000'
+    )
+
+  });
+  const colorprod6 = firstTenProducts5.map((products) => {
+    return (
+      products.state_appliance === 'Nuevo' ? "#0FFF18" : '#FF0000' && products.state_appliance === 'nuevo' ? "#0FFF18" : '#FF0000' && products.state_appliance === 'reacondicionado' ? "#FFF100" : '#FF0000'
+    )
+
+  });
+  
+  
 
   return (
     <div className="App">
@@ -198,7 +225,7 @@ const SimpleSlider = () => {
                     {item.title}
                   </Typography>
                   <div className="rtcontainer" style={{ display: 'flex' }}>
-                    <CircleIcon style={{ color: colorprod2[index], paddingRight: '10px', width: '20' }} />
+                    <CircleIcon style={{ color: colorprod3[index], paddingRight: '10px', width: '20' }} />
                     <Typography noWrap style={{ paddingTop: '2px' }} >
                       {item.state_appliance}
                     </Typography>
@@ -254,7 +281,7 @@ const SimpleSlider = () => {
                         {item.title}
                       </Typography>
                       <div className="rtcontainer" style={{ display: 'flex' }}>
-                        <CircleIcon style={{ color: colorprod2[index], paddingRight: '10px', width: '20' }} />
+                        <CircleIcon style={{ color: colorprod4[index], paddingRight: '10px', width: '20' }} />
                         <Typography noWrap style={{ paddingTop: '2px' }} >
                           {item.state_appliance}
                         </Typography>
@@ -310,7 +337,7 @@ const SimpleSlider = () => {
                         {item.title}
                       </Typography>
                       <div className="rtcontainer" style={{ display: 'flex' }}>
-                        <CircleIcon style={{ color: colorprod2[index], paddingRight: '10px', width: '20' }} />
+                        <CircleIcon style={{ color: colorprod5[index], paddingRight: '10px', width: '20' }} />
                         <Typography noWrap style={{ paddingTop: '2px' }} >
                           {item.state_appliance}
                         </Typography>
@@ -366,7 +393,7 @@ const SimpleSlider = () => {
                         {item.title}
                       </Typography>
                       <div className="rtcontainer" style={{ display: 'flex' }}>
-                        <CircleIcon style={{ color: colorprod2[index], paddingRight: '10px', width: '20' }} />
+                        <CircleIcon style={{ color: colorprod6[index], paddingRight: '10px', width: '20' }} />
                         <Typography noWrap style={{ paddingTop: '2px' }} >
                           {item.state_appliance}
                         </Typography>
