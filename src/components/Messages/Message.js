@@ -74,7 +74,7 @@ const Message = () => {
         getMessage()
         getUser();
         getContacts();
-    }, [id, messages, getMessage, getUser, getContacts])
+    }, [id])
     /*     console.log('FROM:', user.id)
         console.log('TO:', id) */
 
