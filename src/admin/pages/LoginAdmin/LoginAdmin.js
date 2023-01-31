@@ -20,7 +20,6 @@ export const LoginAdmin = () => {
 
     const [loading, setLoading] = useState(false);
 
-    //Sacar todos los errores que me da error y ponerlos en un .map 
     const errorMap = {
         'The email field is required.': 'El campo de correo es requerido',
         'The password field is required.': 'El campo de contraseña es requerido',
@@ -34,7 +33,7 @@ export const LoginAdmin = () => {
         'The email field is required. (and 1 more error)': 'El campo de correo es requerido',
     }
 
-    // Poner los errores traducidos en el state de error
+   
     const setErrorTranslated = (error) => {
         if (errorMap[error]) {
             setError(errorMap[error])

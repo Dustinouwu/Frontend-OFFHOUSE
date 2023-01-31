@@ -228,9 +228,11 @@ function Search(props) {
                 {!isLoading && !isEmpty && <>
                     {product.map((product) => (
                         <TvShow
-                            rute={() => navigate(`/viewproduct/${product.id}`)}
+                            rute={() => {
+                                navigate(`/viewproduct/${product.id}`)
+                                collapseContainer()
+                            }}
                             key={product.id}
-                            
                             thumbanilSrc={product.image}
                             name={product.title}
                             rating={product.price}
