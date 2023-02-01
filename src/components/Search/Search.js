@@ -231,6 +231,7 @@ function Search(props) {
                             rute={() => {
                                 navigate(`/viewproduct/${product.id}`)
                                 collapseContainer()
+                                window.location.reload()
                             }}
                             key={product.id}
                             thumbanilSrc={product.image}

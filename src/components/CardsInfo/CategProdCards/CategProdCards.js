@@ -88,9 +88,9 @@ export const CategProdCards = () => {
                     text={categories.name}
                 />
                 <Container sx={{ py: 5 }} maxWidth="lg">
-                    <Grid container spacing={2}>
+                    <Grid container spacing={2} >
                         {filterProducts.slice(0, itemsPerPage).map((products, index) => (
-                            <Grid item key={products.id} xs={12} sm={6} md={4} >
+                            <Grid item key={products.id} xs={12} sm={6} md={4} onClick={() => navigate(`/viewproduct/${products.id}`)}>
                                 <Card
                                     sx={{
                                         height: '100%',

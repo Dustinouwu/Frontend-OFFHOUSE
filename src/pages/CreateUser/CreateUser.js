@@ -92,6 +92,31 @@ export const CreateUser = ({ register }) => {
         }
     }
 
+    const handlePasswordBlur = (event) => {
+        const password = event.target.value;
+        let errorMessage = '';
+
+        if(!/^(?=.*[a-z])/.test(password)) {
+            errorMessage = 'La contraseña debe contener al menos una letra minúscula';
+        } else if (!/^(?=.*[A-Z])/.test(password)) {
+            errorMessage = 'La contraseña debe contener al menos una letra mayúscula';
+        } else if (!/^(?=.*\d)/.test(password)) {
+            errorMessage = 'La contraseña debe contener al menos un número';
+        } else if (!/^(?=.*[!@#$%^&*])/.test(password)) {
+            errorMessage = 'La contraseña debe contener al menos un carácter especial (!, @, #, $, %, ^, &, *)';
+        } else if (password.length < 5 || password.length > 50) {
+            errorMessage = 'La contraseña debe tener entre 5 y 50 caracteres';
+        }
+
+        if (errorMessage) {
+            setErrors({ ...errors, password: true });
+            setErrorMessages({ ...errorMessages, password: errorMessage });
+        } else {
+            setErrors({ ...errors, password: false });
+            setErrorMessages({ ...errorMessages, password: '' });
+        }
+    };
+
 
     return (
         <div style={{ display: 'flex', width: '100%', overflow: 'hidden' }}>
@@ -388,12 +413,7 @@ export const CreateUser = ({ register }) => {
                                             setErrorMessages({ ...errorMessages, password: '' })
                                         }
                                     }}
-                                    onBlur={(event) => {
-                                        if (event.target.value === '') {
-                                            setErrors({ ...errors, password: true });
-                                            setErrorMessages({ ...errorMessages, password: 'Este campo es obligatorio' });
-                                        }
-                                    }}
+                                    onBlur={handlePasswordBlur}
                                     autoComplete="shipping address-line2"
                                     variant="standard"
                                     InputLabelProps={{

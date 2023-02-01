@@ -56,28 +56,53 @@ const FormPassword = (uppassword) => {
         setPassword_confirmation(uppassword.password_confirmation)
     }, [])
 
+    const handlePasswordBlur = (event) => {
+        const password = event.target.value;
+        let errorMessage = '';
+
+        if(!/^(?=.*[a-z])/.test(password)) {
+            errorMessage = 'La contraseña debe contener al menos una letra minúscula';
+        } else if (!/^(?=.*[A-Z])/.test(password)) {
+            errorMessage = 'La contraseña debe contener al menos una letra mayúscula';
+        } else if (!/^(?=.*\d)/.test(password)) {
+            errorMessage = 'La contraseña debe contener al menos un número';
+        } else if (!/^(?=.*[!@#$%^&*])/.test(password)) {
+            errorMessage = 'La contraseña debe contener al menos un carácter especial (!, @, #, $, %, ^, &, *)';
+        } else if (password.length < 5 || password.length > 50) {
+            errorMessage = 'La contraseña debe tener entre 5 y 50 caracteres';
+        }
+
+        if (errorMessage) {
+            setErrors({ ...errors, password: true });
+            setErrorMessages({ ...errorMessages, password: errorMessage });
+        } else {
+            setErrors({ ...errors, password: false });
+            setErrorMessages({ ...errorMessages, password: '' });
+        }
+    };
+
     return (
         <ThemeProvider theme={theme}>
             <CssBaseline />
             <Container component="main" maxWidth="sm" sx={{ mb: 4 }}>
                 <Paper variant="outlined" sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 3 } }}>
-                    <Typography component="h1" variant="h4" align="center" sx={{ mb: 10 }}>
+                    <Typography component="h1" variant="h4" align="center" sx={{ mb: 2 }}>
                         Actualizar Contraseña
                     </Typography>
 
                     <form onClick={handleSubmit}>
                         {error &&
 
-                            <Alert severity="warning" sx={{ mb: '3%' }}>- Las contraseñas deben coincidir! <br/> - La contraseña debe tener almenos un número
-                            <br/> - La contraseña debe tener almenos una letra mayúscula
-                            <br/> - La contraseña debe tener almenos una letra minúscula
-                            <br/> - La contraseña debe tener almenos un caracter especial
-                            <br/> - La contraseña debe tener almenos 8 caracteres
-                            <br/> - La contraseña no debe tener espacios en blanco
-                            
+                            <Alert severity="warning" sx={{ mb: '3%' }}>- Las contraseñas deben coincidir! <br /> - La contraseña debe tener almenos un número
+                                <br /> - La contraseña debe tener almenos una letra mayúscula
+                                <br /> - La contraseña debe tener almenos una letra minúscula
+                                <br /> - La contraseña debe tener almenos un caracter especial
+                                <br /> - La contraseña debe tener almenos 5 caracteres
+                                <br /> - La contraseña no debe tener espacios en blanco
+
                             </Alert>
                         }
-                        
+
 
                         <Grid container spacing={3} >
                             <Grid item xs={12} >
@@ -100,12 +125,7 @@ const FormPassword = (uppassword) => {
                                             setErrorMessages({ ...errorMessages, password: '' })
                                         }
                                     }}
-                                    onBlur={(event) => {
-                                        if (event.target.value === '') {
-                                            setErrors({ ...errors, password: true });
-                                            setErrorMessages({ ...errorMessages, password: 'Este campo es obligatorio' });
-                                        }
-                                    }}
+                                    onBlur={handlePasswordBlur}
                                     fullWidth
                                     autoComplete="shipping address-line2"
                                     variant="standard"
@@ -131,17 +151,15 @@ const FormPassword = (uppassword) => {
                                         } else if (event.target.value.length < 5) {
                                             setErrors({ ...errors, password_confirmation: true });
                                             setErrorMessages({ ...errorMessages, password_confirmation: 'No menos de 5 caracteres' })
+                                        } else if (event.target.value !== password) { // Condición para comparar si las contraseñas son iguales
+                                            setErrors({ ...errors, password_confirmation: true });
+                                            setErrorMessages({ ...errorMessages, password_confirmation: 'Las contraseñas no coinciden' });
                                         } else {
                                             setErrors({ ...errors, password_confirmation: false });
                                             setErrorMessages({ ...errorMessages, password_confirmation: '' })
                                         }
                                     }}
-                                    onBlur={(event) => {
-                                        if (event.target.value === '') {
-                                            setErrors({ ...errors, password_confirmation: true });
-                                            setErrorMessages({ ...errorMessages, password_confirmation: 'Este campo es obligatorio' });
-                                        }
-                                    }}
+                                    onBlur={handlePasswordBlur}
                                     fullWidth
                                     autoComplete="shipping address-line2"
                                     variant="standard"
