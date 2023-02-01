@@ -91,7 +91,6 @@ export const LoginAdmin = () => {
                         backgroundRepeat: 'no-repeat',
                         backgroundSize: 'cover',
                         backgroundPosition: 'center',
-
                     }}
                 />
             </Grid>

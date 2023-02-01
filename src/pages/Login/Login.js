@@ -47,7 +47,7 @@ export const Login = () => {
                     item
                     xs={false}
                     sm={false}
-                    md={7}
+                    md={5}
                     sx={{
                         backgroundImage: 'url(https://source.unsplash.com/random)',
                         backgroundRepeat: 'no-repeat',
