@@ -31,9 +31,6 @@ export const CardProduct = () => {
             )
             setUser(response.data.data.user);
 
-            console.log(response.data.data.user);
-
-
         } catch (error) {
             console.log(error);
         }
@@ -48,6 +45,7 @@ export const CardProduct = () => {
                 )
                 const user2 = { ...response.data.data.product, id }
                 setProduct(user2);
+                console.log(response.data.data.product);
 
 
 

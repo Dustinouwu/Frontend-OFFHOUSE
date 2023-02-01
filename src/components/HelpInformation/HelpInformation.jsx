@@ -65,7 +65,7 @@ function HelpInformation() {
         </AccordionSummary>
         <AccordionDetails>
           <Typography>
-            Para poder realizar tu suscripción primero tiene que crear un producto, si quieres hacerlo
+            Para poder realizar tu suscripción primero tienes que crear un producto, si quieres hacerlo
             haz click en el botón "Crear tu producto"
           </Typography>
           <Button variant="contained" color="primary" size="small" sx={{ ml: 1 }} onClick={() => navigate('/CreateProduct')}>

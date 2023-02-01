@@ -144,6 +144,7 @@ const ModalDelete = ({ report }) => {
                                 <MenuItem value="Tiene contenido ofensivo">Tiene contenido ofensivo</MenuItem>
                                 <MenuItem value="Creo que es un intento de fraude">Creo que es un intento de fraude</MenuItem>
                                 <MenuItem value="La información no corresponde al producto">La información no corresponde al producto</MenuItem>
+                                <MenuItem value="Otro motivo">Otro motivo</MenuItem>
 
                             </TextField>
                         </Grid>

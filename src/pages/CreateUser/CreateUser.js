@@ -42,23 +42,15 @@ export const CreateUser = ({ register }) => {
         first_name: '- El nombre es obligatorio',
         last_name: '- El apellido es obligatorio',
         email: '- El correo es obligatorio y necesita ser válido',
-        home_phone: '- El teléfono no es obligatorio pero si es necesario que tenga 7 digitos',
+        home_phone: '- El teléfono no es obligatorio',
         personal_phone: '- El celular es obligatorio y necesita 10 digitos',
         address: '- La dirección es obligatoria',
         password: '- La contraseña necesita mínimo: una mayúsucla, una minúscula, un carácter especial y un número',
         password_confirmation: '',
     });
-    const [errorMessagest, setErrorMessagest] = useState({
-        username: '',
-        first_name: '',
-        last_name: '',
-        email: '',
-        home_phone: '',
-        personal_phone: '',
-        address: '',
-        password: '',
-        password_confirmation: '',
-    });
+   
+    
+    
 
     //Sacar todo el arreglo de errores y mostrarlos en un solo string con un salto de línea entre cada uno 
     const handleErrors = Object.values(errorMessages).map((error) => {
@@ -130,19 +122,19 @@ export const CreateUser = ({ register }) => {
                                         setUsername(event.target.value)
                                         if (event.target.value.length > 50) {
                                             setErrors({ ...errors, username: true });
-                                            setErrorMessagest({ ...errorMessagest, username: 'No más de 25 caracteres' })
+                                            setErrorMessages({ ...errorMessages, username: 'No más de 25 caracteres' })
                                         } else if (event.target.value.length < 5) {
                                             setErrors({ ...errors, username: true });
-                                            setErrorMessagest({ ...errorMessagest, username: 'No menos de 5 caracteres' })
+                                            setErrorMessages({ ...errorMessages, username: 'No menos de 5 caracteres' })
                                         } else {
                                             setErrors({ ...errors, username: false });
-                                            setErrorMessagest({ ...errorMessagest, username: '' })
+                                            setErrorMessages({ ...errorMessages, username: '' })
                                         }
                                     }}
                                     onBlur={(event) => {
                                         if (event.target.value === '') {
                                             setErrors({ ...errors, username: true });
-                                            setErrorMessagest({ ...errorMessagest, username: 'Este campo es obligatorio' });
+                                            setErrorMessages({ ...errorMessages, username: 'Este campo es obligatorio' });
                                         }
                                     }}
 
@@ -153,7 +145,7 @@ export const CreateUser = ({ register }) => {
                                         shrink: true,
                                     }}
                                     error={errors.username}
-                                    helperText={errorMessagest.username}
+                                    helperText={errorMessages.username}
 
                                 />
                             </Grid>
@@ -168,19 +160,19 @@ export const CreateUser = ({ register }) => {
                                         setFirst_name(event.target.value)
                                         if (event.target.value.length > 25) {
                                             setErrors({ ...errors, first_name: true });
-                                            setErrorMessagest({ ...errorMessagest, first_name: 'No más de 25 caracteres' })
+                                            setErrorMessages({ ...errorMessages, first_name: 'No más de 25 caracteres' })
                                         } else if (event.target.value.length < 3) {
                                             setErrors({ ...errors, first_name: true });
-                                            setErrorMessagest({ ...errorMessagest, first_name: 'No menos de 3 caracteres' })
+                                            setErrorMessages({ ...errorMessages, first_name: 'No menos de 3 caracteres' })
                                         } else {
                                             setErrors({ ...errors, first_name: false });
-                                            setErrorMessagest({ ...errorMessagest, first_name: '' })
+                                            setErrorMessages({ ...errorMessages, first_name: '' })
                                         }
                                     }}
                                     onBlur={(event) => {
                                         if (event.target.value === '') {
                                             setErrors({ ...errors, first_name: true });
-                                            setErrorMessagest({ ...errorMessagest, first_name: 'Este campo es obligatorio' });
+                                            setErrorMessages({ ...errorMessages, first_name: 'Este campo es obligatorio' });
                                         }
                                     }}
                                     fullWidth
@@ -190,7 +182,7 @@ export const CreateUser = ({ register }) => {
                                         shrink: true,
                                     }}
                                     error={errors.first_name}
-                                    helperText={errorMessagest.first_name}
+                                    helperText={errorMessages.first_name}
                                 />
                             </Grid>
                             <Grid item xs={6} >
@@ -204,19 +196,19 @@ export const CreateUser = ({ register }) => {
                                         setLast_name(event.target.value)
                                         if (event.target.value.length > 25) {
                                             setErrors({ ...errors, last_name: true });
-                                            setErrorMessagest({ ...errorMessagest, last_name: 'No más de 25 caracteres' })
+                                            setErrorMessages({ ...errorMessages, last_name: 'No más de 25 caracteres' })
                                         } else if (event.target.value.length < 3) {
                                             setErrors({ ...errors, last_name: true });
-                                            setErrorMessagest({ ...errorMessagest, last_name: 'No menos de 3 caracteres' })
+                                            setErrorMessages({ ...errorMessages, last_name: 'No menos de 3 caracteres' })
                                         } else {
                                             setErrors({ ...errors, last_name: false });
-                                            setErrorMessagest({ ...errorMessagest, last_name: '' })
+                                            setErrorMessages({ ...errorMessages, last_name: '' })
                                         }
                                     }}
                                     onBlur={(event) => {
                                         if (event.target.value === '') {
                                             setErrors({ ...errors, last_name: true });
-                                            setErrorMessagest({ ...errorMessagest, last_name: 'Este campo es obligatorio' });
+                                            setErrorMessages({ ...errorMessages, last_name: 'Este campo es obligatorio' });
                                         }
                                     }}
                                     fullWidth
@@ -226,7 +218,7 @@ export const CreateUser = ({ register }) => {
                                         shrink: true,
                                     }}
                                     error={errors.last_name}
-                                    helperText={errorMessagest.last_name}
+                                    helperText={errorMessages.last_name}
 
                                 />
                             </Grid>
@@ -242,19 +234,19 @@ export const CreateUser = ({ register }) => {
                                         setEmail(event.target.value)
                                         if (event.target.value.length > 30) {
                                             setErrors({ ...errors, email: true });
-                                            setErrorMessagest({ ...errorMessagest, email: 'No más de 30 caracteres' })
+                                            setErrorMessages({ ...errorMessages, email: 'No más de 30 caracteres' })
                                         } else if (event.target.value.length < 5) {
                                             setErrors({ ...errors, email: true });
-                                            setErrorMessagest({ ...errorMessagest, email: 'No menos de 5 caracteres' })
+                                            setErrorMessages({ ...errorMessages, email: 'No menos de 5 caracteres' })
                                         } else {
                                             setErrors({ ...errors, email: false });
-                                            setErrorMessagest({ ...errorMessagest, email: '' })
+                                            setErrorMessages({ ...errorMessages, email: '' })
                                         }
                                     }}
                                     onBlur={(event) => {
                                         if (event.target.value === '') {
                                             setErrors({ ...errors, email: true });
-                                            setErrorMessagest({ ...errorMessagest, email: 'Este campo es obligatorio' });
+                                            setErrorMessages({ ...errorMessages, email: 'Este campo es obligatorio' });
                                         }
                                     }}
                                     fullWidth
@@ -264,7 +256,7 @@ export const CreateUser = ({ register }) => {
                                         shrink: true,
                                     }}
                                     error={errors.email}
-                                    helperText={errorMessagest.email}
+                                    helperText={errorMessages.email}
 
                                 />
                             </Grid>
@@ -280,10 +272,10 @@ export const CreateUser = ({ register }) => {
                                         setHome_phone(event.target.value)
                                         if (event.target.value.length > 7) {
                                             setErrors({ ...errors, home_phone: true });
-                                            setErrorMessagest({ ...errorMessagest, home_phone: 'No más de 7 caracteres' })
+                                            setErrorMessages({ ...errorMessages, home_phone: 'No más de 7 caracteres' })
                                         }  else {
                                             setErrors({ ...errors, home_phone: false });
-                                            setErrorMessagest({ ...errorMessagest, home_phone: '' })
+                                            setErrorMessages({ ...errorMessages, home_phone: '' })
                                         }
                                     }}
                                     value={home_phone}
@@ -294,7 +286,7 @@ export const CreateUser = ({ register }) => {
                                         shrink: true,
                                     }}
                                     error={errors.home_phone}
-                                    helperText={errorMessagest.home_phone}
+                                    helperText={errorMessages.home_phone}
                                 >
                                 </TextField>
                             </Grid>
@@ -310,19 +302,19 @@ export const CreateUser = ({ register }) => {
                                         setPersonal_phone(event.target.value)
                                         if (event.target.value.length > 10) {
                                             setErrors({ ...errors, personal_phone: true });
-                                            setErrorMessagest({ ...errorMessagest, personal_phone: 'No más de 10 caracteres' })
+                                            setErrorMessages({ ...errorMessages, personal_phone: 'No más de 10 caracteres' })
                                         } else if (event.target.value.length < 10) {
                                             setErrors({ ...errors, personal_phone: true });
-                                            setErrorMessagest({ ...errorMessagest, personal_phone: 'No menos de 10 caracteres' })
+                                            setErrorMessages({ ...errorMessages, personal_phone: 'No menos de 10 caracteres' })
                                         } else {
                                             setErrors({ ...errors, personal_phone: false });
-                                            setErrorMessagest({ ...errorMessagest, personal_phone: '' })
+                                            setErrorMessages({ ...errorMessages, personal_phone: '' })
                                         }
                                     }}
                                     onBlur={(event) => {
                                         if (event.target.value === '') {
                                             setErrors({ ...errors, personal_phone: true });
-                                            setErrorMessagest({ ...errorMessagest, personal_phone: 'Este campo es obligatorio' });
+                                            setErrorMessages({ ...errorMessages, personal_phone: 'Este campo es obligatorio' });
                                         }
                                     }}
                                     value={personal_phone}
@@ -332,7 +324,7 @@ export const CreateUser = ({ register }) => {
                                         shrink: true,
                                     }}
                                     error={errors.personal_phone}
-                                    helperText={errorMessagest.personal_phone}
+                                    helperText={errorMessages.personal_phone}
                                 >
                                 </TextField>
                             </Grid>
@@ -348,19 +340,19 @@ export const CreateUser = ({ register }) => {
                                         setAddress(event.target.value)
                                         if (event.target.value.length > 50) {
                                             setErrors({ ...errors, address: true });
-                                            setErrorMessagest({ ...errorMessagest, address: 'No más de 50 caracteres' })
+                                            setErrorMessages({ ...errorMessages, address: 'No más de 50 caracteres' })
                                         } else if (event.target.value.length < 3) {
                                             setErrors({ ...errors, address: true });
-                                            setErrorMessagest({ ...errorMessagest, address: 'No menos de 3 caracteres' })
+                                            setErrorMessages({ ...errorMessages, address: 'No menos de 3 caracteres' })
                                         } else {
                                             setErrors({ ...errors, address: false });
-                                            setErrorMessagest({ ...errorMessagest, address: '' })
+                                            setErrorMessages({ ...errorMessages, address: '' })
                                         }
                                     }}
                                     onBlur={(event) => {
                                         if (event.target.value === '') {
                                             setErrors({ ...errors, address: true });
-                                            setErrorMessagest({ ...errorMessagest, address: 'Este campo es obligatorio' });
+                                            setErrorMessages({ ...errorMessages, address: 'Este campo es obligatorio' });
                                         }
                                     }}
                                     autoComplete="shipping address-line2"
@@ -369,7 +361,7 @@ export const CreateUser = ({ register }) => {
                                         shrink: true,
                                     }}
                                     error={errors.address}
-                                    helperText={errorMessagest.address}
+                                    helperText={errorMessages.address}
 
                                 >
                                 </TextField>
@@ -387,19 +379,19 @@ export const CreateUser = ({ register }) => {
                                         setPassword(event.target.value)
                                         if (event.target.value.length > 15) {
                                             setErrors({ ...errors, password: true });
-                                            setErrorMessagest({ ...errorMessagest, password: 'No más de 15 caracteres' })
+                                            setErrorMessages({ ...errorMessages, password: 'No más de 15 caracteres' })
                                         } else if (event.target.value.length < 5) {
                                             setErrors({ ...errors, password: true });
-                                            setErrorMessagest({ ...errorMessagest, password: 'Tu clave necesita almenos: 5 carácteres, una mayúscula, una minúscula, un número y un simbolo' })
+                                            setErrorMessages({ ...errorMessages, password: 'Tu clave necesita almenos: 5 carácteres, una mayúscula, una minúscula, un número y un simbolo' })
                                         } else {
                                             setErrors({ ...errors, password: false });
-                                            setErrorMessagest({ ...errorMessagest, password: '' })
+                                            setErrorMessages({ ...errorMessages, password: '' })
                                         }
                                     }}
                                     onBlur={(event) => {
                                         if (event.target.value === '') {
                                             setErrors({ ...errors, password: true });
-                                            setErrorMessagest({ ...errorMessagest, password: 'Este campo es obligatorio' });
+                                            setErrorMessages({ ...errorMessages, password: 'Este campo es obligatorio' });
                                         }
                                     }}
                                     autoComplete="shipping address-line2"
@@ -408,7 +400,7 @@ export const CreateUser = ({ register }) => {
                                         shrink: true,
                                     }}
                                     error={errors.password}
-                                    helperText={errorMessagest.password}
+                                    helperText={errorMessages.password}
 
                                 >
                                 </TextField>
@@ -426,22 +418,22 @@ export const CreateUser = ({ register }) => {
                                         setPasswordConfirmation(event.target.value)
                                         if (event.target.value.length > 15) {
                                             setErrors({ ...errors, password_confirmation: true });
-                                            setErrorMessagest({ ...errorMessagest, password_confirmation: 'No más de 15 caracteres' })
+                                            setErrorMessages({ ...errorMessages, password_confirmation: 'No más de 15 caracteres' })
                                         } else if (event.target.value.length < 5) {
                                             setErrors({ ...errors, password_confirmation: true });
-                                            setErrorMessagest({ ...errorMessagest, password_confirmation: 'Tu clave necesita almenos: 5 carácteres, una mayúscula, una minúscula, un número y un simbolo' })
+                                            setErrorMessages({ ...errorMessages, password_confirmation: 'Tu clave necesita almenos: 5 carácteres, una mayúscula, una minúscula, un número y un simbolo' })
                                         } else if (event.target.value !== password) { // Condición para comparar si las contraseñas son iguales
                                             setErrors({ ...errors, password_confirmation: true });
-                                            setErrorMessagest({ ...errorMessagest, password_confirmation: 'Las contraseñas no coinciden' });
+                                            setErrorMessages({ ...errorMessages, password_confirmation: 'Las contraseñas no coinciden' });
                                         } else {
                                             setErrors({ ...errors, password_confirmation: false });
-                                            setErrorMessagest({ ...errorMessagest, password_confirmation: '' });
+                                            setErrorMessages({ ...errorMessages, password_confirmation: '' });
                                         }
                                     }}
                                     onBlur={(event) => {
                                         if (event.target.value === '') {
                                             setErrors({ ...errors, password_confirmation: true });
-                                            setErrorMessagest({ ...errorMessagest, password_confirmation: 'Este campo es obligatorio' });
+                                            setErrorMessages({ ...errorMessages, password_confirmation: 'Este campo es obligatorio' });
                                         }
                                     }}
                                     autoComplete="shipping address-line2"
@@ -450,7 +442,7 @@ export const CreateUser = ({ register }) => {
                                         shrink: true,
                                     }}
                                     error={errors.password_confirmation}
-                                    helperText={errorMessagest.password_confirmation}
+                                    helperText={errorMessages.password_confirmation}
 
                                 >
                                 </TextField>

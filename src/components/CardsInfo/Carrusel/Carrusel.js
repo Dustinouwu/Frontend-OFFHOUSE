@@ -47,8 +47,8 @@ const SimpleSlider = () => {
   }, []);
 
 
-  
-  
+
+
   const settings = {
     dots: true,
     infinite: true,
@@ -127,15 +127,15 @@ const SimpleSlider = () => {
     )
 
   });
-  
-  
+
+
 
   return (
     <div className="App">
       <h2 className="title">Destacados de Refrigeradoras</h2>
       <Slider {...settings}>
         {firstTenProducts1.map((item, index) => (
-          <Grid item key={item.id} xs={12} sm={6} md={6} >
+          <Grid item key={item.id} xs={12} sm={6} md={6} onClick={() => navigate(`/viewproduct/${item.id}`)}>
             <Card
               sx={{
                 height: '100%',
@@ -161,13 +161,18 @@ const SimpleSlider = () => {
                   image={item.image}
                   alt="random"
                 />
+                
                 <CardContent >
+                <Typography variant="h6" color="text.secondary">
+                  {item.brand}
+                </Typography>
                   <Typography variant="h5" component="h3">
                     ${item.price}
                   </Typography>
                   <Typography variant="h6" component="h5" style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'normal', wordWrap: 'break-word', maxHeight: '30px' }}>
                     {item.title}
                   </Typography>
+
                   <div className="rtcontainer" style={{ display: 'flex' }}>
                     <CircleIcon style={{ color: colorprod2[index], paddingRight: '10px', width: '20' }} />
                     <Typography noWrap style={{ paddingTop: '2px' }} >
@@ -191,7 +196,7 @@ const SimpleSlider = () => {
       <h2 className="title">Destacados de Cocinas</h2>
       <Slider {...settings}>
         {firstTenProducts2.map((item, index) => (
-          <Grid item key={item.id} xs={12} sm={6} md={6} >
+          <Grid item key={item.id} xs={12} sm={6} md={6} onClick={() => navigate(`/viewproduct/${item.id}`)} >
             <Card
               sx={{
                 height: '100%',
@@ -247,169 +252,169 @@ const SimpleSlider = () => {
       <h2 className="title">Destacados de Microondas </h2>
       <Slider {...settings}>
         {firstTenProducts3.map((item, index) => (
-              <Grid item key={item.id} xs={12} sm={6} md={6} >
-                <Card
+          <Grid item key={item.id} xs={12} sm={6} md={6} onClick={() => navigate(`/viewproduct/${item.id}`)}>
+            <Card
+              sx={{
+                height: '100%',
+                maxWidth: '270px',
+                display: 'flex',
+                flexDirection: 'column',
+                borderRadius: 3,
+                border: 0,
+                boxShadow: '15px 0 5px -5px rgba(0, 0, 0, 0.2), -8px 0 15px -5px rgba(0, 0, 0, 0.2)',
+                flexWrap: 'wrap',
+                alignItems: 'flex-end',
+              }}
+            >
+              <CardActionArea>
+                <CardMedia
+                  component="img"
                   sx={{
-                    height: '100%',
-                    maxWidth: '270px',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    borderRadius: 3,
-                    border: 0,
-                    boxShadow: '15px 0 5px -5px rgba(0, 0, 0, 0.2), -8px 0 15px -5px rgba(0, 0, 0, 0.2)',
-                    flexWrap: 'wrap',
-                    alignItems: 'flex-end',
+                    // 16:9
+                    py: '5%',
+                    width: '100%',
+                    height: '200px',
                   }}
-                >
-                  <CardActionArea>
-                    <CardMedia
-                      component="img"
-                      sx={{
-                        // 16:9
-                        py: '5%',
-                        width: '100%',
-                        height: '200px',
-                      }}
-                      image={item.image}
-                      alt="random"
-                    />
-                    <CardContent >
-                      <Typography variant="h5" component="h3">
-                        ${item.price}
-                      </Typography>
-                      <Typography variant="h6" component="h5" style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'normal', wordWrap: 'break-word', maxHeight: '30px' }}>
-                        {item.title}
-                      </Typography>
-                      <div className="rtcontainer" style={{ display: 'flex' }}>
-                        <CircleIcon style={{ color: colorprod4[index], paddingRight: '10px', width: '20' }} />
-                        <Typography noWrap style={{ paddingTop: '2px' }} >
-                          {item.state_appliance}
-                        </Typography>
-                      </div>
-                    </CardContent>
-                  </CardActionArea>
-                  <Button
-                    variant="text"
-                    startIcon={<RemoveRedEyeIcon style={{ color: 'white' }} />}
-                    style={{ color: 'white', backgroundColor: '#FF9901', position: 'absolute', display: 'fixed', }}
-                    onClick={() => navigate(`/viewproduct/${item.id}`)}
-                  >
-                    Ver Producto
-                  </Button>
-                </Card>
-              </Grid>
+                  image={item.image}
+                  alt="random"
+                />
+                <CardContent >
+                  <Typography variant="h5" component="h3">
+                    ${item.price}
+                  </Typography>
+                  <Typography variant="h6" component="h5" style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'normal', wordWrap: 'break-word', maxHeight: '30px' }}>
+                    {item.title}
+                  </Typography>
+                  <div className="rtcontainer" style={{ display: 'flex' }}>
+                    <CircleIcon style={{ color: colorprod4[index], paddingRight: '10px', width: '20' }} />
+                    <Typography noWrap style={{ paddingTop: '2px' }} >
+                      {item.state_appliance}
+                    </Typography>
+                  </div>
+                </CardContent>
+              </CardActionArea>
+              <Button
+                variant="text"
+                startIcon={<RemoveRedEyeIcon style={{ color: 'white' }} />}
+                style={{ color: 'white', backgroundColor: '#FF9901', position: 'absolute', display: 'fixed', }}
+                onClick={() => navigate(`/viewproduct/${item.id}`)}
+              >
+                Ver Producto
+              </Button>
+            </Card>
+          </Grid>
         ))}
       </Slider>
       <h2 className="title">Destacados de Planchas</h2>
       <Slider {...settings}>
         {firstTenProducts4.map((item, index) => (
-              <Grid item key={item.id} xs={12} sm={6} md={6} >
-                <Card
+          <Grid item key={item.id} xs={12} sm={6} md={6} onClick={() => navigate(`/viewproduct/${item.id}`)} >
+            <Card
+              sx={{
+                height: '100%',
+                maxWidth: '270px',
+                display: 'flex',
+                flexDirection: 'column',
+                borderRadius: 3,
+                border: 0,
+                boxShadow: '15px 0 5px -5px rgba(0, 0, 0, 0.2), -8px 0 15px -5px rgba(0, 0, 0, 0.2)',
+                flexWrap: 'wrap',
+                alignItems: 'flex-end',
+              }}
+            >
+              <CardActionArea>
+                <CardMedia
+                  component="img"
                   sx={{
-                    height: '100%',
-                    maxWidth: '270px',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    borderRadius: 3,
-                    border: 0,
-                    boxShadow: '15px 0 5px -5px rgba(0, 0, 0, 0.2), -8px 0 15px -5px rgba(0, 0, 0, 0.2)',
-                    flexWrap: 'wrap',
-                    alignItems: 'flex-end',
+                    // 16:9
+                    py: '5%',
+                    width: '100%',
+                    height: '200px',
                   }}
-                >
-                  <CardActionArea>
-                    <CardMedia
-                      component="img"
-                      sx={{
-                        // 16:9
-                        py: '5%',
-                        width: '100%',
-                        height: '200px',
-                      }}
-                      image={item.image}
-                      alt="random"
-                    />
-                    <CardContent >
-                      <Typography variant="h5" component="h3">
-                        ${item.price}
-                      </Typography>
-                      <Typography variant="h6" component="h5" style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'normal', wordWrap: 'break-word', maxHeight: '30px' }}>
-                        {item.title}
-                      </Typography>
-                      <div className="rtcontainer" style={{ display: 'flex' }}>
-                        <CircleIcon style={{ color: colorprod5[index], paddingRight: '10px', width: '20' }} />
-                        <Typography noWrap style={{ paddingTop: '2px' }} >
-                          {item.state_appliance}
-                        </Typography>
-                      </div>
-                    </CardContent>
-                  </CardActionArea>
-                  <Button
-                    variant="text"
-                    startIcon={<RemoveRedEyeIcon style={{ color: 'white' }} />}
-                    style={{ color: 'white', backgroundColor: '#FF9901', position: 'absolute', display: 'fixed', }}
-                    onClick={() => navigate(`/viewproduct/${item.id}`)}
-                  >
-                    Ver Producto
-                  </Button>
-                </Card>
-              </Grid>
+                  image={item.image}
+                  alt="random"
+                />
+                <CardContent >
+                  <Typography variant="h5" component="h3">
+                    ${item.price}
+                  </Typography>
+                  <Typography variant="h6" component="h5" style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'normal', wordWrap: 'break-word', maxHeight: '30px' }}>
+                    {item.title}
+                  </Typography>
+                  <div className="rtcontainer" style={{ display: 'flex' }}>
+                    <CircleIcon style={{ color: colorprod5[index], paddingRight: '10px', width: '20' }} />
+                    <Typography noWrap style={{ paddingTop: '2px' }} >
+                      {item.state_appliance}
+                    </Typography>
+                  </div>
+                </CardContent>
+              </CardActionArea>
+              <Button
+                variant="text"
+                startIcon={<RemoveRedEyeIcon style={{ color: 'white' }} />}
+                style={{ color: 'white', backgroundColor: '#FF9901', position: 'absolute', display: 'fixed', }}
+                onClick={() => navigate(`/viewproduct/${item.id}`)}
+              >
+                Ver Producto
+              </Button>
+            </Card>
+          </Grid>
         ))}
       </Slider>
       <h2 className="title">Destacados de Lavadoras</h2>
       <Slider {...settings}>
         {firstTenProducts5.map((item, index) => (
-              <Grid item key={item.id} xs={12} sm={6} md={6} >
-                <Card
+          <Grid item key={item.id} xs={12} sm={6} md={6} onClick={() => navigate(`/viewproduct/${item.id}`)}>
+            <Card
+              sx={{
+                height: '100%',
+                maxWidth: '270px',
+                display: 'flex',
+                flexDirection: 'column',
+                borderRadius: 3,
+                border: 0,
+                boxShadow: '15px 0 5px -5px rgba(0, 0, 0, 0.2), -8px 0 15px -5px rgba(0, 0, 0, 0.2)',
+                flexWrap: 'wrap',
+                alignItems: 'flex-end',
+              }}
+            >
+              <CardActionArea>
+                <CardMedia
+                  component="img"
                   sx={{
-                    height: '100%',
-                    maxWidth: '270px',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    borderRadius: 3,
-                    border: 0,
-                    boxShadow: '15px 0 5px -5px rgba(0, 0, 0, 0.2), -8px 0 15px -5px rgba(0, 0, 0, 0.2)',
-                    flexWrap: 'wrap',
-                    alignItems: 'flex-end',
+                    // 16:9
+                    py: '5%',
+                    width: '100%',
+                    height: '200px',
                   }}
-                >
-                  <CardActionArea>
-                    <CardMedia
-                      component="img"
-                      sx={{
-                        // 16:9
-                        py: '5%',
-                        width: '100%',
-                        height: '200px',
-                      }}
-                      image={item.image}
-                      alt="random"
-                    />
-                    <CardContent >
-                      <Typography variant="h5" component="h3">
-                        ${item.price}
-                      </Typography>
-                      <Typography variant="h6" component="h5" style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'normal', wordWrap: 'break-word', maxHeight: '30px' }}>
-                        {item.title}
-                      </Typography>
-                      <div className="rtcontainer" style={{ display: 'flex' }}>
-                        <CircleIcon style={{ color: colorprod6[index], paddingRight: '10px', width: '20' }} />
-                        <Typography noWrap style={{ paddingTop: '2px' }} >
-                          {item.state_appliance}
-                        </Typography>
-                      </div>
-                    </CardContent>
-                  </CardActionArea>
-                  <Button
-                    variant="text"
-                    startIcon={<RemoveRedEyeIcon style={{ color: 'white' }} />}
-                    style={{ color: 'white', backgroundColor: '#FF9901', position: 'absolute', display: 'fixed', }}
-                    onClick={() => navigate(`/viewproduct/${item.id}`)}
-                  >
-                    Ver Producto
-                  </Button>
-                </Card>
-              </Grid>
+                  image={item.image}
+                  alt="random"
+                />
+                <CardContent >
+                  <Typography variant="h5" component="h3">
+                    ${item.price}
+                  </Typography>
+                  <Typography variant="h6" component="h5" style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'normal', wordWrap: 'break-word', maxHeight: '30px' }}>
+                    {item.title}
+                  </Typography>
+                  <div className="rtcontainer" style={{ display: 'flex' }}>
+                    <CircleIcon style={{ color: colorprod6[index], paddingRight: '10px', width: '20' }} />
+                    <Typography noWrap style={{ paddingTop: '2px' }} >
+                      {item.state_appliance}
+                    </Typography>
+                  </div>
+                </CardContent>
+              </CardActionArea>
+              <Button
+                variant="text"
+                startIcon={<RemoveRedEyeIcon style={{ color: 'white' }} />}
+                style={{ color: 'white', backgroundColor: '#FF9901', position: 'absolute', display: 'fixed', }}
+                onClick={() => navigate(`/viewproduct/${item.id}`)}
+              >
+                Ver Producto
+              </Button>
+            </Card>
+          </Grid>
         ))}
       </Slider>
     </div>

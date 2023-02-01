@@ -37,13 +37,13 @@ const ModalEdit = ({ comment }) => {
     const handleClick = () => {
         setOpenMessage(true);
     };
-    
+
     const handleCloseMessage = (event, reason) => {
         if (reason === 'clickaway') {
             return;
         }
         setOpenMessage(false);
-        
+
     };
 
     const tokenUser = localStorage.getItem('token')
@@ -79,7 +79,8 @@ const ModalEdit = ({ comment }) => {
                 `https://offhouse.herokuapp.com/api/products/${id}/comments/${comment.id}`,
                 { ...form }, { headers: { 'accept': 'application/json', 'authorization': tokenUser } }
             )
-            
+
+            window.location.href = `/viewproduct/${id}`;
             handleClose();
             handleClick();
         } catch (error) {
@@ -90,11 +91,7 @@ const ModalEdit = ({ comment }) => {
     //Función para enviar el formulario
     useEffect(() => {
         handleSubmit();
-    }, [handleSubmit])
-
-
-
-
+    }, [])
 
 
     return (
@@ -125,7 +122,7 @@ const ModalEdit = ({ comment }) => {
 
                             style={{ width: 400, height: 100, marginBottom: 10 }}
                         />
-                        <Button variant="contained" onClick={handleClick}  type='submit' >Enviar</Button>
+                        <Button variant="contained" onClick={handleClick} type='submit' >Enviar</Button>
                         <Snackbar open={openMessage}  >
                             <Alert onClose={handleCloseMessage} severity="success" sx={{ width: '100%' }}>
                                 Su reporte ha sido enviado
