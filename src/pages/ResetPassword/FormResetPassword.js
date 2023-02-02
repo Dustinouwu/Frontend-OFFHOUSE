@@ -98,7 +98,7 @@ export const FormResetPassword = () => {
                     >
                     </input>
                     <Label
-                        text='CONFIRMACIÓN DE PASSWORD'
+                        text='CONFIRMACIÓN DE CONTRASEÑA'
                     />
 
                     <input

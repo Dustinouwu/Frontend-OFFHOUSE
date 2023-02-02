@@ -389,10 +389,17 @@ const FormUpdataProduct = ({ products }) => {
                                 >
                                     <MenuItem value="1" selected>Refrigeradores</MenuItem>
                                     <MenuItem value="2">Cocina</MenuItem>
-                                    <MenuItem value="3">Microondas</MenuItem>
-                                    <MenuItem value="4">Iron</MenuItem>
-                                    <MenuItem value="5">Lavadora</MenuItem>
-                                    <MenuItem value="6">Televisión</MenuItem>
+                                    <MenuItem value="3">Lavadoras</MenuItem>
+                                    <MenuItem value="4">Licuadoras</MenuItem>
+                                    <MenuItem value="5">Secadoras de ropa</MenuItem>
+                                    <MenuItem value="6">Microondas</MenuItem>
+                                    <MenuItem value="7">Hornos</MenuItem>
+                                    <MenuItem value="8">Extractores de aire</MenuItem>
+                                    <MenuItem value="9">Aspiradoras</MenuItem>
+                                    <MenuItem value="10">Tostadoras</MenuItem>
+                                    <MenuItem value="11">Ventiladores</MenuItem>
+                                    <MenuItem value="12">Cafeteras</MenuItem>
+                                    <MenuItem value="13">Otros</MenuItem>
                                 </TextField>
                             </Grid>
 
