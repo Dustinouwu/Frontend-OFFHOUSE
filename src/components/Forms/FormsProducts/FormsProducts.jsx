@@ -86,7 +86,7 @@ const FormsProducts = () => {
           </Link>
           <Link href="/productsprimium" underline="none">
             <Button variant="contained" endIcon={<WorkspacePremiumIcon style={{ backgroundColor: 'black', borderRadius: '10px' }} />} sx={{ mt: '1%', backgroundColor: '#000' }}>
-              Mis productos premium
+              Mis productos suscritos
             </Button>
           </Link>
         </div>
@@ -138,7 +138,7 @@ const FormsProducts = () => {
                         style={{ color: 'white', backgroundColor: 'blue' }}
                         onClick={() => navigate(`/payment/product/${products.id}`)}
                       >
-                        Subscripción
+                        Suscripción
                       </Button>
                     </ButtonGroup>
                   </TableCell>

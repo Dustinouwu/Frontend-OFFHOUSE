@@ -28,7 +28,6 @@ const Message = () => {
         }
     }
 
-
     const getMessage = useCallback(async () => {
         try {
             const response = await axios.get(
@@ -55,9 +54,9 @@ const Message = () => {
         }
     }
 
-
+    //Credenciales de Pusher
     useEffect(() => {
-
+        //Colocar las credenciales de pusher
         Pusher.logToConsole = true;
         const pusher = new Pusher('8031fead247c518cc207', {
             cluster: 'us2'
@@ -66,9 +65,6 @@ const Message = () => {
         const channel = pusher.subscribe('chat');
         channel.bind('messages', function (data) {
             setMessages([...messages, data])
-
-
-
         });
 
         getMessage()
@@ -128,7 +124,7 @@ const Message = () => {
                                                     alt="qwe"
                                                 />
                                                 <p>{message.message}</p>
-                                               
+
                                             </div>
                                         </div>
                                     </div>
@@ -143,7 +139,7 @@ const Message = () => {
                                                     alt="qwe"
                                                 />
                                                 <p>{message.message}</p>
-                                               
+
                                             </div>
                                         </div>
                                     </div>
