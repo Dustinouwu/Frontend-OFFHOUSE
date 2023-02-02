@@ -50,7 +50,7 @@ export const CreateUser = ({ register }) => {
     });
    
     
-    
+    const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
 
     //Sacar todo el arreglo de errores y mostrarlos en un solo string con un salto de línea entre cada uno 
     const handleErrors = Object.values(errorMessages).map((error) => {
@@ -102,8 +102,8 @@ export const CreateUser = ({ register }) => {
             errorMessage = 'La contraseña debe contener al menos una letra mayúscula';
         } else if (!/^(?=.*\d)/.test(password)) {
             errorMessage = 'La contraseña debe contener al menos un número';
-        } else if (!/^(?=.*[!@#$%^&*])/.test(password)) {
-            errorMessage = 'La contraseña debe contener al menos un carácter especial (!, @, #, $, %, ^, &, *)';
+        } else if (!/^(?=.*[!@#$%^&*._"'()+,-/:;>=<?{}|])/.test(password)) {
+            errorMessage = 'La contraseña debe contener al menos un carácter especial';
         } else if (password.length < 5 || password.length > 50) {
             errorMessage = 'La contraseña debe tener entre 5 y 50 caracteres';
         }
@@ -270,10 +270,16 @@ export const CreateUser = ({ register }) => {
                                     }}
                                     onBlur={(event) => {
                                         if (event.target.value === '') {
-                                            setErrors({ ...errors, email: true });
-                                            setErrorMessages({ ...errorMessages, email: 'Este campo es obligatorio' });
+                                          setErrors({ ...errors, email: true });
+                                          setErrorMessages({ ...errorMessages, email: 'Este campo es obligatorio' });
+                                        } else if (!emailRegex.test(event.target.value)) {
+                                          setErrors({ ...errors, email: true });
+                                          setErrorMessages({ ...errorMessages, email: 'Por favor ingrese un correo electrónico válido' });
+                                        } else {
+                                          setErrors({ ...errors, email: false });
+                                          setErrorMessages({ ...errorMessages, email: '' });
                                         }
-                                    }}
+                                      }}
                                     fullWidth
                                     autoComplete="shipping address-line2"
                                     variant="standard"

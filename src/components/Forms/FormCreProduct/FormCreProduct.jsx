@@ -143,9 +143,9 @@ const FormCreProduct = ({ products }) => {
                                     label="Nombre del producto"
                                     onChange={(event) => {
                                         setTitle(event.target.value);
-                                        if (event.target.value.length > 50) {
+                                        if (event.target.value.length > 250) {
                                             setErrors({ ...errors, title: true });
-                                            setErrorMessages({ ...errorMessages, title: 'No más de 50 caracteres' })
+                                            setErrorMessages({ ...errorMessages, title: 'No más de 250 caracteres' })
                                         } else if (event.target.value.length < 5) {
                                             setErrors({ ...errors, title: true });
                                             setErrorMessages({ ...errorMessages, title: 'No menos de 5 caracteres' })
@@ -174,7 +174,7 @@ const FormCreProduct = ({ products }) => {
                             </Grid>
                             <Grid item xs={6} >
                                 <TextField
-                                    id="username"
+                                    id="marca"
                                     name="Usuario"
                                     label="Marca"
                                     onChange={(event) => {
@@ -209,15 +209,15 @@ const FormCreProduct = ({ products }) => {
                             </Grid>
                             <Grid item xs={6} >
                                 <TextField
-                                    id="username"
+                                    id="Usuario"
                                     name="Usuario"
                                     type="number"
                                     label="Precio del producto"
                                     onChange={(event) => {
                                         setPrice(event.target.value)
-                                        if (event.target.value.length > 5) {
+                                        if (event.target.value.length > 10) {
                                             setErrors({ ...errors, price: true });
-                                            setErrorMessages({ ...errorMessages, price: 'No más de 5 caracteres' })
+                                            setErrorMessages({ ...errorMessages, price: 'No más de 10 caracteres' })
                                         } else if (event.target.value.length < 1) {
                                             setErrors({ ...errors, price: true });
                                             setErrorMessages({ ...errorMessages, price: 'No menos de 1 caracteres' })
@@ -247,7 +247,7 @@ const FormCreProduct = ({ products }) => {
                             </Grid>
                             <Grid item xs={6} >
                                 <TextField
-                                    id="username"
+                                    id="last_name"
                                     name="last_name"
                                     type="number"
                                     label="Stock del producto"
@@ -286,7 +286,7 @@ const FormCreProduct = ({ products }) => {
 
                             <Grid item xs={6} >
                                 <TextField
-                                    id="username"
+                                    id="last_name"
                                     name="last_name"
                                     label="Estado del producto"
                                     select
@@ -311,7 +311,7 @@ const FormCreProduct = ({ products }) => {
                             </Grid>
                             <Grid item xs={6} >
                                 <TextField
-                                    id="username"
+                                    id="delivery_method"
                                     name='delivery_method'
                                     label="Método de entrega"
                                     select
@@ -330,7 +330,7 @@ const FormCreProduct = ({ products }) => {
                             </Grid>
                             <Grid item xs={6} >
                                 <TextField
-                                    id="username"
+                                    id="Teléfono"
                                     label="Teléfono"
                                     name='phone'
                                     type='number'
@@ -368,7 +368,7 @@ const FormCreProduct = ({ products }) => {
                             </Grid>
                             <Grid item xs={12} >
                                 <TextField
-                                    id="username"
+                                    id="categorie_id"
                                     label="Categoria"
                                     name='categorie_id'
                                     select
@@ -386,16 +386,23 @@ const FormCreProduct = ({ products }) => {
                                 >
                                     <MenuItem value="1" selected>Refrigeradores</MenuItem>
                                     <MenuItem value="2">Cocina</MenuItem>
-                                    <MenuItem value="3">Microondas</MenuItem>
-                                    <MenuItem value="4">Iron</MenuItem>
-                                    <MenuItem value="5">Lavadora</MenuItem>
-                                    <MenuItem value="6">Televisión</MenuItem>
+                                    <MenuItem value="3">Lavadoras</MenuItem>
+                                    <MenuItem value="4">Licuadoras</MenuItem>
+                                    <MenuItem value="5">Secadoras de ropa</MenuItem>
+                                    <MenuItem value="6">Microondas</MenuItem>
+                                    <MenuItem value="7">Hornos</MenuItem>
+                                    <MenuItem value="8">Extractores de aire</MenuItem>
+                                    <MenuItem value="9">Aspiradoras</MenuItem>
+                                    <MenuItem value="10">Tostadoras</MenuItem>
+                                    <MenuItem value="11">Ventiladores</MenuItem>
+                                    <MenuItem value="12">Cafeteras</MenuItem>
+                                    <MenuItem value="13">Otros</MenuItem>
                                 </TextField>
                             </Grid>
 
                             <Grid item xs={12} >
                                 <TextField
-                                    id="username"
+                                    id="Dirección"
                                     label="Dirección"
                                     name='address'
                                     fullWidth

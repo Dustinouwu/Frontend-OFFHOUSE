@@ -117,6 +117,9 @@ export const CategProdCards = () => {
                                             alt="random"
                                         />
                                         <CardContent >
+                                            <Typography variant="h6" color="text.secondary">
+                                                {products.brand}
+                                            </Typography>
                                             <Typography variant="h5" component="h3">
                                                 ${products.price}
                                             </Typography>
