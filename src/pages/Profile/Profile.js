@@ -27,6 +27,8 @@ import ListItemText from '@mui/material/ListItemText';
 import KeyIcon from '@mui/icons-material/Key';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import WorkspacePremiumIcon from '@mui/icons-material/WorkspacePremium';
+import CircularProgress from '@mui/material/CircularProgress';
+import Box from '@mui/material/Box';
 const style = {
     width: '100%',
     maxWidth: '100%',
@@ -44,12 +46,14 @@ export const Profile = () => {
     const navigate = useNavigate();
     const [user, setUser] = useState([])
     const [avatar, setAvatar] = useState([])
+    const [loading, setLoading] = useState(true);
     const [form, setForm] = useState({
         id: '',
 
     })
 
     const getUser = async () => {
+        setLoading(true);
         try {
             const response = await axios.get(
                 `https://offhouse.herokuapp.com/api/profile`,
@@ -57,12 +61,10 @@ export const Profile = () => {
             )
             setUser(response.data.data.user);
             setAvatar(response.data.data.avatar)
-
-            console.log(response.data.data.avatar);
-
-
+            setLoading(false);
         } catch (error) {
             console.log(error);
+            setLoading(false);
         }
     }
 
@@ -75,12 +77,21 @@ export const Profile = () => {
             <div style={{ display: 'flex', gap: '3rem', marginTop: '5%', marginLeft: '5%', marginRight: '5%' }}>
                 <Card sx={{ maxWidth: 350 }}>
                     <CardActionArea>
-                        <CardMedia
-                            component="img"
-                            image={avatar}
-                            style={{ width: '50%', marginBottom: '5%', display: 'flex', alignItems: 'center', flexDirection: 'column', marginLeft: '25%', marginTop: '10%', borderRadius: '25px' }}
-                            alt="avatar user"
-                        />
+                        {
+                            loading ? (
+                                <Box sx={{ display: 'flex',width: '20vh', justifyContent: 'center' }}>
+                                    <CircularProgress size={80} sx={{ color: '#FF9901' }} />
+                                </Box>
+                            ) : (
+                                <CardMedia
+                                    component="img"
+                                    image={avatar}
+                                    style={{ width: '50%', marginBottom: '5%', display: 'flex', alignItems: 'center', flexDirection: 'column', marginLeft: '25%', marginTop: '10%', borderRadius: '25px' }}
+                                    alt="avatar user"
+                                />
+                            )
+                        }
+
                         <CardContent>
                             <Typography gutterBottom variant="h4" component="div" align='center'>
                                 {user.username}
@@ -179,7 +190,7 @@ export const Profile = () => {
 
                         <Button size="small" color="primary" variant="contained" onClick={() => navigate('/productsprimium')} >
                             <WorkspacePremiumIcon />
-                            Productos Premium 
+                            Productos Premium
                         </Button>
                     </CardActions>
                 </Card>

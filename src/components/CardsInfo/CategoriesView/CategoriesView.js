@@ -10,23 +10,27 @@ import { useNavigate } from 'react-router-dom';
 import Labelgiant from "../../atoms/Labelgiant/Labelgiant";
 import axios from 'axios';
 import Footer from '../../Layouts/Footer/Footer';
+import CircularProgress from '@mui/material/CircularProgress';
+import Box from '@mui/material/Box';
 export const CategoriesView = () => {
 
   const navigate = useNavigate(); // Para navegar entre rutas
   const token = localStorage.getItem('token'); // Obtenciíon del token del local storage
   const [categories, setCategories] = useState([]) // Constante
-
+  const [loading, setLoading] = useState(true);
   // Obtener categorías
   const getCategories = useCallback(async () => {
+    setLoading(true);
     try {
       const response = await axios.get(
         'https://offhouse.herokuapp.com/api/admin/categories',
         { headers: { 'accept': 'application/json', 'authorization': token } }
       );
       setCategories(response.data.data.categories);
-      console.log(response.data.data.categories);
+      setLoading(false);
     } catch (error) {
       console.log(error);
+      setLoading(false);
     }
   }, [token]);
 
@@ -41,50 +45,65 @@ export const CategoriesView = () => {
       <Labelgiant
         text={"Categorías"}
       />
-      <div style={{ marginTop: '2%', marginLeft: '10%' }}>
 
-        <Container sx={{ py: 1 }} maxWidth="lg">
-          <Grid container spacing={2}>
-            {categories.map((categories, index) => (
-              <Grid item key={categories.id} xs={12} sm={6} md={4} >
-                <Card
-                  sx={{
-                    height: '100%',
-                    maxWidth: '270px',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    borderRadius: 3,
-                    border: 0,
-                    boxShadow: '15px 0 5px -5px rgba(0, 0, 0, 0.2), -8px 0 15px -5px rgba(0, 0, 0, 0.2)',
-                    flexWrap: 'wrap',
-                    alignItems: 'flex-end',
-                  }}
-                >
-                  <CardActionArea onClick={() => navigate(`/categories/view/${categories.id}`)}>
-                    <CardMedia
-                      component="img"
+
+
+      {
+        loading ? (
+          <Box sx={{ display: 'flex', height: '60vh', alignItems: 'center', justifyContent: 'center' }}>
+            <CircularProgress size={80} sx={{ color: '#FF9901' }} />
+          </Box>
+
+        ) : (
+          <div style={{ marginTop: '2%', marginLeft: '10%' }}>
+            <Container sx={{ py: 1 }} maxWidth="lg">
+              <Grid container spacing={2}>
+                {categories.map((categories, index) => (
+                  <Grid item key={categories.id} xs={12} sm={6} md={4} >
+                    <Card
                       sx={{
-                        // 16:9
-                        py: '5%',
-                        width: '100%',
-                        height: '200px',
+                        height: '100%',
+                        maxWidth: '270px',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        borderRadius: 3,
+                        border: 0,
+                        boxShadow: '15px 0 5px -5px rgba(0, 0, 0, 0.2), -8px 0 15px -5px rgba(0, 0, 0, 0.2)',
+                        flexWrap: 'wrap',
+                        alignItems: 'flex-end',
                       }}
-                      image={categories.imagen}
-                      alt="random"
-                    />
-                    <CardContent >
-                      <Typography variant="h5" component="h3" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                        {categories.name}
-                      </Typography>
-                    </CardContent>
-                  </CardActionArea>
-                </Card>
+                    >
+                      <CardActionArea onClick={() => navigate(`/categories/view/${categories.id}`)}>
+                        <CardMedia
+                          component="img"
+                          sx={{
+                            // 16:9
+                            py: '5%',
+                            width: '100%',
+                            height: '200px',
+                          }}
+                          image={categories.imagen}
+                          alt="random"
+                        />
+                        <CardContent >
+                          <Typography variant="h5" component="h3" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                            {categories.name}
+                          </Typography>
+                        </CardContent>
+                      </CardActionArea>
+                    </Card>
+                  </Grid>
+                ))
+                }
               </Grid>
-            ))}
-          </Grid>
-        </Container>
+            </Container>
+          </div>
+        )
+      }
 
-      </div>
+
+
+
       <Footer />
     </div>
   )

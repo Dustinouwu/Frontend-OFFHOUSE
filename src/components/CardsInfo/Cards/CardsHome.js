@@ -6,7 +6,7 @@ import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import CircleIcon from '@mui/icons-material/Circle';
-import { Button, CardActionArea, Pagination } from '@mui/material';
+import { Button, CardActionArea, CircularProgress, Pagination } from '@mui/material';
 import { Link, useNavigate } from 'react-router-dom';
 import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 import axios from 'axios';
@@ -28,15 +28,18 @@ export default function MultiActionAreaCard(props) {
   const [error, setError] = useState('')
   const [page, setPage] = useState(1);
   const [lastPage, setLastPage] = useState('');
+  const [loading, setLoading] = useState(true);
+
   /* FUNCION PARA PODER SACAR LOS PRODUCTOS DE LA API */
-  const getProducts = async (page) => {
+  const getProducts = async () => {
+    setLoading(true);
     try {
       const response = await axios.get(
-        `https://offhouse.herokuapp.com/api/products?page=${page}`,
+        `https://offhouse.herokuapp.com/api/products`,
         { headers: { 'accept': 'application/json', 'authorization': token } }
       );
-      setProducts(response.data.data.products.data);
-      setLastPage(response.data.data.pagination.last_page);
+      setProducts(response.data.data.products);
+      setLoading(false);
       if (response.status === 403) {
         setError('')
       }
@@ -44,6 +47,7 @@ export default function MultiActionAreaCard(props) {
       console.log(error);
       setError(error.response.data.message)
       console.log(error.response.data.message, 'error');
+      setLoading(false);
     }
   };
   /* FUNCIÓN PARA RENDERIZAR LA FUNCIÓN getProducts AL CARGAR LA PÁGINA*/
@@ -52,8 +56,12 @@ export default function MultiActionAreaCard(props) {
     page === 1 ? setPage(1) : setPage(lastPage);
   }, []);
 
+    // filtrar los productos con featured = 1
+    const firstTenProducts = products.filter((item) => item.featured === 1);
+    console.log(firstTenProducts, 'firstTenProducts');
+
   //FUNCIÓN PARA CAMBIAR EL COLOR DEPENDIENDO EL ESTADO/
-  const colorprod2 = products.map((products) => {
+  const colorprod2 = firstTenProducts.map((products) => {
     return (
       products.state_appliance === 'Nuevo' ? "#0FFF18" : '#FF0000' && products.state_appliance === 'nuevo' ? "#0FFF18" : '#FF0000' && products.state_appliance === 'reacondicionado' ? "#FFF100" : '#FF0000'
     )
@@ -64,10 +72,14 @@ export default function MultiActionAreaCard(props) {
 
   return (
     <div style={{ marginLeft: '10%' }}>
-
+      {products.length === 0 ? (
+        <Box sx={{ display: 'flex', height: '100vh', justifyContent: 'center' }}>
+        <CircularProgress size={80} sx={{ color: '#FF9901' }} />
+      </Box>)
+        : (
       <Container sx={{ py: 5 }} maxWidth="lg">
         <Grid container spacing={2}>
-          {products.map((products, index) => (
+          {firstTenProducts.map((products, index) => (
             <Grid item key={products.id} xs={12} sm={6} md={4} >
 
               <Card
@@ -83,7 +95,7 @@ export default function MultiActionAreaCard(props) {
                 alignItems: 'flex-end',
               }}
             >
-              {products.featured === 1 ? <Button style={{ backgroundColor: 'green', color: 'white', width: '100%', height: '30px', fontSize: '12px' }}>Destacado</Button> : null
+              {products.featured === 1 ? <Button style={{ backgroundColor: 'black', color: 'white', width: '100%', height: '30px', fontSize: '12px' }}>Destacado</Button> : null
               }
               <CardActionArea>
                 <CardMedia
@@ -131,52 +143,7 @@ export default function MultiActionAreaCard(props) {
           ))}
         </Grid>
       </Container>
-      <Pagination count={lastPage} variant="outlined" page={page} onChange={(event, value) => {
-          setPage(value);
-          getProducts(value);
-}} />
-      </div>
-  );
+      )}
+      </div>
+  );
 }
-
-
-
-{/* <Grid item key={products.id} xs={4} sm={4} md={3} >
-            <Card
-              sx={{
-                height: '100%',
-                maxWidth: '250px',
-                display: 'flex',
-                flexDirection: 'column',
-                borderRadius: 3,
-                border: 3,
-              }}
-            >
-              <CardActionArea>
-                <CardMedia
-                  component="img"
-                  sx={{
-                    // 16:9
-                    py: '5%',
-                  }}
-                  image={Imagenes.img5}
-                  alt="random"
-                />
-                <CardContent >
-                  <Typography variant="h7" component="h3">
-                    $ 1000
-                  </Typography>
-                  <Typography variant="h6" component="h5">
-                    IPhone 10
-                  </Typography>
-                  <div className="rtcontainer" style={{ display: 'flex' }}>
-                    <CircleIcon style={{ color: colorproduct, paddingRight: '10px', width: '20' }} />
-                    <Typography noWrap style={{ paddingTop: '2px' }} >
-                      Usado
-                    </Typography>
-                  </div>
-
-                </CardContent>
-              </CardActionArea>
-            </Card>
-          </Grid> */}

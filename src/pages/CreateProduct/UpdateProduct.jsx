@@ -2,12 +2,14 @@ import axios from "axios";
 import React, { useEffect, useState } from "react"
 import { useParams } from "react-router-dom";
 import FormUpdataPro from "../../components/Forms/FormCreProduct/FormUpdataPro";
+import CircularProgress from '@mui/material/CircularProgress';
+import Box from '@mui/material/Box';
 export const UpdateProduct = () => {
     const { id } = useParams();
     const [product, setProduct] = useState({});
     const tokenUser = localStorage.getItem("token");
     const user = JSON.parse(localStorage.getItem('user')) || {};
-    
+
 
 
 
@@ -46,14 +48,18 @@ export const UpdateProduct = () => {
                                     )
                                     :
                                     (
-                                        <h1>Loading...</h1>
+                                        <Box sx={{ display: 'flex', height: '80vh', justifyContent: 'center' }}>
+                                            <CircularProgress size={80} sx={{ color: '#FF9901' }} />
+                                        </Box>
                                     )
                             }
                         </div>
                     )
                     :
                     (
-                        <h1>Loading...</h1>
+                        <Box sx={{ display: 'flex', height: '80vh', justifyContent: 'center', alignItems: 'center' }}>
+                            <CircularProgress size={80} sx={{ color: '#FF9901' }} />
+                        </Box>
                     )
             }
 

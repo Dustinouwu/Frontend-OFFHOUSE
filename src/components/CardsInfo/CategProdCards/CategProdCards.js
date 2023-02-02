@@ -12,6 +12,8 @@ import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 import Labelgiant from "../../atoms/Labelgiant/Labelgiant";
 import axios from 'axios';
 import Footer from '../../Layouts/Footer/Footer';
+import Box from '@mui/material/Box';
+import CircularProgress from '@mui/material/CircularProgress';
 
 
 
@@ -25,6 +27,7 @@ export const CategProdCards = () => {
     const [page, setPage] = useState(1);
     const [lastPage, setLastPage] = useState('');
     const [itemsPerPage, setItemsPerPage] = useState(9);
+    const [loading, setLoading] = useState(true);
 
     const config = {
         headers: { Authorization: `${token}` }
@@ -32,19 +35,23 @@ export const CategProdCards = () => {
 
     // Obtener categorías
     const getCategories = async () => {
+        setLoading(true);
         try {
             const response = await axios.get(
                 `https://offhouse.herokuapp.com/api/admin/categories/${id}`,
                 { headers: { 'accept': 'application/json', 'authorization': token } }
             )
             setCategories(response.data.data.categorie);
+            setLoading(false);
         } catch (error) {
             console.log(error);
+            setLoading(false);
         }
     };
 
     // Obtener productos
     const getCatProduct = async (page) => {
+        setLoading(true);
         try {
             const response = await axios.get(
                 `https://offhouse.herokuapp.com/api/products`,
@@ -52,9 +59,11 @@ export const CategProdCards = () => {
                 config
             )
             setProducts(response.data.data.products);
+            setLoading(false);
 
         } catch (error) {
             console.log(error);
+            setLoading(false);
         }
     };
     // Renderizar categorías y productos 
@@ -87,6 +96,15 @@ export const CategProdCards = () => {
                 <Labelgiant
                     text={categories.name}
                 />
+                {
+                  loading ? (
+                    <Box sx={{ display: 'flex', height: '100vh', alignItems: 'center', justifyContent: 'center' }}>
+                    <CircularProgress size={80} sx={{ color: '#FF9901' }} />
+                  </Box>  
+                  )
+                  :
+                  (
+                    <>
                 <Container sx={{ py: 5 }} maxWidth="lg">
                     <Grid container spacing={2} >
                         {filterProducts.slice(0, itemsPerPage).map((products, index) => (
@@ -149,10 +167,12 @@ export const CategProdCards = () => {
                     </Grid>
                 </Container>
                 <Container sx={{ display: 'flex', justifyContent: 'center' }} maxWidth="lg" >
-
                     <Button color="secondary" onClick={() => setItemsPerPage(itemsPerPage + 9)} sx={{ color: '#000' }}>Ver más</Button>
                 </Container>
+                </>
+                  )
+                }
             </div>
-        </div>
-    )
+        </div>
+    )
 }

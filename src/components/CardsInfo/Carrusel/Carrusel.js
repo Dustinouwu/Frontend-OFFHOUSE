@@ -14,22 +14,26 @@ import { Link, useNavigate } from 'react-router-dom';
 import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 import axios from 'axios';
 import './Carrusel.css'
+import CircularProgress from '@mui/material/CircularProgress';
+import Box from '@mui/material/Box';
 const SimpleSlider = () => {
 
   const navigate = useNavigate(); // Para poder navegar entre las páginas
   const token = localStorage.getItem('token');
   const [products, setProducts] = useState([]);
   const [error, setError] = useState('')
+  const [loading, setLoading] = useState(true);
 
   /* FUNCION PARA PODER SACAR LOS PRODUCTOS DE LA API */
   const getProducts = async () => {
+    setLoading(true);
     try {
       const response = await axios.get(
         'https://offhouse.herokuapp.com/api/products',
         { headers: { 'accept': 'application/json', 'authorization': token } }
       );
-      console.log(response.data.data.products);
       setProducts(response.data.data.products);
+      setLoading(false);
       if (response.status === 403) {
         setError('')
       }
@@ -37,6 +41,7 @@ const SimpleSlider = () => {
       console.log(error);
       setError(error.response.data.message)
       console.log(error.response.data.message, 'error');
+      setLoading(false);
     }
   };
 
@@ -90,333 +95,87 @@ const SimpleSlider = () => {
 
   // filtrar los productos con featured = 1
   const firstTenProducts = products.filter((item) => item.featured === 1);
-  console.log(firstTenProducts, 'firstTenProducts');
-  //Solo mostrar los productos de la categoria 1
-  const firstTenProducts1 = firstTenProducts.filter((item) => item.categorie_id === 1);
-  const firstTenProducts2 = firstTenProducts.filter((item) => item.categorie_id === 2);
-  const firstTenProducts3 = firstTenProducts.filter((item) => item.categorie_id === 3);
-  const firstTenProducts4 = firstTenProducts.filter((item) => item.categorie_id === 4);
-  const firstTenProducts5 = firstTenProducts.filter((item) => item.categorie_id === 5);
-  const colorprod2 = firstTenProducts1.map((products) => {
+  const colorprod2 = firstTenProducts.map((products) => {
     return (
       products.state_appliance === 'Nuevo' ? "#0FFF18" : '#FF0000' && products.state_appliance === 'nuevo' ? "#0FFF18" : '#FF0000' && products.state_appliance === 'reacondicionado' ? "#FFF100" : '#FF0000'
     )
 
   });
-  const colorprod3 = firstTenProducts2.map((products) => {
-    return (
-      products.state_appliance === 'Nuevo' ? "#0FFF18" : '#FF0000' && products.state_appliance === 'nuevo' ? "#0FFF18" : '#FF0000' && products.state_appliance === 'reacondicionado' ? "#FFF100" : '#FF0000'
-    )
-
-  });
-  const colorprod4 = firstTenProducts3.map((products) => {
-    return (
-      products.state_appliance === 'Nuevo' ? "#0FFF18" : '#FF0000' && products.state_appliance === 'nuevo' ? "#0FFF18" : '#FF0000' && products.state_appliance === 'reacondicionado' ? "#FFF100" : '#FF0000'
-    )
-
-  });
-  const colorprod5 = firstTenProducts4.map((products) => {
-    return (
-      products.state_appliance === 'Nuevo' ? "#0FFF18" : '#FF0000' && products.state_appliance === 'nuevo' ? "#0FFF18" : '#FF0000' && products.state_appliance === 'reacondicionado' ? "#FFF100" : '#FF0000'
-    )
-
-  });
-  const colorprod6 = firstTenProducts5.map((products) => {
-    return (
-      products.state_appliance === 'Nuevo' ? "#0FFF18" : '#FF0000' && products.state_appliance === 'nuevo' ? "#0FFF18" : '#FF0000' && products.state_appliance === 'reacondicionado' ? "#FFF100" : '#FF0000'
-    )
-
-  });
-
-
 
   return (
     <div className="App">
-      <h2 className="title">Destacados de Refrigeradoras</h2>
-      <Slider {...settings}>
-        {firstTenProducts1.map((item, index) => (
-          <Grid item key={item.id} xs={12} sm={6} md={6} onClick={() => navigate(`/viewproduct/${item.id}`)}>
-            <Card
-              sx={{
-                height: '100%',
-                maxWidth: '270px',
-                display: 'flex',
-                flexDirection: 'column',
-                borderRadius: 3,
-                border: 0,
-                boxShadow: '15px 0 5px -5px rgba(0, 0, 0, 0.2), -8px 0 15px -5px rgba(0, 0, 0, 0.2)',
-                flexWrap: 'wrap',
-                alignItems: 'flex-end',
-              }}
-            >
-              <CardActionArea>
-                <CardMedia
-                  component="img"
-                  sx={{
-                    // 16:9
-                    py: '5%',
-                    width: '100%',
-                    height: '200px',
-                  }}
-                  image={item.image}
-                  alt="random"
-                />
-                
-                <CardContent >
-                <Typography variant="h6" color="text.secondary">
-                  {item.brand}
-                </Typography>
-                  <Typography variant="h5" component="h3">
-                    ${item.price}
-                  </Typography>
-                  <Typography variant="h6" component="h5" style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'normal', wordWrap: 'break-word', maxHeight: '30px' }}>
-                    {item.title}
-                  </Typography>
+      <h2 className="title">Productos destacados</h2>
+      {products.length === 0 ? (
 
-                  <div className="rtcontainer" style={{ display: 'flex' }}>
-                    <CircleIcon style={{ color: colorprod2[index], paddingRight: '10px', width: '20' }} />
-                    <Typography noWrap style={{ paddingTop: '2px' }} >
-                      {item.state_appliance}
-                    </Typography>
-                  </div>
-                </CardContent>
-              </CardActionArea>
-              <Button
-                variant="text"
-                startIcon={<RemoveRedEyeIcon style={{ color: 'white' }} />}
-                style={{ color: 'white', backgroundColor: '#FF9901', position: 'absolute', display: 'fixed', }}
-                onClick={() => navigate(`/viewproduct/${item.id}`)}
+        <Box sx={{ display: 'flex', height: '100vh', justifyContent: 'center' }}>
+          <CircularProgress size={80} sx={{ color: '#FF9901' }} />
+        </Box>
+
+      ) : (
+        <Slider {...settings}>
+          {firstTenProducts.map((products, index) => (
+            <Grid item key={products.id} xs={12} sm={6} md={4} >
+              <Card
+                sx={{
+                  height: '100%',
+                  maxWidth: '270px',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  borderRadius: 3,
+                  border: 0,
+                  boxShadow: '15px 0 5px -5px rgba(0, 0, 0, 0.2), -8px 0 15px -5px rgba(0, 0, 0, 0.2)',
+                  flexWrap: 'wrap',
+                  alignItems: 'flex-end',
+                }}
               >
-                Ver Producto
-              </Button>
-            </Card>
-          </Grid>
-        ))}
-      </Slider>
-      <h2 className="title">Destacados de Cocinas</h2>
-      <Slider {...settings}>
-        {firstTenProducts2.map((item, index) => (
-          <Grid item key={item.id} xs={12} sm={6} md={6} onClick={() => navigate(`/viewproduct/${item.id}`)} >
-            <Card
-              sx={{
-                height: '100%',
-                maxWidth: '270px',
-                display: 'flex',
-                flexDirection: 'column',
-                borderRadius: 3,
-                border: 0,
-                boxShadow: '15px 0 5px -5px rgba(0, 0, 0, 0.2), -8px 0 15px -5px rgba(0, 0, 0, 0.2)',
-                flexWrap: 'wrap',
-                alignItems: 'flex-end',
-              }}
-            >
-              <CardActionArea>
-                <CardMedia
-                  component="img"
-                  sx={{
-                    // 16:9
-                    py: '5%',
-                    width: '100%',
-                    height: '200px',
-                  }}
-                  image={item.image}
-                  alt="random"
-                />
-                <CardContent >
-                  <Typography variant="h5" component="h3">
-                    ${item.price}
-                  </Typography>
-                  <Typography variant="h6" component="h5" style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'normal', wordWrap: 'break-word', maxHeight: '30px' }}>
-                    {item.title}
-                  </Typography>
-                  <div className="rtcontainer" style={{ display: 'flex' }}>
-                    <CircleIcon style={{ color: colorprod3[index], paddingRight: '10px', width: '20' }} />
-                    <Typography noWrap style={{ paddingTop: '2px' }} >
-                      {item.state_appliance}
+                {products.featured === 1 ? <Button style={{ backgroundColor: 'black', color: 'white', width: '100%', height: '30px', fontSize: '12px' }}>Destacado</Button> : null
+                }
+                <CardActionArea>
+                  <CardMedia
+                    component="img"
+                    sx={{
+                      // 16:9
+                      py: '5%',
+                      width: '100%',
+                      height: '200px',
+                    }}
+                    image={products.image}
+                    alt="random"
+                  />
+                  <CardContent >
+                    <Typography variant="h5" component="h3" style={{ color: 'green' }}>
+                      ${products.price}
                     </Typography>
-                  </div>
-                </CardContent>
-              </CardActionArea>
-              <Button
-                variant="text"
-                startIcon={<RemoveRedEyeIcon style={{ color: 'white' }} />}
-                style={{ color: 'white', backgroundColor: '#FF9901', position: 'absolute', display: 'fixed', }}
-                onClick={() => navigate(`/viewproduct/${item.id}`)}
-              >
-                Ver Producto
-              </Button>
-            </Card>
-          </Grid>
-        ))}
-      </Slider>
-      <h2 className="title">Destacados de Microondas </h2>
-      <Slider {...settings}>
-        {firstTenProducts3.map((item, index) => (
-          <Grid item key={item.id} xs={12} sm={6} md={6} onClick={() => navigate(`/viewproduct/${item.id}`)}>
-            <Card
-              sx={{
-                height: '100%',
-                maxWidth: '270px',
-                display: 'flex',
-                flexDirection: 'column',
-                borderRadius: 3,
-                border: 0,
-                boxShadow: '15px 0 5px -5px rgba(0, 0, 0, 0.2), -8px 0 15px -5px rgba(0, 0, 0, 0.2)',
-                flexWrap: 'wrap',
-                alignItems: 'flex-end',
-              }}
-            >
-              <CardActionArea>
-                <CardMedia
-                  component="img"
-                  sx={{
-                    // 16:9
-                    py: '5%',
-                    width: '100%',
-                    height: '200px',
-                  }}
-                  image={item.image}
-                  alt="random"
-                />
-                <CardContent >
-                  <Typography variant="h5" component="h3">
-                    ${item.price}
-                  </Typography>
-                  <Typography variant="h6" component="h5" style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'normal', wordWrap: 'break-word', maxHeight: '30px' }}>
-                    {item.title}
-                  </Typography>
-                  <div className="rtcontainer" style={{ display: 'flex' }}>
-                    <CircleIcon style={{ color: colorprod4[index], paddingRight: '10px', width: '20' }} />
-                    <Typography noWrap style={{ paddingTop: '2px' }} >
-                      {item.state_appliance}
+                    <Typography
+                      variant="h6"
+                      component="h6"
+                      style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'normal', wordWrap: 'break-word', maxHeight: '30px' }}
+                    >
+                      {products.title}
                     </Typography>
-                  </div>
-                </CardContent>
-              </CardActionArea>
-              <Button
-                variant="text"
-                startIcon={<RemoveRedEyeIcon style={{ color: 'white' }} />}
-                style={{ color: 'white', backgroundColor: '#FF9901', position: 'absolute', display: 'fixed', }}
-                onClick={() => navigate(`/viewproduct/${item.id}`)}
-              >
-                Ver Producto
-              </Button>
-            </Card>
-          </Grid>
-        ))}
-      </Slider>
-      <h2 className="title">Destacados de Planchas</h2>
-      <Slider {...settings}>
-        {firstTenProducts4.map((item, index) => (
-          <Grid item key={item.id} xs={12} sm={6} md={6} onClick={() => navigate(`/viewproduct/${item.id}`)} >
-            <Card
-              sx={{
-                height: '100%',
-                maxWidth: '270px',
-                display: 'flex',
-                flexDirection: 'column',
-                borderRadius: 3,
-                border: 0,
-                boxShadow: '15px 0 5px -5px rgba(0, 0, 0, 0.2), -8px 0 15px -5px rgba(0, 0, 0, 0.2)',
-                flexWrap: 'wrap',
-                alignItems: 'flex-end',
-              }}
-            >
-              <CardActionArea>
-                <CardMedia
-                  component="img"
-                  sx={{
-                    // 16:9
-                    py: '5%',
-                    width: '100%',
-                    height: '200px',
-                  }}
-                  image={item.image}
-                  alt="random"
-                />
-                <CardContent >
-                  <Typography variant="h5" component="h3">
-                    ${item.price}
-                  </Typography>
-                  <Typography variant="h6" component="h5" style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'normal', wordWrap: 'break-word', maxHeight: '30px' }}>
-                    {item.title}
-                  </Typography>
-                  <div className="rtcontainer" style={{ display: 'flex' }}>
-                    <CircleIcon style={{ color: colorprod5[index], paddingRight: '10px', width: '20' }} />
-                    <Typography noWrap style={{ paddingTop: '2px' }} >
-                      {item.state_appliance}
-                    </Typography>
-                  </div>
-                </CardContent>
-              </CardActionArea>
-              <Button
-                variant="text"
-                startIcon={<RemoveRedEyeIcon style={{ color: 'white' }} />}
-                style={{ color: 'white', backgroundColor: '#FF9901', position: 'absolute', display: 'fixed', }}
-                onClick={() => navigate(`/viewproduct/${item.id}`)}
-              >
-                Ver Producto
-              </Button>
-            </Card>
-          </Grid>
-        ))}
-      </Slider>
-      <h2 className="title">Destacados de Lavadoras</h2>
-      <Slider {...settings}>
-        {firstTenProducts5.map((item, index) => (
-          <Grid item key={item.id} xs={12} sm={6} md={6} onClick={() => navigate(`/viewproduct/${item.id}`)}>
-            <Card
-              sx={{
-                height: '100%',
-                maxWidth: '270px',
-                display: 'flex',
-                flexDirection: 'column',
-                borderRadius: 3,
-                border: 0,
-                boxShadow: '15px 0 5px -5px rgba(0, 0, 0, 0.2), -8px 0 15px -5px rgba(0, 0, 0, 0.2)',
-                flexWrap: 'wrap',
-                alignItems: 'flex-end',
-              }}
-            >
-              <CardActionArea>
-                <CardMedia
-                  component="img"
-                  sx={{
-                    // 16:9
-                    py: '5%',
-                    width: '100%',
-                    height: '200px',
-                  }}
-                  image={item.image}
-                  alt="random"
-                />
-                <CardContent >
-                  <Typography variant="h5" component="h3">
-                    ${item.price}
-                  </Typography>
-                  <Typography variant="h6" component="h5" style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'normal', wordWrap: 'break-word', maxHeight: '30px' }}>
-                    {item.title}
-                  </Typography>
-                  <div className="rtcontainer" style={{ display: 'flex' }}>
-                    <CircleIcon style={{ color: colorprod6[index], paddingRight: '10px', width: '20' }} />
-                    <Typography noWrap style={{ paddingTop: '2px' }} >
-                      {item.state_appliance}
-                    </Typography>
-                  </div>
-                </CardContent>
-              </CardActionArea>
-              <Button
-                variant="text"
-                startIcon={<RemoveRedEyeIcon style={{ color: 'white' }} />}
-                style={{ color: 'white', backgroundColor: '#FF9901', position: 'absolute', display: 'fixed', }}
-                onClick={() => navigate(`/viewproduct/${item.id}`)}
-              >
-                Ver Producto
-              </Button>
-            </Card>
-          </Grid>
-        ))}
-      </Slider>
+                    <div className="rtcontainer" style={{ display: 'flex', height: '100%' }}>
+                      <CircleIcon style={{ color: colorprod2[index], paddingRight: '10px', width: '20' }} />
+                      <Typography noWrap style={{ paddingTop: '2px' }} >
+                        {products.state_appliance}
+                        <br />
+                        {products.featured}
+                      </Typography>
+                    </div>
+                  </CardContent>
+                </CardActionArea>
+                <Button
+                  variant="text"
+                  startIcon={<RemoveRedEyeIcon style={{ color: 'white' }} />}
+                  style={{ color: 'white', backgroundColor: '#FF9901', position: 'absolute', display: 'fixed', }}
+                  onClick={() => navigate(`/viewproduct/${products.id}`)}
+                >
+                  Ver
+                </Button>
+              </Card>
+            </Grid>
+          ))}
+        </Slider>
+      )}
     </div>
   );
 }

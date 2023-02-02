@@ -17,28 +17,33 @@ import WorkspacePremiumIcon from '@mui/icons-material/WorkspacePremium';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import Footer from '../../Layouts/Footer/Footer';
-
+import CircularProgress from '@mui/material/CircularProgress';
+import Box from '@mui/material/Box';
 const FormsProducts = () => {
 
   const navigate = useNavigate(); /* FUNCIÓN PÁRA NAVEGAR */
   const [products, setProducts] = useState([]);  /* FUNCIÓN PARA LISTAR LOS PRODUCTOS */
   const tokenUser = localStorage.getItem('token')  /* FUNCIÓN PARA PODER RECUPERAR EL TOKEN */
   const user = JSON.parse(localStorage.getItem('user')) || {};
+  const [loading, setLoading] = useState(true);
   const config = {
     headers: { Authorization: `${tokenUser}` }
   };
 
   /* MUESTRA DE PRODUCTO POR USUARIO  */
   const getProductsUser = async () => {
+    setLoading(true);
     try {
       const response = await axios.get(
         'https://offhouse.herokuapp.com/api/products',
         { headers: { 'accept': 'application/json', 'authorization': tokenUser } },
         config
       );
+      setLoading(false);
       setProducts(response.data.data.products);
     } catch (error) {
       console.log(error.response.data.message, 'error');
+      setLoading(false);
     }
   };
 
@@ -75,7 +80,7 @@ const FormsProducts = () => {
     <div>
       <div style={{ marginLeft: '3%', marginRight: '3%', marginTop: '3%', marginBottom: '3%', paddingLeft: '3%', paddingRight: '3%', paddingBottom: '3%', paddingTop: '3%', borderRadius: '10px', backgroundColor: '#D9D9D9' }}>
         <div style={{ display: 'flex', justifyContent: 'center' }}>
-        <h1 id='labelhelp'>MIS PRODUCTOS</h1>
+          <h1 id='labelhelp'>MIS PRODUCTOS</h1>
         </div>
         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
 
@@ -101,49 +106,58 @@ const FormsProducts = () => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {filterProducts.map((products, index) => (
-                <TableRow
-                  key={products.id}
-                  sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                >
+              {
+                loading ? (
+                  <Box sx={{ display: 'flex', height: '50vh', justifyContent: 'flex-end', alignItems: 'center' }}>
+                    <CircularProgress size={80} sx={{ color: '#FF9901' }} />
+                  </Box>
+                ) : (
+                  filterProducts.map((products, index) => (
+                    <TableRow
+                      key={products.id}
+                      sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                    >
 
-                  <TableCell component="th" scope="row"  >
-                    {products.title}
-                  </TableCell>
-                  <TableCell component="th" scope="row"  >
-                    <img src={products.image} alt="imagen" style={{ width: '100px', height: '100px' }} />
-                  </TableCell>
+                      <TableCell component="th" scope="row"  >
+                        {products.title}
+                      </TableCell>
+                      <TableCell component="th" scope="row"  >
+                        <img src={products.image} alt="imagen" style={{ width: '100px', height: '100px' }} />
+                      </TableCell>
 
-                  <TableCell align="right" >
-                    <ButtonGroup sx={{ gap: 0.5 }} orientation="vertical">
-                      <Button
-                        variant="text"
-                        startIcon={<DeleteIcon style={{ color: 'white' }} />}
-                        style={{ color: 'white', backgroundColor: 'red' }}
-                        onClick={() => { deleteProduct(products.id) }}
-                      >
-                        Eliminar
-                      </Button>
-                      <Button
-                        variant="text"
-                        startIcon={<EditIcon style={{ color: 'white' }} />}
-                        style={{ color: 'white', backgroundColor: 'green' }}
-                        onClick={() => navigate(`/CreateProduct/edit/${products.id}`)}
-                      >
-                        Editar
-                      </Button>
-                      <Button
-                        variant="text"
-                        startIcon={<WorkspacePremiumIcon style={{ color: 'white' }} />}
-                        style={{ color: 'white', backgroundColor: 'blue' }}
-                        onClick={() => navigate(`/payment/product/${products.id}`)}
-                      >
-                        Suscripción
-                      </Button>
-                    </ButtonGroup>
-                  </TableCell>
-                </TableRow>
-              ))}
+                      <TableCell align="right" >
+                        <ButtonGroup sx={{ gap: 0.5 }} orientation="vertical">
+                          <Button
+                            variant="text"
+                            startIcon={<DeleteIcon style={{ color: 'white' }} />}
+                            style={{ color: 'white', backgroundColor: 'red' }}
+                            onClick={() => { deleteProduct(products.id) }}
+                          >
+                            Eliminar
+                          </Button>
+                          <Button
+                            variant="text"
+                            startIcon={<EditIcon style={{ color: 'white' }} />}
+                            style={{ color: 'white', backgroundColor: 'green' }}
+                            onClick={() => navigate(`/CreateProduct/edit/${products.id}`)}
+                          >
+                            Editar
+                          </Button>
+                          <Button
+                            variant="text"
+                            startIcon={<WorkspacePremiumIcon style={{ color: 'white' }} />}
+                            style={{ color: 'white', backgroundColor: 'blue' }}
+                            onClick={() => navigate(`/payment/product/${products.id}`)}
+                          >
+                            Suscripción
+                          </Button>
+                        </ButtonGroup>
+                      </TableCell>
+                    </TableRow>
+                  ))
+                )
+              }
+
             </TableBody>
           </Table>
         </TableContainer>
