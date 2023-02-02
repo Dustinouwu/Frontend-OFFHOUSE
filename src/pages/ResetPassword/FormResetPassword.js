@@ -94,7 +94,7 @@ export const FormResetPassword = () => {
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                         className="inputstyle"
-                        placeholder="example@example.com"
+                        placeholder="************"
                     >
                     </input>
                     <Label
@@ -107,7 +107,7 @@ export const FormResetPassword = () => {
                         value={password_confirmation}
                         onChange={(e) => setPassword_confirmation(e.target.value)}
                         className="inputstyle"
-                        placeholder="example@example.com"
+                        placeholder="************"
                     >
                     </input>
 

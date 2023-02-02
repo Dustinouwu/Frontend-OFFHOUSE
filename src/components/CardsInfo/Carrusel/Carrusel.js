@@ -104,7 +104,7 @@ const SimpleSlider = () => {
 
   return (
     <div className="App">
-      <h2 className="title">Productos destacados</h2>
+      <h1 className="title">Productos destacados</h1>
       {products.length === 0 ? (
 
         <Box sx={{ display: 'flex', height: '100vh', justifyContent: 'center' }}>
@@ -114,7 +114,7 @@ const SimpleSlider = () => {
       ) : (
         <Slider {...settings}>
           {firstTenProducts.map((products, index) => (
-            <Grid item key={products.id} xs={12} sm={6} md={4} >
+            <Grid item key={products.id} xs={12} sm={6} md={4} onClick={() => navigate(`/viewproduct/${products.id}`)} >
               <Card
                 sx={{
                   height: '100%',
@@ -143,6 +143,9 @@ const SimpleSlider = () => {
                     alt="random"
                   />
                   <CardContent >
+                    <Typography variant="h6" color="text.secondary">
+                      {products.brand}
+                    </Typography>
                     <Typography variant="h5" component="h3" style={{ color: 'green' }}>
                       ${products.price}
                     </Typography>
@@ -157,8 +160,7 @@ const SimpleSlider = () => {
                       <CircleIcon style={{ color: colorprod2[index], paddingRight: '10px', width: '20' }} />
                       <Typography noWrap style={{ paddingTop: '2px' }} >
                         {products.state_appliance}
-                        <br />
-                        {products.featured}
+
                       </Typography>
                     </div>
                   </CardContent>
