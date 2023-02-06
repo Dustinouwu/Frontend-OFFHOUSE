@@ -1,14 +1,28 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;300&display=swap');
-
-@media screen and (max-width: 1024px) {
-    .lhd-container {
+@media screen and (max-width: 900px) {
+    #imglogo {
         display: none;
     }
-    #theader{
+
+    #theader {
         display: none;
+    }
+
+    .lhd-container {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        width: 200px;
     }
 
 }
+@media screen and (min-width: 1024px) {
+   #prueba{
+         display: none;
+   }
+
+}
+    
+
 
 
 
@@ -22,7 +36,7 @@
     flex: 1;
 }
 
-#theader{
+#theader {
     cursor: pointer;
 }
 
@@ -31,7 +45,7 @@
     align-items: center;
     gap: 1rem;
     width: 300px;
-    height: 100%;
+
 }
 
 .lhd-container h1 {

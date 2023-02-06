@@ -21,6 +21,16 @@ import Logout from '@mui/icons-material/Logout';
 import Inventory2Icon from '@mui/icons-material/Inventory2';
 import NewHeader from './NewHeader';
 import Footer from '../Footer/Footer';
+import AccountCircle from '@mui/icons-material/AccountCircle';
+import MailIcon from '@mui/icons-material/Mail';
+import NotificationsIcon from '@mui/icons-material/Notifications';
+import MoreIcon from '@mui/icons-material/MoreVert';
+import MenuIcon from '@mui/icons-material/Menu';
+import HomeIcon from '@mui/icons-material/Home';
+import CategoryIcon from '@mui/icons-material/Category';
+import NoteAddIcon from '@mui/icons-material/NoteAdd';
+import InfoIcon from '@mui/icons-material/Info';
+import BusinessCenterIcon from '@mui/icons-material/BusinessCenter';
 
 const Header = () => {
 
@@ -73,20 +83,118 @@ const Header = () => {
         getUser()
     }, [])
 
+    const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
+
+    const isMenuOpen = Boolean(anchorEl);
+    const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
+
+    const handleProfileMenuOpen = (event) => {
+        setAnchorEl(event.currentTarget);
+    };
+
+    const handleMobileMenuClose = () => {
+        setMobileMoreAnchorEl(null);
+    };
+
+    const handleMenuClose = () => {
+        setAnchorEl(null);
+        handleMobileMenuClose();
+    };
+
+    const handleMobileMenuOpen = (event) => {
+        setMobileMoreAnchorEl(event.currentTarget);
+    };
+
+    const mobileMenuId = 'primary-search-account-menu-mobile';
+    const renderMobileMenu = (
+        <Menu
+            anchorEl={mobileMoreAnchorEl}
+            anchorOrigin={{
+                vertical: 'top',
+                horizontal: 'left',
+            }}
+            id={mobileMenuId}
+            keepMounted
+            transformOrigin={{
+                vertical: 'top',
+                horizontal: 'left',
+            }}
+            open={isMobileMenuOpen}
+            onClose={handleMobileMenuClose}
+        >
+            <MenuItem onClick={() => {navigate('/home');handleMobileMenuClose()}}>
+                <IconButton size="large" color="inherit">
+                    <HomeIcon />
+                </IconButton>
+                <p>Página principal</p>
+            </MenuItem>
+            <MenuItem onClick={() => {navigate('/categories');handleMobileMenuClose()}}>
+                <IconButton size="large" color="inherit">
+                    <CategoryIcon />
+                </IconButton>
+                <p>Categorías</p>
+            </MenuItem>
+            <MenuItem onClick={() => {navigate('/CreateProduct');handleMobileMenuClose()}}>
+                <IconButton size="large" color="inherit">
+                    <NoteAddIcon />
+                </IconButton>
+                <p>Crea tu producto</p>
+            </MenuItem>
+            <MenuItem onClick={() => {navigate('/help');handleMobileMenuClose()}}>
+                <IconButton size="large" color="inherit">
+                    <InfoIcon />
+                </IconButton>
+                <p>Información</p>
+            </MenuItem>
+            <MenuItem onClick={() => {navigate('/productlist');handleMobileMenuClose()}}>
+                <IconButton size="large" color="inherit">
+                    <BusinessCenterIcon />
+                </IconButton>
+                <p>Mis productos</p>
+            </MenuItem>
+            <MenuItem onClick={handleProfileMenuOpen}>
+                <IconButton
+                    size="large"
+                    aria-label="account of current user"
+                    aria-controls="primary-search-account-menu"
+                    aria-haspopup="true"
+                    color="inherit"
+                >
+                    <AccountCircle />
+                </IconButton>
+                <p>Mi Perfil</p>
+            </MenuItem>
+        </Menu>
+    );
+
+
     return (
         <div >
             {/* <NewHeader /> */}
             <div className="header-container">
-                <Link to="/home">
-                    <div className='lhd-container'>
 
-                        <img src={Imagenes.img4} alt="logo" />
+                <div className='lhd-container'>
 
-
+                    <img src={Imagenes.img4} alt="logo" id='imglogo' />
+                    <Link to="/home">
                         <h1 id='theader' >OFF HOUSE</h1>
-
+                    </Link>
+                    <div id='prueba'>
+                        <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
+                            <IconButton
+                                size="large"
+                                aria-label="show more"
+                                aria-controls={mobileMenuId}
+                                aria-haspopup="true"
+                                onClick={handleMobileMenuOpen}
+                                color="inherit"
+                            >
+                                <MenuIcon />
+                            </IconButton>
+                        </Box>
                     </div>
-                </Link>
+                </div>
+
                 <form id='formsearch'>
                     <Search />
 
@@ -187,7 +295,7 @@ const Header = () => {
                     </Menu>
 
                 </div>
-
+                {renderMobileMenu}
             </div>
 
             <div className='navv-container'>

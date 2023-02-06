@@ -48,8 +48,8 @@ export const CreateUser = ({ register }) => {
         password: '- La contraseña necesita mínimo: una mayúsucla, una minúscula, un carácter especial y un número',
         password_confirmation: '',
     });
-   
-    
+
+
     const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
 
     //Sacar todo el arreglo de errores y mostrarlos en un solo string con un salto de línea entre cada uno 
@@ -61,7 +61,7 @@ export const CreateUser = ({ register }) => {
         )
     })
 
-    
+
 
     // Manejador de envío del formulario
     const handleSubmit = async (e) => {
@@ -92,11 +92,12 @@ export const CreateUser = ({ register }) => {
         }
     }
 
+    //Validaciones de contraseña
     const handlePasswordBlur = (event) => {
         const password = event.target.value;
         let errorMessage = '';
 
-        if(!/^(?=.*[a-z])/.test(password)) {
+        if (!/^(?=.*[a-z])/.test(password)) {
             errorMessage = 'La contraseña debe contener al menos una letra minúscula';
         } else if (!/^(?=.*[A-Z])/.test(password)) {
             errorMessage = 'La contraseña debe contener al menos una letra mayúscula';
@@ -104,8 +105,8 @@ export const CreateUser = ({ register }) => {
             errorMessage = 'La contraseña debe contener al menos un número';
         } else if (!/^(?=.*[!@#$%^&*._"'()+,-/:;>=<?{}|])/.test(password)) {
             errorMessage = 'La contraseña debe contener al menos un carácter especial';
-        } else if (password.length < 5 || password.length > 50) {
-            errorMessage = 'La contraseña debe tener entre 5 y 50 caracteres';
+        } else if (password.length < 8 || password.length > 50) {
+            errorMessage = 'La contraseña debe tener entre 8 y 50 caracteres';
         }
 
         if (errorMessage) {
@@ -120,10 +121,10 @@ export const CreateUser = ({ register }) => {
 
     return (
         <div style={{ display: 'flex', width: '100%', overflow: 'hidden' }}>
-            
+
             <ThemeProvider theme={theme}>
                 <CssBaseline />
-                <Container component="main" maxWidth="sm" sx={{ mb: 0, mt: 10 }}>
+                <Container component="main" maxWidth="sm" sx={{ mb: 10, mt: 5 }}>
 
                     <Typography component="h1" variant="h4" align="center" sx={{ mb: 0 }}>
                         CREA TU PERFIL
@@ -162,7 +163,7 @@ export const CreateUser = ({ register }) => {
                                             setErrorMessages({ ...errorMessages, username: 'Este campo es obligatorio' });
                                         }
                                     }}
-
+                                    required
                                     fullWidth
                                     autoComplete="shipping address-line2"
                                     variant="standard"
@@ -201,6 +202,7 @@ export const CreateUser = ({ register }) => {
                                         }
                                     }}
                                     fullWidth
+                                    required
                                     autoComplete="shipping address-line2"
                                     variant="standard"
                                     InputLabelProps={{
@@ -237,6 +239,7 @@ export const CreateUser = ({ register }) => {
                                         }
                                     }}
                                     fullWidth
+                                    required
                                     autoComplete="shipping address-line2"
                                     variant="standard"
                                     InputLabelProps={{
@@ -270,17 +273,18 @@ export const CreateUser = ({ register }) => {
                                     }}
                                     onBlur={(event) => {
                                         if (event.target.value === '') {
-                                          setErrors({ ...errors, email: true });
-                                          setErrorMessages({ ...errorMessages, email: 'Este campo es obligatorio' });
+                                            setErrors({ ...errors, email: true });
+                                            setErrorMessages({ ...errorMessages, email: 'Este campo es obligatorio' });
                                         } else if (!emailRegex.test(event.target.value)) {
-                                          setErrors({ ...errors, email: true });
-                                          setErrorMessages({ ...errorMessages, email: 'Por favor ingrese un correo electrónico válido' });
+                                            setErrors({ ...errors, email: true });
+                                            setErrorMessages({ ...errorMessages, email: 'Por favor ingrese un correo electrónico válido' });
                                         } else {
-                                          setErrors({ ...errors, email: false });
-                                          setErrorMessages({ ...errorMessages, email: '' });
+                                            setErrors({ ...errors, email: false });
+                                            setErrorMessages({ ...errorMessages, email: '' });
                                         }
-                                      }}
+                                    }}
                                     fullWidth
+                                    required
                                     autoComplete="shipping address-line2"
                                     variant="standard"
                                     InputLabelProps={{
@@ -304,14 +308,13 @@ export const CreateUser = ({ register }) => {
                                         if (event.target.value.length > 7) {
                                             setErrors({ ...errors, home_phone: true });
                                             setErrorMessages({ ...errorMessages, home_phone: 'No más de 7 caracteres' })
-                                        }  else {
+                                        } else {
                                             setErrors({ ...errors, home_phone: false });
                                             setErrorMessages({ ...errorMessages, home_phone: '' })
                                         }
                                     }}
                                     value={home_phone}
                                     autoComplete="shipping address-line2"
-                                    required
                                     variant="standard"
                                     InputLabelProps={{
                                         shrink: true,
@@ -349,6 +352,7 @@ export const CreateUser = ({ register }) => {
                                         }
                                     }}
                                     value={personal_phone}
+                                    required
                                     autoComplete="shipping address-line2"
                                     variant="standard"
                                     InputLabelProps={{
@@ -388,6 +392,7 @@ export const CreateUser = ({ register }) => {
                                     }}
                                     autoComplete="shipping address-line2"
                                     variant="standard"
+                                    required
                                     InputLabelProps={{
                                         shrink: true,
                                     }}
@@ -411,9 +416,9 @@ export const CreateUser = ({ register }) => {
                                         if (event.target.value.length > 15) {
                                             setErrors({ ...errors, password: true });
                                             setErrorMessages({ ...errorMessages, password: 'No más de 15 caracteres' })
-                                        } else if (event.target.value.length < 5) {
+                                        } else if (event.target.value.length < 8) {
                                             setErrors({ ...errors, password: true });
-                                            setErrorMessages({ ...errorMessages, password: 'Tu clave necesita almenos: 5 carácteres, una mayúscula, una minúscula, un número y un simbolo' })
+                                            setErrorMessages({ ...errorMessages, password: 'Tu clave necesita almenos: 8 carácteres, una mayúscula, una minúscula, un número y un simbolo' })
                                         } else {
                                             setErrors({ ...errors, password: false });
                                             setErrorMessages({ ...errorMessages, password: '' })
@@ -422,6 +427,7 @@ export const CreateUser = ({ register }) => {
                                     onBlur={handlePasswordBlur}
                                     autoComplete="shipping address-line2"
                                     variant="standard"
+                                    required
                                     InputLabelProps={{
                                         shrink: true,
                                     }}
@@ -442,13 +448,7 @@ export const CreateUser = ({ register }) => {
                                     value={password_confirmation}
                                     onChange={(event) => {
                                         setPasswordConfirmation(event.target.value)
-                                        if (event.target.value.length > 15) {
-                                            setErrors({ ...errors, password_confirmation: true });
-                                            setErrorMessages({ ...errorMessages, password_confirmation: 'No más de 15 caracteres' })
-                                        } else if (event.target.value.length < 5) {
-                                            setErrors({ ...errors, password_confirmation: true });
-                                            setErrorMessages({ ...errorMessages, password_confirmation: 'Tu clave necesita almenos: 5 carácteres, una mayúscula, una minúscula, un número y un simbolo' })
-                                        } else if (event.target.value !== password) { // Condición para comparar si las contraseñas son iguales
+                                        if (event.target.value !== password) { // Condición para comparar si las contraseñas son iguales
                                             setErrors({ ...errors, password_confirmation: true });
                                             setErrorMessages({ ...errorMessages, password_confirmation: 'Las contraseñas no coinciden' });
                                         } else {
@@ -464,6 +464,7 @@ export const CreateUser = ({ register }) => {
                                     }}
                                     autoComplete="shipping address-line2"
                                     variant="standard"
+                                    required
                                     InputLabelProps={{
                                         shrink: true,
                                     }}
@@ -501,7 +502,6 @@ export const CreateUser = ({ register }) => {
                             </Grid>
                         </Grid>
                     </form>
-
                 </Container>
             </ThemeProvider>
             <div className="logo-container">
@@ -510,316 +510,3 @@ export const CreateUser = ({ register }) => {
         </div>
     )
 }
-
-{/* <div className="main-container">
-
-<Grid container component="main" sx={{ height: '100vh' }}>
-    <Grid
-        item
-        xs={false}
-        sm={false}
-        md={5}
-        sx={{
-            backgroundImage: 'url(https://images.unsplash.com/photo-1632923565835-6582b54f2105?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=688&q=80)',
-            backgroundRepeat: 'no-repeat',
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-
-        }}
-    />
-</Grid>
-
-<Title text='Registro de usuario'></Title>
-<div className="login-container">
-
-    <div className="formcreate" style={{ overflow: 'scroll', overflowX: 'hidden',  height: '75%', width:'28%', position: 'absolute', marginRight: '14%' }}>
-        <form onSubmit={handleSubmit} >
-
-            {error &&
-
-                <Alert severity="error" sx={{ mb: '3%' }}>{error}</Alert>
-            }
-
-            <Label
-                text='USUARIO'
-            />
-
-            <input
-                id="user"
-                type='text'
-                name='username'
-                onChange={handleChange}
-                value={form.username}
-                className="inputstyle"
-                placeholder="Pepito"
-            >
-            </input>
-
-            <Label
-                text='NOMBRE'
-            />
-
-            <input
-                id="user"
-                type='text'
-                name='first_name'
-                onChange={handleChange}
-                value={form.first_name}
-                className="inputstyle"
-                placeholder="Miguel"
-            >
-            </input>
-
-            <Label
-                text='APELLIDO'
-            />
-
-            <input
-                id="user"
-                type='text'
-                name='last_name'
-                onChange={handleChange}
-                value={form.last_name}
-                className="inputstyle"
-                placeholder="Tenorio"
-            >
-            </input>
-
-            <Label
-                text='EMAIL'
-            />
-
-            <input
-                id="mail"
-                type='email'
-                name='email'
-                value={form.email}
-                className="inputstyle"
-                placeholder="example@example.com"
-                onChange={handleChange}
-            >
-            </input>
-            <Label
-                text='TELÉFONO'
-            />
-
-            <input
-                id="telf"
-                type='tel'
-                name='home_phone'
-                value={form.home_phone}
-                className="inputstyle"
-                placeholder="2476391"
-                onChange={handleChange}
-            >
-            </input>
-            <Label
-                text='CELULAR'
-            />
-
-            <input
-                id="telf"
-                type='tel'
-                name='personal_phone'
-                value={form.personal_phone}
-                className="inputstyle"
-                placeholder="0987335353"
-                onChange={handleChange}
-            >
-            </input>
-
-            <Label
-                text='DIRECCIÓN'
-            />
-
-            <input
-                id="dirre"
-                type='text'
-                value={form.address}
-                className="inputstyle"
-                name='address'
-                placeholder="Quito - Quitumbe"
-                onChange={handleChange}
-            >
-            </input>
-
-            <Label
-                text='CONTRASEÑA'
-            />
-
-            <input
-                id="password"
-                type='password'
-                value={form.password}
-                className="inputstyle"
-                name='password'
-                placeholder="***************"
-                onChange={handleChange}
-            >
-            </input>
-
-            <Label
-                text='CONFIRMAR CONTRASEÑA'
-            />
-
-            <input
-                id="password"
-                type='password'
-                value={form.password_confirmation}
-                className="inputstyle"
-                name='password_confirmation'
-                placeholder="***************"
-                onChange={handleChange}
-            >
-            </input>
-        </form>
-
-    </div>
-    <div className="submit-button-container" style={{ position: 'fixed', bottom:'0', display: 'flex', flexDirection: 'column', marginRight: '15%' }} onClick={handleSubmit}>
-        <Link to="/" ><h5 className="singupl" style={{paddingTop: '15%'}}>Ya tienes una cuenta?</h5></Link>
-        <button  >
-            INGRESAR
-        </button>
-    </div>
-    <div className="signup-container" style={{ position: 'fixed', bottom: '2' }}>
-
-    </div>
-
-</div>
-
-<div className="logo-container">
-    <img src={Imagenes.img4} alt='props'></img>
-</div>
-</div> */}
-{/* <form className="formregister" onSubmit={handleSubmit}>
-                    <Title text='Registro para OFFHUSE'></Title>
-                    {error &&
-                        <label className="label-error-createu">
-                            {error}
-                        </label>
-                    }
-                    <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'flex-end', justifyContent: 'flex-end' }}>
-                        <div style={{ paddingBottom: '4%', paddingLeft: '7%', paddingTop: '5%', gap: '50px' }}>
-                            <Labeltwo
-                                text='USUARIO'
-                            />
-                            <Labeltwo
-
-                                text='NOMBRE'
-                            />
-                            <Labeltwo
-                                text='APELLIDO'
-                            />
-                            <Labeltwo
-
-                                text='EMAIL'
-                            />
-                            <Labeltwo
-                                text='TELÉFONO'
-                            />
-                            <Labeltwo
-                                text='CELULAR'
-                            />
-                            <Labeltwo
-                                text='DIRECCIÓN'
-                            />
-                            <Labeltwo
-                                text='CONTRASEÑA'
-                            />
-                            <Labeltwo
-                                text='CONFIRMAR CONTRASEÑA'
-                            />
-
-                        </div>
-                        <div style={{ display: 'flex', flexDirection: 'column', gap: '1%', position: 'absolute' }}>
-                            <input
-                                id="user"
-                                type='text'
-                                value={form.username}
-                                className="inputcreateuser"
-                                name='username'
-                                placeholder="Pepito"
-                                onChange={handleChange}
-                            />
-                            <input
-                                id="user"
-                                type='text'
-                                value={form.first_name}
-                                className="inputcreateuser"
-                                name='first_name'
-                                placeholder="Raúl"
-                                onChange={handleChange}
-                            />
-                            <input
-                                id="user"
-                                type='text'
-                                value={form.last_name}
-                                className="inputcreateuser"
-                                name='last_name'
-                                placeholder="Muzo"
-                                onChange={handleChange}
-                            />
-                            <input
-                                id="mail"
-                                type='email'
-                                value={form.email}
-                                className="inputcreateuser"
-                                name='email'
-                                placeholder="example@example.com"
-                                onChange={handleChange}
-                            />
-                            <input
-                                id="telf"
-                                type='tel'
-                                value={form.home_phone}
-                                className="inputcreateuser"
-                                name='home_phone'
-                                placeholder="2476391"
-                                onChange={handleChange}
-                            />
-                            <input
-                                id="telf"
-                                type='tel'
-                                value={form.personal_phone}
-                                className="inputcreateuser"
-                                name='personal_phone'
-                                placeholder="0987335353"
-                                onChange={handleChange}
-                            />
-                            <input
-                                id="dirre"
-                                type='text'
-                                value={form.address}
-                                className="inputcreateuser"
-                                name='address'
-                                placeholder="Quito - Quitumbe"
-                                onChange={handleChange}
-                            />
-                            <input
-                                id="password"
-                                type='password'
-                                value={form.password}
-                                className="inputcreateuser"
-                                name='password'
-                                placeholder="***************"
-                                onChange={handleChange}
-                            />
-                            <input
-                                id="password"
-                                type='password'
-                                value={form.password_confirmation}
-                                className="inputcreateuser"
-                                name='password_confirmation'
-                                placeholder="***************"
-                                onChange={handleChange}
-                            />
-                        </div>
-                    </div>
-                    <div className="submit-button-container">
-
-                        <button >
-                            CONFIRMAR
-                        </button>
-
-                    </div>
-                </form> */}

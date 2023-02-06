@@ -1,7 +1,7 @@
 
 .App {
-    width: 70%;
-    margin: 0 auto;
+    width: 100%;
+    margin: 0 1%;
     margin-top: 50px;
 
 }
@@ -69,23 +69,16 @@
     height: 2px;
 }
 
-@media screen and (max-width: 768px) {
-    .card {
-        width: 500px;
-        height: 350px;
-    }
-
-    .card-top>img {
-        height: 150px;
-    }
+@media screen and (min-width: 1224) {
     .App {
         width: 100%;
-        margin: 0 auto;
-        margin-top: 50px;
-        justify-content: center;
-        align-items: center;
+        margin: 0 5%;
     }
-.slick-slide>div {
-    margin: 30px 20px;
 }
+@media screen and (min-width: 500) {
+    .App {
+        width: 100%;
+        margin: 0 5%;
+    }
 }
+    

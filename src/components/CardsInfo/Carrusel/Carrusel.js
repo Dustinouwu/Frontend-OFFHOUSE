@@ -21,45 +21,33 @@ const SimpleSlider = () => {
   const navigate = useNavigate(); // Para poder navegar entre las páginas
   const token = localStorage.getItem('token');
   const [products, setProducts] = useState([]);
-  const [error, setError] = useState('')
-  const [loading, setLoading] = useState(true);
+
 
   /* FUNCION PARA PODER SACAR LOS PRODUCTOS DE LA API */
   const getProducts = async () => {
-    setLoading(true);
     try {
       const response = await axios.get(
         'https://offhouse.herokuapp.com/api/products',
         { headers: { 'accept': 'application/json', 'authorization': token } }
       );
       setProducts(response.data.data.products);
-      setLoading(false);
-      if (response.status === 403) {
-        setError('')
-      }
     } catch (error) {
       console.log(error);
-      setError(error.response.data.message)
       console.log(error.response.data.message, 'error');
-      setLoading(false);
     }
   };
-
 
   /* FUNCIÓN PARA RENDERIZAR LA FUNCIÓN getProducts AL CARGAR LA PÁGINA*/
   useEffect(() => {
     getProducts();
   }, []);
 
-
-
-
   const settings = {
     dots: true,
     infinite: true,
     speed: 500,
     autoplay: true,
-    slidesToShow: 3,
+    slidesToShow: 4,
     slidesToScroll: 1,
     initialSlide: 0,
     speed: 2000,
@@ -67,24 +55,41 @@ const SimpleSlider = () => {
     cssEase: "linear",
     responsive: [
       {
-        breakpoint: 1024,
+        breakpoint: 1224,
         settings: {
-          slidesToShow: 2,
-          slidesToScroll: 2,
+          slidesToShow: 3,
+          slidesToScroll: 1,
           infinite: true,
           dots: true,
+        },
+      },
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 1,
+          infinite: true,
+          dots: true,
+        },
+      },
+      {
+        breakpoint: 900,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
+          initialSlide: 1,
         },
       },
       {
         breakpoint: 600,
         settings: {
           slidesToShow: 2,
-          slidesToScroll: 2,
+          slidesToScroll: 1,
           initialSlide: 1,
         },
       },
       {
-        breakpoint: 480,
+        breakpoint: 500,
         settings: {
           slidesToShow: 1,
           slidesToScroll: 1,
@@ -99,18 +104,15 @@ const SimpleSlider = () => {
     return (
       products.state_appliance === 'Nuevo' ? "#0FFF18" : '#FF0000' && products.state_appliance === 'nuevo' ? "#0FFF18" : '#FF0000' && products.state_appliance === 'reacondicionado' ? "#FFF100" : '#FF0000'
     )
-
   });
 
   return (
     <div className="App">
       <h1 className="title">Productos destacados</h1>
       {products.length === 0 ? (
-
         <Box sx={{ display: 'flex', height: '100vh', justifyContent: 'center' }}>
           <CircularProgress size={80} sx={{ color: '#FF9901' }} />
         </Box>
-
       ) : (
         <Slider {...settings}>
           {firstTenProducts.map((products, index) => (
@@ -168,7 +170,7 @@ const SimpleSlider = () => {
                 <Button
                   variant="text"
                   startIcon={<RemoveRedEyeIcon style={{ color: 'white' }} />}
-                  style={{ color: 'white', backgroundColor: '#FF9901', position: 'absolute', display: 'fixed', }}
+                  style={{ color: 'white', backgroundColor: '#FF9901', position: 'absolute', display: 'fixed'}}
                   onClick={() => navigate(`/viewproduct/${products.id}`)}
                 >
                   Ver
