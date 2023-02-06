@@ -8,10 +8,7 @@
     }
 
     .lhd-container {
-        display: flex;
-        align-items: center;
-        gap: 1rem;
-        width: 200px;
+        width: 20px;
     }
 
 }
@@ -44,8 +41,7 @@
     display: flex;
     align-items: center;
     gap: 1rem;
-    width: 300px;
-
+    width: 220px;
 }
 
 .lhd-container h1 {

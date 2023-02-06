@@ -16,7 +16,7 @@ const SearchBarContainer = styled(motion.div)`
     width: 40%;
     flex-direction: column;
     background-color: #D39C49;
-    border-radius: 25px;
+    border-radius: 10px;
     box-shadow: 0px 2px 12px 3px rgba(0, 0, 0, 0.14);
     position: absolute;
     z-index: 999;
@@ -27,6 +27,13 @@ const SearchBarContainer = styled(motion.div)`
     @media only screen and (min-width: 768px) {
         width: 40%; /* solo se aplica en pantallas mayores a 768px*/
       }
+      @media (max-width: 900px) {
+        width: 55%;
+    }
+    @media (max-width: 650px) {
+        width: 60%;
+    }
+
 `;
 
 const SearchInputContainer = styled.div`
@@ -35,7 +42,7 @@ const SearchInputContainer = styled.div`
     display: flex;
     align-items: center;
     position: relative;
-    padding: 10px 15px;
+    padding: 10px 10px;
     
 `;
 
@@ -79,11 +86,12 @@ const CloseIconContainer = styled(motion.span)`
     font-size: 23px;
     vertical-align: middle;
     trasition: all 200ms ease-in-out;
-    margin-left: 40px;
+    margin-left: 60px;
     cursor: pointer;
     &:hover {
         color: #dfdfdf;
     }
+
 `;
 
 const LineSeparator = styled.div`

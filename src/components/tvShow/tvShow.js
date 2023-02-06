@@ -19,6 +19,9 @@ const Thumbnail = styled.img`
     width: 50px;
     height: 100%;
     }
+    @media (max-width: 768px) {
+        margin: 0 auto;
+    }
 `;
 
 const Name = styled.h3`
@@ -28,6 +31,14 @@ const Name = styled.h3`
     flex: 2;
     display: flex;
     justify-content: flex-start;
+    @media (max-width: 768px) {
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+    }
+    @media (max-width: 650px) {
+        display: none;
+    }
 `;
 
 const Rating = styled.span`
@@ -35,6 +46,9 @@ const Rating = styled.span`
     font-size: 16px;
     display: flex;
     flex: 0.5;
+    @media (max-width: 768px) {
+        display: none;
+    }
 `;
 
 //constante para poner hacer un onclick y adentro un navigate 
@@ -47,6 +61,9 @@ const Rute = styled.input`
     &:hover {
         color: #dfdfdf;
     }
+    @media (max-width: 768px) {
+        display: none;
+    }
 `;
 
 function TvShow(props) {
@@ -56,10 +73,10 @@ function TvShow(props) {
         <TvshowContainer onClick={rute}>
 
             <Thumbnail src={thumbanilSrc} />
-            
+
             <Name>{name}</Name>
             <Rating>${rating}</Rating>
-            
+
         </TvshowContainer>
     )
 }

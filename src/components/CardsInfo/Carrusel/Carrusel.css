@@ -69,16 +69,16 @@
     height: 2px;
 }
 
-@media screen and (min-width: 1224) {
+@media screen and (max-width: 1224) {
     .App {
         width: 100%;
         margin: 0 5%;
     }
 }
-@media screen and (min-width: 500) {
+@media screen and (max-width: 500) {
     .App {
         width: 100%;
-        margin: 0 5%;
+        margin: 0 15%;
     }
 }
     

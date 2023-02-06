@@ -122,31 +122,37 @@ const Header = () => {
             open={isMobileMenuOpen}
             onClose={handleMobileMenuClose}
         >
-            <MenuItem onClick={() => {navigate('/home');handleMobileMenuClose()}}>
+            <MenuItem onClick={() => { navigate('/home'); handleMobileMenuClose() }}>
                 <IconButton size="large" color="inherit">
                     <HomeIcon />
                 </IconButton>
                 <p>Página principal</p>
             </MenuItem>
-            <MenuItem onClick={() => {navigate('/categories');handleMobileMenuClose()}}>
+            <MenuItem onClick={() => { navigate('/chats'); handleMobileMenuClose() }}>
+                <IconButton size="large" color="inherit">
+                    <ChatBubbleOutlineIcon />
+                </IconButton>
+                <p>Chat</p>
+            </MenuItem>
+            <MenuItem onClick={() => { navigate('/categories'); handleMobileMenuClose() }}>
                 <IconButton size="large" color="inherit">
                     <CategoryIcon />
                 </IconButton>
                 <p>Categorías</p>
             </MenuItem>
-            <MenuItem onClick={() => {navigate('/CreateProduct');handleMobileMenuClose()}}>
+            <MenuItem onClick={() => { navigate('/CreateProduct'); handleMobileMenuClose() }}>
                 <IconButton size="large" color="inherit">
                     <NoteAddIcon />
                 </IconButton>
                 <p>Crea tu producto</p>
             </MenuItem>
-            <MenuItem onClick={() => {navigate('/help');handleMobileMenuClose()}}>
+            <MenuItem onClick={() => { navigate('/help'); handleMobileMenuClose() }}>
                 <IconButton size="large" color="inherit">
                     <InfoIcon />
                 </IconButton>
                 <p>Información</p>
             </MenuItem>
-            <MenuItem onClick={() => {navigate('/productlist');handleMobileMenuClose()}}>
+            <MenuItem onClick={() => { navigate('/productlist'); handleMobileMenuClose() }}>
                 <IconButton size="large" color="inherit">
                     <BusinessCenterIcon />
                 </IconButton>
@@ -175,10 +181,8 @@ const Header = () => {
 
                 <div className='lhd-container'>
 
-                    <img src={Imagenes.img4} alt="logo" id='imglogo' />
-                    <Link to="/home">
-                        <h1 id='theader' >OFF HOUSE</h1>
-                    </Link>
+                    <img src={Imagenes.img4} alt="logo" id='imglogo' onClick={() => navigate('/home')} />
+                    <h1 id='theader'onClick={() => navigate('/home')} >OFF HOUSE</h1>
                     <div id='prueba'>
                         <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
                             <IconButton
@@ -202,9 +206,7 @@ const Header = () => {
 
                 <div className='other-container'>
                     <Link to="/chats">
-
-                        <ChatBubbleOutlineIcon size="25px" style={{ color: 'black' }} />
-
+                        <ChatBubbleOutlineIcon size="25px" sx={{ color: 'black', display: 'block', [`@media (max-width: 650px)`]: { display: 'none' } }} />
                     </Link>
 
                     <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
@@ -213,7 +215,7 @@ const Header = () => {
                             <IconButton
                                 onClick={handleClick}
                                 size="small"
-                                sx={{ ml: 2 }}
+                                sx={{ ml: 2, [`@media (max-width: 650px)`]: { display: 'none' } }}
                                 aria-controls={open ? 'account-menu' : undefined}
                                 aria-haspopup="true"
                                 aria-expanded={open ? 'true' : undefined}

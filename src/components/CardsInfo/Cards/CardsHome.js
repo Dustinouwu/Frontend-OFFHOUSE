@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import './CardsHome.css';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
@@ -6,17 +7,11 @@ import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import CircleIcon from '@mui/icons-material/Circle';
-import { Button, CardActionArea, CircularProgress, Pagination } from '@mui/material';
-import { Link, useNavigate } from 'react-router-dom';
+import { Button, CardActionArea, CircularProgress } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 import axios from 'axios';
-import { Pageerror } from '../../../pages';
-import { useScrollTrigger } from '@mui/material';
-import PropTypes from 'prop-types';
-import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
-import Fade from '@mui/material/Fade';
 import Box from '@mui/material/Box';
-import Fab from '@mui/material/Fab';
 
 
 export default function MultiActionAreaCard(props) {
@@ -25,9 +20,6 @@ export default function MultiActionAreaCard(props) {
   const navigate = useNavigate(); // Para poder navegar entre las páginas
   const token = localStorage.getItem('token');
   const [products, setProducts] = useState([]);
-  const [error, setError] = useState('')
-  const [page, setPage] = useState(1);
-  const [lastPage, setLastPage] = useState('');
   const [loading, setLoading] = useState(true);
 
   /* FUNCION PARA PODER SACAR LOS PRODUCTOS DE LA API */
@@ -40,12 +32,8 @@ export default function MultiActionAreaCard(props) {
       );
       setProducts(response.data.data.products);
       setLoading(false);
-      if (response.status === 403) {
-        setError('')
-      }
     } catch (error) {
       console.log(error);
-      setError(error.response.data.message)
       console.log(error.response.data.message, 'error');
       setLoading(false);
     }
@@ -53,7 +41,6 @@ export default function MultiActionAreaCard(props) {
   /* FUNCIÓN PARA RENDERIZAR LA FUNCIÓN getProducts AL CARGAR LA PÁGINA*/
   useEffect(() => {
     getProducts();
-    page === 1 ? setPage(1) : setPage(lastPage);
   }, []);
 
     // filtrar los productos con featured = 1
@@ -71,7 +58,7 @@ export default function MultiActionAreaCard(props) {
 
 
   return (
-    <div style={{ marginLeft: '10%' }}>
+    <div className='cardshome-container'>
       {products.length === 0 ? (
         <Box sx={{ display: 'flex', height: '100vh', justifyContent: 'center' }}>
         <CircularProgress size={80} sx={{ color: '#FF9901' }} />
