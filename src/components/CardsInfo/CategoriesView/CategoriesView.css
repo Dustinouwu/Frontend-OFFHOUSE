@@ -1,3 +1,23 @@
+@media screen and (max-width: 600px) {
+    .cardcat-containter{
+        padding-left: 15%;
+    }
+}
+@media screen and (max-width: 460px) {
+    .cardcat-containter{
+        padding-left: 10%;
+    }
+}
+@media screen and (max-width: 460px) {
+    .cardcat-containter{
+        padding-left: 3%;
+    }
+}
+    
+.catview-container{
+    margin-right: 5%;
+}
+
 .box {
     border: 3px solid black;
     border-radius: 15px;

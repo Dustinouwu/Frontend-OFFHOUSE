@@ -1,3 +1,31 @@
+@media screen and (max-width: 768px) {
+    .profile-top{
+        display: flex; 
+        flex-direction: column;
+        gap: 3rem;
+        margin-top: 5%;
+        margin-left: 5%;
+        margin-right: 5%;
+    }
+}
+
+.profile-top{
+    display: flex; 
+    gap: 3rem;
+    margin-top: 5%;
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
+.profile-under{
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+    margin-top: 2%; 
+    margin-left: 5%;
+    margin-right: 5%
+}
+
 #labprofile{
     font-family: 'Inter', sans-serif;
     letter-spacing: 6px;

@@ -48,7 +48,7 @@ export const FormResetPassword = () => {
         <div className="main-container">
 
 
-            <Grid container component="main" sx={{ height: '100vh' }}>
+            <Grid container component="main" sx={{ height: '100vh',[`@media (max-width: 900px)`]: { display: 'none' } }}>
                 <Grid
                     item
                     xs={false}

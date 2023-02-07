@@ -1,4 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react';
+import './CategoriesView.css';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
@@ -14,11 +15,11 @@ import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
 export const CategoriesView = () => {
 
-  const navigate = useNavigate(); // Para navegar entre rutas
-  const token = localStorage.getItem('token'); // Obtenciíon del token del local storage
-  const [categories, setCategories] = useState([]) // Constante
+  const navigate = useNavigate(); 
+  const token = localStorage.getItem('token'); 
+  const [categories, setCategories] = useState([]) 
   const [loading, setLoading] = useState(true);
-  // Obtener categorías
+
   const getCategories = useCallback(async () => {
     setLoading(true);
     try {
@@ -41,21 +42,17 @@ export const CategoriesView = () => {
 
 
   return (
-    <div>
+    <div className='catview-container'> 
       <Labelgiant
         text={"Categorías"}
       />
-
-
-
       {
         loading ? (
           <Box sx={{ display: 'flex', height: '60vh', alignItems: 'center', justifyContent: 'center' }}>
             <CircularProgress size={80} sx={{ color: '#FF9901' }} />
           </Box>
-
         ) : (
-          <div style={{ marginTop: '2%', marginLeft: '10%' }}>
+          <div className='cardcat-containter' style={{ marginTop: '2%', marginLeft: '10%' }}>
             <Container sx={{ py: 1 }} maxWidth="lg">
               <Grid container spacing={2}>
                 {categories.map((categories, index) => (

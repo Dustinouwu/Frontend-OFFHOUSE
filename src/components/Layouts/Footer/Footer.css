@@ -1,3 +1,21 @@
+@media screen and (max-width: 1024px) {
+    .footer-container {
+        flex-direction: column;
+        gap: 1rem;
+        margin: 0 1rem 0 1rem;
+    }
+
+    .footer-section-container {
+        padding-inline: 1rem;
+    }
+
+    .footer-dir {
+        flex-direction: column;
+        gap: 1rem;
+    }
+}
+
+
 .footercatch {
     position: absolute;
     width: 100%;

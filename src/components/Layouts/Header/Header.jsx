@@ -8,6 +8,7 @@ import { Avatar, Badge, IconButton } from '@mui/material'
 import { Outlet } from 'react-router-dom';
 import { AuthContext } from '../../../contexts';
 import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
+import ChatBubbleTwoToneIcon from '@mui/icons-material/ChatBubbleTwoTone';
 import LogoutIcon from '@mui/icons-material/Logout';
 import axios from 'axios';
 import Box from '@mui/material/Box';
@@ -130,7 +131,7 @@ const Header = () => {
             </MenuItem>
             <MenuItem onClick={() => { navigate('/chats'); handleMobileMenuClose() }}>
                 <IconButton size="large" color="inherit">
-                    <ChatBubbleOutlineIcon />
+                    <ChatBubbleTwoToneIcon />
                 </IconButton>
                 <p>Chat</p>
             </MenuItem>
@@ -176,13 +177,12 @@ const Header = () => {
 
     return (
         <div >
-            {/* <NewHeader /> */}
             <div className="header-container">
 
                 <div className='lhd-container'>
 
                     <img src={Imagenes.img4} alt="logo" id='imglogo' onClick={() => navigate('/home')} />
-                    <h1 id='theader'onClick={() => navigate('/home')} >OFF HOUSE</h1>
+                    <h1 id='theader' onClick={() => navigate('/home')} >OFF HOUSE</h1>
                     <div id='prueba'>
                         <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
                             <IconButton
@@ -225,8 +225,6 @@ const Header = () => {
                                     src={avatar}
                                     sx={{ width: 45, height: 45 }}
                                     overlap="circular">
-
-
                                 </Avatar>
                             </IconButton>
                         </Tooltip>
@@ -278,16 +276,7 @@ const Header = () => {
                             </MenuItem>
                         </Link>
                         <Divider />
-                        <Link to="/productlist" style={{ textDecoration: 'none', color: 'rgb(55, 65, 81)' }}>
-                            <MenuItem>
 
-                                <Inventory2Icon>
-                                    <Settings fontSize="small" />
-                                </Inventory2Icon>
-                                Mis productos
-
-                            </MenuItem>
-                        </Link>
                         <MenuItem onClick={onLogout}>
                             <ListItemIcon>
                                 <Logout fontSize="small" />

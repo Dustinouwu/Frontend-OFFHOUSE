@@ -42,8 +42,6 @@ export const LoginAdmin = () => {
         }
     }
 
-
-
     const onLogin = async (e) => {
         e.preventDefault();
 
@@ -80,7 +78,7 @@ export const LoginAdmin = () => {
     return (
         <div className="main-container">
             {loading && <CircularProgress />}
-            <Grid container component="main" sx={{ height: '100vh' }}>
+            <Grid container component="main" sx={{ height: '100vh',[`@media (max-width: 900px)`]: { display: 'none' } }}>
                 <Grid
                     item
                     xs={false}

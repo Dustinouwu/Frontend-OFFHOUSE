@@ -6,7 +6,6 @@
 
 }
 
-
 .userChat {
   padding: 10px;
   display: flex;
@@ -176,15 +175,16 @@
 }
 
 .messageContentOwner {
-  
+
   display: flex;
   flex-direction: column;
   align-items: flex-end;
   gap: 10px;
   margin-left: 100px;
-  
+
 
 }
+
 .scrollarea {
   min-height: 500px;
 }
@@ -242,4 +242,20 @@
   cursor: pointer;
 }
 
-@media screen and (max-width: 480px) {}
+@media screen and (max-width: 768px) {
+  .messageContentOwner {
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 10px;
+    margin-left: 10px;
+  }
+
+  .logo {
+    display: none;
+  
+  }
+
+  
+}

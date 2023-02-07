@@ -42,7 +42,7 @@ export const ResetPassword = () => {
 
             {/* <div className="image-container"> */}
             {/* <img src={Imagenes.img1} alt='Imagen Electrodomésticos'></img> */}
-            <Grid container component="main" sx={{ height: '100vh' }}>
+            <Grid container component="main" sx={{ height: '100vh',[`@media (max-width: 900px)`]: { display: 'none' } }}>
                 <Grid
                     item
                     xs={false}

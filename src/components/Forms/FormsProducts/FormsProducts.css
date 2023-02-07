@@ -1,0 +1,12 @@
+@media screen and (max-width: 615px) {
+    .buttonpl{
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+.buttonpl{
+    display: flex;
+    justify-content: space-between;
+}
+    

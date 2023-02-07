@@ -56,14 +56,14 @@ const Input = () => {
                 <input type="hidden" name="to" value={form.to = id} />
                 <input
                     type="text"
-                    placeholder="Type something..."
+                    placeholder="Escriba algo..."
                     name="message"
                     value={form.message}
                     onChange={handleChange}
                 />
                 <div className="send">
 
-                    <button>Send</button>
+                    <button>Enviar</button>
                 </div>
 
 

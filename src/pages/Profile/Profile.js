@@ -20,15 +20,11 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
-import { CardActionArea, CardActions } from '@mui/material';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemText from '@mui/material/ListItemText';
+import { CardActionArea, CardActions, List, ListItem, ListItemText, Box, CircularProgress} from '@mui/material';
 import KeyIcon from '@mui/icons-material/Key';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import WorkspacePremiumIcon from '@mui/icons-material/WorkspacePremium';
-import CircularProgress from '@mui/material/CircularProgress';
-import Box from '@mui/material/Box';
+
 const style = {
     width: '100%',
     maxWidth: '100%',
@@ -38,7 +34,6 @@ const style = {
     borderRight: '1px solid   #e0e0e0',
     borderBottom: '1px solid   #e0e0e0',
 };
-
 
 export const Profile = () => {
 
@@ -74,8 +69,8 @@ export const Profile = () => {
 
     return (
         <div>
-            <div style={{ display: 'flex', gap: '3rem', marginTop: '5%', marginLeft: '5%', marginRight: '5%' }}>
-                <Card sx={{ maxWidth: 350 }}>
+            <div className='profile-top' >
+                <Card sx={{ maxWidth: 350, [`@media (max-width: 768px)`]: { margin: 'auto' } }}>
                     <CardActionArea>
                         {
                             loading ? (
@@ -91,7 +86,6 @@ export const Profile = () => {
                                 />
                             )
                         }
-
                         <CardContent>
                             <Typography gutterBottom variant="h4" component="div" align='center'>
                                 {user.username}
@@ -145,8 +139,8 @@ export const Profile = () => {
                 </List>
 
             </div>
-            <div style={{ display: 'flex', flexDirection: 'row', gap: '3rem', marginTop: '2%', marginLeft: '5%', marginRight: '5%' }}>
-                <Card sx={{ maxWidth: 300 }}>
+            <div className='profile-under' >
+                <Card sx={{ maxWidth: 'auto' }}>
                     <CardActionArea>
                         <CardContent>
                             <Typography variant="h5" component="div" align='center'>
@@ -162,7 +156,7 @@ export const Profile = () => {
                         </Button>
                     </CardActions>
                 </Card>
-                <Card sx={{ maxWidth: 300 }}>
+                <Card sx={{ maxWidth: 'auto' }}>
                     <CardActionArea>
                         <CardContent>
                             <Typography variant="h5" component="div" align='center'>
@@ -178,11 +172,11 @@ export const Profile = () => {
                         </Button>
                     </CardActions>
                 </Card>
-                <Card sx={{ maxWidth: 300 }}>
+                <Card sx={{ maxWidth: 'auto' }}>
                     <CardActionArea>
                         <CardContent>
                             <Typography variant="h5" component="div" align='center'>
-                                Ver mis productos con suscriptoción
+                                Ver mis productos con suscripción
                             </Typography>
                         </CardContent>
                     </CardActionArea>
@@ -200,82 +194,3 @@ export const Profile = () => {
 
     )
 }
-
-
-
-{/* <div>
-            <div className='profile-main' style={{ marginLeft: '5%', marginRight: '5%', marginTop: '2%', marginBottom: '5%', paddingTop: '5%', paddingLeft: '2%', paddingBottom: '5%', paddingRight: '2%', borderRadius: '35px', backgroundColor: '#D9D9D9' }} >
-                <div style={{ display: 'flex', gap: '6rem', marginLeft: '5%' }}>
-                    <div style={{ display: 'flex', alignItems: 'center', flexDirection: 'column', width: '15%' }}>
-                        <img src={avatar} alt="avatar" style={{ width: '80%', marginBottom: '5%' }} />
-                        <Button
-                            id="demo-customized-button"
-                            aria-controls={open ? 'demo-customized-menu' : undefined}
-                            aria-haspopup="true"
-                            aria-expanded={open ? 'true' : undefined}
-                            variant="contained"
-                            disableElevation
-                            
-                            onClick={handleClick}
-                            endIcon={<KeyboardArrowDownIcon />}
-                            style={{ backgroundColor: '#F2C94C', color: 'black', width: '100%', marginBottom: '5%' }}
-                        >
-                            Mi cuenta
-                        </Button>
-                        <StyledMenu
-                            id="demo-customized-menu"
-                            MenuListProps={{
-                                'aria-labelledby': 'demo-customized-button',
-                            }}
-                            anchorEl={anchorEl}
-                            open={open}
-                            onClose={handleClose}
-                        >
-                            <MenuItem onClick={handleClose} disableRipple>
-                                <Link to="/editProfile" style={{ textDecoration: 'none', color: 'rgb(55, 65, 81)' }} >
-                                    <ModeEditIcon />
-                                    Editar Perfil
-                                </Link>
-                            </MenuItem>
-                            <MenuItem onClick={handleClose} disableRipple>
-                                <Link to="/productlist" style={{ textDecoration: 'none', color: 'rgb(55, 65, 81)' }}>
-                                    <Inventory2Icon />
-                                    Mis productos
-                                </Link>
-                            </MenuItem>
-                            
-                        </StyledMenu>
-                        
-                    </div>
-
-                    <h1 id='labprofile' style={{ display: 'flex', alignItems: 'flex-start', margin: 'auto' }}>{user.username}</h1>
-                </div>
-                <Divider sx={{ my: 0.5 }} />
-                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end', flexDirection: 'row', gap: '10%', marginTop: '5%' }}>
-
-                    <div style={{ display: 'flex', alignItems: 'flex-end', flexDirection: 'column' }}>
-
-                        <h2 id='labelprod'>Nombre:</h2>
-                        <h2 id='labelprod'>Apellido:</h2>
-                        <h2 id='labelprod'>Email:</h2>
-                        <h2 id='labelprod'>Teléfono:</h2>
-                        <h2 id='labelprod'>Celular:</h2>
-                        <h2 id='labelprod'>Dirección:</h2>
-                    </div>
-
-                    <div style={{ display: 'flex', alignItems: 'flex-start', flexDirection: 'column' }}>
-
-                        <h2 id='labelprod'>{user.first_name}</h2>
-                        <h2 id='labelprod'>{user.last_name}</h2>
-                        <h2 id='labelprod'>{user.email}</h2>
-                        <h2 id='labelprod'>{user.home_phone}</h2>
-                        <h2 id='labelprod'>{user.personal_phone}</h2>
-                        <h2 id='labelprod'>{user.address}</h2>
-                    </div>
-                </div>
-
-
-
-            </div>
-
-        </div > */}

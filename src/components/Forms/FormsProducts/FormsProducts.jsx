@@ -82,7 +82,7 @@ const FormsProducts = () => {
         <div style={{ display: 'flex', justifyContent: 'center' }}>
           <h1 id='labelhelp'>MIS PRODUCTOS</h1>
         </div>
-        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+        <div className='buttonpl'>
 
           <Link href="/createproduct" underline="none">
             <Button variant="contained" endIcon={<AddIcon style={{ backgroundColor: 'black', borderRadius: '10px' }} />} sx={{ mt: '1%', backgroundColor: '#000' }}>
