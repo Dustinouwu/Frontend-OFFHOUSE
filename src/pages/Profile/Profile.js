@@ -2,20 +2,9 @@ import { IconButton } from '@chakra-ui/react';
 import './Profile.css'
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
-import ModeEditIcon from '@mui/icons-material/ModeEdit';
-import Inventory2Icon from '@mui/icons-material/Inventory2';
 import { Button } from '@mui/material';
-import { Link, Navigate, useNavigate } from 'react-router-dom';
-import { styled, alpha } from '@mui/material/styles';
-import Menu from '@mui/material/Menu';
-import MenuItem from '@mui/material/MenuItem';
-import EditIcon from '@mui/icons-material/Edit';
+import { useNavigate } from 'react-router-dom';
 import Divider from '@mui/material/Divider';
-import ArchiveIcon from '@mui/icons-material/Archive';
-import FileCopyIcon from '@mui/icons-material/FileCopy';
-import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import MenuIcon from '@mui/icons-material/Menu';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';

@@ -92,12 +92,12 @@ const FormAvatar = (avatar) => {
                         <Grid container spacing={3} >
 
                             <Grid item xs={6} sx={{ display: 'flex', flexDirection: 'column' }} >
-                                <Typography component="h5" variant="h8" align="left" sx={{ color: 'rgba(0, 0, 0, 0.6)' }}>
+                                <Typography component="h5" variant="h8" align="left" sx={{ color: 'rgba(0, 0, 0, 0.6)'  }}>
                                     Avatar
                                 </Typography>
                                 <img id="preview-img" src={imageUrl} alt="preview"
                                 />
-                                <Button variant="contained" component="label" style={{ width: '50%', marginTop: '2%' }}>
+                                <Button variant="contained" component="label" style={{ width: 300, marginTop: '2%', minWidth: 300 }}>
                                     <PhotoLibraryIcon />
                                     Subir imagen
                                     <input

@@ -39,9 +39,6 @@ export const ResetPassword = () => {
 
     return (
         <div className="main-container">
-
-            {/* <div className="image-container"> */}
-            {/* <img src={Imagenes.img1} alt='Imagen Electrodomésticos'></img> */}
             <Grid container component="main" sx={{ height: '100vh',[`@media (max-width: 900px)`]: { display: 'none' } }}>
                 <Grid
                     item
@@ -57,8 +54,6 @@ export const ResetPassword = () => {
                     }}
                 />
             </Grid>
-            {/*  </div> */}
-
             <div className="login-container">
                 <form className="formlogin" onSubmit={forgotPassword}>
                     <Title text='Recuperación de contraseña '></Title>
@@ -78,37 +73,22 @@ export const ResetPassword = () => {
                         placeholder="example@example.com"
                     >
                     </input>
-
-
                     <div className="submit-button-container">
                         <button>CONFIRMAR </button>
                     </div>
-
-
-
                     <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
                         <h5>Crea tu cuenta</h5>
-
                         <div className="signup-container">
 
                             <Link to="/*" ><h5 className="singupl">Ya tienes una cuenta?</h5></Link>
                         </div>
-
-
-
-
                     </div>
                 </form>
-
             </div>
-
             <div className="logo-container">
                 <img src={Imagenes.img4} alt='Logopq'></img>
             </div>
-
-
         </div >
     )
-
 }
 

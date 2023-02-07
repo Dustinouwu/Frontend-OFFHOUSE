@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import './Paypal.css'
 import axios from 'axios'
 import { useNavigate, useParams } from 'react-router-dom'
 import Comments from '../../Comments/Comments'
@@ -9,8 +10,6 @@ import {
     ListItemText,
     Alert
 } from '@mui/material';
-
-
 import {
     Button,
     Card,
@@ -51,14 +50,7 @@ const Paypal = () => {
             console.log(error);
         }
     }
-    console.log(user.username)
-    //alertar para cuando se envie el postSubscription y se complete la transaccion con el nombre del usuario usesr.username
-    const handleOnSuccess = (user) => {
-        if (user) {
-            alert(`Gracias por contratar la suscripción ${user.username}!`);
-        }
-    };
-
+    
     const postSubsciptipn = async () => {
         try {
             const response = await axios.post(
@@ -67,7 +59,6 @@ const Paypal = () => {
                 { headers: { 'accept': 'application/json', 'authorization': tokenUser } }
             )
             navigate('/productsprimium')
-            handleOnSuccess(user)
         } catch (error) {
             if (error.response && error.response.status === 400) {
                 setError(error.response.data.message)
@@ -79,8 +70,6 @@ const Paypal = () => {
             console.log(error);
         }
     }
-
-
 
     useEffect(() => {
         const getProduct = async () => {
@@ -105,7 +94,7 @@ const Paypal = () => {
             {error &&
                 <Alert severity="error" sx={{ mb: '3%' }}>{error}</Alert>
             }
-            <div style={{ marginRight: '5%', marginLeft: '5%', marginTop: '3%', marginBottom: '3%', display: 'flex' }}>
+            <div className='paypalbox' >
                 <Card sx={{ maxWidth: 800, }}>
 
                     <CardActionArea>
@@ -160,8 +149,9 @@ const Paypal = () => {
                                     <ListItemText primary="Dirección" />
                                     <ListItemText secondary={product.address} align='center' />
                                 </ListItem>
+                                <ListItemText primary="Detalle" align='center' />
                                 <ListItem >
-                                    <ListItemText primary="Detalle" />
+                                    
                                     <ListItemText secondary={product.detail} align='center' />
                                 </ListItem>
 
@@ -169,7 +159,7 @@ const Paypal = () => {
                         </CardContent>
                     </CardActionArea>
                 </Card>
-                <Card sx={{ maxWidth: '40%', maxHeight: 500, marginLeft: '2%' }}>
+                <Card sx={{ maxWidth: '40%', maxHeight: '50%', marginLeft: '2%',[`@media (max-width: 1225px)`]: { maxWidth: '100%' } }}>
                     <CardContent>
                         <Typography gutterBottom variant="h5" component="div">
                             Paga tu suscripción con Paypal
@@ -182,7 +172,8 @@ const Paypal = () => {
 
                         </Typography>
                         <Typography variant="body2" color="text.secondary">
-                            Si no está satisfecho con su compra, tiene 14 días a partir de la fecha de entrega para solicitar un reembolso o un intercambio. Por favor, póngase en contacto con nosotros a través de nuestro correo electrónico o número de teléfono para iniciar el proceso de devolución. Todos los productos deben ser devueltos en su embalaje original y en condiciones nuevas para ser elegibles para un reembolso o intercambio."
+                            Una vez realizada la compra, tu producto será publicado en la sección de productos premium o pantalla princial.
+                            Si deseas cancelar tu suscripción, puedes contactarnos a través de nuestro correo electrónico offhouse@offhouse.com.
 
                         </Typography>
                     </CardContent>
@@ -193,9 +184,7 @@ const Paypal = () => {
                                 postSubsciptipn()
                                 return actions.order.capture().then((details) => {
                                     const name = details.payer.name.given_name;
-                                    alert(`Transaction completed by ${name}`);
-
-
+                                    alert(`Gracias por su compra!`);
                                 });
                             }}
                         />
