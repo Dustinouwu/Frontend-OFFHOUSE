@@ -122,7 +122,7 @@ const ModalDelete = ({ report }) => {
                 open={open}
                 onClose={handleClose}
             >
-                <Box sx={{ '& .MuiTextField-root': { ml: 0, mb: 2, width: '50ch' }, gap: '2%', ...style, width: 450, pr:10 }}>
+                <Box sx={{ '& .MuiTextField-root': { ml: 0, mb: 2, width: '50ch' }, gap: '2%', ...style, width: 450, pr:10,[`@media (max-width: 600px)`]: { width: 300, '& .MuiTextField-root': { ml: 0, mb: 2, width: '30ch' } }, [`@media (max-width: 500px)`]: { width: 250, '& .MuiTextField-root': { ml: 0, mb: 2, width: '30ch' } } }}>
                     <form onSubmit={handleSubmit}>
                         <h2>Ingreso información sobre el reporte</h2>
                         <Grid item xs={1} sx={{width: 'auto'}}>
@@ -154,7 +154,7 @@ const ModalDelete = ({ report }) => {
                             value={form.description}
                             aria-label="minimum height"
                             minRows={3}
-                            style={{ width: 400, height: 100, marginBottom: 10 }}
+                            style={{ width: 320, height: 100, marginBottom: 10 }}
                         />
                         <Button variant="contained" type='submit' onClick={handleClick} style={{backgroundColor: 'red'}}>ENVIAR</Button>
                         <Snackbar open={openMessage}  >

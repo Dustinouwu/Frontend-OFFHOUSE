@@ -44,7 +44,7 @@ const Input = () => {
                 { ...form }, { headers: { 'accept': 'application/json', 'authorization': tokenUser } }
             )
             setForm({ message: '', to: ''});
-    
+                window.location.reload();
         } catch (error) {
             console.log(error)
         }

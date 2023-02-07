@@ -119,7 +119,7 @@ const ModalMessage = ({ message, product }) => {
                 open={open}
                 onClose={handleClose}
             >
-                <Box sx={{ '& .MuiTextField-root': { ml: 0, mb: 2, width: '47ch' }, gap: '2%', ...style, width: 400, pr: 15 }}>
+                <Box sx={{ '& .MuiTextField-root': { ml: 0, mb: 2, width: '47ch' }, gap: '2%', ...style, width: 400, pr: 15,[`@media (max-width: 600px)`]: { width: 300 }, [`@media (max-width: 500px)`]: { width: 200, '& .MuiTextField-root': { ml: 0, mb: 2, width: '30ch' } } }}>
                     <form onSubmit={handleSubmit}>
                         <h2>Ingrese el mensaje que quiere enviar</h2>
                         <Grid item xs={1}>

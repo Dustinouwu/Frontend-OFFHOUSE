@@ -110,7 +110,7 @@ const ModalEdit = ({ comment }) => {
                 onClose={handleClose}
 
             >
-                <Box sx={{ ...style, width: 400 }}>
+                <Box sx={{ ...style, width: 400, [`@media (max-width: 485px)`]: { width: 300 }, [`@media (max-width: 380px)`]: { width: 300 } }}>
                     <form onSubmit={handleSubmit}>
                         <h2>Ingrese su comentario</h2>
                         <TextareaAutosize
@@ -120,7 +120,7 @@ const ModalEdit = ({ comment }) => {
                             aria-label="minimum height"
                             minRows={3}
 
-                            style={{ width: 400, height: 100, marginBottom: 10 }}
+                            style={{ width: 320, height: 100, marginBottom: 10 }}
                         />
                         <Button variant="contained" onClick={handleClick} type='submit' >Enviar</Button>
                         <Snackbar open={openMessage}  >
