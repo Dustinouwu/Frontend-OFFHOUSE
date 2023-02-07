@@ -1,30 +1,8 @@
-@media screen and (max-width: 1225px) {
-    .paypalbox{
-        width: 100%;
-        height: 100%;
-        background-color: #fff;
-        border-radius: 10px;
-        box-shadow: 0 0 10px rgba(0,0,0,0.2);
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        padding: 20px;
-        box-sizing: border-box;
-        position: relative;
-        overflow: hidden;
-        gap : 20px;
-        padding-left: 5%;
-        margin-right: 10%;
-    }
-    
-}
 
-.paypalbox{
-    margin-right: 1%;
-    margin-left: 1%;
+
+.paypalbox {
+    margin-right: 5%;
+    margin-left: 5%;
     margin-top: 3%;
     margin-bottom: 3%;
-    display: flex;
 }
-

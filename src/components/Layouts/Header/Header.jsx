@@ -159,7 +159,7 @@ const Header = () => {
                 </IconButton>
                 <p>Mis productos</p>
             </MenuItem>
-            <MenuItem onClick={handleProfileMenuOpen}>
+            <MenuItem onClick={() => { navigate('/profile'); handleMobileMenuClose() }}>
                 <IconButton
                     size="large"
                     aria-label="account of current user"
@@ -170,6 +170,12 @@ const Header = () => {
                     <AccountCircle />
                 </IconButton>
                 <p>Mi Perfil</p>
+            </MenuItem>
+            <MenuItem onClick={onLogout}>
+                <IconButton size="large" color="inherit">
+                    <Logout />
+                </IconButton>
+                <p>Cerrar sesión</p>
             </MenuItem>
         </Menu>
     );

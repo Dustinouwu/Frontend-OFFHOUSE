@@ -19,8 +19,8 @@ const Thumbnail = styled.img`
     width: 50px;
     height: 100%;
     }
-    @media (max-width: 768px) {
-        margin: 0 auto;
+    @media (max-width: 650px) {
+        display: none;
     }
 `;
 
@@ -34,10 +34,10 @@ const Name = styled.h3`
     @media (max-width: 768px) {
         text-overflow: ellipsis;
         overflow: hidden;
-        white-space: nowrap;
+       
     }
     @media (max-width: 650px) {
-        display: none;
+       
     }
 `;
 

@@ -8,7 +8,8 @@ import {
     List,
     ListItem,
     ListItemText,
-    Alert
+    Alert,
+    Grid
 } from '@mui/material';
 import {
     Button,
@@ -50,7 +51,7 @@ const Paypal = () => {
             console.log(error);
         }
     }
-    
+
     const postSubsciptipn = async () => {
         try {
             const response = await axios.post(
@@ -95,102 +96,108 @@ const Paypal = () => {
                 <Alert severity="error" sx={{ mb: '3%' }}>{error}</Alert>
             }
             <div className='paypalbox' >
-                <Card sx={{ maxWidth: 800, }}>
+                <Grid container spacing={1} >
+                    <Grid item  sx={{display: 'flex', flexDirection: 'column-reverse',[`@media (min-width: 900px)`]: { display: 'flex', flexDirection: 'column-reverse'}}}>
+                        <Card sx={{ maxWidth: '100%', }}>
 
-                    <CardActionArea>
-                        <CardMedia
-                            component="img"
-                            image={product.image}
-                            style={{
-                                width: '50%',
-                                display: 'flex',
-                                alignItems: 'center',
-                                flexDirection: 'column',
-                                marginLeft: '25%',
-                                marginTop: '1%',
-                                borderRadius: '25px'
-                            }}
-                            alt="avatar user"
-                        />
-                        <CardContent>
-                            <Typography variant="h4" component="div" align='center'>
-                                {product.title}
-                            </Typography>
-                            <List sx={style} component="nav" aria-label="mailbox folders" >
-                                <ListItem >
-                                    <ListItemText primary="Precio" />
-                                    $
-                                    <ListItemText secondary={product.price} align='center' />
-                                </ListItem>
-                                <ListItem>
-                                    <ListItemText primary="Marca" />
-                                    <ListItemText secondary={product.brand} align='center' />
-                                </ListItem>
-                                <ListItem>
-                                    <ListItemText primary="Stock" />
-                                    <ListItemText secondary={product.stock} align='center' />
-                                </ListItem>
-                                <ListItem >
-                                    <ListItemText primary="Estado del producto" />
-                                    <ListItemText secondary={product.state_appliance} align='center' />
-                                </ListItem>
+                            <CardActionArea>
+                                <CardMedia
+                                    component="img"
+                                    image={product.image}
+                                    style={{
+                                        width: '50%',
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        flexDirection: 'column',
+                                        marginLeft: '25%',
+                                        marginTop: '1%',
+                                        borderRadius: '25px'
+                                    }}
+                                    alt="avatar user"
+                                />
+                                <CardContent>
+                                    <Typography variant="h4" component="div" align='center'>
+                                        {product.title}
+                                    </Typography>
+                                    <List sx={style} component="nav" aria-label="mailbox folders" >
+                                        <ListItem >
+                                            <ListItemText primary="Precio" />
+                                            $
+                                            <ListItemText secondary={product.price} align='center' />
+                                        </ListItem>
+                                        <ListItem>
+                                            <ListItemText primary="Marca" />
+                                            <ListItemText secondary={product.brand} align='center' />
+                                        </ListItem>
+                                        <ListItem>
+                                            <ListItemText primary="Stock" />
+                                            <ListItemText secondary={product.stock} align='center' />
+                                        </ListItem>
+                                        <ListItem >
+                                            <ListItemText primary="Estado del producto" />
+                                            <ListItemText secondary={product.state_appliance} align='center' />
+                                        </ListItem>
 
-                                <ListItem >
-                                    <ListItemText primary="Contacto" />
-                                    <ListItemText secondary={product.phone} align='center' />
-                                </ListItem>
+                                        <ListItem >
+                                            <ListItemText primary="Contacto" />
+                                            <ListItemText secondary={product.phone} align='center' />
+                                        </ListItem>
 
-                                <ListItem >
-                                    <ListItemText primary="Método de envío" />
-                                    <ListItemText secondary={product.delivery_method} align='center' />
-                                </ListItem>
+                                        <ListItem >
+                                            <ListItemText primary="Método de envío" />
+                                            <ListItemText secondary={product.delivery_method} align='center' />
+                                        </ListItem>
 
-                                <ListItem >
-                                    <ListItemText primary="Dirección" />
-                                    <ListItemText secondary={product.address} align='center' />
-                                </ListItem>
-                                <ListItemText primary="Detalle" align='center' />
-                                <ListItem >
-                                    
-                                    <ListItemText secondary={product.detail} align='center' />
-                                </ListItem>
+                                        <ListItem >
+                                            <ListItemText primary="Dirección" />
+                                            <ListItemText secondary={product.address} align='center' />
+                                        </ListItem>
+                                        <ListItemText primary="Detalle" align='center' />
+                                        <ListItem >
 
-                            </List>
-                        </CardContent>
-                    </CardActionArea>
-                </Card>
-                <Card sx={{ maxWidth: '40%', maxHeight: '50%', marginLeft: '2%',[`@media (max-width: 1225px)`]: { maxWidth: '100%' } }}>
-                    <CardContent>
-                        <Typography gutterBottom variant="h5" component="div">
-                            Paga tu suscripción con Paypal
-                        </Typography>
-                        <Typography gutterBottom variant="h3" component="div" align='center' color='#FF9901'>
-                            $ <strong>4.99</strong>
-                        </Typography>
-                        <Typography variant="body2" color="text.secondary">
-                            Paga un módico precio para que tu producto sea más visible y puedas venderlo más rápido.
+                                            <ListItemText secondary={product.detail} align='center' />
+                                        </ListItem>
 
-                        </Typography>
-                        <Typography variant="body2" color="text.secondary">
-                            Una vez realizada la compra, tu producto será publicado en la sección de productos premium o pantalla princial.
-                            Si deseas cancelar tu suscripción, puedes contactarnos a través de nuestro correo electrónico offhouse@offhouse.com.
+                                    </List>
+                                </CardContent>
+                            </CardActionArea>
+                        </Card>
+                        <Card sx={{ maxWidth: '100%', maxHeight: '100%' , mt: 5, mb: 5 }} align='center'>
+                            <CardContent>
+                                <Typography gutterBottom variant="h5" component="div">
+                                    Paga tu suscripción con Paypal
+                                </Typography>
+                                <Typography gutterBottom variant="h3" component="div" align='center' color='#FF9901'>
+                                    $ <strong>4.99</strong>
+                                </Typography>
+                                <Typography variant="body2" color="text.secondary">
+                                    Paga un módico precio para que tu producto sea más visible y puedas venderlo más rápido.
 
-                        </Typography>
-                    </CardContent>
+                                </Typography>
+                                <Typography variant="body2" color="text.secondary">
+                                    Una vez realizada la compra, tu producto será publicado en la sección de productos premium o pantalla princial.
+                                    Si deseas cancelar tu suscripción, puedes contactarnos a través de nuestro correo electrónico offhouse@offhouse.com.
 
-                    <PayPalScriptProvider options={{ "client-id": "AT0xfwubetSem8Phs-ka4eLvDlYeNqja0LvhkgXs4BfBVFc1lRixxDwlVifa2ah239-olrO_UdwI5zVF" }}>
-                        <PayPalButtons style={{ layout: "horizontal" }}
-                            onApprove={(data, actions) => {
-                                postSubsciptipn()
-                                return actions.order.capture().then((details) => {
-                                    const name = details.payer.name.given_name;
-                                    alert(`Gracias por su compra!`);
-                                });
-                            }}
-                        />
-                    </PayPalScriptProvider>
+                                </Typography>
+                            </CardContent>
 
-                </Card>
+                            <PayPalScriptProvider options={{ "client-id": "AT0xfwubetSem8Phs-ka4eLvDlYeNqja0LvhkgXs4BfBVFc1lRixxDwlVifa2ah239-olrO_UdwI5zVF" }}>
+                                <PayPalButtons style={{ layout: "horizontal" }}
+                                    onApprove={(data, actions) => {
+                                        postSubsciptipn()
+                                        return actions.order.capture().then((details) => {
+                                            const name = details.payer.name.given_name;
+                                            alert(`Gracias por su compra!`);
+                                        });
+                                    }}
+                                />
+                            </PayPalScriptProvider>
+
+                        </Card>
+                    </Grid>
+                    
+
+                </Grid>
                 <div>
 
                 </div>

@@ -30,7 +30,8 @@ export const LoginAdmin = () => {
         'The password confirmation field is required.': 'El campo de confirmación de la contraseña es requerido',
         'The password field is required.': 'El campo de contraseña es requerido',
         'The provided credentials are incorrect.': 'Las credenciales proporcionadas son incorrectas',
-        'The email field is required. (and 1 more error)': 'El campo de correo es requerido',
+        'The email field is required. (and 1 more error)': 'El campo de correo y contraseña es requerido',
+        'User is already authenticated.': 'El usuario ya está autenticado',
     }
 
    
