@@ -23,8 +23,6 @@ import {
 } from '@mui/material';
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 
-
-
 const style = {
     width: '100%',
     maxWidth: '100%',

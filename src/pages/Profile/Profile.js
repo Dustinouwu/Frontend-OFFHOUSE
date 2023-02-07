@@ -1,4 +1,3 @@
-import { IconButton } from '@chakra-ui/react';
 import './Profile.css'
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
@@ -13,6 +12,7 @@ import { CardActionArea, CardActions, List, ListItem, ListItemText, Box, Circula
 import KeyIcon from '@mui/icons-material/Key';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import WorkspacePremiumIcon from '@mui/icons-material/WorkspacePremium';
+import Footer from '../../components/Layouts/Footer/Footer';
 
 const style = {
     width: '100%',
@@ -178,6 +178,7 @@ export const Profile = () => {
                     </CardActions>
                 </Card>
             </div>
+            <Footer />
         </div>
 
 

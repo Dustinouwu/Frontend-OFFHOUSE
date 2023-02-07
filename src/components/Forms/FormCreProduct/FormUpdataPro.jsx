@@ -441,9 +441,9 @@ const FormUpdataProduct = ({ products }) => {
                                 <Typography component="h5" variant="h8" align="left" sx={{ color: 'rgba(0, 0, 0, 0.6)' }}>
                                     Imagen del producto
                                 </Typography>
-                                <img id="preview-img" src={imageUrl} alt="preview" style={{ width: '50%' }}
+                                <img id="preview-img" src={imageUrl} alt="preview" style={{ width: 300 }}
                                 />
-                                <Button variant="contained" component="label" style={{ width: '50%', marginTop: '2%' }}>
+                                <Button variant="contained" component="label" style={{ width: 300, minWidth: 300, marginTop: '2%' }}>
                                     <PhotoLibraryIcon />
                                     Subir imagen
                                     <input

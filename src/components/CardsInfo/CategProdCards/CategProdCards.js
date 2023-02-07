@@ -105,7 +105,7 @@ export const CategProdCards = () => {
                   :
                   (
                     <>
-                <Container sx={{ py: 5 }} maxWidth="lg">
+                <Container sx={{ py: 5,  [`@media (max-width: 600px)`]: { pl: 11 }  }} maxWidth="lg">
                     <Grid container spacing={2} >
                         {filterProducts.slice(0, itemsPerPage).map((products, index) => (
                             <Grid item key={products.id} xs={12} sm={6} md={4} onClick={() => navigate(`/viewproduct/${products.id}`)}>
@@ -169,10 +169,12 @@ export const CategProdCards = () => {
                 <Container sx={{ display: 'flex', justifyContent: 'center' }} maxWidth="lg" >
                     <Button color="secondary" onClick={() => setItemsPerPage(itemsPerPage + 9)} sx={{ color: '#000' }}>Ver más</Button>
                 </Container>
+                
                 </>
                   )
                 }
             </div>
+            <Footer />
         </div>
     )
 }

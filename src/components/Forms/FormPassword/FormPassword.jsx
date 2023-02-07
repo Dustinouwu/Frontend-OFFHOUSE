@@ -56,20 +56,21 @@ const FormPassword = (uppassword) => {
         setPassword_confirmation(uppassword.password_confirmation)
     }, [])
 
+    //Validaciones de contraseña
     const handlePasswordBlur = (event) => {
         const password = event.target.value;
         let errorMessage = '';
 
-        if(!/^(?=.*[a-z])/.test(password)) {
+        if (!/^(?=.*[a-z])/.test(password)) {
             errorMessage = 'La contraseña debe contener al menos una letra minúscula';
         } else if (!/^(?=.*[A-Z])/.test(password)) {
             errorMessage = 'La contraseña debe contener al menos una letra mayúscula';
         } else if (!/^(?=.*\d)/.test(password)) {
             errorMessage = 'La contraseña debe contener al menos un número';
-        } else if (!/^(?=.*[!@#$%^&*])/.test(password)) {
-            errorMessage = 'La contraseña debe contener al menos un carácter especial (!, @, #, $, %, ^, &, *)';
-        } else if (password.length < 5 || password.length > 50) {
-            errorMessage = 'La contraseña debe tener entre 5 y 50 caracteres';
+        } else if (!/^(?=.*[!@#$%^&*._"'()+,-/:;>=<?{}|])/.test(password)) {
+            errorMessage = 'La contraseña debe contener al menos un carácter especial';
+        } else if (password.length < 8 || password.length > 50) {
+            errorMessage = 'La contraseña debe tener entre 8 y 50 caracteres';
         }
 
         if (errorMessage) {
@@ -80,6 +81,7 @@ const FormPassword = (uppassword) => {
             setErrorMessages({ ...errorMessages, password: '' });
         }
     };
+
 
     return (
         <ThemeProvider theme={theme}>
@@ -97,7 +99,7 @@ const FormPassword = (uppassword) => {
                                 <br /> - La contraseña debe tener almenos una letra mayúscula
                                 <br /> - La contraseña debe tener almenos una letra minúscula
                                 <br /> - La contraseña debe tener almenos un caracter especial
-                                <br /> - La contraseña debe tener almenos 5 caracteres
+                                <br /> - La contraseña debe tener almenos 8 caracteres
                                 <br /> - La contraseña no debe tener espacios en blanco
 
                             </Alert>
