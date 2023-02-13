@@ -363,7 +363,7 @@ const FormsProfileAdmin = ({ profile }) => {
                 <Button
                   variant="contained"
                   sx={{ mt: '1%', backgroundColor: '#000', alignItems: 'center' }}
-                  onClick={() => navigate('/profile')}
+                  onClick={() => navigate('/homeAdmin')}
                 >
                   Cancelar
                 </Button>
