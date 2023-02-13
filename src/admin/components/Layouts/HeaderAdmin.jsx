@@ -18,6 +18,7 @@ import { AuthContext } from '../../../contexts';
 import Logout from '@mui/icons-material/Logout';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import Settings from '@mui/icons-material/Settings';
+import AccountCircle from '@mui/icons-material/AccountCircle';
 
 const pages = ['Products', 'Pricing', 'Blog'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
@@ -124,13 +125,24 @@ const HeaderAdmin = () => {
                   }}
                 >
 
-                  <MenuItem onClick={handleCloseNavMenu}>
+                  <MenuItem onClick={() => {navigate('/crudusers'); handleCloseNavMenu()}}>
                     <Typography textAlign="center">Usuarios</Typography>
                   </MenuItem>
-                  <MenuItem onClick={handleCloseNavMenu}>
+                  <MenuItem onClick={() => {navigate('/crudcateg'); handleCloseNavMenu()}}>
                     <Typography textAlign="center">Categorías</Typography>
                   </MenuItem>
-
+                  <MenuItem onClick={() => {navigate('/crudcoms'); handleCloseNavMenu()}}>
+                    <Typography textAlign="center">Comentarios</Typography>
+                  </MenuItem>
+                  <MenuItem onClick={() => {navigate('/crudreports'); handleCloseNavMenu()}}>
+                    <Typography textAlign="center">Reportes</Typography>
+                  </MenuItem>
+                  <MenuItem onClick={() => {navigate('/crudproducts'); handleCloseNavMenu()}}>
+                    <Typography textAlign="center">Productos</Typography>
+                  </MenuItem>
+                  <MenuItem onClick={() => {navigate('/crudsubscription'); handleCloseNavMenu()}}>
+                    <Typography textAlign="center">Suscripción</Typography>
+                  </MenuItem>
                 </Menu>
               </Box>
               <MotionPhotosAutoIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
@@ -233,12 +245,20 @@ const HeaderAdmin = () => {
                   open={Boolean(anchorElUser)}
                   onClose={handleCloseUserMenu}
                 >
+
+                  <MenuItem onClick={() => navigate('/profileAdmin')}>
+                    <ListItemIcon>
+                      <AccountCircle  />
+                    </ListItemIcon>
+                    Mi perfil
+                  </MenuItem>
                   <MenuItem onClick={onLogout}>
                     <ListItemIcon>
                       <Logout fontSize="small" />
                     </ListItemIcon>
                     Cierre de sesión
                   </MenuItem>
+
 
                 </Menu>
               </Box>

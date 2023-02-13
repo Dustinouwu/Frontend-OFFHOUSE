@@ -156,7 +156,7 @@ const ModalDelete = ({ report }) => {
                             minRows={3}
                             style={{ width: 320, height: 100, marginBottom: 10 }}
                         />
-                        <Button variant="contained" type='submit' onClick={handleClick} style={{backgroundColor: 'red'}}>ENVIAR</Button>
+                        <Button variant="contained" type='submit' onClick={handleClick} style={{backgroundColor: 'red'}}>ENVIAR REPORTE</Button>
                         <Snackbar open={openMessage}  >
                             <Alert onClose={handleCloseMessage} severity="success" sx={{ width: '100%' }}>
                                 Su reporte ha sido enviado

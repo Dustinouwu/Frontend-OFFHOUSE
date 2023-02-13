@@ -23,6 +23,7 @@ import FormPassword from '../components/Forms/FormPassword/FormPassword';
 import UpdateAvatar from '../components/Forms/FormsAvatar/UpdateAvatar';
 import Paypal from '../components/CardsInfo/CardPaypal/Paypal';
 import Productpremium from '../pages/Profile/Productpremium';
+import ProfileAdmin from '../admin/pages/Profile/ProfileAdmin';
 
 export const AppRouter = () => {
 
@@ -94,6 +95,7 @@ export const AppRouter = () => {
                                         <Route path='crudproducts' element={<CrudProducts />}></Route>
                                         <Route path='formsProducts/view/:id' element={<FormsProducts />}></Route>
                                         <Route path='crudsubscription' element={<CrudSubscription />}></Route>
+                                        <Route path='profileAdmin' element={<ProfileAdmin />}></Route>
                                     </>
 
                                 )}
