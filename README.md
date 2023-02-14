@@ -1,70 +1,67 @@
-# Getting Started with Create React App
+<p align="center"><a href="https://offhouse.vercel.app" target="_blank"><img src="https://user-images.githubusercontent.com/74844624/217299705-56ad3b15-b3cd-46c6-ab88-d3aa0d9f67be.png" width="100" alt="Laravel Logo"></a></p>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# OFFHOUSE - API REST
 
-## Available Scripts
+OffHouse es un ecommerce C2C (Comprador a Comprador) diseñado para la venta de electrodomésticos entre particulares. Con una interfaz intuitiva y fácil de usar, ofrece a los vendedores la capacidad de publicar sus productos y a los compradores la posibilidad de buscar y comprar productos en línea mediante un chat. Con seguridad en el pago y un sistema de comentarios para productos, OffHouse es una plataforma confiable para realizar transacciones en línea. ¡Únete a la comunidad de OffHouse y comienza a comprar y vender electrodomésticos de manera sencilla y segura!
+## Requisitos
 
-In the project directory, you can run:
+- PHP >= 7.2
+- [Composer](https://getcomposer.org/)
 
-### `npm start`
+## Instalación
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+1. Clona el repositorio en tu computadora.
+2. Ejecuta `composer install` para instalar las dependencias del proyecto.
+3. Crea un archivo `.env` a partir de `.env.example` y configura las variables de entorno, como la conexión a la base de datos.
+4. Ejecuta `php artisan key:generate` para generar una clave para la aplicación.
+5. Ejecuta `php artisan migrate` para ejecutar las migraciones y crear las tablas en la base de datos.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Uso
 
-### `npm test`
+La API REST de `OffHouse` te permite acceder y manipular los datos de la plataforma de manera programática. A continuación, se explica cómo funciona la API REST y cómo puedes utilizarla.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Autenticación
 
-### `npm run build`
+Antes de poder hacer peticiones a la API REST, debes obtener un token de acceso válido. Puedes hacerlo a través de la autenticación con tu nombre de usuario y contraseña.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Endpoints
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+La API REST de `OffHouse` expone diferentes endpoints para acceder y manipular los datos. Algunos ejemplos incluyen:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- `GET /products`: Obtiene una lista de todos los productos en el ecommerce.
+- `GET /products/{id}`: Obtiene la información detallada sobre un producto en particular.
+- `POST /products`: Publica un nuevo producto en el ecommerce.
+- `POST /products/{id}`: Actualiza la información sobre un producto existente.
+- `DELETE /products/{id}`: Elimina un producto del ecommerce.
 
-### `npm run eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### Peticiones
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Puedes hacer peticiones a la API REST utilizando herramientas como [cURL](https://curl.haxx.se/) o [Postman](https://www.postman.com/). Por ejemplo, aquí hay una petición `GET` para obtener una lista de productos:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+Reemplaza `{token}` con tu token de acceso válido y la respuesta será una lista de productos en formato JSON.
 
-## Learn More
+### Documentación
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Para obtener más información sobre cómo funciona la API REST de `OffHouse` y cómo utilizarla, consulta la [documentación completa de la API](https://documenter.getpostman.com/view/22594154/2s935hSTPh).
 
-To learn React, check out the [React documentation](https://reactjs.org/).
 
-### Code Splitting
+## Contribución
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+¡Bienvenido al proyecto `OffHouse`! Estamos encantados de que te interese contribuir. Aquí hay algunas maneras en las que puedes ayudar:
 
-### Analyzing the Bundle Size
+- Reportar errores: Si encuentras un bug o tienes problemas para utilizar la plataforma, abre un informe de problema en GitHub. Asegúrate de incluir una descripción detallada y, si es posible, una forma de reproducir el problema.
+- Proponer características: Si tienes una idea para mejorar la plataforma, abre un informe de solicitud de característica en GitHub. Asegúrate de incluir una descripción detallada de la característica y la motivación detrás de ella.
+- Contribuir con código: Si quieres ayudar a desarrollar la plataforma, puedes hacerlo enviando pull requests en GitHub. Antes de comenzar, asegúrate de leer las directrices de contribución y tener en cuenta las buenas prácticas de programación.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+Gracias por considerar contribuir a `OffHouse`. ¡Juntos podemos hacer que la plataforma sea aún mejor!
 
-### Making a Progressive Web App
+## Licencia
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+El código fuente de `OffHouse` está liberado bajo la licencia MIT. Puedes encontrar una copia de la licencia en el archivo [LICENSE](LICENSE).
 
-### Advanced Configuration
+## Créditos
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- Desarrollo Frontend por [Dustin Chávez](https://github.com/Dustinouwu).
+- Desarrollo Backend por [Miguel Muzo](https://github.com/Miguel-EMC).
