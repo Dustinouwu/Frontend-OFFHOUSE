@@ -2,7 +2,7 @@
 
 # OFFHOUSE - API REST
 
-OffHouse es un ecommerce C2C (Comprador a Comprador) diseñado para la venta de electrodomésticos entre particulares. Con una interfaz intuitiva y fácil de usar, ofrece a los vendedores la capacidad de publicar sus productos y a los compradores la posibilidad de buscar y comprar productos en línea mediante un chat. Con seguridad en el pago y un sistema de comentarios para productos, OffHouse es una plataforma confiable para realizar transacciones en línea. ¡Únete a la comunidad de OffHouse y comienza a comprar y vender electrodomésticos de manera sencilla y segura!
+OFFHOUSE es un ecommerce C2C (Comprador a Comprador) diseñado para la venta de electrodomésticos entre particulares. Con una interfaz intuitiva y fácil de usar, ofrece a los vendedores la capacidad de publicar sus productos y a los compradores la posibilidad de buscar y comprar productos en línea mediante un chat. Con seguridad en el pago y un sistema de comentarios para productos, OffHouse es una plataforma confiable para realizar transacciones en línea. ¡Únete a la comunidad de OffHouse y comienza a comprar y vender electrodomésticos de manera sencilla y segura!
 ## Requisitos
 
 - PHP >= 7.2
