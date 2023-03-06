@@ -19,7 +19,7 @@ Para más información para la instalación se recomienda revisar el manual de i
 
 ## Manual de usuario
 Aquí se muestra la funcionalidad que tiene el sistema presentado
-[Manual de instalación](https://www.youtube.com/watch?v=h8H4d59ng8E)
+[Manual de Usuario](https://www.youtube.com/watch?v=h8H4d59ng8E)
 
 
 ## Autenticación
